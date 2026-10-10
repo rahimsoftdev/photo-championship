@@ -8,20 +8,43 @@ const announcements = [
 
 const AnnouncementBar = () => {
   return (
-    <div className="overflow-hidden bg-[#4048CD] py-2.5 text-white">
-      <div className="flex  animate-marquee items-center max-w-[1280px] ">
-        {[...announcements, ...announcements].map((announcement, index) => (
-          <div
+    <div className="overflow-hidden bg-btn py-2.5 text-white">
+      <div className="announcement-track flex w-max items-center">
+        {[...announcements, ...announcements].map((item, index) => (
+          <span
             key={index}
-            className="flex shrink-0 items-center whitespace-nowrap"
+            className="shrink-0 whitespace-nowrap px-6 text-sm font-medium md:text-base"
           >
-            <p className="px-6 text-sm font-medium md:text-base">
-              {announcement}
-            </p>
-            <span className="text-white/70">·</span>
-          </div>
+            {item}
+            <span className="ml-6 text-white/70">·</span>
+          </span>
         ))}
       </div>
+
+      <style>{`
+        .announcement-track {
+          animation: announcement-scroll 35s linear infinite;
+        }
+
+        .announcement-track:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes announcement-scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .announcement-track {
+            animation: none;
+          }
+        }
+      `}</style>
     </div>
   );
 };

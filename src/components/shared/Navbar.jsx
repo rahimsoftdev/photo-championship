@@ -1,5 +1,3 @@
-
-import { Button } from "@heroui/react";
 import { useState } from "react";
 import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router";
