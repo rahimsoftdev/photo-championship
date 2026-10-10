@@ -1,2 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "@heroui/styles"; 
+
+
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-btn:#4048CD;
+  --color-btn2:#EE1C25;
+}
+
+body{
+  font-family: "Inter", sans-serif;
+}
