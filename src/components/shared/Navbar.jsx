@@ -38,7 +38,7 @@ const Navbar = () => {
                     <img
                         src="/src/assets/images/logo.png"
                         alt="Photo Championship"
-                        className="h-12 w-auto object-contain sm:h-14"
+                        className="h-14 w-auto object-contain sm:h-14"
                     />
                 </Link>
 
