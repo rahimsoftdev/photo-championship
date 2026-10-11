@@ -6,13 +6,24 @@
 
 @theme {
   --font-sans: "Inter", sans-serif;
+  --font-inter:"Inter", sans-serif;
+
   --color-primary:#4048CD;
   --color-secondary:#EE1C25;
+
   --color-btn:#4048CD;
   --color-btn2:#EE1C25;
+
+  --color-titleText:#0D0D14;
+  --color-subTitleText:#6B7280;
+  --color-redText:#E31837;
+  --color-blueText:#3F51B5;
+
+
   --container-main:1280px;
-  --font-inter:"Inter", sans-serif;
   --spacing-section:120px;
+
+
 }
 
 body{
