@@ -1,34 +1,16 @@
 import { FaStar } from "react-icons/fa";
+import useFetch from "../../hooks/useFetch";
+import LoadingPage from "../../pages/feedback/LoadingPage";
 
-// Testimonial data
-const testimonials = [
-  {
-    id: 1,
-    name: "Anna Kowalska",
-    date: "July 2025 Winner",
-    image: "https://i.pravatar.cc/100?img=47",
-    review:
-      "Thanks to MyPhotos, my work reached thousands of people. This is the best photography community I have ever been part of.",
-  },
-  {
-    id: 2,
-    name: "Piotr Majew",
-    date: "Top 3 - June 2025",
-    image: "https://i.pravatar.cc/100?img=12",
-    review:
-      "The platform is incredibly clean and elegant. Voting is seamless, and the prizes genuinely motivate you to push your skills.",
-  },
-  {
-    id: 3,
-    name: "Marta Wiśniewska",
-    date: "Jury Award Winner",
-    image: "https://i.pravatar.cc/100?img=44",
-    review:
-      "I received more meaningful feedback here than anywhere else. Other photographers recommend it to every photographer.",
-  },
-];
 
 const Testimonials = () => {
+
+  const {data, isLoading} = useFetch('/testimonials.json');
+  console.log(data, 'th')
+
+  if(isLoading){
+    return <LoadingPage/>
+  }
   return (
     <section className="bg-[#F7F8FA] py-section">
       <div className="container mx-auto px-4">
@@ -46,7 +28,7 @@ const Testimonials = () => {
 
         {/* Testimonial cards */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((item) => (
+          {data.map((item) => (
             <div
               key={item.id}
               className="rounded-xl border border-gray-100 bg-white p-5 transition-shadow duration-300 hover:shadow-md"

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Anna Kowalska",
+    "date": "July 2025 Winner",
+    "image": "https://i.pravatar.cc/100?img=47",
+    "review": "Thanks to MyPhotos, my work reached thousands of people. This is the best photography community I have ever been part of."
+  },
+  {
+    "id": 2,
+    "name": "Piotr Majew",
+    "date": "Top 3 - June 2025",
+    "image": "https://i.pravatar.cc/100?img=12",
+    "review": "The platform is incredibly clean and elegant. Voting is seamless, and the prizes genuinely motivate you to push your skills."
+  },
+  {
+    "id": 3,
+    "name": "Marta Wiśniewska",
+    "date": "Jury Award Winner",
+    "image": "https://i.pravatar.cc/100?img=44",
+    "review": "I received more meaningful feedback here than anywhere else. Other photographers recommend it to every photographer."
+  }
+]
