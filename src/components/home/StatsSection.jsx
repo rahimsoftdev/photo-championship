@@ -33,7 +33,7 @@ const StatsSection = () => {
 
   return (
     <section className="w-full bg-white  py-8 sm:px-8 sm:py-[60px]">
-      <div className="mx-auto grid max-w-6xl grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-x-4 gap-y-8  md:gap-10">
+      <div className="mx-auto grid max-w-main grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-between gap-x-4 gap-y-8  md:gap-10">
         {stats.map((stat) => (
           <Counter
             key={stat.id}
