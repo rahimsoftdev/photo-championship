@@ -5,7 +5,7 @@ const announcements = [
   "🏆 This month's prize: $500",
   "📅 Competition ends in 7 days",
 ];
-
+//This is an announcement bar that will always appear at the top of the page. I created an array to store news announcements. The benefit of using an array is that we can easily add new announcements, and they will automatically be displayed in the announcement bar.
 const AnnouncementBar = () => {
   return (
     <div className="overflow-hidden bg-btn py-2.5 text-white">

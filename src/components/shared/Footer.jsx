@@ -1,6 +1,11 @@
 
 import { FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 import logo from "../../assets/images/logo.png";
+/**
+ * Responsive footer with brand information, social media links,
+ * navigation sections, and copyright text.
+ * Footer content is managed using arrays for easy maintenance.
+ */
 
 const Footer = () => {
     const footerSections = [
@@ -43,9 +48,9 @@ const Footer = () => {
     ];
 
     return (
-        <footer className="bg-[#ECEDFA]">
+        <footer className="bg-[#ECEDFA] pt-10">
             {/* Main container: same width as Navbar */}
-            <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
+            <div className="mx-auto max-w-main px-5 sm:px-8 lg:px-10">
                 {/* Four equal sections */}
                 <div className="md:flex justify-between gap-16">
                      <div className="flex flex-col items-start">

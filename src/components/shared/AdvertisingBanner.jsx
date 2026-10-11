@@ -3,9 +3,9 @@ import bannerImage from "../../assets/images/advertising-banner.jpg";
 
 const AdvertisingBanner = () => {
   return (
-    <section className="px-4 py-6 sm:px-6">
+    <section className="px-4 py-6 sm:px-6 py-section">
       <div
-        className="relative mx-auto flex min-h-[190px] h-[220px] md:h-[400px] max-w-[1280px] items-center justify-center overflow-hidden rounded-lg bg-cover bg-center px-5 py-8 sm:min-h-[220px] sm:px-10"
+        className="relative mx-auto flex min-h-[190px] h-[220px] md:h-[400px] max-w-main items-center justify-center overflow-hidden rounded-lg bg-cover bg-center px-5 py-8 sm:min-h-[220px] sm:px-10"
         style={{ backgroundImage: `url(${bannerImage})` }}
       >
         {/* Dark overlay */}

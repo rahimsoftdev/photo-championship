@@ -1,6 +1,23 @@
 import { useState } from "react";
 import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router";
+/**
+ * Navbar Component
+ *
+ * Provides the main navigation for the website, including the logo,
+ * navigation links, language selector, and authentication buttons.
+ *
+ * Features:
+ * - Responsive navigation for desktop, tablet, and mobile screens.
+ * - Mobile menu toggle with open and close functionality.
+ * - Language dropdown to switch between English and Bangla.
+ * - Navigation links generated dynamically from the navLinks array.
+ * - Login and registration links for user authentication.
+ * - Automatically closes the menu and dropdowns when a navigation
+ *   link is selected.
+ *
+ * The navbar remains sticky at the top of the page while scrolling.
+ */
 
 const navLinks = [
     { name: "Competitions", path: "/competitions" },

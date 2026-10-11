@@ -6,8 +6,13 @@
 
 @theme {
   --font-sans: "Inter", sans-serif;
+  --color-primary:#4048CD;
+  --color-secondary:#EE1C25;
   --color-btn:#4048CD;
   --color-btn2:#EE1C25;
+  --container-main:1280px;
+  --font-inter:"Inter", sans-serif;
+  --spacing-section:120px;
 }
 
 body{
