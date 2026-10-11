@@ -1,39 +1,17 @@
 import { FaArrowRight } from "react-icons/fa";
+import useFetch from "../../hooks/useFetch";
+import LoadingPage from "../../pages/feedback/LoadingPage";
 
-const winners = [
-  {
-    id: 1,
-    rank: 1,
-    name: "Emma Kowalska",
-    album: "Silence at Dusk",
-    votes: "3,210 votes",
-    prize: "$300",
-    avatar: "https://i.pravatar.cc/150?img=47",
-    medal: "🥇",
-  },
-  {
-    id: 2,
-    rank: 2,
-    name: "David Novak",
-    album: "Urban Rivers",
-    votes: "2,801 votes",
-    prize: "$150",
-    avatar: "https://i.pravatar.cc/150?img=12",
-    medal: "🥈",
-  },
-  {
-    id: 3,
-    rank: 3,
-    name: "Marie Blanche",
-    album: "Salt Flats Journey",
-    votes: "2,645 votes",
-    prize: "$50",
-    avatar: "https://i.pravatar.cc/150?img=44",
-    medal: "🥉",
-  },
-];
 
 const MonthlyWinners = () => {
+    const {
+    data,
+    isLoading,
+  } = useFetch("/monthlyWinners.json");
+
+  if(isLoading){
+    return <LoadingPage/>
+  }
   return (
     <section className="px-5  ">
       <div className="mx-auto max-w-main rounded-2xl bg-primary px-5 py-12 text-center text-white sm:px-8 sm:py-16">
@@ -54,7 +32,7 @@ const MonthlyWinners = () => {
 
         {/* Winner Cards */}
         <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {winners.map((winner) => (
+          {data.map((winner) => (
             <article
               key={winner.id}
               className="flex flex-col items-center rounded-2xl border border-white/10 bg-[#666DD7] px-6 py-6 text-center text-white"

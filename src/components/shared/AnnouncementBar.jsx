@@ -8,17 +8,19 @@ const announcements = [
 //This is an announcement bar that will always appear at the top of the page. I created an array to store news announcements. The benefit of using an array is that we can easily add new announcements, and they will automatically be displayed in the announcement bar.
 const AnnouncementBar = () => {
   return (
-    <div className="overflow-hidden bg-btn py-2.5 text-white">
-      <div className="announcement-track flex w-max items-center">
-        {[...announcements, ...announcements].map((item, index) => (
-          <span
-            key={index}
-            className="shrink-0 whitespace-nowrap px-6 text-sm font-medium md:text-base"
-          >
-            {item}
-            <span className="ml-6 text-white/70">·</span>
-          </span>
-        ))}
+    <div className="overflow-hidden bg-btn py-2.5 text-white ">
+      <div className="max-w-main">
+        <div className="announcement-track flex  items-center">
+          {[...announcements, ...announcements].map((item, index) => (
+            <span
+              key={index}
+              className="shrink-0 whitespace-nowrap px-6 text-sm font-medium md:text-base"
+            >
+              {item}
+              <span className="ml-6 text-white/70">·</span>
+            </span>
+          ))}
+        </div>
       </div>
 
       <style>{`

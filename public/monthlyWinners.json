@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "rank": 1,
+    "name": "Emma Kowalska",
+    "album": "Silence at Dusk",
+    "votes": "3,210 votes",
+    "prize": "$300",
+    "avatar": "https://i.pravatar.cc/150?img=47",
+    "medal": "🥇"
+  },
+  {
+    "id": 2,
+    "rank": 2,
+    "name": "David Novak",
+    "album": "Urban Rivers",
+    "votes": "2,801 votes",
+    "prize": "$150",
+    "avatar": "https://i.pravatar.cc/150?img=12",
+    "medal": "🥈"
+  },
+  {
+    "id": 3,
+    "rank": 3,
+    "name": "Marie Blanche",
+    "album": "Salt Flats Journey",
+    "votes": "2,645 votes",
+    "prize": "$50",
+    "avatar": "https://i.pravatar.cc/150?img=44",
+    "medal": "🥉"
+  }
+]
