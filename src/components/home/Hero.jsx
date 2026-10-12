@@ -18,7 +18,7 @@ const Hero = () => {
 
       {/* Dark overlay keeps the text readable */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#100d2b]/80 via-[#100d2b]/40 to-[#100d2b]/10" />
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-gradient-to-b from-transparent to-white blur-[6px]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-gradient-to-b from-transparent to-white blur-[6px]" />
       {/* Hero content */}
       <div className="mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24">
         <div className="max-w-3xl">
@@ -47,7 +47,7 @@ const Hero = () => {
 
           {/* Search bar component goes here */}
           <div className="mt-7 w-full max-w-[660px]">
-            <SearchBar width="760px"/>
+            <SearchBar width="760px" />
           </div>
         </div>
       </div>

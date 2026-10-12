@@ -4,6 +4,7 @@ import MainLayout from "../../layouts/MainLayout.jsx";
 import HomePage from "../../pages/HomePage.jsx";
 import NotFound from "../../pages/feedback/NotFoundPage.jsx";
 import ErrorPage from "../../pages/feedback/ErrorPage.jsx";
+import AboutPage from "../../pages/feed/AboutPage.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -13,6 +14,9 @@ export const router = createBrowserRouter([
         children:[
             {
                 index:true, Component:HomePage
+            },
+            {
+                path:"about", Component: AboutPage
             }
         ]
     }, {

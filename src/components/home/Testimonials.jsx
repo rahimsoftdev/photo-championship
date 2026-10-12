@@ -13,7 +13,7 @@ const Testimonials = () => {
   }
   return (
     <section className="bg-[#F7F8FA] py-section">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-main">
 
         {/* Section heading */}
         <div className="mb-10 text-center">
