@@ -4,6 +4,8 @@ import LoadingPage from "../../pages/feedback/LoadingPage";
 
 
 const MonthlyWinners = () => {
+  //fetch data form monthlyWinners.json file in public folder,
+  //useFetch is a custom hook. the hook get url and send data
     const {
     data,
     isLoading,

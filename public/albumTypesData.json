@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Single Photo",
+    "description": "Submit one outstanding photograph that speaks for itself. Pure skill, pure story – judged by the community.",
+    "badge": null,
+    "isPopular": false,
+    "features": [
+      "Monthly competition",
+      "Public community voting",
+      "Top 3 win cash prizes"
+    ],
+    "price": "$1500.00",
+    "priceSub": "/prize money",
+    "buttonText": "Enter Now",
+    "iconType": "Camera"
+  },
+  {
+    "id": 2,
+    "title": "6 Photos Story",
+    "description": "Craft a visual narrative using six carefully sequenced images that guide the viewer through an arc.",
+    "badge": "MOST POPULAR",
+    "isPopular": true,
+    "features": [
+      "Sequential storytelling",
+      "Community votes",
+      "Best story wins"
+    ],
+    "price": "$2500.00",
+    "priceSub": "/prize money",
+    "buttonText": "Enter Now",
+    "iconType": "BookOpen"
+  },
+  {
+    "id": 3,
+    "title": "12 Photos - Full Zodiac Story",
+    "description": "Create a complete zodiac-themed visual journey across twelve stunning images – our grandest format.",
+    "badge": null,
+    "isPopular": false,
+    "features": [
+      "12-sign visual arc",
+      "Zodiac-order display",
+      "Grand prize category"
+    ],
+    "price": "$3500.00",
+    "priceSub": "/prize money",
+    "buttonText": "Enter Now",
+    "iconType": "Sparkles"
+  }
+]

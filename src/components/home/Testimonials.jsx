@@ -4,12 +4,12 @@ import LoadingPage from "../../pages/feedback/LoadingPage";
 
 
 const Testimonials = () => {
+  //get data form Testimonials.json public file 
+  //useFetch is a custom hook. the hook get url and send data
+  const { data, isLoading } = useFetch('/testimonials.json');
 
-  const {data, isLoading} = useFetch('/testimonials.json');
-  console.log(data, 'th')
-
-  if(isLoading){
-    return <LoadingPage/>
+  if (isLoading) {
+    return <LoadingPage />
   }
   return (
     <section className="bg-[#F7F8FA] py-section">
