@@ -45,12 +45,12 @@ const AboutBanner = () => {
                     {/* Action Buttons */}
                     <div className="flex flex-wrap items-center gap-4">
                         {/* Join Now Button (#EE1C25) */}
-                        <button className="px-8 py-3.5 bg-secondary hover:bg-red-700 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md">
+                        <button className="cursor-pointer px-8 py-3.5 bg-secondary hover:bg-red-700 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md">
                             Join Now
                         </button>
 
                         {/* Learn How It Works Button (#4048CD) */}
-                        <button className="px-8 py-3.5 bg-primary hover:bg-blue-800 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md">
+                        <button className="px-8 cursor-pointer py-3.5 bg-primary hover:bg-blue-800 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md">
                             Learn How It Works
                         </button>
                     </div>
