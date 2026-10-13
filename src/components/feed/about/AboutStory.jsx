@@ -3,9 +3,9 @@ import storyImage from '../../../assets/images/story.jpg';
 
 const AboutStory = () => {
   return (
-    <section className="w-full py-8 md:py-12 px-4 md:px-8 lg:px-16 bg-white">
+    <section className="w-full py-section md:py-12 px-4 md:px-8 lg:px-16 bg-white">
       {/* Main container wrapper */}
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+      <div className="max-w-main mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
         
         {/* Left Container: Story Image */}
         <div className="w-full lg:w-1/2 flex justify-center">
@@ -22,7 +22,7 @@ const AboutStory = () => {
         <div className="w-full lg:w-1/2 flex flex-col justify-center">
           
           {/* Main Title Heading */}
-          <h2 className="text-[36px] md:text-[48px] font-extrabold text-[#0D0D14] leading-none mb-4">
+          <h2 className="text-[36px] md:text-[48px] font-extrabold text-titleText leading-none mb-4">
             Our Story
           </h2>
 

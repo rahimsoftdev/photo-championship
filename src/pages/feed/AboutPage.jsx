@@ -1,4 +1,5 @@
 import AboutBanner from "../../components/feed/about/AboutBanner";
+import AboutMissionVision from "../../components/feed/about/AboutMissionVision";
 import AboutStats from "../../components/feed/about/AboutStats";
 import AboutStory from "../../components/feed/about/AboutStory";
 
@@ -8,6 +9,7 @@ const AboutPage = () => {
         <AboutBanner/>
         <AboutStats/>
         <AboutStory/>
+        <AboutMissionVision/>
             
         </>
     );
