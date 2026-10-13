@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Nature",
+    "value": "nature",
+    "subcategories": [
+      { "name": "Mountains", "value": "mountains" },
+      { "name": "Forest", "value": "forest" },
+      { "name": "Wildlife", "value": "wildlife" },
+      { "name": "Rivers & Lakes", "value": "rivers-lakes" },
+      { "name": "Oceans & Beaches", "value": "oceans-beaches" },
+      { "name": "Flowers & Plants", "value": "flowers-plants" },
+      { "name": "Sky & Clouds", "value": "sky-clouds" },
+      { "name": "Weather & Storms", "value": "weather-storms" }
+    ]
+  },
+  {
+    "name": "Portrait",
+    "value": "portrait",
+    "subcategories": [
+      { "name": "Individual Portraits", "value": "individual-portraits" },
+      { "name": "Family Portraits", "value": "family-portraits" },
+      { "name": "Couples", "value": "couples" },
+      { "name": "Professional Headshots", "value": "professional-headshots" },
+      { "name": "Candid Portraits", "value": "candid-portraits" }
+    ]
+  },
+  {
+    "name": "Landscape",
+    "value": "landscape",
+    "subcategories": [
+      { "name": "Mountains", "value": "mountains" },
+      { "name": "Countryside", "value": "countryside" },
+      { "name": "Desert", "value": "desert" },
+      { "name": "Coastal Views", "value": "coastal-views" },
+      { "name": "City Skylines", "value": "city-skylines" }
+    ]
+  },
+  {
+    "name": "Street Photography",
+    "value": "street-photography",
+    "subcategories": [
+      { "name": "Street Life", "value": "street-life" },
+      { "name": "Urban Architecture", "value": "urban-architecture" },
+      { "name": "Markets", "value": "markets" },
+      { "name": "Public Transport", "value": "public-transport" },
+      { "name": "Street Portraits", "value": "street-portraits" }
+    ]
+  },
+  {
+    "name": "Architecture",
+    "value": "architecture",
+    "subcategories": [
+      { "name": "Modern Buildings", "value": "modern-buildings" },
+      { "name": "Historic Buildings", "value": "historic-buildings" },
+      { "name": "Interiors", "value": "interiors" },
+      { "name": "Bridges", "value": "bridges" },
+      { "name": "Religious Buildings", "value": "religious-buildings" }
+    ]
+  },
+  {
+    "name": "Black & White",
+    "value": "black-white",
+    "subcategories": [
+      { "name": "Portraits", "value": "portraits" },
+      { "name": "Street", "value": "street" },
+      { "name": "Architecture", "value": "architecture" },
+      { "name": "Nature", "value": "nature" }
+    ]
+  },
+  {
+    "name": "Travel",
+    "value": "travel",
+    "subcategories": [
+      { "name": "Adventure", "value": "adventure" },
+      { "name": "Cultural Experiences", "value": "cultural-experiences" },
+      { "name": "Landmarks", "value": "landmarks" },
+      { "name": "Food & Culture", "value": "food-culture" }
+    ]
+  },
+  {
+    "name": "Wedding",
+    "value": "wedding",
+    "subcategories": [
+      { "name": "Ceremony", "value": "ceremony" },
+      { "name": "Bride & Groom", "value": "bride-groom" },
+      { "name": "Reception", "value": "reception" },
+      { "name": "Wedding Details", "value": "wedding-details" }
+    ]
+  },
+  {
+    "name": "Macro",
+    "value": "macro",
+    "subcategories": [
+      { "name": "Insects", "value": "insects" },
+      { "name": "Flowers", "value": "flowers" },
+      { "name": "Water Droplets", "value": "water-droplets" },
+      { "name": "Textures", "value": "textures" }
+    ]
+  },
+  {
+    "name": "Fine Art",
+    "value": "fine-art",
+    "subcategories": [
+      { "name": "Conceptual", "value": "conceptual" },
+      { "name": "Abstract", "value": "abstract" },
+      { "name": "Minimalism", "value": "minimalism" },
+      { "name": "Surrealism", "value": "surrealism" }
+    ]
+  },
+  {
+    "name": "Pets",
+    "value": "pets",
+    "subcategories": [
+      { "name": "Dogs", "value": "dogs" },
+      { "name": "Cats", "value": "cats" },
+      { "name": "Birds", "value": "birds" },
+      { "name": "Other Pets", "value": "other-pets" }
+    ]
+  },
+  {
+    "name": "Sports",
+    "value": "sports",
+    "subcategories": [
+      { "name": "Football", "value": "football" },
+      { "name": "Cricket", "value": "cricket" },
+      { "name": "Basketball", "value": "basketball" },
+      { "name": "Running", "value": "running" },
+      { "name": "Extreme Sports", "value": "extreme-sports" }
+    ]
+  },
+  {
+    "name": "Night Photography",
+    "value": "night-photography",
+    "subcategories": [
+      { "name": "Astrophotography", "value": "astrophotography" },
+      { "name": "Star Trails", "value": "star-trails" },
+      { "name": "City Lights", "value": "city-lights" },
+      { "name": "Night Sky", "value": "night-sky" },
+      { "name": "Light Painting", "value": "light-painting" }
+    ]
+  }
+]
