@@ -83,8 +83,8 @@ const ArtworkGalleryGrid = ({ images = [], zodiacs = [] }) => {
         )}
       </div>
 
-      {/* Grid container */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+      {/* Grid container: Strict 6 columns and max 2 rows, items shrink to fit without scrollbar */}
+      <div className="grid grid-cols-6 grid-rows-2 gap-2 sm:gap-3 lg:gap-4 w-full">
         {images.slice(0, 12).map((imgUrl, index) => {
           const isRedTheme = index < 6;
           const themeColor = isRedTheme ? "#ef4444" : "#3b82f6"; // Red or Blue
@@ -98,26 +98,26 @@ const ArtworkGalleryGrid = ({ images = [], zodiacs = [] }) => {
             <div
               key={index}
               onClick={() => handleImageSelect(index)}
-              className="cursor-pointer group flex flex-col space-y-1.5"
+              className="cursor-pointer group flex flex-col space-y-1 min-w-0"
             >
               {/* Top Details: Icon, Name & Circle Badge */}
-              <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-1.5 overflow-hidden">
+              <div className="flex items-center justify-between text-[10px] sm:text-xs">
+                <div className="flex items-center gap-1 overflow-hidden">
                   {/* Icon with soft background box */}
                   <span
-                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded text-xs text-white"
+                    className="flex h-4 w-4 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded text-[10px] sm:text-xs text-white"
                     style={{ backgroundColor: themeColor }}
                   >
                     {ZodiacIconComponent}
                   </span>
-                  <span className="font-medium text-gray-800 truncate text-[11px] sm:text-xs">
+                  <span className="font-medium text-gray-800 truncate text-[9px] sm:text-xs">
                     {zodiacName}
                   </span>
                 </div>
                 
                 {/* Halka circle badge for index number */}
                 <span
-                  className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
+                  className="flex h-4 w-4 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full text-[9px] sm:text-[10px] font-bold"
                   style={{
                     backgroundColor: isRedTheme ? "rgba(254, 226, 226, 0.8)" : "rgba(219, 234, 254, 0.8)",
                     color: themeColor,
@@ -129,7 +129,7 @@ const ArtworkGalleryGrid = ({ images = [], zodiacs = [] }) => {
 
               {/* Image Box with Active Border */}
               <div
-                className={`relative overflow-hidden rounded-xl aspect-[16/10] border-2 transition-all duration-200 ${
+                className={`relative overflow-hidden rounded-lg sm:rounded-xl aspect-[16/10] border-2 transition-all duration-200 ${
                   isSelected ? "shadow-md" : "opacity-75 hover:opacity-100"
                 }`}
                 style={{
