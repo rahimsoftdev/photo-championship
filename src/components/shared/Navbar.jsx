@@ -20,9 +20,9 @@ import { Link } from "react-router";
  */
 
 const navLinks = [
-    { name: "Competitions", path: "/competitions" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "Buy Photos", path: "/buy-photos" },
+    { name: "Competitions", path: "/feed/competition" },
+    { name: "Gallery", path: "/feed/gallery" },
+    { name: "Buy Photos", path: "/feed/buy-photos" },
     { name: "Album Types", path: "/album-types" },
     { name: "Advertise With Us", path: "/advertise" },
     { name: "Leaderboard", path: "/leaderboard" },

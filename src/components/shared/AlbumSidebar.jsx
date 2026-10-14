@@ -167,11 +167,10 @@ const AlbumSidebar = () => {
                         handleCategoryToggle(category.value)
                       }
                       aria-expanded={isExpanded}
-                      className={`flex w-full items-center justify-between gap-3 rounded-md px-2 py-2.5 text-left text-sm font-medium transition hover:bg-gray-50 ${
-                        isExpanded || isSelected
-                          ? "text-secondary"
-                          : "text-gray-700"
-                      }`}
+                      className={`flex w-full items-center justify-between gap-3 rounded-md px-2 py-2.5 text-left text-sm font-medium transition hover:bg-gray-50 ${isExpanded || isSelected
+                        ? "text-secondary"
+                        : "text-gray-700"
+                        }`}
                     >
                       <span>{category.name}</span>
 
