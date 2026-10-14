@@ -1,22 +1,30 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 
 const ArtworkImages = ({ images = [] }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isVisible, setIsVisible] = useState(true);
 
+  // URL query params (index) theke current index nia asha, na thakle 0
+  const queryIndex = parseInt(searchParams.get("index")) || 0;
+  const currentIndex = queryIndex < images.length && queryIndex >= 0 ? queryIndex : 0;
+
   useEffect(() => {
-    setCurrentIndex(0);
     setIsVisible(true);
-  }, [images]);
+  }, [currentIndex, images]);
 
   const changeImage = (newIndex) => {
     if (newIndex === currentIndex) return;
 
     setIsVisible(false);
 
-    // Allow the fade-out animation to finish before changing the image.
+    // Allow the fade-out animation to finish before changing the image & updating URL search params.
     setTimeout(() => {
-      setCurrentIndex(newIndex);
+      setSearchParams((prev) => {
+        const newParams = new URLSearchParams(prev);
+        newParams.set("index", newIndex);
+        return newParams;
+      });
       setIsVisible(true);
     }, 200);
   };

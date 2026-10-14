@@ -3,6 +3,7 @@ import useArtworkById from "../../hooks/useArtworkById";
 import ArtworkImages from "../../components/ui/detailsPage/ArtworkImages";
 import ArtworkVideo from "../../components/ui/detailsPage/ArtworkVideo";
 import ArtworkInfoSection from "../../components/ui/detailsPage/ArtworkInfoSection";
+import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGrid";
 // import ArtworkImages from "../../components/shared/ArtworkImages";
 
 const ArtwokDetailsPage = () => {
@@ -27,6 +28,7 @@ const ArtwokDetailsPage = () => {
 
         {/* art work iamge carosel if 1 photo will show 1 photo if 6 or 12 will show carosel */}
       <ArtworkImages images={artwork.images} />
+      <ArtworkGalleryGrid images={artwork.images} zodiacs={artwork.zodiacs} />
 
       {/* TODO: Video component  */}
       {/* <ArtworkVideo video={artwork.video} /> */}
