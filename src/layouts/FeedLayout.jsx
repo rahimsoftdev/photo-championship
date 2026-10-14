@@ -3,6 +3,7 @@ import React from "react";
 import { Outlet } from "react-router";
 import AlbumSidebar from "../components/shared/AlbumSidebar";
 import SearchBar from "../components/ui/SearchBar";
+import Pagination from "../components/shared/Pagination";
 
 const FeedLayout = () => {
   return (
@@ -28,6 +29,10 @@ const FeedLayout = () => {
 
           {/* Nested page content */}
           <Outlet />
+
+
+          {/* pagination  */}
+          <Pagination/>
         </section>
       </div>
     </main>

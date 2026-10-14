@@ -1,14 +1,22 @@
 import { useEffect, useMemo, useState } from "react";
 
-//distructuring: query params
-const useArtwork = ({ title, albumType, category, subcategory } = {},
-    competition = true
+// Extract query params using destructuring.
+const useArtwork = (
+    {
+        title,
+        albumType,
+        category,
+        subcategory,
+        page,
+    } = {},
+    competition = true,
+    itemsPerPage = 9
 ) => {
     const [allArtworks, setAllArtworks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Fetch all artworks from public/artWork.json
+    // Fetch all artworks from public/artWork.json.
     useEffect(() => {
         const controller = new AbortController();
 
@@ -45,11 +53,10 @@ const useArtwork = ({ title, albumType, category, subcategory } = {},
         return () => controller.abort();
     }, []);
 
-    // Filter artworks using type and query params
-    const artworks = useMemo(() => {
+    // Filter artworks by type, title, album type, category, and subcategory.
+    const filteredArtworks = useMemo(() => {
         const selectedType = competition ? "competition" : "gallery";
 
-        // Support the albumType values used by the sidebar and JSON.
         const albumTypeAliases = {
             "single-photo": ["single-photo", "single"],
             "6-photo-story": ["6-photo-story", "six", "6"],
@@ -64,7 +71,7 @@ const useArtwork = ({ title, albumType, category, subcategory } = {},
             String(value ?? "").trim().toLowerCase();
 
         return allArtworks.filter((artwork) => {
-            // First, filter by competition or gallery.
+            // Filter competition or gallery artworks.
             if (normalize(artwork.type) !== selectedType) {
                 return false;
             }
@@ -77,14 +84,15 @@ const useArtwork = ({ title, albumType, category, subcategory } = {},
                 return false;
             }
 
-            // Filter by albumType from AlbumSidebar.
+            // Filter by album type from AlbumSidebar.
             if (albumType?.trim()) {
                 const requestedAlbumType = normalize(albumType);
                 const aliases = albumTypeAliases[requestedAlbumType];
 
                 const matchesAlbumType = aliases
                     ? aliases.some(
-                        (value) => normalize(artwork.albumType) === normalize(value)
+                        (value) =>
+                            normalize(artwork.albumType) === normalize(value)
                     )
                     : normalize(artwork.albumType) === requestedAlbumType;
 
@@ -120,8 +128,33 @@ const useArtwork = ({ title, albumType, category, subcategory } = {},
         competition,
     ]);
 
+    // Calculate total pages after applying all filters.
+    const totalArtworks = filteredArtworks.length;
+    const totalPages = Math.ceil(totalArtworks / itemsPerPage);
+
+    // Ensure the current page stays within valid bounds.
+    const currentPage = Math.min(
+        Math.max(Number(page) || 1, 1),
+        Math.max(totalPages, 1)
+    );
+
+    // Return only artworks for the current page.
+    const artworks = useMemo(() => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+
+        return filteredArtworks.slice(
+            startIndex,
+            startIndex + itemsPerPage
+        );
+    }, [filteredArtworks, currentPage, itemsPerPage]);
+
     return {
         artworks,
+        filteredArtworks,
+        totalArtworks,
+        totalPages,
+        currentPage,
+        itemsPerPage,
         loading,
         error,
     };
