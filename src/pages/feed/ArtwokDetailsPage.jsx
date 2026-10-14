@@ -5,6 +5,7 @@ import ArtworkImages from "../../components/ui/detailsPage/ArtworkImages";
 import ArtworkInfoSection from "../../components/ui/detailsPage/ArtworkInfoSection";
 import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGrid";
 import ArtworkComments from "../../components/ui/detailsPage/ArtworkComments";
+import SupportSection from "../../components/ui/detailsPage/SupportSection";
 // import ArtworkImages from "../../components/shared/ArtworkImages";
 
 const ArtwokDetailsPage = () => {
@@ -35,6 +36,7 @@ const ArtwokDetailsPage = () => {
       {/* <ArtworkVideo video={artwork.video} /> */}
 
       <ArtworkInfoSection artwork={artwork} />
+      <SupportSection/>
       <ArtworkComments artwork={artwork} />
 
   
