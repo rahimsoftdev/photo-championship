@@ -1,9 +1,10 @@
 import { useParams } from "react-router";
 import useArtworkById from "../../hooks/useArtworkById";
 import ArtworkImages from "../../components/ui/detailsPage/ArtworkImages";
-import ArtworkVideo from "../../components/ui/detailsPage/ArtworkVideo";
+// import ArtworkVideo from "../../components/ui/detailsPage/ArtworkVideo";
 import ArtworkInfoSection from "../../components/ui/detailsPage/ArtworkInfoSection";
 import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGrid";
+import ArtworkComments from "../../components/ui/detailsPage/ArtworkComments";
 // import ArtworkImages from "../../components/shared/ArtworkImages";
 
 const ArtwokDetailsPage = () => {
@@ -34,6 +35,7 @@ const ArtwokDetailsPage = () => {
       {/* <ArtworkVideo video={artwork.video} /> */}
 
       <ArtworkInfoSection artwork={artwork} />
+      <ArtworkComments artwork={artwork} />
 
   
     </main>
