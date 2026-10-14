@@ -1,5 +1,9 @@
 import { useParams } from "react-router";
 import useArtworkById from "../../hooks/useArtworkById";
+import ArtworkImages from "../../components/ui/detailsPage/ArtworkImages";
+import ArtworkVideo from "../../components/ui/detailsPage/ArtworkVideo";
+import ArtworkInfoSection from "../../components/ui/detailsPage/ArtworkInfoSection";
+// import ArtworkImages from "../../components/shared/ArtworkImages";
 
 const ArtwokDetailsPage = () => {
   const { id } = useParams();
@@ -19,24 +23,18 @@ const ArtwokDetailsPage = () => {
   }
 
   return (
-    <div>
-      <h1>{artwork.title}</h1>
+    <main className="mx-auto w-full max-w-main px-4 py-6">
 
-      <p>{artwork.description}</p>
+        {/* art work iamge carosel if 1 photo will show 1 photo if 6 or 12 will show carosel */}
+      <ArtworkImages images={artwork.images} />
 
-      <img
-        src={artwork.images[0]}
-        alt={artwork.title}
-      />
+      {/* TODO: Video component  */}
+      {/* <ArtworkVideo video={artwork.video} /> */}
 
-      <p>Author: {artwork.info.author}</p>
+      <ArtworkInfoSection artwork={artwork} />
 
-      <p>Category: {artwork.category}</p>
-
-      <p>Views: {artwork.viewsCount}</p>
-
-      <p>Reactions: {artwork.totalReact}</p>
-    </div>
+  
+    </main>
   );
 };
 
