@@ -7,6 +7,7 @@ import ErrorPage from "../../pages/feedback/ErrorPage.jsx";
 import AboutPage from "../../pages/feed/AboutPage.jsx";
 import FeedLayout from "../../layouts/FeedLayout.jsx";
 import CompetitionPage from "../../pages/feed/CompetitionPage.jsx";
+import GalleryPage from "../../pages/feed/GalleryPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -30,6 +31,9 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path:"competition", Component: CompetitionPage
+                    },
+                    {
+                        path:"gallery", Component:GalleryPage
                     }
                 ]
             }, 
