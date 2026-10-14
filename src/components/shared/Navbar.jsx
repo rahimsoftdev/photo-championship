@@ -1,22 +1,16 @@
 import { useState } from "react";
 import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
+
 /**
  * Navbar Component
  *
- * Provides the main navigation for the website, including the logo,
- * navigation links, language selector, and authentication buttons.
- *
  * Features:
- * - Responsive navigation for desktop, tablet, and mobile screens.
- * - Mobile menu toggle with open and close functionality.
- * - Language dropdown to switch between English and Bangla.
- * - Navigation links generated dynamically from the navLinks array.
- * - Login and registration links for user authentication.
- * - Automatically closes the menu and dropdowns when a navigation
- *   link is selected.
- *
- * The navbar remains sticky at the top of the page while scrolling.
+ * - Responsive navigation
+ * - Active navigation link using NavLink
+ * - Language dropdown
+ * - Mobile menu toggle
+ * - Login and registration links
  */
 
 const navLinks = [
@@ -41,8 +35,8 @@ const Navbar = () => {
     };
 
     return (
-        //TODO: Navar will be sticky 
-        <header className=" top-0 z-50 w-full border-b border-gray-100 bg-white">
+        // TODO: Navbar will be sticky
+        <header className="top-0 z-50 w-full border-b border-gray-100 bg-white">
             <nav className="mx-auto flex min-h-[84px] max-h-[87px] max-w-[1280px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-5">
                 {/* Logo */}
                 <Link
@@ -61,13 +55,19 @@ const Navbar = () => {
                 {/* Desktop Navigation */}
                 <div className="hidden items-center gap-6 xl:flex 2xl:gap-7">
                     {navLinks.map((link) => (
-                        <Link
+                        <NavLink
                             key={link.name}
                             to={link.path}
-                            className="whitespace-nowrap text-base font-semibold text-[#6B7280] transition-colors duration-200 hover:text-[#4048CD] text-sm"
+                            className={({ isActive }) =>
+                                `whitespace-nowrap text-sm font-semibold transition-colors duration-200 ${
+                                    isActive
+                                        ? "text-primary"
+                                        : "text-[#6B7280] hover:text-primary"
+                                }`
+                            }
                         >
                             {link.name}
-                        </Link>
+                        </NavLink>
                     ))}
                 </div>
 
@@ -77,14 +77,17 @@ const Navbar = () => {
                     <div className="relative">
                         <button
                             type="button"
-                            onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+                            onClick={() =>
+                                setIsLanguageOpen(!isLanguageOpen)
+                            }
                             aria-expanded={isLanguageOpen}
                             className="flex items-center gap-2 rounded-lg bg-[#F0F0F0] px-3 py-2.5 text-sm font-medium text-black transition hover:bg-gray-200"
                         >
                             {language}
                             <FiChevronDown
-                                className={`transition-transform ${isLanguageOpen ? "rotate-180" : ""
-                                    }`}
+                                className={`transition-transform ${
+                                    isLanguageOpen ? "rotate-180" : ""
+                                }`}
                                 size={16}
                             />
                         </button>
@@ -99,10 +102,11 @@ const Navbar = () => {
                                             setLanguage(item);
                                             setIsLanguageOpen(false);
                                         }}
-                                        className={`block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100 ${language === item
-                                                ? "font-semibold text-[#4048CD]"
+                                        className={`block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100 ${
+                                            language === item
+                                                ? "font-semibold text-primary"
                                                 : "text-gray-700"
-                                            }`}
+                                        }`}
                                     >
                                         {item}
                                     </button>
@@ -114,19 +118,15 @@ const Navbar = () => {
                     {/* Login */}
                     <Link
                         to="/login"
-                        className="whitespace-nowrap bg-btn2 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#3038B5] rounded-full "
-
+                        className="whitespace-nowrap rounded-full bg-btn2 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#3038B5]"
                     >
-                       
-                            Log In
-                       
-
+                        Log In
                     </Link>
 
                     {/* Register */}
                     <Link
                         to="/register"
-                        className="whitespace-nowrap  bg-btn px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#D71920] rounded-full"
+                        className="whitespace-nowrap rounded-full bg-btn px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#D71920]"
                     >
                         Register Free
                     </Link>
@@ -140,7 +140,11 @@ const Navbar = () => {
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     aria-expanded={isMenuOpen}
                 >
-                    {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                    {isMenuOpen ? (
+                        <FiX size={24} />
+                    ) : (
+                        <FiMenu size={24} />
+                    )}
                 </button>
             </nav>
 
@@ -149,29 +153,38 @@ const Navbar = () => {
                 <div className="border-t border-gray-100 bg-white shadow-lg xl:hidden">
                     <div className="mx-auto max-w-[1280px] space-y-1 px-4 py-4 sm:px-6">
                         {navLinks.map((link) => (
-                            <Link
+                            <NavLink
                                 key={link.name}
                                 to={link.path}
                                 onClick={closeMenu}
-                                className="block rounded-lg px-4 py-3 text-base font-semibold text-[#6B7280] transition hover:bg-gray-50 hover:text-[#4048CD]"
+                                className={({ isActive }) =>
+                                    `block rounded-lg px-4 py-3 text-base font-semibold transition ${
+                                        isActive
+                                            ? "text-primary"
+                                            : "text-[#6B7280] hover:bg-gray-50 hover:text-primary"
+                                    }`
+                                }
                             >
                                 {link.name}
-                            </Link>
+                            </NavLink>
                         ))}
 
                         <div className="mt-3 border-t border-gray-100 pt-4">
                             {/* Mobile Language Dropdown */}
                             <button
                                 type="button"
-                                onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+                                onClick={() =>
+                                    setIsLanguageOpen(!isLanguageOpen)
+                                }
                                 className="flex w-full items-center justify-between rounded-lg bg-[#F0F0F0] px-4 py-3 text-sm font-medium text-black"
                                 aria-expanded={isLanguageOpen}
                             >
                                 <span>{language}</span>
                                 <FiChevronDown
                                     size={18}
-                                    className={`transition-transform ${isLanguageOpen ? "rotate-180" : ""
-                                        }`}
+                                    className={`transition-transform ${
+                                        isLanguageOpen ? "rotate-180" : ""
+                                    }`}
                                 />
                             </button>
 
@@ -185,7 +198,11 @@ const Navbar = () => {
                                                 setLanguage(item);
                                                 setIsLanguageOpen(false);
                                             }}
-                                            className="block w-full rounded-md px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-gray-100"
+                                            className={`block w-full rounded-md px-4 py-2.5 text-left text-sm hover:bg-gray-100 ${
+                                                language === item
+                                                    ? "font-semibold text-primary"
+                                                    : "text-gray-700"
+                                            }`}
                                         >
                                             {item}
                                         </button>
@@ -205,7 +222,7 @@ const Navbar = () => {
                                 <Link
                                     to="/register"
                                     onClick={closeMenu}
-                                    className="flex flex-1 items-center justify-center rounded-lg bg-[#EE1C25] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#D71920] "
+                                    className="flex flex-1 items-center justify-center rounded-lg bg-[#EE1C25] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#D71920]"
                                 >
                                     Register Free
                                 </Link>

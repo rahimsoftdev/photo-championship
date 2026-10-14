@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import {
   FiMoreVertical,
   FiBookmark,
@@ -31,11 +32,13 @@ const getArtworkId = (artwork) =>
 
 const ArtworkCard = ({ artWorkData }) => {
   const artwork = artWorkData;
+  const navigate = useNavigate();
 
   // Keep the initial state synchronized with localStorage.
   const [savedIds, setSavedIds] = useState(() =>
     readStorage(SAVED_STORAGE_KEY)
   );
+
   const [lovedIds, setLovedIds] = useState(() =>
     readStorage(LOVED_STORAGE_KEY)
   );
@@ -79,8 +82,19 @@ const ArtworkCard = ({ artWorkData }) => {
       : artwork.images[0]?.url ?? artwork.images[0]?.src ?? ""
     : "";
 
+  // Navigate to artwork details.
+  const handleCardClick = () => {
+    const id = artwork.id ?? artwork._id;
+
+    if (!id) return;
+
+    navigate(`/artwokrdetails/${id}`);
+  };
+
   // Toggle Save without affecting any other artwork in localStorage.
-  const handleSave = () => {
+  const handleSave = (event) => {
+    event.stopPropagation();
+
     const currentIds = readStorage(SAVED_STORAGE_KEY);
 
     const updatedIds = currentIds.includes(artworkId)
@@ -92,7 +106,9 @@ const ArtworkCard = ({ artWorkData }) => {
   };
 
   // Toggle Love independently from Save and other artwork cards.
-  const handleLove = () => {
+  const handleLove = (event) => {
+    event.stopPropagation();
+
     const currentIds = readStorage(LOVED_STORAGE_KEY);
 
     const updatedIds = currentIds.includes(artworkId)
@@ -104,7 +120,8 @@ const ArtworkCard = ({ artWorkData }) => {
   };
 
   // TODO: add modal for the three-dot menu.
-  const handleMenuClick = () => {
+  const handleMenuClick = (event) => {
+    event.stopPropagation();
     // Open the artwork actions modal here in the future.
   };
 
@@ -128,7 +145,22 @@ const ArtworkCard = ({ artWorkData }) => {
       : "Date unavailable";
 
   return (
-    <article className="w-full min-w-0 overflow-hidden rounded-xl border border-[#E5E7EB] bg-white transition-shadow duration-200 hover:shadow-md">
+    <article
+      onClick={handleCardClick}
+      onKeyDown={(event) => {
+        if (
+          event.target === event.currentTarget &&
+          (event.key === "Enter" || event.key === " ")
+        ) {
+          event.preventDefault();
+          handleCardClick();
+        }
+      }}
+      role="link"
+      tabIndex={0}
+      aria-label={`View details for ${artwork.title || "artwork"}`}
+      className="w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-[#E5E7EB] bg-white transition-shadow duration-200 hover:shadow-md"
+    >
       {/* Artwork cover and overlaid actions */}
       <div className="relative h-[205px] w-full overflow-hidden bg-gray-100">
         {coverImage ? (
@@ -177,7 +209,7 @@ const ArtworkCard = ({ artWorkData }) => {
           {isSaved ? "Saved" : "Save"}
         </button>
 
-        {/* Additional photo count: single-photo albums show no count. */}
+        {/* Additional photo count */}
         {photoCount > 1 && (
           <span className="absolute bottom-2.5 right-2.5 inline-flex items-center gap-1.5 rounded-md bg-[rgba(17,24,39,0.8)] px-2.5 py-1.5 text-xs font-semibold text-white">
             <FiImage size={13} />

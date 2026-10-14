@@ -8,6 +8,7 @@ import AboutPage from "../../pages/feed/AboutPage.jsx";
 import FeedLayout from "../../layouts/FeedLayout.jsx";
 import CompetitionPage from "../../pages/feed/CompetitionPage.jsx";
 import GalleryPage from "../../pages/feed/GalleryPage.jsx";
+import ArtwokDetailsPage from "../../pages/feed/ArtwokDetailsPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -36,7 +37,10 @@ export const router = createBrowserRouter([
                         path:"gallery", Component:GalleryPage
                     }
                 ]
-            }, 
+            },
+            {
+                path:"artwokrdetails/:id", Component:ArtwokDetailsPage
+            }
         ]
     },
     {

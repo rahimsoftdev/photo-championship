@@ -14,6 +14,7 @@
     "images": [
       "https://picsum.photos/seed/mountain-art-01/1200/800"
     ],
+    "zodiacs": ["Gemini"],
     "video": null,
     "title": "Golden Sunrise Over the Mountains",
     "description": "A beautiful sunrise illuminating the mountain peaks.",
@@ -56,6 +57,7 @@
       "https://picsum.photos/seed/wildlife-art-05/1200/800",
       "https://picsum.photos/seed/wildlife-art-06/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
     "video": null,
     "title": "Wildlife Through My Lens",
     "description": "A collection capturing the beauty of animals in their natural habitats.",
@@ -104,6 +106,7 @@
       "https://picsum.photos/seed/portrait-art-11/1200/800",
       "https://picsum.photos/seed/portrait-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "Faces of Humanity",
     "description": "Twelve portraits showing different human emotions and stories.",
@@ -146,6 +149,7 @@
     "images": [
       "https://picsum.photos/seed/architecture-art-01/1200/800"
     ],
+    "zodiacs": ["Libra"],
     "video": null,
     "title": "Modern Architectural Beauty",
     "description": "A minimalist perspective on modern architecture.",
@@ -182,6 +186,7 @@
       "https://picsum.photos/seed/countryside-art-05/1200/800",
       "https://picsum.photos/seed/countryside-art-06/1200/800"
     ],
+    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "Peaceful Countryside",
     "description": "A six-photo journey through peaceful green countryside.",
@@ -230,6 +235,7 @@
       "https://picsum.photos/seed/travel-art-11/1200/800",
       "https://picsum.photos/seed/travel-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
     "title": "Discovering New Cultures",
     "description": "Twelve photographs from a journey across different cultures.",
@@ -261,6 +267,7 @@
     "images": [
       "https://picsum.photos/seed/macro-art-01/1200/800"
     ],
+    "zodiacs": ["Gemini"],
     "video": null,
     "title": "Tiny Wonders of Nature",
     "description": "A close-up view of the little details we often overlook.",
@@ -303,6 +310,7 @@
       "https://picsum.photos/seed/street-art-05/1200/800",
       "https://picsum.photos/seed/street-art-06/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
     "video": null,
     "title": "Life on the Streets",
     "description": "Everyday moments captured in busy city streets.",
@@ -345,6 +353,7 @@
       "https://picsum.photos/seed/bw-art-11/1200/800",
       "https://picsum.photos/seed/bw-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "Monochrome Emotions",
     "description": "A dramatic collection of black-and-white portraits.",
@@ -382,6 +391,7 @@
     "images": [
       "https://picsum.photos/seed/cat-art-01/1200/800"
     ],
+    "zodiacs": ["Libra"],
     "video": null,
     "title": "Little Cat, Big Personality",
     "description": "A cute portrait of a curious feline friend.",
@@ -418,6 +428,7 @@
       "https://picsum.photos/seed/astro-art-05/1200/800",
       "https://picsum.photos/seed/astro-art-06/1200/800"
     ],
+    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "Beyond the Night Sky",
     "description": "Six views of the stars and the mysterious night sky.",
@@ -466,6 +477,7 @@
       "https://picsum.photos/seed/wedding-art-11/1200/800",
       "https://picsum.photos/seed/wedding-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
     "title": "Forever Starts Today",
     "description": "A collection of romantic moments from a wedding day.",
@@ -497,6 +509,7 @@
     "images": [
       "https://picsum.photos/seed/abstract-art-01/1200/800"
     ],
+    "zodiacs": ["Gemini"],
     "video": null,
     "title": "Abstract Dreams",
     "description": "An artistic experiment with shapes, colors, and light.",
@@ -533,6 +546,7 @@
       "https://picsum.photos/seed/football-art-05/1200/800",
       "https://picsum.photos/seed/football-art-06/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
     "video": null,
     "title": "The Spirit of Football",
     "description": "Fast-paced action and unforgettable moments from the field.",
@@ -581,6 +595,7 @@
       "https://picsum.photos/seed/ocean-art-11/1200/800",
       "https://picsum.photos/seed/ocean-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "Whispers of the Ocean",
     "description": "Twelve photographs exploring the colors and movement of the sea.",
@@ -612,6 +627,7 @@
     "images": [
       "https://picsum.photos/seed/landmark-art-01/1200/800"
     ],
+    "zodiacs": ["Libra"],
     "video": null,
     "title": "A Landmark to Remember",
     "description": "A memorable view of an iconic travel destination.",
@@ -648,6 +664,7 @@
       "https://picsum.photos/seed/bridge-art-05/1200/800",
       "https://picsum.photos/seed/bridge-art-06/1200/800"
     ],
+    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "Bridges That Connect Us",
     "description": "A collection highlighting engineering and architectural beauty.",
@@ -696,6 +713,7 @@
       "https://picsum.photos/seed/market-art-11/1200/800",
       "https://picsum.photos/seed/market-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "Stories from the Local Market",
     "description": "Everyday market scenes full of colors, people, and culture.",
@@ -727,6 +745,7 @@
     "images": [
       "https://picsum.photos/seed/dog-art-01/1200/800"
     ],
+    "zodiacs": ["Gemini"],
     "video": null,
     "title": "A Loyal Friend",
     "description": "A heartwarming portrait of a beloved dog.",
@@ -763,6 +782,7 @@
       "https://picsum.photos/seed/minimal-art-05/1200/800",
       "https://picsum.photos/seed/minimal-art-06/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
     "video": null,
     "title": "Less Is More",
     "description": "A minimalistic collection focused on form and simplicity.",
@@ -805,6 +825,7 @@
       "https://picsum.photos/seed/cricket-art-11/1200/800",
       "https://picsum.photos/seed/cricket-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
     "title": "Cricket: Moments of Glory",
     "description": "Twelve action-packed photographs celebrating cricket.",
@@ -842,6 +863,7 @@
     "images": [
       "https://picsum.photos/seed/flowers-art-01/1200/800"
     ],
+    "zodiacs": ["Libra"],
     "video": null,
     "title": "A Garden in Bloom",
     "description": "A colorful photograph celebrating the beauty of flowers.",
@@ -878,6 +900,7 @@
       "https://picsum.photos/seed/citynight-art-05/1200/800",
       "https://picsum.photos/seed/citynight-art-06/1200/800"
     ],
+    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "City Lights After Dark",
     "description": "Nighttime cityscapes glowing with color and energy.",
@@ -920,6 +943,7 @@
       "https://picsum.photos/seed/adventure-art-11/1200/800",
       "https://picsum.photos/seed/adventure-art-12/1200/800"
     ],
+    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
     "video": null,
     "title": "The Adventure Collection",
     "description": "Twelve frames from an unforgettable outdoor adventure.",
@@ -957,6 +981,7 @@
     "images": [
       "https://picsum.photos/seed/surreal-art-01/1200/800"
     ],
+    "zodiacs": ["Gemini"],
     "video": null,
     "title": "A World Beyond Reality",
     "description": "A surreal artistic interpretation of an imaginary world.",
