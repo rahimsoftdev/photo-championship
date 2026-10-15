@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useArtworkById = (id) => {
+const useArtworkById = (id, url) => {
   const [artwork, setArtwork] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ const useArtworkById = (id) => {
         setLoading(true);
         setError(null);
 
-        const response = await fetch("/artWork.json");
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error("Failed to fetch artwork data");

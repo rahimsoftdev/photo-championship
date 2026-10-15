@@ -8,13 +8,12 @@ import HowCompetitionsWork from "../../components/feed/about/HowCompetitionsWork
 const AboutPage = () => {
     return (
         <>
-        <AboutBanner/>
-        <AboutStats/>
-        <AboutStory/>
-        <AboutMissionVision/>
-        <HowCompetitionsWork/>
-        <AboutCallToAction/>
-            
+            <AboutBanner />
+            <AboutStats />
+            <AboutStory />
+            <AboutMissionVision />
+            <HowCompetitionsWork />
+            <AboutCallToAction />
         </>
     );
 };

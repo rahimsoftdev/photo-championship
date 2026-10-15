@@ -11,7 +11,7 @@ import SupportSection from "../../components/ui/detailsPage/SupportSection";
 const ArtwokDetailsPage = () => {
   const { id } = useParams();
 
-  const { artwork, loading, error } = useArtworkById(id);
+  const { artwork, loading, error } = useArtworkById(id, '/artWork.json');
 
   if (loading) {
     return <p>Loading artwork...</p>;

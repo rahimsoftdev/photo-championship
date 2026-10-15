@@ -26,8 +26,8 @@ const readStorage = (key) => {
 const getArtworkId = (artwork) =>
   String(
     artwork.id ??
-      artwork._id ??
-      `${artwork.userId ?? "user"}-${artwork.title ?? "artwork"}-${artwork.images?.[0] ?? ""}`
+    artwork._id ??
+    `${artwork.userId ?? "user"}-${artwork.title ?? "artwork"}-${artwork.images?.[0] ?? ""}`
   );
 
 const ArtworkCard = ({ artWorkData }) => {
@@ -57,12 +57,12 @@ const ArtworkCard = ({ artWorkData }) => {
     albumType === "single-photo" || albumType === "single"
       ? 1
       : albumType === "6-photo-story" ||
-          albumType === "six" ||
-          albumType === "6"
+        albumType === "six" ||
+        albumType === "6"
         ? 6
         : albumType === "12-photos-full-zodiac-story" ||
-            albumType === "twelve" ||
-            albumType === "12"
+          albumType === "twelve" ||
+          albumType === "12"
           ? 12
           : Array.isArray(artwork.images)
             ? artwork.images.length
@@ -87,6 +87,10 @@ const ArtworkCard = ({ artWorkData }) => {
     const id = artwork.id ?? artwork._id;
 
     if (!id) return;
+    if(artwork.price){
+      navigate(`/bayimagedetails/${id}`)
+      return
+    }
 
     navigate(`/artwokrdetails/${id}`);
   };
@@ -132,16 +136,16 @@ const ArtworkCard = ({ artWorkData }) => {
   // Format artwork date with a readable fallback.
   const formattedDate = artwork.date
     ? new Date(artwork.date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })
+    : artwork.createdAt
+      ? new Date(artwork.createdAt).toLocaleDateString("en-US", {
         month: "long",
         day: "numeric",
         year: "numeric",
       })
-    : artwork.createdAt
-      ? new Date(artwork.createdAt).toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        })
       : "Date unavailable";
 
   return (
@@ -196,11 +200,10 @@ const ArtworkCard = ({ artWorkData }) => {
           type="button"
           onClick={handleSave}
           aria-pressed={isSaved}
-          className={`absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition ${
-            isSaved
+          className={`absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition ${isSaved
               ? "bg-secondary text-white"
               : "bg-[#FDE8E9] text-bg-secondary hover:bg-[#FBD5D8]"
-          }`}
+            }`}
         >
           <FiBookmark
             size={17}
@@ -263,6 +266,11 @@ const ArtworkCard = ({ artWorkData }) => {
             {formattedDate}
           </span>
         </div>
+
+        {
+          artWorkData.price && <span className="text-[20px] text-primary font-bold my-2 inline-block">$ {artWorkData.price}</span>
+        }
+        
       </div>
     </article>
   );

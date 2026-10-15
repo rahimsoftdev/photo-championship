@@ -10,7 +10,9 @@ const useArtwork = (
         page,
     } = {},
     competition = true,
-    itemsPerPage = 9
+    itemsPerPage = 9,
+    url
+
 ) => {
     const [allArtworks, setAllArtworks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ const useArtwork = (
                 setLoading(true);
                 setError(null);
 
-                const response = await fetch("/artWork.json", {
+                const response = await fetch(  url, {
                     signal: controller.signal,
                 });
 
@@ -112,7 +114,7 @@ const useArtwork = (
             // Filter by subcategory.
             if (
                 subcategory?.trim() &&
-                normalize(artwork.subcategory) !== normalize(subcategory)
+                normalize(artwork.subCategory) !== normalize(subcategory)
             ) {
                 return false;
             }

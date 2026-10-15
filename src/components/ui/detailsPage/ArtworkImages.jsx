@@ -13,6 +13,7 @@ const ArtworkImages = ({ images = [] }) => {
     setIsVisible(true);
   }, [currentIndex, images]);
 
+  //change image
   const changeImage = (newIndex) => {
     if (newIndex === currentIndex) return;
 
@@ -29,6 +30,7 @@ const ArtworkImages = ({ images = [] }) => {
     }, 200);
   };
 
+  //next or prev image handler:
   const handlePrevious = () => {
     const newIndex =
       currentIndex === 0 ? images.length - 1 : currentIndex - 1;

@@ -17,7 +17,7 @@ const CompetitionPage = () => {
         loading,
         error,
         totalPages,
-    } = useArtwork(params, true, 9);
+    } = useArtwork(params, true, 9, '/artWork.json');
 
     // Show loading page while data is being fetched.
     if (loading) return <LoadingPage />;

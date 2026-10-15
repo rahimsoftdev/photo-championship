@@ -17,7 +17,7 @@ const GalleryPage = () => {
         loading,
         error,
         totalPages,
-    } = useArtwork(params, false, 9);
+    } = useArtwork(params, false, 9, '/artWork.json');
 
     // Show loading page while data is being fetched.
     if (loading) return <LoadingPage />;
