@@ -5,6 +5,7 @@ import Platform from '../components/home/Platform';
 import MonthlyWinners from '../components/home/MonthlyWinners';
 import HowItWorks from '../components/shared/HowItWorks';
 import AlbumTypes from '../components/shared/AlbumTypes';
+import TopPhotographersSection from '../components/shared/TopPhotographersSection';
 
 const HomePage = () => {
     return (
@@ -14,6 +15,8 @@ const HomePage = () => {
             <AlbumTypes/>
 
             <HowItWorks/>
+
+            <TopPhotographersSection/>
             
             <MonthlyWinners/>
             <Platform/>

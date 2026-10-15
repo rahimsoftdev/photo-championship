@@ -15,7 +15,7 @@ const MonthlyWinners = () => {
     return <LoadingPage/>
   }
   return (
-    <section className="px-5  ">
+    <section className="px-5 mt-section  ">
       <div className="mx-auto max-w-main rounded-2xl bg-primary px-5 py-12 text-center text-white sm:px-8 sm:py-16">
         {/* Section Heading */}
         <div className="mb-8">

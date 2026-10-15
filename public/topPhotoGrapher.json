@@ -1,0 +1,182 @@
+[
+  {
+    "ranking": 1,
+    "userId": "user_103",
+    "photographerinfo": {
+      "name": "Sophia Williams",
+      "image": "https://picsum.photos/seed/photographer-103/300/300"
+    },
+    "city": "London",
+    "point": 12500,
+    "vots": 3420,
+    "albumType": "twelve"
+  },
+  {
+    "ranking": 2,
+    "userId": "user_121",
+    "photographerinfo": {
+      "name": "William Young",
+      "image": "https://picsum.photos/seed/photographer-121/300/300"
+    },
+    "city": "Dhaka",
+    "point": 11800,
+    "vots": 3150,
+    "albumType": "twelve"
+  },
+  {
+    "ranking": 3,
+    "userId": "user_110",
+    "photographerinfo": {
+      "name": "Ava Martinez",
+      "image": "https://picsum.photos/seed/photographer-110/300/300"
+    },
+    "city": "Toronto",
+    "point": 10950,
+    "vots": 2980,
+    "albumType": "single"
+  },
+  {
+    "ranking": 4,
+    "userId": "user_115",
+    "photographerinfo": {
+      "name": "Chloe Martin",
+      "image": "https://picsum.photos/seed/photographer-115/300/300"
+    },
+    "city": "Maldives",
+    "point": 10200,
+    "vots": 2750,
+    "albumType": "twelve"
+  },
+  {
+    "ranking": 5,
+    "userId": "user_107",
+    "photographerinfo": {
+      "name": "Isabella Brown",
+      "image": "https://picsum.photos/seed/photographer-107/300/300"
+    },
+    "city": "Dhaka",
+    "point": 9650,
+    "vots": 2510,
+    "albumType": "single"
+  },
+  {
+    "ranking": 6,
+    "userId": "user_112",
+    "photographerinfo": {
+      "name": "Grace Thomas",
+      "image": "https://picsum.photos/seed/photographer-112/300/300"
+    },
+    "city": "Bali",
+    "point": 9100,
+    "vots": 2340,
+    "albumType": "twelve"
+  },
+  {
+    "ranking": 7,
+    "userId": "user_125",
+    "photographerinfo": {
+      "name": "Oscar Turner",
+      "image": "https://picsum.photos/seed/photographer-125/300/300"
+    },
+    "city": "Barcelona",
+    "point": 8750,
+    "vots": 2190,
+    "albumType": "single"
+  },
+  {
+    "ranking": 8,
+    "userId": "user_111",
+    "photographerinfo": {
+      "name": "Noah Anderson",
+      "image": "https://picsum.photos/seed/photographer-111/300/300"
+    },
+    "city": "Atacama",
+    "point": 8300,
+    "vots": 2010,
+    "albumType": "six"
+  },
+  {
+    "ranking": 9,
+    "userId": "user_101",
+    "photographerinfo": {
+      "name": "Rahim Sikdar",
+      "image": "https://picsum.photos/seed/photographer-101/300/300"
+    },
+    "city": "Zurich",
+    "point": 7900,
+    "vots": 1890,
+    "albumType": "single"
+  },
+  {
+    "ranking": 10,
+    "userId": "user_124",
+    "photographerinfo": {
+      "name": "Scarlett Adams",
+      "image": "https://picsum.photos/seed/photographer-124/300/300"
+    },
+    "city": "Kathmandu",
+    "point": 7450,
+    "vots": 1720,
+    "albumType": "twelve"
+  },
+  {
+    "ranking": 11,
+    "userId": "user_114",
+    "photographerinfo": {
+      "name": "Jack Harris",
+      "image": "https://picsum.photos/seed/photographer-114/300/300"
+    },
+    "city": "London",
+    "point": 7100,
+    "vots": 1600,
+    "albumType": "six"
+  },
+  {
+    "ranking": 12,
+    "userId": "user_106",
+    "photographerinfo": {
+      "name": "Oliver James",
+      "image": "https://picsum.photos/seed/photographer-106/300/300"
+    },
+    "city": "Kyoto",
+    "point": 6800,
+    "vots": 1510,
+    "albumType": "twelve"
+  },
+  {
+    "ranking": 13,
+    "userId": "user_119",
+    "photographerinfo": {
+      "name": "Ella Walker",
+      "image": "https://picsum.photos/seed/photographer-119/300/300"
+    },
+    "city": "Melbourne",
+    "point": 6400,
+    "vots": 1420,
+    "albumType": "single"
+  },
+  {
+    "ranking": 14,
+    "userId": "user_109",
+    "photographerinfo": {
+      "name": "Mia Taylor",
+      "image": "https://picsum.photos/seed/photographer-109/300/300"
+    },
+    "city": "Paris",
+    "point": 6050,
+    "vots": 1330,
+    "albumType": "twelve"
+  },
+  {
+    "ranking": 15,
+    "userId": "user_123",
+    "photographerinfo": {
+      "name": "James Allen",
+      "image": "https://picsum.photos/seed/photographer-123/300/300"
+    },
+    "city": "Tokyo",
+    "point": 5700,
+    "vots": 1210,
+    "albumType": "six"
+  }
+]
