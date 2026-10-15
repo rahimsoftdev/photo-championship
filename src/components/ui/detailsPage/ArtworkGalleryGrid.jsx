@@ -24,6 +24,8 @@ const ArtworkGalleryGrid = ({ images = [], zodiacs = [] }) => {
     });
   };
 
+  
+
   // Jodi single photo (1 ta ba kom) hoy, tahole section ti dekhabe na
   if (!images || images.length <= 1) {
     return null;

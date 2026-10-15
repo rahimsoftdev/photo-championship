@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FaHeart, FaShareAlt, FaShoppingCart } from 'react-icons/fa';
 
 const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
+    // Correct: useNavigate hook-ti component er top level e call kora holo
+    const navigate = useNavigate();
+
     // State for interactive features
     const [isLiked, setIsLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(bayPhoto?.totalReact || 2150);
@@ -23,11 +27,24 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
         const currentUrl = window.location.href;
         navigator.clipboard.writeText(currentUrl).then(() => {
             setCopied(true);
-            alert("Link copied to clipboard!");
+            // alert("Link copied to clipboard!");
             setTimeout(() => setCopied(false), 2000);
         }).catch(err => {
             console.error('Failed to copy: ', err);
         });
+    };
+
+    // Handle Buy Photo Button Click
+    const handleBuyPhoto = () => {
+        const queryParams = new URLSearchParams({
+            title: bayPhoto?.title || "Golden Sunrise Over the Mountains",
+            author: bayPhoto?.info?.author || "Emma Wilson",
+            price: "25.00",
+            image: bayPhoto?.images?.[0] || "https://picsum.photos/seed/mountain-art-01/1200/800"
+        }).toString();
+
+        // Ekhon navigate function safely kaj korbe
+        navigate(`/bayimagedetails/checkout?${queryParams}`);
     };
 
     return (
@@ -69,7 +86,10 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
                         <div className="text-2xl lg:text-3xl font-bold text-[#111827] mb-4">
                             $25.00
                         </div>
-                        <button className="w-full bg-secondary text-white py-3 px-4 rounded-xl font-medium flex items-center justify-center gap-2 hover:opacity-95 transition-all shadow-md">
+                        <button 
+                            onClick={handleBuyPhoto}
+                            className="w-full bg-secondary text-white py-3 px-4 rounded-xl font-medium flex items-center justify-center gap-2 hover:opacity-95 transition-all shadow-md cursor-pointer"
+                        >
                             <FaShoppingCart /> Buy Photo
                         </button>
                     </div>
@@ -162,7 +182,7 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
                 {/* Like Button with Toggle Background */}
                 <button 
                     onClick={handleLikeToggle}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-medium transition-all shadow-sm ${
+                    className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-medium transition-all shadow-sm cursor-pointer ${
                         isLiked 
                             ? 'bg-secondary text-white' 
                             : 'bg-[#FDE8E9] text-secondary border border-secondary/30 hover:bg-secondary/10'
@@ -175,7 +195,7 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
                 {/* Share Button to Copy Link */}
                 <button 
                     onClick={handleShare}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-full font-medium bg-[#FDE8E9] text-secondary border border-secondary/30 hover:bg-secondary/10 transition-all shadow-sm"
+                    className="flex items-center gap-2 px-6 py-2.5 rounded-full font-medium bg-[#FDE8E9] text-secondary border border-secondary/30 hover:bg-secondary/10 transition-all shadow-sm cursor-pointer"
                 >
                     <FaShareAlt />
                     <span>{copied ? 'Copied!' : 'Share'}</span>

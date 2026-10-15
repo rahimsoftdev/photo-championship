@@ -12,6 +12,7 @@ import ArtwokDetailsPage from "../../pages/feed/ArtwokDetailsPage.jsx";
 import AlbumTypePage from "../../pages/feed/AlbumTypePage.jsx";
 import BayPhotosPage from "../../pages/feed/BayPhotosPage.jsx";
 import BayImageDetailsPage from "../../pages/feed/BayImageDetailsPage.jsx";
+import ByCheckOut from "../../pages/feed/ByCheckOut.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -52,6 +53,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"bayimagedetails/:id", Component:BayImageDetailsPage
+            },
+            {
+                path:"bayimagedetails/checkout", Component:ByCheckOut
             }
         ]
     },

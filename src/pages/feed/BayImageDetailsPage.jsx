@@ -12,7 +12,7 @@ const BayImageDetailsPage = () => {
     const { artwork: bayPhoto, loading, error } = useArtworkById(id, '/bayPhoto.json');
     console.log(bayPhoto)
     return (
-        <div className='max-w-main mx-auto'>
+        <div className='max-w-main mx-auto px-5 '>
 
             {/* art work iamge carosel if 1 photo will show 1 photo if 6 or 12 will show carosel */}
             <ArtworkImages images={bayPhoto?.images} />
