@@ -34,7 +34,7 @@ const Pagination = ({ totalPages = 10 }) => {
 
     // Update only the page param while preserving other query params.
     const handlePageChange = (page) => {
-        if (page < 1 || page > totalPages || page === currentPage) {
+        if (page < 1 || page > totalPages || page === currentcPage) {
             return;
         }
 

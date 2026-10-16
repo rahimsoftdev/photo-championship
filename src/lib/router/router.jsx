@@ -14,6 +14,7 @@ import BayPhotosPage from "../../pages/feed/BayPhotosPage.jsx";
 import BayImageDetailsPage from "../../pages/feed/BayImageDetailsPage.jsx";
 import ByCheckOut from "../../pages/feed/ByCheckOut.jsx";
 import LeaderboardPage from "../../pages/feed/LeaderboardPage.jsx";
+import WinnerPage from "../../pages/feed/WinnerPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -36,6 +37,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"album-types", Component:AlbumTypePage
+            },
+            {
+                path:"winners", Component:WinnerPage
             },
             {
                 path: "feed",

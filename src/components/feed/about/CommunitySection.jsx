@@ -9,7 +9,7 @@ import Community3Img from '../../../assets/images/community3.jpg';
 
 const CommunitySection = () => {
   return (
-    <section className="py-16 px-4 md:px-8 bg-white">
+    <section className="py-section px-4 md:px-8 bg-white">
       <div className="max-w-main mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Side: Text and Cards */}
