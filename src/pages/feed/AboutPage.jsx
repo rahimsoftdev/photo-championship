@@ -3,6 +3,7 @@ import AboutCallToAction from "../../components/feed/about/AboutCallToAction";
 import AboutMissionVision from "../../components/feed/about/AboutMissionVision";
 import AboutStats from "../../components/feed/about/AboutStats";
 import AboutStory from "../../components/feed/about/AboutStory";
+import CommunitySection from "../../components/feed/about/CommunitySection";
 import HowCompetitionsWork from "../../components/feed/about/HowCompetitionsWork";
 
 const AboutPage = () => {
@@ -13,6 +14,7 @@ const AboutPage = () => {
             <AboutStory />
             <AboutMissionVision />
             <HowCompetitionsWork />
+            <CommunitySection/>
             <AboutCallToAction />
         </>
     );
