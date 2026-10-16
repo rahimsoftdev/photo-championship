@@ -8,6 +8,7 @@ import {
   FiCalendar,
   FiImage,
 } from "react-icons/fi";
+import ReportPhotoModal from "./ReportPhotoModal";
 
 const SAVED_STORAGE_KEY = "my12photos-saved-artworks";
 const LOVED_STORAGE_KEY = "my12photos-loved-artworks";
@@ -87,7 +88,7 @@ const ArtworkCard = ({ artWorkData }) => {
     const id = artwork.id ?? artwork._id;
 
     if (!id) return;
-    if(artwork.price){
+    if (artwork.price) {
       navigate(`/bayimagedetails/${id}`)
       return
     }
@@ -150,7 +151,7 @@ const ArtworkCard = ({ artWorkData }) => {
 
   return (
     <article
-      onClick={handleCardClick}
+
       onKeyDown={(event) => {
         if (
           event.target === event.currentTarget &&
@@ -169,6 +170,7 @@ const ArtworkCard = ({ artWorkData }) => {
       <div className="relative h-[205px] w-full overflow-hidden bg-gray-100">
         {coverImage ? (
           <img
+            onClick={handleCardClick}
             src={coverImage}
             alt={artwork.title || "Artwork"}
             loading="lazy"
@@ -186,14 +188,9 @@ const ArtworkCard = ({ artWorkData }) => {
         </span>
 
         {/* Three-dot menu */}
-        <button
-          type="button"
-          onClick={handleMenuClick}
-          aria-label="More artwork options"
-          className="absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-gray-900/80 text-white transition hover:bg-gray-900"
-        >
-          <FiMoreVertical size={20} />
-        </button>
+        <div className="absolute right-2.5 top-2.5 z-10">
+          <ReportPhotoModal photoTitle={artwork.title || "this photo"} />
+        </div>
 
         {/* Save button */}
         <button
@@ -201,8 +198,8 @@ const ArtworkCard = ({ artWorkData }) => {
           onClick={handleSave}
           aria-pressed={isSaved}
           className={`absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition ${isSaved
-              ? "bg-secondary text-white"
-              : "bg-[#FDE8E9] text-bg-secondary hover:bg-[#FBD5D8]"
+            ? "bg-secondary text-white"
+            : "bg-[#FDE8E9] text-bg-secondary hover:bg-[#FBD5D8]"
             }`}
         >
           <FiBookmark
@@ -270,7 +267,7 @@ const ArtworkCard = ({ artWorkData }) => {
         {
           artWorkData.price && <span className="text-[20px] text-primary font-bold my-2 inline-block">$ {artWorkData.price}</span>
         }
-        
+
       </div>
     </article>
   );
