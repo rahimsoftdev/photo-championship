@@ -16,6 +16,7 @@ import ByCheckOut from "../../pages/feed/ByCheckOut.jsx";
 import LeaderboardPage from "../../pages/feed/LeaderboardPage.jsx";
 import WinnerPage from "../../pages/feed/WinnerPage.jsx";
 import Register from "../../pages/auth/RegisterPage.jsx";
+import LoginPage from "../../pages/auth/LoginPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -69,7 +70,7 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: "login"
+        path: "login", Component: LoginPage
     },
     {
         path:"register", Component: Register
