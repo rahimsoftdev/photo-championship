@@ -15,6 +15,7 @@ import BayImageDetailsPage from "../../pages/feed/BayImageDetailsPage.jsx";
 import ByCheckOut from "../../pages/feed/ByCheckOut.jsx";
 import LeaderboardPage from "../../pages/feed/LeaderboardPage.jsx";
 import WinnerPage from "../../pages/feed/WinnerPage.jsx";
+import Register from "../../pages/auth/RegisterPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -33,39 +34,51 @@ export const router = createBrowserRouter([
                 path: "about", Component: AboutPage
             },
             {
-                path:"leaderboard", Component: LeaderboardPage
+                path: "leaderboard", Component: LeaderboardPage
             },
             {
-                path:"album-types", Component:AlbumTypePage
+                path: "album-types", Component: AlbumTypePage
             },
             {
-                path:"winners", Component:WinnerPage
+                path: "winners", Component: WinnerPage
             },
             {
                 path: "feed",
                 Component: FeedLayout,
                 children: [
                     {
-                        path:"competition", Component: CompetitionPage
+                        path: "competition", Component: CompetitionPage
                     },
                     {
-                        path:"gallery", Component:GalleryPage
+                        path: "gallery", Component: GalleryPage
                     },
                     {
-                        path:'buy-photos', Component:BayPhotosPage
+                        path: 'buy-photos', Component: BayPhotosPage
                     }
                 ]
             },
             {
-                path:"artwokrdetails/:id", Component:ArtwokDetailsPage
+                path: "artwokrdetails/:id", Component: ArtwokDetailsPage
             },
             {
-                path:"bayimagedetails/:id", Component:BayImageDetailsPage
+                path: "bayimagedetails/:id", Component: BayImageDetailsPage
             },
             {
-                path:"bayimagedetails/checkout", Component:ByCheckOut
+                path: "bayimagedetails/checkout", Component: ByCheckOut
             }
         ]
+    },
+    {
+        path: "login"
+    },
+    {
+        path:"register", Component: Register
+    },
+    {
+        path: "userDashboard",
+    },
+    {
+        path: "adminDashboard"
     },
     {
         path: "*",

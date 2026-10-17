@@ -15,6 +15,7 @@ import {
   FiCheck,
 } from "react-icons/fi";
 
+//reason in array formate
 const reportReasons = [
   {
     id: "copyright",
