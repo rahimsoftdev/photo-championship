@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router';
 import useArtwork from '../../hooks/useArtwork';
 import Pagination from '../../components/shared/Pagination';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
 import ArtworkCard from '../../components/userDashbaord/ArtworkCard';
-// import ArtworkCard from '../../components/ArtworkCard'; // Apnar path onujayi
+import UploadArtworkModal from '../../components/userDashbaord/ui/UploadArtworkModal';
+// import UploadArtworkModal from '../../components/userDashbaord/UploadArtworkModal'; // Apnar path onujayi
 
 const SellPhotosPage = () => {
     const [searchParams] = useSearchParams();
     const params = Object.fromEntries(searchParams.entries());
+
+    // Modal state for upload format selection
+    const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
     const {
         artworks = [],
@@ -28,8 +32,13 @@ const SellPhotosPage = () => {
                     <h1 className="text-2xl font-bold text-gray-900">Manage Your Selling Photos</h1>
                     <p className="text-sm text-gray-500 mt-1">Manage your photos and showcase your work on your profile.</p>
                 </div>
-                <button type="button" className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-sm">
-                    Upload Photos
+                {/* Upload Photos Button with bg-secondary */}
+                <button 
+                    type="button" 
+                    onClick={() => setIsUploadModalOpen(true)}
+                    className="bg-secondary text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-sm cursor-pointer hover:opacity-90 flex items-center gap-1.5"
+                >
+                    Upload Photos <span>⌄</span>
                 </button>
             </div>
 
@@ -45,6 +54,12 @@ const SellPhotosPage = () => {
             </div>
 
             <Pagination totalPages={totalPages} />
+
+            {/* Upload Format Selection Modal Component */}
+            <UploadArtworkModal
+                isOpen={isUploadModalOpen} 
+                onClose={() => setIsUploadModalOpen(false)} 
+            />
         </div>
     );
 };
