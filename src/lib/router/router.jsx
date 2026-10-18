@@ -22,6 +22,8 @@ import HomePageDhshboard from "../../pages/userDashboard/HomePageDhshboard.jsx";
 import MyArtwork from "../../pages/userDashboard/MyArtwork.jsx";
 import UploadArtWorkTypes from "../../pages/UploadArtWorkTypes.jsx";
 import UploadArtWorkPage from "../../pages/userDashboard/UploadArtWorkPage.jsx";
+import NewsAndMessagePage from "../../pages/userDashboard/NewsAndMessagePage.jsx";
+import UploadMessagePage from "../../pages/userDashboard/UploadMessagePage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -98,6 +100,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: "artwork-management/UploadArtWork", Component: UploadArtWorkPage
+            },
+            //news and message route:
+            {
+                path:"news-message", Component:NewsAndMessagePage
+            },
+            {
+                path:"news-message/new", Component:UploadMessagePage
             }
         ]
     },
