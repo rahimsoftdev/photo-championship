@@ -1,11 +1,25 @@
 import { HiCamera, HiBookOpen, HiSparkles } from "react-icons/hi2";
 import { BsCheck } from "react-icons/bs";
+import { Link } from "react-router";
 
 /**
  * AlbumCard Component: Renders an individual competition album card with features, pricing, and dynamic icons.
+ * "Enter Now" button navigates to the upload page with the albumType query param.
+ * Example: /userDashboard/artwork-management/UploadArtWork?albumType=single
  */
 const AlbumCard = ({ album }) => {
-  const { title, description, badge, isPopular, features, price, priceSub, buttonText, iconType } = album;
+  const {
+    title,
+    description,
+    badge,
+    isPopular,
+    features = [],
+    price,
+    priceSub,
+    buttonText,
+    iconType,
+    albumType = "single",
+  } = album;
 
   // Render appropriate icon based on the iconType prop
   const renderIcon = (type) => {
@@ -22,8 +36,11 @@ const AlbumCard = ({ album }) => {
   };
 
   return (
-    <div className={`relative bg-white rounded-2xl p-6 sm:p-8 border border-[rgba(0,0,0,0.16)] ${isPopular ? 'shadow-xl' : 'shadow-sm'} flex flex-col justify-between transition-all duration-300`}>
-      
+    <div
+      className={`relative bg-white rounded-2xl p-6 sm:p-8 border border-[rgba(0,0,0,0.16)] ${
+        isPopular ? "shadow-xl" : "shadow-sm"
+      } flex flex-col justify-between transition-all duration-300`}
+    >
       {/* Most Popular Badge */}
       {badge && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -50,9 +67,12 @@ const AlbumCard = ({ album }) => {
         </p>
 
         {/* Features List */}
-        <ul className="space-y-3 mb-2  border-gray-100 pt-2">
+        <ul className="space-y-3 mb-2 border-gray-100 pt-2">
           {features.map((feature, index) => (
-            <li key={index} className="flex items-center font-manrope font-normal text-[14px] leading-[20px] text-[#111827]">
+            <li
+              key={index}
+              className="flex items-center font-manrope font-normal text-[14px] leading-[20px] text-[#111827]"
+            >
               <BsCheck className="w-5 h-5 text-[#EE1C25] mr-2 flex-shrink-0" />
               <span>{feature}</span>
             </li>
@@ -63,17 +83,23 @@ const AlbumCard = ({ album }) => {
       <div>
         {/* Pricing Section */}
         <div className="flex items-baseline mb-6">
-          <span className="text-2xl sm:text-[32px] font-extrabold text-[#4048CD] font-manrope">{price}</span>
-          <span className="text-[16px] font-normal text-[#1B1E56] ml-1 font-manrope">{priceSub}</span>
+          <span className="text-2xl sm:text-[32px] font-extrabold text-[#4048CD] font-manrope">
+            {price}
+          </span>
+          <span className="text-[16px] font-normal text-[#1B1E56] ml-1 font-manrope">
+            {priceSub}
+          </span>
         </div>
 
-        {/* Action Button */}
-        <button className="w-full py-3.5 px-4 bg-[#EE1C25] hover:bg-red-700 text-white font-manrope font-semibold rounded-full transition-colors duration-200 flex items-center justify-center space-x-2">
+        {/* Action Button -> adds ?albumType=single|six|twelve */}
+        <Link
+          to={`/userDashboard/artwork-management/UploadArtWork?albumType=${encodeURIComponent(albumType)}`}
+          className="w-full py-3.5 px-4 bg-[#EE1C25] hover:bg-red-700 text-white font-manrope font-semibold rounded-full transition-colors duration-200 flex items-center justify-center space-x-2"
+        >
           <span>{buttonText}</span>
           <span>→</span>
-        </button>
+        </Link>
       </div>
-
     </div>
   );
 };

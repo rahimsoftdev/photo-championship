@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { FiPlus } from "react-icons/fi";
 import useAllArtworks from "../../hooks/useAllArtworks";
 import Pagination from "../../components/shared/Pagination";
@@ -34,13 +34,15 @@ const MyArtwork = () => {
                     </p>
                 </div>
 
-                <button
+                <Link
+                to={'/userDashboard/artwork-management/UploadArtWorkTypes'}
+
                     type="button"
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:opacity-90"
                 >
                     <FiPlus size={16} />
                     Upload Artwork
-                </button>
+                </Link>
             </div>
 
             {/* Stats Cards Component */}

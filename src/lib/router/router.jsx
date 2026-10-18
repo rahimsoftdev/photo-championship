@@ -20,6 +20,8 @@ import LoginPage from "../../pages/auth/LoginPage.jsx";
 import UserDashboardLayout from "../../layouts/UserDashboardLayout.jsx";
 import HomePageDhshboard from "../../pages/userDashboard/HomePageDhshboard.jsx";
 import MyArtwork from "../../pages/userDashboard/MyArtwork.jsx";
+import UploadArtWorkTypes from "../../pages/UploadArtWorkTypes.jsx";
+import UploadArtWorkPage from "../../pages/userDashboard/UploadArtWorkPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -80,15 +82,22 @@ export const router = createBrowserRouter([
     },
     {
         path: "userDashboard", Component: UserDashboardLayout,
-        children:[
+        children: [
             {
-                index:true, Component: HomePageDhshboard
+                index: true, Component: HomePageDhshboard
+            },
+            //start artwork management routes
+            {
+                path: "artwork-management", Component: MyArtwork
             },
             {
-                path:"artwork-management", Component: MyArtwork
+                path: "artwork-management/:id", Component: ArtwokDetailsPage
             },
             {
-                path:"artwork-management/:id", Component: ArtwokDetailsPage
+                path: "artwork-management/UploadArtWorkTypes", Component: UploadArtWorkTypes
+            },
+            {
+                path: "artwork-management/UploadArtWork", Component: UploadArtWorkPage
             }
         ]
     },
@@ -98,6 +107,6 @@ export const router = createBrowserRouter([
     {
         path: "*",
         Component: NotFound,
-        errorElement: <ErrorPage/>
+        errorElement: <ErrorPage />
     }
 ])
