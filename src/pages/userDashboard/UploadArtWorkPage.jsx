@@ -1,10 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, Navigate, useSearchParams } from "react-router";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link, Navigate, useNavigate, useSearchParams } from "react-router";
 import { FiAlertCircle, FiArrowLeft } from "react-icons/fi";
-// import SingleAlbumSection from "../../components/uploadArtwork/SingleAlbumSection";
-// import SixAlbumSection from "../../components/uploadArtwork/SixAlbumSection";
-// import TwelveAlbumSection from "../../components/uploadArtwork/TwelveAlbumSection";
-// import UploadArtWorkForm from "../../components/uploadArtwork/UploadArtWorkForm";
+import useFetch from "../../hooks/useFetch";
+
 import {
     ALBUM_CONFIG,
     MAX_PHOTO_SIZE_MB,
@@ -14,17 +12,29 @@ import {
     formatBytes,
     getQualityLabel,
 } from "../../components/userDashbaord/Uploadartworkdata";
+
+//import form component
 import UploadArtWorkForm from "../../components/userDashbaord/Uploadartworkform";
+
+//single album component will show if album type = singe
 import SingleAlbumSection from "../../components/userDashbaord/Singlealbumsection";
+
+//Twelve album component will show if album type = Twelve
 import TwelveAlbumSection from "../../components/userDashbaord/Twelvealbumsection";
+
+//six album component will show if album type = six
 import SixAlbumSection from "../../components/userDashbaord/Sixalbumsection";
+import UploadSuccessModal from "../../components/userDashbaord/Uploadsuccessmoda";
 
 const SELECTION_PATH = "/userDashboard/artwork-management/UploadArtWorkTypes";
 
+// TODO: change this to the real file name of your categories JSON (inside /public)
+const CATEGORIES_URL = "/albumCategories.json";
+
 const INITIAL_FORM = {
     title: "",
-    category: "",
-    subCategory: "",
+    category: "", // category.value  (e.g. "nature")
+    subCategory: "", // subcategory.value (e.g. "mountains")
     story: "",
     publishTo: "", // "competition" | "profile"
     isAI: null, // "yes" | "no"
@@ -45,6 +55,8 @@ const loadImageMeta = (file) =>
     });
 
 const UploadArtWorkPage = () => {
+    const navigate = useNavigate();
+
     /* ---------- albumType from the URL (?albumType=single|six|twelve) ---------- */
     const [searchParams] = useSearchParams();
     const rawType = searchParams.get("albumType");
@@ -52,6 +64,10 @@ const UploadArtWorkPage = () => {
     const albumType = isValidType ? rawType : "single";
     const config = ALBUM_CONFIG[albumType];
     const requiredCount = config.count;
+
+    /* ---------- categories (name/value + subcategories) ---------- */
+    const { data: categoriesData, error: categoriesError } = useFetch(CATEGORIES_URL);
+    const categories = Array.isArray(categoriesData) ? categoriesData : [];
 
     /* ---------- state (all upload state lives here) ---------- */
     const [selectedSignId, setSelectedSignId] = useState(1); // single: chosen zodiac sign
@@ -61,7 +77,7 @@ const UploadArtWorkPage = () => {
     const [formValues, setFormValues] = useState(INITIAL_FORM);
     const [uploadError, setUploadError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [successModal, setSuccessModal] = useState(null); // null | "competition" | "profile"
 
     // refs so we can revoke object URLs on unmount / reset
     const photosRef = useRef(photos);
@@ -74,8 +90,7 @@ const UploadArtWorkPage = () => {
         if (videoRef.current) URL.revokeObjectURL(videoRef.current.preview);
     };
 
-    // Reset everything when the album type changes
-    useEffect(() => {
+    const resetAll = () => {
         revokeAll();
         setPhotos({});
         setVideo(null);
@@ -83,7 +98,13 @@ const UploadArtWorkPage = () => {
         setSelectedSignId(1);
         setFormValues(INITIAL_FORM);
         setUploadError("");
-        setIsSubmitted(false);
+    };
+
+    // Reset everything when the album type changes
+    useEffect(() => {
+        resetAll();
+        setSuccessModal(null);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [albumType]);
 
     // Cleanup on unmount
@@ -133,7 +154,6 @@ const UploadArtWorkPage = () => {
     /* ---------- handlers ---------- */
     const handlePhotoSelect = async (slotKey, file) => {
         setUploadError("");
-        setIsSubmitted(false);
 
         if (!file.type.startsWith("image/")) {
             setUploadError("Only image files can be uploaded as photos.");
@@ -184,7 +204,6 @@ const UploadArtWorkPage = () => {
     };
 
     const handleFieldChange = (field, value) => {
-        setIsSubmitted(false);
         setFormValues((prev) => ({
             ...prev,
             [field]: value,
@@ -222,8 +241,18 @@ const UploadArtWorkPage = () => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         setIsSubmitting(false);
-        setIsSubmitted(true);
+        setSuccessModal(formValues.publishTo); // opens the success popup
     };
+
+    /* ---------- success modal actions ---------- */
+    const handleCloseModal = useCallback(() => {
+        setSuccessModal(null);
+        resetAll(); // clear the form so the same album can't be submitted twice
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleGoHome = () => navigate("/");
+    const handleUploadAnother = () => navigate(SELECTION_PATH);
 
     /* ---------- invalid / missing albumType -> back to selection ---------- */
     if (!isValidType) {
@@ -235,13 +264,14 @@ const UploadArtWorkPage = () => {
         <UploadArtWorkForm
             values={formValues}
             onFieldChange={handleFieldChange}
+            categories={categories}
+            categoriesError={categoriesError ? String(categoriesError) : ""}
             derived={derived}
             uploadedCount={uploadedCount}
             requiredCount={requiredCount}
             isValid={isFormValid}
             missingItems={missingItems}
             isSubmitting={isSubmitting}
-            isSubmitted={isSubmitted}
             onSubmit={handleSubmit}
         />
     );
@@ -311,6 +341,15 @@ const UploadArtWorkPage = () => {
                     {form}
                 </div>
             )}
+
+            {/* Success popup (competition / profile) */}
+            <UploadSuccessModal
+                isOpen={successModal !== null}
+                type={successModal}
+                onClose={handleCloseModal}
+                onGoHome={handleGoHome}
+                onUploadAnother={handleUploadAnother}
+            />
         </div>
     );
 };

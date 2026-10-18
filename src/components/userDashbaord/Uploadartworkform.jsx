@@ -1,5 +1,5 @@
-import { FiAward, FiCheckCircle, FiLoader, FiUploadCloud, FiUser } from "react-icons/fi";
-import { CATEGORIES, COMPETITION_INFO } from "./uploadArtworkData";
+import { FiAward, FiLoader, FiUploadCloud, FiUser } from "react-icons/fi";
+import { COMPETITION_INFO } from "./uploadArtworkData";
 
 const inputClass =
     "w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-[#4048CD] focus:ring-2 focus:ring-[#4048CD]/20 disabled:cursor-not-allowed disabled:bg-gray-50";
@@ -21,21 +21,30 @@ const Field = ({ label, htmlFor, children }) => (
 
 /**
  * Upload form. It holds NO state of its own — everything comes from the parent page.
+ * `categories` = [{ name, value, subcategories: [{ name, value }] }] (from the categories JSON)
  * Submit is enabled only when `isValid` is true (all fields filled + all required photos uploaded).
  */
 const UploadArtWorkForm = ({
     values,
     onFieldChange,
+    categories = [],
+    categoriesError = "",
     derived,
     uploadedCount,
     requiredCount,
     isValid,
     missingItems,
     isSubmitting,
-    isSubmitted,
     onSubmit,
 }) => {
-    const subCategories = values.category ? CATEGORIES[values.category] ?? [] : [];
+    const selectedCategory = categories.find((c) => c.value === values.category);
+    const subCategories = selectedCategory?.subcategories ?? [];
+
+    const categoryPlaceholder = categoriesError
+        ? "Failed to load categories"
+        : categories.length === 0
+          ? "Loading categories..."
+          : "Select category";
 
     return (
         <form
@@ -60,14 +69,15 @@ const UploadArtWorkForm = ({
                     <select
                         id="category"
                         required
+                        disabled={categories.length === 0}
                         value={values.category}
                         onChange={(e) => onFieldChange("category", e.target.value)}
                         className={inputClass}
                     >
-                        <option value="">Select category</option>
-                        {Object.keys(CATEGORIES).map((c) => (
-                            <option key={c} value={c}>
-                                {c}
+                        <option value="">{categoryPlaceholder}</option>
+                        {categories.map((c) => (
+                            <option key={c.value} value={c.value}>
+                                {c.name}
                             </option>
                         ))}
                     </select>
@@ -84,8 +94,8 @@ const UploadArtWorkForm = ({
                     >
                         <option value="">Select subcategory</option>
                         {subCategories.map((s) => (
-                            <option key={s} value={s}>
-                                {s}
+                            <option key={s.value} value={s.value}>
+                                {s.name}
                             </option>
                         ))}
                     </select>
@@ -249,14 +259,7 @@ const UploadArtWorkForm = ({
                 </span>
             </label>
 
-            {/* Status + Submit */}
-            {isSubmitted && (
-                <div className="flex items-center gap-2 rounded-lg border border-[#A7F3D0] bg-[#ECFDF5] px-3 py-2.5 text-xs font-semibold text-[#059669]">
-                    <FiCheckCircle size={16} />
-                    Your artwork was submitted successfully!
-                </div>
-            )}
-
+            {/* Submit */}
             <div>
                 <button
                     type="submit"
