@@ -24,6 +24,7 @@ import UploadArtWorkTypes from "../../pages/UploadArtWorkTypes.jsx";
 import UploadArtWorkPage from "../../pages/userDashboard/UploadArtWorkPage.jsx";
 import NewsAndMessagePage from "../../pages/userDashboard/NewsAndMessagePage.jsx";
 import UploadMessagePage from "../../pages/userDashboard/UploadMessagePage.jsx";
+import SellPhotosPage from "../../pages/feed/SellPhotosPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -107,6 +108,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"news-message/new", Component:UploadMessagePage
+            },
+            {
+                path:"sell-photos", Component: SellPhotosPage
             }
         ]
     },
