@@ -19,6 +19,7 @@ import Register from "../../pages/auth/RegisterPage.jsx";
 import LoginPage from "../../pages/auth/LoginPage.jsx";
 import UserDashboardLayout from "../../layouts/UserDashboardLayout.jsx";
 import HomePageDhshboard from "../../pages/userDashboard/HomePageDhshboard.jsx";
+import MyArtwork from "../../pages/userDashboard/MyArtwork.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -82,6 +83,12 @@ export const router = createBrowserRouter([
         children:[
             {
                 index:true, Component: HomePageDhshboard
+            },
+            {
+                path:"artwork-management", Component: MyArtwork
+            },
+            {
+                path:"artwork-management/:id", Component: ArtwokDetailsPage
             }
         ]
     },

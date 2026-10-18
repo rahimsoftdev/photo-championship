@@ -53,7 +53,7 @@ const useArtwork = (
         fetchArtworks();
 
         return () => controller.abort();
-    }, []);
+    }, [url]);
 
     // Filter artworks by type, title, album type, category, and subcategory.
     const filteredArtworks = useMemo(() => {
