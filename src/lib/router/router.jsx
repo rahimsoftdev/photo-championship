@@ -25,6 +25,8 @@ import UploadArtWorkPage from "../../pages/userDashboard/UploadArtWorkPage.jsx";
 import NewsAndMessagePage from "../../pages/userDashboard/NewsAndMessagePage.jsx";
 import UploadMessagePage from "../../pages/userDashboard/UploadMessagePage.jsx";
 import SellPhotosPage from "../../pages/feed/SellPhotosPage.jsx";
+import MyStore from "../../pages/userDashboard/MyStore.jsx";
+import CollectionForm from "../../pages/userDashboard/CollectionForm.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -114,6 +116,13 @@ export const router = createBrowserRouter([
             },
             {
                 path:"sell-photos/:id", Component: BayImageDetailsPage
+            },
+            //my store routs:
+            {
+                path:"my-store", Component:MyStore
+            },
+            {
+                path:"my-store/new", Component:CollectionForm
             }
         ]
     },
