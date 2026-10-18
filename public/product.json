@@ -1,0 +1,154 @@
+[
+  {
+    "id": 1,
+    "collectionTitle": "Dolomites Dawn - Archival Fine Art Print",
+    "category": "Digital Art",
+    "price": "$68.00",
+    "editionSize": "Limited Edition of 50",
+    "description": "Museum-grade 308gsm Hahnemühle Photo Rag, hand-signed with embossed studio seal.",
+    "bannerImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+    "othersImages": [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+    ]
+  },
+  {
+    "id": 2,
+    "collectionTitle": "Alpine Valley Mist - Art Print",
+    "category": "Art Prints",
+    "price": "$45.00",
+    "editionSize": "Standard Size",
+    "description": "High-resolution archival pigment print on premium matte textured cotton paper.",
+    "bannerImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 3,
+    "collectionTitle": "Handmade Ceramic Pottery Set",
+    "category": "Handmade Crafts",
+    "price": "$120.00",
+    "editionSize": "Unique Piece",
+    "description": "Hand-thrown stoneware pottery glazed with natural earth tones, food and dishwasher safe.",
+    "bannerImage": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 4,
+    "collectionTitle": "Minimalist Autumn Apparel",
+    "category": "Apparel",
+    "price": "$85.00",
+    "editionSize": "Size: M, L, XL",
+    "description": "100% organic heavy-cotton oversized hoodie designed for ultimate comfort and style.",
+    "bannerImage": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 5,
+    "collectionTitle": "Memories Photobook Album",
+    "category": "Photobooks",
+    "price": "$55.00",
+    "editionSize": "Hardcover 40 Pages",
+    "description": "Handcrafted linen-bound photo album with acid-free black pages for timeless memories.",
+    "bannerImage": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 6,
+    "collectionTitle": "Cinematic Lightroom Presets",
+    "category": "Digital Preset",
+    "price": "$29.00",
+    "editionSize": "Digital Download",
+    "description": "Professional desktop and mobile preset pack tailored for moody landscapes and portraits.",
+    "bannerImage": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 7,
+    "collectionTitle": "Colorful Quilling Paper Art",
+    "category": "Handmade Crafts",
+    "price": "$90.00",
+    "editionSize": "Custom Edition",
+    "description": "Intricate handmade paper filigree artwork framed in a modern floating wooden shadow box.",
+    "bannerImage": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 8,
+    "collectionTitle": "Solitary Wanderer Landscape",
+    "category": "Art Prints",
+    "price": "$75.00",
+    "editionSize": "Limited Edition of 100",
+    "description": "Captured in the Scottish Highlands, printed on heavyweight cotton rag canvas.",
+    "bannerImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 9,
+    "collectionTitle": "Nordic Wool Knit Sweater",
+    "category": "Apparel",
+    "price": "$110.00",
+    "editionSize": "Size: S, M, L",
+    "description": "Traditional Scandinavian pattern knit with 100% pure virgin wool for cozy winter warmth.",
+    "bannerImage": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 10,
+    "collectionTitle": "Vintage Leather Travel Journal",
+    "category": "Handmade Crafts",
+    "price": "$40.00",
+    "editionSize": "Handmade 120 Pages",
+    "description": "Distressed full-grain leather cover with hand-stitched deckle edge cotton parchment paper.",
+    "bannerImage": "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 11,
+    "collectionTitle": "Neon Cyberpunk Cityscape",
+    "category": "Digital Art",
+    "price": "$95.00",
+    "editionSize": "Limited Edition of 25",
+    "description": "Futuristic neon-drenched alleyway digital illustration rendered in high-definition 4K.",
+    "bannerImage": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 12,
+    "collectionTitle": "Botanical Pressed Flower Frame",
+    "category": "Art Prints",
+    "price": "$50.00",
+    "editionSize": "One of a Kind",
+    "description": "Real pressed wildflowers arranged delicately between two panes of clear glass in brass frame.",
+    "bannerImage": "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 13,
+    "collectionTitle": "Studio Portrait Masterclass",
+    "category": "Photobooks",
+    "price": "$70.00",
+    "editionSize": "Hardcover 80 Pages",
+    "description": "Comprehensive photography guide featuring lighting diagrams, poses, and editing workflows.",
+    "bannerImage": "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 14,
+    "collectionTitle": "Moody Film LUTs Collection",
+    "category": "Digital Preset",
+    "price": "$35.00",
+    "editionSize": "Digital Download",
+    "description": "Analog film emulations designed to give your video footage timeless cinematic warmth.",
+    "bannerImage": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  },
+  {
+    "id": 15,
+    "collectionTitle": "Abstract Golden Acrylic Canvas",
+    "category": "Art Prints",
+    "price": "$150.00",
+    "editionSize": "Original Artwork",
+    "description": "Textured heavy-body acrylic painting accented with genuine gold leaf flakes on stretched canvas.",
+    "bannerImage": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80",
+    "othersImages": []
+  }
+]
