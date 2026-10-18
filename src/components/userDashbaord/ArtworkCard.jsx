@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FiHeart, FiEye, FiCalendar, FiX } from 'react-icons/fi';
 import ArtworkDropdownMenu from './ArtworkDropdownMenu';
-// import ArtworkDropdownMenu from './ArtworkDropdownMenu';
 
 const ArtworkCard = ({ item, onDeleteSuccess }) => {
+    const navigate = useNavigate();
     const [artworkData, setArtworkData] = useState(item);
     const [isDeleted, setIsDeleted] = useState(false);
     const [successMsg, setSuccessMsg] = useState('');
@@ -22,11 +23,19 @@ const ArtworkCard = ({ item, onDeleteSuccess }) => {
     // Promote selected plan
     const [selectedPlan, setSelectedPlan] = useState(40);
 
+    // Handle Image Click for Dynamic Routing
+    const handleImageClick = () => {
+        if (item?.id) {
+            navigate(`/userDashboard/sell-photos/${item.id}`);
+        }
+    };
+
     // Handle Delete
     const handleDelete = () => {
         setIsDeleted(true);
         setSuccessMsg("Photo deleted successfully!");
         if (onDeleteSuccess) onDeleteSuccess(item.id);
+        setTimeout(() => setSuccessMsg(''), 3000);
     };
 
     // Handle Edit Submit
@@ -57,18 +66,38 @@ const ArtworkCard = ({ item, onDeleteSuccess }) => {
             {/* Card UI */}
             <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition flex flex-col justify-between relative">
                 <div>
-                    <div className="relative w-full h-56 rounded-xl overflow-hidden mb-4 bg-gray-100">
-                        <img src={mainImage} alt={artworkData.title} className="w-full h-full object-cover" />
+                    {/* Image Container with Dynamic Click Routing */}
+                    <div 
+                        role="button"
+                        tabIndex={0}
+                        onClick={handleImageClick}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                handleImageClick();
+                            }
+                        }}
+                        className="relative w-full h-56 rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer group"
+                    >
+                        <img 
+                            src={mainImage} 
+                            alt={artworkData.title} 
+                            className="w-full h-full object-cover transition duration-300 group-hover:scale-105" 
+                        />
                         
                         {/* Top Left Badge */}
-                        <div className="absolute top-3 left-3">
+                        <div className="absolute top-3 left-3 pointer-events-none">
                             <span className="bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold px-2.5 py-1 rounded-md uppercase tracking-wider">
                                 {artworkData.albumType === 'single' ? 'Single Photo' : artworkData.albumType === 'six' ? '6 Photo story' : '12 Photos - Full Zodiac Story'}
                             </span>
                         </div>
 
-                        {/* 3-Dot Dropdown Menu */}
-                        <div className="absolute top-3 right-3">
+                        {/* 3-Dot Dropdown Menu (stopPropagation jate image click trigger na hoy) */}
+                        <div 
+                            className="absolute top-3 right-3" 
+                            onClick={(e) => e.stopPropagation()}
+                            onKeyDown={(e) => e.stopPropagation()}
+                        >
                             <ArtworkDropdownMenu
                                 onEdit={() => setIsEditModalOpen(true)}
                                 onDelete={handleDelete}
@@ -95,7 +124,7 @@ const ArtworkCard = ({ item, onDeleteSuccess }) => {
             {isEditModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                     <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl relative">
-                        <button onClick={() => setIsEditModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                        <button onClick={() => setIsEditModalOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer">
                             <FiX size={20} />
                         </button>
                         <h3 className="text-xl font-bold text-gray-900 mb-4">Edit Artwork</h3>
@@ -131,8 +160,8 @@ const ArtworkCard = ({ item, onDeleteSuccess }) => {
                                 />
                             </div>
                             <div className="flex justify-end gap-3 pt-2">
-                                <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-4 py-2 text-xs font-medium text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200">Cancel</button>
-                                <button type="submit" className="px-5 py-2 text-xs font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700">Save Changes</button>
+                                <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-4 py-2 text-xs font-medium text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 cursor-pointer">Cancel</button>
+                                <button type="submit" className="px-5 py-2 text-xs font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 cursor-pointer">Save Changes</button>
                             </div>
                         </form>
                     </div>
@@ -145,7 +174,7 @@ const ArtworkCard = ({ item, onDeleteSuccess }) => {
                     <div className="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl relative">
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="text-lg font-bold text-gray-900">Sponsored Photo</h3>
-                            <button onClick={() => setIsPromoteModalOpen(false)} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200">
+                            <button onClick={() => setIsPromoteModalOpen(false)} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 cursor-pointer">
                                 <FiX size={16} />
                             </button>
                         </div>
@@ -185,7 +214,7 @@ const ArtworkCard = ({ item, onDeleteSuccess }) => {
                                 setSuccessMsg("Photo promoted successfully!");
                                 setTimeout(() => setSuccessMsg(''), 3000);
                             }}
-                            className="w-full bg-secondary text-white py-3 rounded-xl font-semibold text-sm transition hover:opacity-95 shadow-sm"
+                            className="w-full bg-secondary text-white py-3 rounded-xl font-semibold text-sm transition hover:opacity-95 shadow-sm cursor-pointer"
                         >
                             Confirm Promotion
                         </button>

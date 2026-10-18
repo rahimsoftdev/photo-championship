@@ -111,6 +111,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"sell-photos", Component: SellPhotosPage
+            },
+            {
+                path:"sell-photos/:id", Component: BayImageDetailsPage
             }
         ]
     },
