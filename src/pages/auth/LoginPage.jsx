@@ -42,7 +42,6 @@ const LoginPage = () => {
 
     const trimmedEmail = email.trim();
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(trimmedEmail)) {
@@ -50,7 +49,6 @@ const LoginPage = () => {
       return;
     }
 
-    // Password must contain 8–15 characters
     if (password.length < 8 || password.length > 15) {
       setError("Password must be between 8 and 15 characters.");
       return;
@@ -58,7 +56,6 @@ const LoginPage = () => {
 
     setIsSubmitting(true);
 
-    // Frontend-only demo login; no credentials are verified.
     try {
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", trimmedEmail);
@@ -75,20 +72,19 @@ const LoginPage = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#F3F3F3]  ">
-      <div className="mx-auto flex min-h-[calc(100vh-16px)] w-full max-w-[1440px] overflow-hidden bg-white sm:min-h-[calc(100vh-32px)] lg:min-h-[calc(100vh-48px)]">
+    <main className="min-h-screen w-screen bg-white p-0">
+      <div className="flex min-h-screen w-full overflow-hidden bg-white">
+
         {/* Left side: Image and branding */}
-        <section className="relative hidden w-1/2 overflow-hidden md:block">
+        <section className="relative hidden min-h-screen w-1/2 shrink-0 overflow-hidden md:block">
           <img
             src={cervidaeImage}
             alt="Deer standing in a peaceful forest"
             className="absolute inset-0 h-full w-full object-cover"
           />
 
-          {/* Image overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/5" />
 
-          {/* Branding */}
           <div className="absolute bottom-8 left-7 right-7 lg:bottom-12 lg:left-8 lg:right-8">
             <div className="inline-block max-w-full rounded-xl border border-white/40 bg-black/10 px-3 py-2.5 backdrop-blur-[2px] sm:px-4 sm:py-3">
               <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
@@ -103,7 +99,8 @@ const LoginPage = () => {
         </section>
 
         {/* Right side: Login form */}
-        <section className="flex w-full flex-col bg-white md:w-1/2">
+        <section className="flex min-h-screen w-full flex-col bg-white md:w-1/2">
+
           {/* Mobile branding */}
           <div className="relative flex min-h-[180px] items-end overflow-hidden md:hidden">
             <img
@@ -118,6 +115,7 @@ const LoginPage = () => {
               <h1 className="text-3xl font-bold text-white">
                 My12Photos
               </h1>
+
               <p className="mt-1 text-xs tracking-widest text-white/90">
                 CAPTURE. COMPETE. CELEBRATE.
               </p>
@@ -126,6 +124,7 @@ const LoginPage = () => {
 
           <div className="flex flex-1 items-center justify-center px-5 py-10 sm:px-10 md:px-8 lg:px-12 xl:px-16">
             <div className="w-full max-w-[360px]">
+
               {/* Back to home */}
               <Link
                 to="/"
@@ -166,8 +165,9 @@ const LoginPage = () => {
                 </div>
               )}
 
-              {/* Form */}
+              {/* Login form */}
               <form onSubmit={handleSubmit} noValidate>
+
                 {/* Email */}
                 <div className="mb-5">
                   <label
@@ -317,6 +317,7 @@ const LoginPage = () => {
                   Create Account
                 </Link>
               </p>
+
             </div>
           </div>
         </section>

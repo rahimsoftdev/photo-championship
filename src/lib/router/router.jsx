@@ -17,6 +17,8 @@ import LeaderboardPage from "../../pages/feed/LeaderboardPage.jsx";
 import WinnerPage from "../../pages/feed/WinnerPage.jsx";
 import Register from "../../pages/auth/RegisterPage.jsx";
 import LoginPage from "../../pages/auth/LoginPage.jsx";
+import UserDashboardLayout from "../../layouts/UserDashboardLayout.jsx";
+import HomePageDhshboard from "../../pages/userDashboard/HomePageDhshboard.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -73,16 +75,22 @@ export const router = createBrowserRouter([
         path: "login", Component: LoginPage
     },
     {
-        path:"register", Component: Register
+        path: "register", Component: Register
     },
     {
-        path: "userDashboard",
+        path: "userDashboard", Component: UserDashboardLayout,
+        children:[
+            {
+                index:true, Component: HomePageDhshboard
+            }
+        ]
     },
     {
         path: "adminDashboard"
     },
     {
         path: "*",
-        Component: NotFound
+        Component: NotFound,
+        errorElement: <ErrorPage/>
     }
 ])
