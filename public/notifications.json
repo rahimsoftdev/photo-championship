@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "type": "system",
+    "message": "Meg Griffin has left you a review. Both of your reviews from this trip are now public.",
+    "date": "2023-03-01T10:15:00Z",
+    "isRead": false
+  },
+  {
+    "id": 2,
+    "type": "system",
+    "message": "Cleveland Brown has left you a review. Both of your reviews from this trip are now public.",
+    "date": "2023-02-26T08:40:00Z",
+    "isRead": false
+  },
+  {
+    "id": 3,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cheerful 2-bedroom home in the heart of Quahog",
+    "date": "2022-04-25T14:20:00Z",
+    "isRead": true
+  },
+  {
+    "id": 4,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T09:05:00Z",
+    "isRead": true
+  },
+  {
+    "id": 5,
+    "type": "system",
+    "message": "Please confirm your email address by clicking on the link we just emailed you. If you cannot find the email, you can request a new confirmation email or change your email address.",
+    "date": "2022-03-01T07:30:00Z",
+    "isRead": false
+  },
+  {
+    "id": 6,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T09:00:00Z",
+    "isRead": true
+  },
+  {
+    "id": 7,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T08:55:00Z",
+    "isRead": true
+  },
+  {
+    "id": 8,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T08:50:00Z",
+    "isRead": true
+  },
+  {
+    "id": 9,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T08:45:00Z",
+    "isRead": true
+  },
+  {
+    "id": 10,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T08:40:00Z",
+    "isRead": true
+  },
+  {
+    "id": 11,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T08:35:00Z",
+    "isRead": true
+  },
+  {
+    "id": 12,
+    "type": "user",
+    "senderName": "Glenn",
+    "avatar": "https://i.pravatar.cc/80?img=12",
+    "message": "Glenn accepted your invite to co-host Cozy 3BR home minutes from downtown Quahog",
+    "date": "2022-03-06T08:30:00Z",
+    "isRead": true
+  }
+]

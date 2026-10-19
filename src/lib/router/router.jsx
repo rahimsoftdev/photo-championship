@@ -28,6 +28,7 @@ import SellPhotosPage from "../../pages/feed/SellPhotosPage.jsx";
 import MyStore from "../../pages/userDashboard/MyStore.jsx";
 import CollectionForm from "../../pages/userDashboard/CollectionForm.jsx";
 import BusinessLinkPage from "../../pages/userDashboard/BusinessLinkPhotosPage.jsx";
+import NotificationsPage from "../../pages/userDashboard/NotificationsPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -131,6 +132,10 @@ export const router = createBrowserRouter([
             //business-link-photos
             {
                 path:"business-link-photos", Component: BusinessLinkPage
+            }, 
+            //notification
+            {
+                path:"notifications", Component: NotificationsPage
             }
         ]
     },
