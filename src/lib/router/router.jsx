@@ -40,6 +40,8 @@ import ArtworksTab from "../../pages/profile/ArtworksTab.jsx";
 import BayPhotoTab from "../../pages/profile/BayPhotoTab.jsx";
 import PostTab from "../../pages/profile/PostTab.jsx";
 import MyStoreTab from "../../pages/profile/MyStoreTab.jsx";
+import FavoritePhotos from "../../pages/userDashboard/FavoritePhotos.jsx";
+import SupportPage from "../../pages/userDashboard/SupportPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -148,21 +150,27 @@ export const router = createBrowserRouter([
             {
                 path: "notifications", Component: NotificationsPage
             },
+            //order route
             {
                 path: "orders", Component: OrdersPage
             },
+            //my orders route
             {
                 path: "my-orders", Component: MyOrdersPage
             },
+            //order details route
             {
                 path: "orders/:id", Component: OrderDetailsPage
             },
+            //my order details route:
             {
                 path: "my-orders/:id", Component: MyOrderDetailsPage
             },
+            //my all favorite photographers:
             {
                 path: "favourite-photographers", Component: FavoritePhotographarPage
             },
+            //profile in user dashboard
             {
                 path: "photographers/:id", Component: PhotographarDetailsLayout,
                 children: [
@@ -183,11 +191,18 @@ export const router = createBrowserRouter([
                     },
                 ]
             },
+            {
+                path:"favourite-photos", Component: CompetitionPage
+            },
+            {
+                path:"contact-us", Component:SupportPage
+            }
         ]
     },
     {
         path: "adminDashboard"
     },
+    //photograhpar profile details routes
     {
         path: "photographers/:id", Component: PhotographarDetailsLayout,
         children: [
