@@ -27,6 +27,7 @@ import UploadMessagePage from "../../pages/userDashboard/UploadMessagePage.jsx";
 import SellPhotosPage from "../../pages/feed/SellPhotosPage.jsx";
 import MyStore from "../../pages/userDashboard/MyStore.jsx";
 import CollectionForm from "../../pages/userDashboard/CollectionForm.jsx";
+import BusinessLinkPage from "../../pages/userDashboard/BusinessLinkPhotosPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -115,6 +116,9 @@ export const router = createBrowserRouter([
                 path:"sell-photos", Component: SellPhotosPage
             },
             {
+                path:"sell-photos/new", Component: UploadArtWorkPage
+            },
+            {
                 path:"sell-photos/:id", Component: BayImageDetailsPage
             },
             //my store routs:
@@ -123,6 +127,10 @@ export const router = createBrowserRouter([
             },
             {
                 path:"my-store/new", Component:CollectionForm
+            }, 
+            //business-link-photos
+            {
+                path:"business-link-photos", Component: BusinessLinkPage
             }
         ]
     },

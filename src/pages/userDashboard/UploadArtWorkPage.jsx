@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, Navigate, useSearchParams } from "react-router";
 import { FiAlertCircle, FiArrowLeft } from "react-icons/fi";
-// import SingleAlbumSection from "../../components/uploadArtwork/SingleAlbumSection";
-// import SixAlbumSection from "../../components/uploadArtwork/SixAlbumSection";
-// import TwelveAlbumSection from "../../components/uploadArtwork/TwelveAlbumSection";
-// import UploadArtWorkForm from "../../components/uploadArtwork/UploadArtWorkForm";
 import {
     ALBUM_CONFIG,
     MAX_PHOTO_SIZE_MB,
@@ -18,14 +14,19 @@ import UploadArtWorkForm from "../../components/userDashbaord/Uploadartworkform"
 import SingleAlbumSection from "../../components/userDashbaord/Singlealbumsection";
 import TwelveAlbumSection from "../../components/userDashbaord/Twelvealbumsection";
 import SixAlbumSection from "../../components/userDashbaord/Sixalbumsection";
+import UploadSuccessModal from "../../components/userDashbaord/ui/UploadSuccessModal";
 
 const SELECTION_PATH = "/userDashboard/artwork-management/UploadArtWorkTypes";
+// ⚠️ sell-photos এর সিলেকশন পেজের আসল পাথ বসান
+const SELL_SELECTION_PATH = "/userDashboard/sell-photos";
+const SELL_PARAM = "bayphoto"; // ?bayphoto=yes
 
 const INITIAL_FORM = {
     title: "",
     category: "",
     subCategory: "",
     story: "",
+    price: "",
     publishTo: "", // "competition" | "profile"
     isAI: null, // "yes" | "no"
     copyrightConfirmed: false,
@@ -45,27 +46,33 @@ const loadImageMeta = (file) =>
     });
 
 const UploadArtWorkPage = () => {
-    /* ---------- albumType from the URL (?albumType=single|six|twelve) ---------- */
+    /* ---------- URL params ---------- */
     const [searchParams] = useSearchParams();
     const rawType = searchParams.get("albumType");
     const isValidType = Object.prototype.hasOwnProperty.call(ALBUM_CONFIG, rawType ?? "");
     const albumType = isValidType ? rawType : "single";
     const config = ALBUM_CONFIG[albumType];
     const requiredCount = config.count;
+    const isSellMode = searchParams.get(SELL_PARAM) === "yes";
+    const selectionPath = isSellMode ? SELL_SELECTION_PATH : SELECTION_PATH;
 
-    /* ---------- state (all upload state lives here) ---------- */
-    const [selectedSignId, setSelectedSignId] = useState(1); // single: chosen zodiac sign
-    const [theme, setTheme] = useState("red"); // six: "red" (1-6) | "blue" (7-12)
-    const [photos, setPhotos] = useState({}); // { slotKey: { file, preview, width, height } }
-    const [video, setVideo] = useState(null); // { file, preview } | null
+    /* ---------- state ---------- */
+    const [categories, setCategories] = useState([]);
+    const [categoriesError, setCategoriesError] = useState("");
+    const [selectedSignId, setSelectedSignId] = useState(1);
+    const [theme, setTheme] = useState("red");
+    const [photos, setPhotos] = useState({});
+    const [video, setVideo] = useState(null);
     const [formValues, setFormValues] = useState(INITIAL_FORM);
     const [uploadError, setUploadError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submittedInfo, setSubmittedInfo] = useState(null);
 
-    // refs so we can revoke object URLs on unmount / reset
+    // refs
     const photosRef = useRef(photos);
     const videoRef = useRef(video);
+    const sessionRef = useRef(0); // রিসেটের পর পুরোনো async ফলাফল বাতিল করার জন্য
     photosRef.current = photos;
     videoRef.current = video;
 
@@ -74,8 +81,8 @@ const UploadArtWorkPage = () => {
         if (videoRef.current) URL.revokeObjectURL(videoRef.current.preview);
     };
 
-    // Reset everything when the album type changes
-    useEffect(() => {
+    const resetAll = () => {
+        sessionRef.current += 1;
         revokeAll();
         setPhotos({});
         setVideo(null);
@@ -84,12 +91,36 @@ const UploadArtWorkPage = () => {
         setFormValues(INITIAL_FORM);
         setUploadError("");
         setIsSubmitted(false);
-    }, [albumType]);
+        setSubmittedInfo(null);
+    };
 
-    // Cleanup on unmount
+    // albumType বা মোড বদলালে সব রিসেট
+    useEffect(() => {
+        resetAll();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [albumType, isSellMode]);
+
+    // unmount-এ ক্লিনআপ
     useEffect(() => revokeAll, []);
 
-    /* ---------- which slots are active right now ---------- */
+    // categories JSON লোড (public/albumCategories.json)
+    useEffect(() => {
+        const controller = new AbortController();
+
+        fetch("/albumCategories.json", { signal: controller.signal })
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to load categories");
+                return res.json();
+            })
+            .then((data) => setCategories(data))
+            .catch((err) => {
+                if (err.name !== "AbortError") setCategoriesError(err.message);
+            });
+
+        return () => controller.abort();
+    }, []);
+
+    /* ---------- active slots ---------- */
     const slotKeys = useMemo(() => {
         if (albumType === "single") return ["single"];
         if (albumType === "six") return THEMES[theme].signIds;
@@ -99,7 +130,7 @@ const UploadArtWorkPage = () => {
     const uploadedPhotos = slotKeys.map((key) => photos[key]).filter(Boolean);
     const uploadedCount = uploadedPhotos.length;
 
-    /* ---------- values auto-filled from the uploaded photos ---------- */
+    /* ---------- auto-filled values ---------- */
     const derived = useMemo(() => {
         if (uploadedPhotos.length === 0) return { resolution: "", fileSize: "", quality: "" };
 
@@ -117,14 +148,22 @@ const UploadArtWorkPage = () => {
     }, [photos, slotKeys]);
 
     /* ---------- validation ---------- */
+    const priceNumber = Number(formValues.price);
+
     const missingItems = [];
     const missingPhotos = requiredCount - uploadedCount;
     if (missingPhotos > 0) missingItems.push(`${missingPhotos} more photo${missingPhotos > 1 ? "s" : ""}`);
     if (!formValues.title.trim()) missingItems.push("title");
     if (!formValues.category) missingItems.push("category");
     if (!formValues.subCategory) missingItems.push("subcategory");
-    if (!formValues.story.trim()) missingItems.push("story");
-    if (!formValues.publishTo) missingItems.push("publish option");
+
+    if (isSellMode) {
+        if (!formValues.price || !(priceNumber > 0)) missingItems.push("price");
+    } else {
+        if (!formValues.story.trim()) missingItems.push("story");
+        if (!formValues.publishTo) missingItems.push("publish option");
+    }
+
     if (!formValues.isAI) missingItems.push("AI answer");
     if (!formValues.copyrightConfirmed) missingItems.push("copyright confirmation");
 
@@ -144,8 +183,16 @@ const UploadArtWorkPage = () => {
             return;
         }
 
+        const session = sessionRef.current;
         try {
             const meta = await loadImageMeta(file);
+
+            // এর মধ্যে রিসেট হয়ে গেলে এই ছবি বাতিল
+            if (session !== sessionRef.current) {
+                URL.revokeObjectURL(meta.preview);
+                return;
+            }
+
             const old = photosRef.current[slotKey];
             if (old) URL.revokeObjectURL(old.preview);
             setPhotos((prev) => ({ ...prev, [slotKey]: meta }));
@@ -188,7 +235,6 @@ const UploadArtWorkPage = () => {
         setFormValues((prev) => ({
             ...prev,
             [field]: value,
-            // changing the category clears the old subcategory
             ...(field === "category" ? { subCategory: "" } : {}),
         }));
     };
@@ -198,18 +244,26 @@ const UploadArtWorkPage = () => {
         if (!isFormValid || isSubmitting) return;
 
         setIsSubmitting(true);
+        setUploadError("");
 
         const payload = new FormData();
         payload.append("albumType", albumType);
         payload.append("title", formValues.title.trim());
         payload.append("category", formValues.category);
         payload.append("subCategory", formValues.subCategory);
-        payload.append("description", formValues.story.trim());
-        payload.append("publishTo", formValues.publishTo);
         payload.append("isAI", formValues.isAI);
+        payload.append("copyrightConfirmed", String(formValues.copyrightConfirmed));
         payload.append("resolution", derived.resolution);
         payload.append("fileSize", derived.fileSize);
         payload.append("quality", derived.quality);
+
+        if (isSellMode) {
+            payload.append("forSale", "true");
+            payload.append("price", priceNumber.toFixed(2));
+        } else {
+            payload.append("description", formValues.story.trim());
+            payload.append("publishTo", formValues.publishTo);
+        }
 
         slotKeys.forEach((key) => {
             payload.append("images", photos[key].file);
@@ -218,16 +272,28 @@ const UploadArtWorkPage = () => {
         });
         if (video) payload.append("video", video.file);
 
-        // TODO: send `payload` to the API
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        try {
+            // TODO: এখানে আসল API কল বসান, যেমন:
+            // const res = await fetch("/api/artworks", { method: "POST", body: payload });
+            // if (!res.ok) throw new Error("Upload failed. Please try again.");
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        setIsSubmitting(false);
-        setIsSubmitted(true);
+            setSubmittedInfo({
+                title: formValues.title.trim(),
+                photoCount: requiredCount,
+                price: isSellMode ? priceNumber : null,
+            });
+            setIsSubmitted(true);
+        } catch (err) {
+            setUploadError(err.message || "Something went wrong. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     /* ---------- invalid / missing albumType -> back to selection ---------- */
     if (!isValidType) {
-        return <Navigate to={SELECTION_PATH} replace />;
+        return <Navigate to={selectionPath} replace />;
     }
 
     /* ---------- render ---------- */
@@ -235,13 +301,15 @@ const UploadArtWorkPage = () => {
         <UploadArtWorkForm
             values={formValues}
             onFieldChange={handleFieldChange}
+            isSellMode={isSellMode}
+            categories={categories}
+            categoriesError={categoriesError}
             derived={derived}
             uploadedCount={uploadedCount}
             requiredCount={requiredCount}
             isValid={isFormValid}
             missingItems={missingItems}
             isSubmitting={isSubmitting}
-            isSubmitted={isSubmitted}
             onSubmit={handleSubmit}
         />
     );
@@ -255,7 +323,7 @@ const UploadArtWorkPage = () => {
     return (
         <div className="w-full space-y-5 pb-12">
             <Link
-                to={SELECTION_PATH}
+                to={selectionPath}
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 transition hover:text-gray-900"
             >
                 <FiArrowLeft size={14} />
@@ -311,6 +379,15 @@ const UploadArtWorkPage = () => {
                     {form}
                 </div>
             )}
+
+            <UploadSuccessModal
+                open={isSubmitted}
+                onClose={resetAll}
+                title={submittedInfo?.title ?? ""}
+                photoCount={submittedInfo?.photoCount ?? 0}
+                price={submittedInfo?.price ?? null}
+                selectionPath={selectionPath}
+            />
         </div>
     );
 };
