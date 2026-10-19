@@ -39,6 +39,7 @@ import ProfileTab from "../../pages/profile/ProfileTab.jsx";
 import ArtworksTab from "../../pages/profile/ArtworksTab.jsx";
 import BayPhotoTab from "../../pages/profile/BayPhotoTab.jsx";
 import PostTab from "../../pages/profile/PostTab.jsx";
+import MyStoreTab from "../../pages/profile/MyStoreTab.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -161,7 +162,27 @@ export const router = createBrowserRouter([
             },
             {
                 path: "favourite-photographers", Component: FavoritePhotographarPage
-            }
+            },
+            {
+                path: "photographers/:id", Component: PhotographarDetailsLayout,
+                children: [
+                    {
+                        index: true, Component: ProfileTab
+                    },
+                    {
+                        path: "artworks", Component: ArtworksTab
+                    },
+                    {
+                        path: "premium-photos", Component: BayPhotoTab
+                    },
+                    {
+                        path: "posts", Component: PostTab
+                    },
+                    {
+                        path: "store", Component: MyStoreTab
+                    },
+                ]
+            },
         ]
     },
     {
@@ -170,18 +191,21 @@ export const router = createBrowserRouter([
     {
         path: "photographers/:id", Component: PhotographarDetailsLayout,
         children: [
-                {
-                    index:true, Component:ProfileTab
-                }, 
-                {
-                    path:"artworks", Component: ArtworksTab
-                },
-                {
-                    path:"premium-photos", Component: BayPhotoTab
-                },
-                {
-                    path:"posts", Component: PostTab
-                },
+            {
+                index: true, Component: ProfileTab
+            },
+            {
+                path: "artworks", Component: ArtworksTab
+            },
+            {
+                path: "premium-photos", Component: BayPhotoTab
+            },
+            {
+                path: "posts", Component: PostTab
+            },
+            {
+                path: "store", Component: MyStoreTab
+            },
         ]
     },
     {

@@ -91,8 +91,8 @@ const PhotographerCard = ({ user }) => {
                     onClick={() => setFollowing((v) => !v)}
                     aria-pressed={following}
                     className={`flex flex-1 items-center justify-center gap-1.5 rounded-lg border py-2 text-xs font-medium transition ${following
-                            ? "border-gray-200 bg-white text-[#4048CD] hover:bg-gray-50"
-                            : "border-[#4048CD] bg-[#4048CD] text-white hover:bg-[#343cb5]"
+                        ? "border-gray-200 bg-white text-[#4048CD] hover:bg-gray-50"
+                        : "border-[#4048CD] bg-[#4048CD] text-white hover:bg-[#343cb5]"
                         }`}
                 >
                     {following ? <FiUserCheck size={13} /> : <FiUser size={13} />}
@@ -101,7 +101,7 @@ const PhotographerCard = ({ user }) => {
 
                 {/* ⚠️ আপনার আসল প্রোফাইল রুট বসান */}
                 <a
-                    href={`/photographers/${user.id}`}
+                    href={`/userDashboard/photographers/${user.id}`}
                     className="flex flex-1 items-center justify-center rounded-lg bg-gray-100 py-2 text-xs font-medium text-gray-800 transition hover:bg-gray-200"
                 >
                     View Profile

@@ -1,10 +1,13 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router';
+import { NavLink, useParams, useLocation } from 'react-router';
 
-const PhotographerNavTabs = ({ isDashboard = false }) => {
+const PhotographerNavTabs = () => {
   const { id } = useParams();
+  const location = useLocation();
 
-  // isDashboard true hole dashboard route ebong false hole normal route hobe
+  // URL e 'userDashboard' thakle dashboard route, noyto normal route hobe
+  const isDashboard = location.pathname.includes('userDashboard');
+
   const basePath = isDashboard 
     ? `/userDashboard/photographers/${id}` 
     : `/photographers/${id}`;
