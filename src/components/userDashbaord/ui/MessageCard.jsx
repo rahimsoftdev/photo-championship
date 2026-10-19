@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiHeart, FiShare2, FiCalendar, FiClock } from 'react-icons/fi';
 
-const MessageCard = ({ item }) => {
+const MessageCard = ({ item,post }) => {
     const { usrinfo, date, desciption, image, loves } = item || {};
 
     // Date ebong Time formate korar jonno
@@ -49,7 +49,7 @@ const MessageCard = ({ item }) => {
                         <img 
                             src={image} 
                             alt="Post attachment" 
-                            className="w-full h-56 object-cover hover:scale-105 transition duration-300"
+                            className={`w-full  object-cover hover:scale-105 transition duration-300 ${post ==='yes' ? "h-100" : 'h-40'}`}
                         />
                     </div>
                 )}

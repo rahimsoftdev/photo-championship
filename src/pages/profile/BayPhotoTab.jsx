@@ -27,12 +27,20 @@ const BayPhotoTab = () => {
     }
     return (
         <div>
+            <div className='mb-5'>
+                <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <span>🖼️</span> My Premium Photos
+                </h3>
+                <p className="text-xs text-gray-500 mt-1">
+                    Explore single photography prints, 6-photo sets, and 12-photo Zodiac Story editorial albums
+                </p>
+            </div>
 
             <MyArtworkFilter totalShown={artworks.length}
                 totalFiltered={totalArtworks} />
 
-            <section className="w-full space-y-6">
-                
+            <section className="w-full space-y-6 mt-5">
+
 
                 {artworks.length === 0 ? (
                     <p>No photos found.</p>

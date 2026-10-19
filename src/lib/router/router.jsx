@@ -38,6 +38,7 @@ import PhotographarDetailsLayout from "../../layouts/PhotographarDetailsLayout.j
 import ProfileTab from "../../pages/profile/ProfileTab.jsx";
 import ArtworksTab from "../../pages/profile/ArtworksTab.jsx";
 import BayPhotoTab from "../../pages/profile/BayPhotoTab.jsx";
+import PostTab from "../../pages/profile/PostTab.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -177,6 +178,9 @@ export const router = createBrowserRouter([
                 },
                 {
                     path:"premium-photos", Component: BayPhotoTab
+                },
+                {
+                    path:"posts", Component: PostTab
                 },
         ]
     },
