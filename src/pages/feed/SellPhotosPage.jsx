@@ -3,8 +3,9 @@ import { useSearchParams } from 'react-router';
 import useArtwork from '../../hooks/useArtwork';
 import Pagination from '../../components/shared/Pagination';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
-import ArtworkCard from '../../components/userDashbaord/ArtworkCard';
+// import ArtworkCard from '../../components/userDashbaord/ArtworkCard';
 import UploadArtworkModal from '../../components/userDashbaord/ui/UploadArtworkModal';
+import ArtworkCard from '../../components/ui/ArtworkCard';
 // import UploadArtworkModal from '../../components/userDashbaord/UploadArtworkModal'; // Apnar path onujayi
 
 const SellPhotosPage = () => {
@@ -33,8 +34,8 @@ const SellPhotosPage = () => {
                     <p className="text-sm text-gray-500 mt-1">Manage your photos and showcase your work on your profile.</p>
                 </div>
                 {/* Upload Photos Button with bg-secondary */}
-                <button 
-                    type="button" 
+                <button
+                    type="button"
                     onClick={() => setIsUploadModalOpen(true)}
                     className="bg-secondary text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-sm cursor-pointer hover:opacity-90 flex items-center gap-1.5"
                 >
@@ -49,7 +50,12 @@ const SellPhotosPage = () => {
             {/* Artwork Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                 {artworks.map((item) => (
-                    <ArtworkCard key={item.id} item={item} />
+                    // <ArtworkCard key={item.id} item={item} />
+                    <ArtworkCard
+                        key={item.id}
+                        artWorkData={item}
+                        dashboard= "yes"
+                    />
                 ))}
             </div>
 
@@ -57,8 +63,8 @@ const SellPhotosPage = () => {
 
             {/* Upload Format Selection Modal Component */}
             <UploadArtworkModal
-                isOpen={isUploadModalOpen} 
-                onClose={() => setIsUploadModalOpen(false)} 
+                isOpen={isUploadModalOpen}
+                onClose={() => setIsUploadModalOpen(false)}
             />
         </div>
     );

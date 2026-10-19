@@ -31,7 +31,7 @@ const getArtworkId = (artwork) =>
     `${artwork.userId ?? "user"}-${artwork.title ?? "artwork"}-${artwork.images?.[0] ?? ""}`
   );
 
-const ArtworkCard = ({ artWorkData }) => {
+const ArtworkCard = ({ artWorkData,dashboard }) => {
   const artwork = artWorkData;
   const navigate = useNavigate();
 
@@ -86,6 +86,10 @@ const ArtworkCard = ({ artWorkData }) => {
   // Navigate to artwork details.
   const handleCardClick = () => {
     const id = artwork.id ?? artwork._id;
+    if(dashboard === 'yes'){
+      navigate(`/userDashboard/sell-photos/${id}`)
+      return
+    }
 
     if (!id) return;
     if (artwork.price) {

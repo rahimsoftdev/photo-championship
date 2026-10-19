@@ -37,6 +37,7 @@ import FavoritePhotographarPage from "../../pages/userDashboard/FavoritePhotogra
 import PhotographarDetailsLayout from "../../layouts/PhotographarDetailsLayout.jsx";
 import ProfileTab from "../../pages/profile/ProfileTab.jsx";
 import ArtworksTab from "../../pages/profile/ArtworksTab.jsx";
+import BayPhotoTab from "../../pages/profile/BayPhotoTab.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -173,7 +174,10 @@ export const router = createBrowserRouter([
                 }, 
                 {
                     path:"artworks", Component: ArtworksTab
-                }
+                },
+                {
+                    path:"premium-photos", Component: BayPhotoTab
+                },
         ]
     },
     {
