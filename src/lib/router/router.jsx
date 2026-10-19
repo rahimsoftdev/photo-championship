@@ -36,6 +36,7 @@ import MyOrderDetailsPage from "../../pages/userDashboard/MyOrderDetailsPage.jsx
 import FavoritePhotographarPage from "../../pages/userDashboard/FavoritePhotographerPage.jsx";
 import PhotographarDetailsLayout from "../../layouts/PhotographarDetailsLayout.jsx";
 import ProfileTab from "../../pages/profile/ProfileTab.jsx";
+import ArtworksTab from "../../pages/profile/ArtworksTab.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -169,6 +170,9 @@ export const router = createBrowserRouter([
         children: [
                 {
                     index:true, Component:ProfileTab
+                }, 
+                {
+                    path:"artworks", Component: ArtworksTab
                 }
         ]
     },

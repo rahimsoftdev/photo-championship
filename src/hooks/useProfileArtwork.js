@@ -1,18 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router';
 
-export const useProfileArtwork = (dataUrl = '/artworks.json', userId = null, itemsPerPage = 6) => {
+export const useProfileArtwork = (dataUrl = '/artworks.json', albumType = 'all', page = 1, itemsPerPage = 8) => {
   const [artworks, setArtworks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  // URL query params theke current state read kora
-  const currentAlbumType = searchParams.get('albumType') || 'all';
-  const currentPage = Math.max(Number(searchParams.get('page')) || 1, 1);
-
-  // 1. Fetch Data from JSON/API
   useEffect(() => {
     const fetchArtworks = async () => {
       try {
@@ -20,8 +12,11 @@ export const useProfileArtwork = (dataUrl = '/artworks.json', userId = null, ite
         setError(null);
 
         const response = await fetch(dataUrl);
-        if (!response.ok) {
-          throw new Error('Failed to fetch artworks data');
+
+        // Content-type check for 404 HTML fallback
+        const contentType = response.headers.get("content-type");
+        if (!response.ok || (contentType && contentType.includes("text/html"))) {
+          throw new Error(`Data not found at "${dataUrl}". Make sure file exists in public/ directory.`);
         }
 
         const data = await response.json();
@@ -36,27 +31,17 @@ export const useProfileArtwork = (dataUrl = '/artworks.json', userId = null, ite
     fetchArtworks();
   }, [dataUrl]);
 
-  // 2. Filter Artworks by userId and albumType (useMemo for optimization)
+  // Album type filtering
   const filteredArtworks = useMemo(() => {
     return artworks.filter((item) => {
-      // User ID match check (jodi userId pass kora hoy)
-      const matchesUser = userId
-        ? String(item.userId).toLowerCase() === String(userId).toLowerCase()
-        : true;
-
-      // Album Type filter check (all, single, six, twelve)
-      const matchesAlbum =
-        currentAlbumType === 'all' ||
-        String(item.albumType).toLowerCase() === currentAlbumType.toLowerCase();
-
-      return matchesUser && matchesAlbum;
+      if (!albumType || albumType === 'all') return true;
+      return String(item.albumType).toLowerCase() === String(albumType).toLowerCase();
     });
-  }, [artworks, userId, currentAlbumType]);
+  }, [artworks, albumType]);
 
-  // 3. Paginate Filtered Data
+  // Pagination Logic
   const totalPages = Math.ceil(filteredArtworks.length / itemsPerPage) || 1;
-
-  // Safe Page adjustment
+  const currentPage = Math.max(Number(page) || 1, 1);
   const safePage = Math.min(currentPage, totalPages);
 
   const paginatedArtworks = useMemo(() => {
@@ -64,27 +49,11 @@ export const useProfileArtwork = (dataUrl = '/artworks.json', userId = null, ite
     return filteredArtworks.slice(startIndex, startIndex + itemsPerPage);
   }, [filteredArtworks, safePage, itemsPerPage]);
 
-  // 4. Helper function to change album type filter
-  const setAlbumType = (type) => {
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev);
-      if (type === 'all') {
-        next.delete('albumType');
-      } else {
-        next.set('albumType', type);
-      }
-      next.set('page', '1'); // Filter change korle page reset to 1
-      return next;
-    });
-  };
-
   return {
-    artworks: paginatedArtworks,     // Current page er filtered items
-    totalArtworks: filteredArtworks, // Shob filtered items
-    totalPages,                      // Total page count (Pagination component er jonno)
+    artworks: paginatedArtworks,
+    totalArtworks: filteredArtworks,
+    totalPages,
     currentPage: safePage,
-    currentAlbumType,
-    setAlbumType,                     // Category/Album type change function
     loading,
     error,
   };
