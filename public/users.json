@@ -1,0 +1,13 @@
+[
+  { "id": "user_103", "name": "James Carter", "email": "j.carter@example.com", "phone": "+1 555 654 1123", "roles": ["buyer"], "store": null },
+  { "id": "user_104", "name": "Sarah Mitchell", "email": "sarah@sarahscreative.com", "phone": "+1 555 201 7788", "roles": ["seller"], "store": { "name": "Sarah's Creative Store", "verified": true } },
+  { "id": "user_105", "name": "Alex Parker", "email": "alex@alexphotography.com", "phone": "+1 555 330 4412", "roles": ["seller"], "store": { "name": "Alex Photography", "verified": true } },
+  { "id": "user_106", "name": "Maya Lin", "email": "maya@creativestudio.com", "phone": "+1 555 818 9021", "roles": ["seller"], "store": { "name": "Creative Studio", "verified": false } },
+  { "id": "user_107", "name": "Sarah Johnson", "email": "sarah.j@example.com", "phone": "+1 555 100 2001", "roles": ["buyer"], "store": null },
+  { "id": "user_108", "name": "Michael Brown", "email": "m.brown@example.com", "phone": "+1 555 100 2002", "roles": ["buyer"], "store": null },
+  { "id": "user_109", "name": "Emma Wilson", "email": "emma.w@example.com", "phone": "+1 555 100 2003", "roles": ["buyer"], "store": null },
+  { "id": "user_110", "name": "David Chen", "email": "d.chen@example.com", "phone": "+1 555 100 2004", "roles": ["buyer"], "store": null },
+  { "id": "user_111", "name": "Olivia Martinez", "email": "olivia.m@example.com", "phone": "+1 555 100 2005", "roles": ["buyer"], "store": null },
+  { "id": "user_112", "name": "Sophia Lee", "email": "sophia.l@example.com", "phone": "+1 555 100 2006", "roles": ["buyer"], "store": null },
+  { "id": "user_113", "name": "Liam Anderson", "email": "liam.a@example.com", "phone": "+1 555 100 2007", "roles": ["buyer"], "store": null }
+]
