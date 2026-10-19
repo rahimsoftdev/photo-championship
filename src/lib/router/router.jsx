@@ -33,6 +33,7 @@ import OrdersPage from "../../pages/userDashboard/OrdersPage.jsx";
 import OrderDetailsPage from "../../pages/userDashboard/OrderDetailsPage.jsx";
 import MyOrdersPage from "../../pages/userDashboard/MyOrdersPage.jsx";
 import MyOrderDetailsPage from "../../pages/userDashboard/MyOrderDetailsPage.jsx";
+import FavoritePhotographarPage from "../../pages/userDashboard/FavoritePhotographerPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -153,6 +154,9 @@ export const router = createBrowserRouter([
             {
                 path:"my-orders/:id", Component:MyOrderDetailsPage
             },
+            {
+                path:"favourite-photographers", Component: FavoritePhotographarPage
+            }
         ]
     },
     {
