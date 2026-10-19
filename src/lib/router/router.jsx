@@ -42,6 +42,7 @@ import PostTab from "../../pages/profile/PostTab.jsx";
 import MyStoreTab from "../../pages/profile/MyStoreTab.jsx";
 import FavoritePhotos from "../../pages/userDashboard/FavoritePhotos.jsx";
 import SupportPage from "../../pages/userDashboard/SupportPage.jsx";
+import ProfileDetailsEditor from "../../pages/userDashboard/ProfileDetailsEditor.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -196,7 +197,10 @@ export const router = createBrowserRouter([
             },
             {
                 path:"contact-us", Component:SupportPage
-            }
+            },
+            {
+                path:"settings", Component:ProfileDetailsEditor
+            },
         ]
     },
     {
