@@ -43,6 +43,7 @@ import MyStoreTab from "../../pages/profile/MyStoreTab.jsx";
 import FavoritePhotos from "../../pages/userDashboard/FavoritePhotos.jsx";
 import SupportPage from "../../pages/userDashboard/SupportPage.jsx";
 import ProfileDetailsEditor from "../../pages/userDashboard/ProfileDetailsEditor.jsx";
+import PrizeAndPayments from "../../pages/userDashboard/PrizeAndPayments.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -200,6 +201,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"settings", Component:ProfileDetailsEditor
+            },
+            {
+                path:"prize-payments", Component:PrizeAndPayments
             },
         ]
     },
