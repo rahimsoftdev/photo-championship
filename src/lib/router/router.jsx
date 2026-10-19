@@ -31,6 +31,8 @@ import BusinessLinkPage from "../../pages/userDashboard/BusinessLinkPhotosPage.j
 import NotificationsPage from "../../pages/userDashboard/NotificationsPage.jsx";
 import OrdersPage from "../../pages/userDashboard/OrdersPage.jsx";
 import OrderDetailsPage from "../../pages/userDashboard/OrderDetailsPage.jsx";
+import MyOrdersPage from "../../pages/userDashboard/MyOrdersPage.jsx";
+import MyOrderDetailsPage from "../../pages/userDashboard/MyOrderDetailsPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -143,8 +145,14 @@ export const router = createBrowserRouter([
                 path:"orders", Component:OrdersPage
             },
             {
+                path:"my-orders", Component:MyOrdersPage
+            },
+            {
                 path:"orders/:id", Component:OrderDetailsPage
-            }
+            },
+            {
+                path:"my-orders/:id", Component:MyOrderDetailsPage
+            },
         ]
     },
     {
