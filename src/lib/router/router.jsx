@@ -34,6 +34,8 @@ import OrderDetailsPage from "../../pages/userDashboard/OrderDetailsPage.jsx";
 import MyOrdersPage from "../../pages/userDashboard/MyOrdersPage.jsx";
 import MyOrderDetailsPage from "../../pages/userDashboard/MyOrderDetailsPage.jsx";
 import FavoritePhotographarPage from "../../pages/userDashboard/FavoritePhotographerPage.jsx";
+import PhotographarDetailsLayout from "../../layouts/PhotographarDetailsLayout.jsx";
+import ProfileTab from "../../pages/profile/ProfileTab.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -113,54 +115,62 @@ export const router = createBrowserRouter([
             },
             //news and message route:
             {
-                path:"news-message", Component:NewsAndMessagePage
+                path: "news-message", Component: NewsAndMessagePage
             },
             {
-                path:"news-message/new", Component:UploadMessagePage
+                path: "news-message/new", Component: UploadMessagePage
             },
             {
-                path:"sell-photos", Component: SellPhotosPage
+                path: "sell-photos", Component: SellPhotosPage
             },
             {
-                path:"sell-photos/new", Component: UploadArtWorkPage
+                path: "sell-photos/new", Component: UploadArtWorkPage
             },
             {
-                path:"sell-photos/:id", Component: BayImageDetailsPage
+                path: "sell-photos/:id", Component: BayImageDetailsPage
             },
             //my store routs:
             {
-                path:"my-store", Component:MyStore
+                path: "my-store", Component: MyStore
             },
             {
-                path:"my-store/new", Component:CollectionForm
-            }, 
+                path: "my-store/new", Component: CollectionForm
+            },
             //business-link-photos
             {
-                path:"business-link-photos", Component: BusinessLinkPage
-            }, 
+                path: "business-link-photos", Component: BusinessLinkPage
+            },
             //notification
             {
-                path:"notifications", Component: NotificationsPage
-            }, 
-            {
-                path:"orders", Component:OrdersPage
+                path: "notifications", Component: NotificationsPage
             },
             {
-                path:"my-orders", Component:MyOrdersPage
+                path: "orders", Component: OrdersPage
             },
             {
-                path:"orders/:id", Component:OrderDetailsPage
+                path: "my-orders", Component: MyOrdersPage
             },
             {
-                path:"my-orders/:id", Component:MyOrderDetailsPage
+                path: "orders/:id", Component: OrderDetailsPage
             },
             {
-                path:"favourite-photographers", Component: FavoritePhotographarPage
+                path: "my-orders/:id", Component: MyOrderDetailsPage
+            },
+            {
+                path: "favourite-photographers", Component: FavoritePhotographarPage
             }
         ]
     },
     {
         path: "adminDashboard"
+    },
+    {
+        path: "photographers/:id", Component: PhotographarDetailsLayout,
+        children: [
+                {
+                    index:true, Component:ProfileTab
+                }
+        ]
     },
     {
         path: "*",
