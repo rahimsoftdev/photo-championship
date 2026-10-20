@@ -50,6 +50,7 @@ import Categories from "../../pages/adminDashboard/Categories.jsx";
 import EditAlbumTypesPage from "../../pages/adminDashboard/EditAlbumTypePage.jsx";
 import TopPhotographersSection from "../../components/shared/TopPhotographersSection.jsx";
 import UsersManagement from "../../pages/adminDashboard/UserMangementPage.jsx";
+import CompetitionManagementPage from "../../pages/adminDashboard/CompetitionManagementPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -206,16 +207,16 @@ export const router = createBrowserRouter([
                 ]
             },
             {
-                path:"favourite-photos", Component: CompetitionPage
+                path: "favourite-photos", Component: CompetitionPage
             },
             {
-                path:"contact-us", Component:SupportPage
+                path: "contact-us", Component: SupportPage
             },
             {
-                path:"settings", Component:ProfileDetailsEditor
+                path: "settings", Component: ProfileDetailsEditor
             },
             {
-                path:"prize-payments", Component:PrizeAndPayments
+                path: "prize-payments", Component: PrizeAndPayments
             },
         ]
     },
@@ -223,24 +224,30 @@ export const router = createBrowserRouter([
     //admin dashboard:
     {
         path: "adminDashboard", Component: AdminDashboardLayout,
-        children:[
+        children: [
             {
-                index:true, Component: AdminOverview
+                index: true, Component: AdminOverview
             },
             {
-                path:"payouts", Component:PrizeAndPayments
+                path: "payouts", Component: PrizeAndPayments
             },
             {
-                path:"categories", Component:Categories
+                path: "categories", Component: Categories
             },
             {
-                path:"album-types", Component:EditAlbumTypesPage
+                path: "album-types", Component: EditAlbumTypesPage
             },
             {
-                path:"winners", Component:TopPhotographersSection
+                path: "winners", Component: TopPhotographersSection
             },
             {
-                path:"users", Component:UsersManagement
+                path: "users", Component: UsersManagement
+            },
+            {
+                path: "competitions", Component: CompetitionManagementPage
+            },
+            {
+                path: "competitions/:id", Component: ArtwokDetailsPage
             },
         ]
     },
