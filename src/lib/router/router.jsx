@@ -262,7 +262,7 @@ export const router = createBrowserRouter([
                 path: "premium-photos", Component: BayPhotoMangement
             },
             {
-                path: "gallery/:id", Component: ArtwokDetailsPage
+                path: "premium-photos/:id", Component: BayImageDetailsPage
             },
             {
                 path:"promoted-albums", Component:PromotedProductsPage

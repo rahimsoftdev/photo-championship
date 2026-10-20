@@ -5,10 +5,6 @@ import useFetch from '../../hooks/useFetch';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
 import PromotedProductCard from '../../components/admin/Promotedproductcard';
 import Pagination from '../../components/shared/Pagination';
-// import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
-// import Pagination from '../../components/ui/Pagination'; // TODO: adjust path to your Pagination file
-// import PromotedProductCard from '../../components/ui/PromotedProductCard'; // TODO: adjust path if needed
-// import useFetch from '../../hooks/useFetch';
 
 const PAGE_SIZE = 12; // cards per page
 
@@ -30,8 +26,10 @@ const PromotedProductsPage = () => {
     // TODO: confirm the shape your useFetch hook returns ({ data, isLoading, error })
     const { data, isLoading, error } = useFetch('/Promoted.json');
 
+    // Show loading page while data is being fetched.
     if (isLoading) return <LoadingPage />;
 
+    // Show an error if fetching fails.
     if (error) {
         return <p className="text-red-500">{String(error)}</p>;
     }
@@ -52,7 +50,7 @@ const PromotedProductsPage = () => {
     return (
         <section className="w-full space-y-6 pb-12">
             {/* Heading */}
-            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#111827]">
+            <h1 className="text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
                 Promoted Products
             </h1>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { FaHeart } from 'react-icons/fa';
 import { FiEye, FiCalendar, FiList, FiCheckCircle } from 'react-icons/fi';
 
@@ -29,9 +29,15 @@ const formatDate = (iso) => {
  *                viewsCount, info.createdAt ...)
  *  - onDelete  : optional callback(id). Called after the "deleted successfully"
  *                message has been shown, so the parent can remove it from its list.
+ *
+ * Image click goes to the CURRENT page path + "/:id", so no extra prop is needed:
+ *   /adminDashboard/competitions    -> /adminDashboard/competitions/:id
+ *   /adminDashboard/gallery         -> /adminDashboard/gallery/:id
+ *   /adminDashboard/premium-photos  -> /adminDashboard/premium-photos/:id
  */
-const AdminArtworkCard = ({ imageData = {}, onDelete,isGallery }) => {
+const AdminArtworkCard = ({ imageData = {}, onDelete }) => {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     const {
         id,
@@ -63,13 +69,10 @@ const AdminArtworkCard = ({ imageData = {}, onDelete,isGallery }) => {
         setShowToast(true);
     };
 
-    // Image click -> /adminDashboard/competitions/:id
+    // Image click -> current page path + "/:id"
     const handleImageClick = () => {
-        if(isGallery){
-            navigate(`/adminDashboard/gallery/${id}`)
-            return
-        }
-        navigate(`/adminDashboard/competitions/${id}`);
+        const basePath = pathname.replace(/\/+$/, ''); // remove trailing slash
+        navigate(`${basePath}/${id}`);
     };
 
     const handleImageKeyDown = (e) => {
