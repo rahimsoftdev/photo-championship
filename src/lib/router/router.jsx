@@ -44,6 +44,7 @@ import FavoritePhotos from "../../pages/userDashboard/FavoritePhotos.jsx";
 import SupportPage from "../../pages/userDashboard/SupportPage.jsx";
 import ProfileDetailsEditor from "../../pages/userDashboard/ProfileDetailsEditor.jsx";
 import PrizeAndPayments from "../../pages/userDashboard/PrizeAndPayments.jsx";
+import AdminDashboardLayout from "../../layouts/AdminDashboardLayout.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -96,12 +97,18 @@ export const router = createBrowserRouter([
             }
         ]
     },
+
+    //auth:
+    //loign
     {
         path: "login", Component: LoginPage
     },
+    //register
     {
         path: "register", Component: Register
     },
+
+    //user dashboard
     {
         path: "userDashboard", Component: UserDashboardLayout,
         children: [
@@ -207,8 +214,10 @@ export const router = createBrowserRouter([
             },
         ]
     },
+
+    //admin dashboard:
     {
-        path: "adminDashboard"
+        path: "adminDashboard", Component: AdminDashboardLayout
     },
     //photograhpar profile details routes
     {
