@@ -1,13 +1,19 @@
-import { HiCamera, HiBookOpen, HiSparkles } from "react-icons/hi2";
+import { HiCamera, HiBookOpen, HiSparkles, HiPencilSquare } from "react-icons/hi2";
 import { BsCheck } from "react-icons/bs";
 import { Link } from "react-router";
 
 /**
  * AlbumCard Component: Renders an individual competition album card with features, pricing, and dynamic icons.
- * "Enter Now" button navigates to the upload page with the albumType query param.
- * Example: /userDashboard/artwork-management/UploadArtWork?albumType=single
+ *
+ * Normal mode (isEdit = false):
+ *   "Enter Now" button navigates to the upload page with the albumType query param.
+ *   Example: /userDashboard/artwork-management/UploadArtWork?albumType=single
+ *
+ * Admin mode (isEdit = true):
+ *   Shows an "Edit Album" button with an edit icon instead of "Enter Now".
+ *   Clicking it calls onEdit(album) so the parent can open the edit modal.
  */
-const AlbumCard = ({ album }) => {
+const AlbumCard = ({ album, isEdit = false, onEdit }) => {
   const {
     title,
     description,
@@ -34,6 +40,9 @@ const AlbumCard = ({ album }) => {
         return null;
     }
   };
+
+  const buttonClass =
+    "w-full py-3.5 px-4 bg-[#EE1C25] hover:bg-red-700 text-white font-manrope font-semibold rounded-full transition-colors duration-200 flex items-center justify-center space-x-2";
 
   return (
     <div
@@ -91,14 +100,23 @@ const AlbumCard = ({ album }) => {
           </span>
         </div>
 
-        {/* Action Button -> adds ?albumType=single|six|twelve */}
-        <Link
-          to={`/userDashboard/artwork-management/UploadArtWork?albumType=${encodeURIComponent(albumType)}`}
-          className="w-full py-3.5 px-4 bg-[#EE1C25] hover:bg-red-700 text-white font-manrope font-semibold rounded-full transition-colors duration-200 flex items-center justify-center space-x-2"
-        >
-          <span>{buttonText}</span>
-          <span>→</span>
-        </Link>
+        {/* Action Button */}
+        {isEdit ? (
+          // Admin mode: Edit Album button with edit icon
+          <button type="button" onClick={() => onEdit && onEdit(album)} className={buttonClass}>
+            <HiPencilSquare className="w-5 h-5" />
+            <span>Edit Album</span>
+          </button>
+        ) : (
+          // User mode: Enter Now -> adds ?albumType=single|six|twelve
+          <Link
+            to={`/userDashboard/artwork-management/UploadArtWork?albumType=${encodeURIComponent(albumType)}`}
+            className={buttonClass}
+          >
+            <span>{buttonText}</span>
+            <span>→</span>
+          </Link>
+        )}
       </div>
     </div>
   );
