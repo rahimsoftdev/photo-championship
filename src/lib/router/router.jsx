@@ -53,6 +53,7 @@ import UsersManagement from "../../pages/adminDashboard/UserMangementPage.jsx";
 import CompetitionManagementPage from "../../pages/adminDashboard/CompetitionManagementPage.jsx";
 import GalleryManagementPage from "../../pages/adminDashboard/GalleryManagementPage.jsx";
 import BayPhotoMangement from "../../pages/adminDashboard/BayPhotoMangement.jsx";
+import PromotedProductsPage from "../../pages/adminDashboard/Promotedproductspage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -263,6 +264,9 @@ export const router = createBrowserRouter([
             {
                 path: "gallery/:id", Component: ArtwokDetailsPage
             },
+            {
+                path:"promoted-albums", Component:PromotedProductsPage
+            }
         ]
     },
 
