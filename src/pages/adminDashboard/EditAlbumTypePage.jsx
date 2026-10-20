@@ -7,7 +7,7 @@ import AlbumTypeModal from '../../components/admin/Albumtypemoda';
 // import AlbumTypeModal from '../../components/ui/AlbumTypeModal'; // TODO: adjust path if needed
 // import useFetch from '../../hooks/useFetch';
 
-const AlbumTypesPage = () => {
+const EditAlbumTypesPage = () => {
     // Fetch album data using the custom useFetch hook (from /public/albumTypesData.json)
     // TODO: confirm the shape your useFetch hook returns ({ data, isLoading, error })
     const { data, isLoading, error } = useFetch('/albumTypesData.json');
@@ -162,4 +162,4 @@ const AlbumTypesPage = () => {
     );
 };
 
-export default AlbumTypesPage;
+export default EditAlbumTypesPage;
