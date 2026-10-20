@@ -49,6 +49,7 @@ import AdminOverview from "../../pages/adminDashboard/AdminOverview.jsx";
 import Categories from "../../pages/adminDashboard/Categories.jsx";
 import EditAlbumTypesPage from "../../pages/adminDashboard/EditAlbumTypePage.jsx";
 import TopPhotographersSection from "../../components/shared/TopPhotographersSection.jsx";
+import UsersManagement from "../../pages/adminDashboard/UserMangementPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -237,6 +238,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"winners", Component:TopPhotographersSection
+            },
+            {
+                path:"users", Component:UsersManagement
             },
         ]
     },
