@@ -1,4 +1,4 @@
-import { Pagination } from '@heroui/react';
+// import { Pagination } from '@heroui/react';
 import React, { useState } from 'react';
 // import AdminArtworkCard from '../../components/ui/AdminArtworkCard';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
@@ -7,6 +7,7 @@ import { FiPlus } from 'react-icons/fi';
 import { Link, useSearchParams } from 'react-router';
 import useAllArtworks from '../../hooks/useAllArtworks';
 import AdminArtworkCard from '../../components/admin/Adminartworkcard';
+import Pagination from '../../components/shared/Pagination';
 
 const CompetitionManagementPage = () => {
     const [searchParams] = useSearchParams();
@@ -68,6 +69,7 @@ const CompetitionManagementPage = () => {
                             }
                             imageData={artWorkData}
                             onDelete={handleDelete}
+                            isGallery= {true}
                         />
                     ))}
                 </div>

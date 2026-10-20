@@ -30,7 +30,7 @@ const formatDate = (iso) => {
  *  - onDelete  : optional callback(id). Called after the "deleted successfully"
  *                message has been shown, so the parent can remove it from its list.
  */
-const AdminArtworkCard = ({ imageData = {}, onDelete }) => {
+const AdminArtworkCard = ({ imageData = {}, onDelete,isGallery }) => {
     const navigate = useNavigate();
 
     const {
@@ -65,6 +65,10 @@ const AdminArtworkCard = ({ imageData = {}, onDelete }) => {
 
     // Image click -> /adminDashboard/competitions/:id
     const handleImageClick = () => {
+        if(isGallery){
+            navigate(`/adminDashboard/gallery/${id}`)
+            return
+        }
         navigate(`/adminDashboard/competitions/${id}`);
     };
 

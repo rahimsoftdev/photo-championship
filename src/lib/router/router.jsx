@@ -51,6 +51,8 @@ import EditAlbumTypesPage from "../../pages/adminDashboard/EditAlbumTypePage.jsx
 import TopPhotographersSection from "../../components/shared/TopPhotographersSection.jsx";
 import UsersManagement from "../../pages/adminDashboard/UserMangementPage.jsx";
 import CompetitionManagementPage from "../../pages/adminDashboard/CompetitionManagementPage.jsx";
+import GalleryManagementPage from "../../pages/adminDashboard/GalleryManagementPage.jsx";
+import BayPhotoMangement from "../../pages/adminDashboard/BayPhotoMangement.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -248,6 +250,18 @@ export const router = createBrowserRouter([
             },
             {
                 path: "competitions/:id", Component: ArtwokDetailsPage
+            },
+            {
+                path: "gallery", Component: GalleryManagementPage
+            },
+            {
+                path: "gallery/:id", Component: ArtwokDetailsPage
+            },
+            {
+                path: "premium-photos", Component: BayPhotoMangement
+            },
+            {
+                path: "gallery/:id", Component: ArtwokDetailsPage
             },
         ]
     },
