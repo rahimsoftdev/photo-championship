@@ -46,6 +46,7 @@ import ProfileDetailsEditor from "../../pages/userDashboard/ProfileDetailsEditor
 import PrizeAndPayments from "../../pages/userDashboard/PrizeAndPayments.jsx";
 import AdminDashboardLayout from "../../layouts/AdminDashboardLayout.jsx";
 import AdminOverview from "../../pages/adminDashboard/AdminOverview.jsx";
+import Categories from "../../pages/adminDashboard/Categories.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -225,6 +226,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"payouts", Component:PrizeAndPayments
+            },
+            {
+                path:"categories", Component:Categories
             }
         ]
     },
