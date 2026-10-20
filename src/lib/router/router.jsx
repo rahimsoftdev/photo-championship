@@ -45,6 +45,7 @@ import SupportPage from "../../pages/userDashboard/SupportPage.jsx";
 import ProfileDetailsEditor from "../../pages/userDashboard/ProfileDetailsEditor.jsx";
 import PrizeAndPayments from "../../pages/userDashboard/PrizeAndPayments.jsx";
 import AdminDashboardLayout from "../../layouts/AdminDashboardLayout.jsx";
+import AdminOverview from "../../pages/adminDashboard/AdminOverview.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -217,7 +218,15 @@ export const router = createBrowserRouter([
 
     //admin dashboard:
     {
-        path: "adminDashboard", Component: AdminDashboardLayout
+        path: "adminDashboard", Component: AdminDashboardLayout,
+        children:[
+            {
+                index:true, Component: AdminOverview
+            },
+            {
+                path:"payouts", Component:PrizeAndPayments
+            }
+        ]
     },
     //photograhpar profile details routes
     {
