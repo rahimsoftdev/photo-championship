@@ -55,6 +55,8 @@ import GalleryManagementPage from "../../pages/adminDashboard/GalleryManagementP
 import BayPhotoMangement from "../../pages/adminDashboard/BayPhotoMangement.jsx";
 import PromotedProductsPage from "../../pages/adminDashboard/Promotedproductspage.jsx";
 import SupportInbox from "../../pages/adminDashboard/Supportinbox.jsx";
+import BusinessLinkPhotos from "../../pages/adminDashboard/Businesslinkphotos.jsx";
+import BusinessLinkPhotoDetails from "../../pages/adminDashboard/Businesslinkphotodetails.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -270,6 +272,12 @@ export const router = createBrowserRouter([
             },
             {
                 path:"support", Component:SupportInbox
+            },
+            {
+                path:"business-link-photos", Component:BusinessLinkPhotos
+            },
+            {
+                path:"business-link-photos/details", Component:BusinessLinkPhotoDetails
             },
         ]
     },

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  FiSend, 
-  FiMail, 
-  FiChevronRight, 
-  FiX, 
-  FiPaperclip, 
-  FiLock 
+import {
+  FiSend,
+  FiMail,
+  FiChevronRight,
+  FiX,
+  FiPaperclip,
+  FiLock
 } from 'react-icons/fi';
 import { HiCheckBadge } from 'react-icons/hi2';
 
@@ -147,7 +147,7 @@ const SupportPage = () => {
   return (
     <div className="min-h-screen bg-[#FDFDFD] p-6 lg:p-12 text-slate-800 font-sans">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-        
+
         {/* Left Column: Contact Support Form */}
         <div>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">Contact Support</h1>
@@ -245,11 +245,10 @@ const SupportPage = () => {
                 <button
                   key={tab}
                   onClick={() => setActiveFilter(tab)}
-                  className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${
-                    activeFilter === tab
-                      ? 'bg-primary text-white'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
+                  className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${activeFilter === tab
+                    ? 'bg-primary text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
                 >
                   {tab}
                 </button>
@@ -314,7 +313,7 @@ const SupportPage = () => {
       {selectedConversation && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
           <div className="bg-white w-full max-w-xl rounded-2xl shadow-xl overflow-hidden flex flex-col max-h-[90vh]">
-            
+
             {/* Modal Header */}
             <div className="p-6 border-b border-gray-100 flex items-start justify-between">
               <div>
