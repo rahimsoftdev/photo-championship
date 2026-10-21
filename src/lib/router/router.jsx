@@ -59,6 +59,9 @@ import BusinessLinkPhotos from "../../pages/adminDashboard/Businesslinkphotos.js
 import BusinessLinkPhotoDetails from "../../pages/adminDashboard/Businesslinkphotodetails.jsx";
 import Newsletter from "../../pages/adminDashboard/Newsletter.jsx";
 import CommentManagement from "../../pages/adminDashboard/Commentmanagement.jsx";
+import AdsManagement from "../../pages/adminDashboard/Adsmanagement.jsx";
+import DemoProfiles from "../../pages/adminDashboard/Demoprofiles.jsx";
+import AddDemoProfile from "../../pages/adminDashboard/Adddemoprofile.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -286,6 +289,15 @@ export const router = createBrowserRouter([
             },
             {
                 path:"comment", Component:CommentManagement
+            },
+            {
+                path:"ads-management", Component:AdsManagement
+            },
+            {
+                path:"demo-profile", Component:DemoProfiles
+            },
+            {
+                path:"demo-profiles/add", Component:AddDemoProfile
             },
         ]
     },
