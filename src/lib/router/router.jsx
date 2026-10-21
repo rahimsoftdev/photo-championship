@@ -62,6 +62,9 @@ import CommentManagement from "../../pages/adminDashboard/Commentmanagement.jsx"
 import AdsManagement from "../../pages/adminDashboard/Adsmanagement.jsx";
 import DemoProfiles from "../../pages/adminDashboard/Demoprofiles.jsx";
 import AddDemoProfile from "../../pages/adminDashboard/Adddemoprofile.jsx";
+import ReportsModeration from "../../pages/adminDashboard/Reportsmoderation.jsx";
+import ReportDetails from "../../pages/adminDashboard/Reportdetails.jsx";
+import PromoLinkManagement from "../../pages/adminDashboard/Promolinkmanagement.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -298,6 +301,15 @@ export const router = createBrowserRouter([
             },
             {
                 path:"demo-profiles/add", Component:AddDemoProfile
+            },
+            {
+                path:"reports-resolved", Component:ReportsModeration
+            },
+            {
+                path:"reports-resolved/details", Component:ReportDetails
+            },
+            {
+                path:"promo-links", Component:PromoLinkManagement
             },
         ]
     },
