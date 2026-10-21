@@ -54,6 +54,7 @@ import CompetitionManagementPage from "../../pages/adminDashboard/CompetitionMan
 import GalleryManagementPage from "../../pages/adminDashboard/GalleryManagementPage.jsx";
 import BayPhotoMangement from "../../pages/adminDashboard/BayPhotoMangement.jsx";
 import PromotedProductsPage from "../../pages/adminDashboard/Promotedproductspage.jsx";
+import SupportInbox from "../../pages/adminDashboard/Supportinbox.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -266,7 +267,10 @@ export const router = createBrowserRouter([
             },
             {
                 path:"promoted-albums", Component:PromotedProductsPage
-            }
+            },
+            {
+                path:"support", Component:SupportInbox
+            },
         ]
     },
 
