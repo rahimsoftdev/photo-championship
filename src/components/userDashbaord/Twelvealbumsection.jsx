@@ -1,7 +1,7 @@
 import { FiMoon, FiSun } from "react-icons/fi";
 import CurveDivider from "./CurveDivider";
-import VideoUploader from "./VideoUploader";
-import ZodiacSlot from "./ZodiacSlot";
+import VideoUploader from "./Videouploader.jsx";
+import ZodiacSlot from "./Zodiacslot.jsx";
 import {
     THEME_STYLES,
     TWELVE_DISPLAY_ORDER,

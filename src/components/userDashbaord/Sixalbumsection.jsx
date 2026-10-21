@@ -1,7 +1,7 @@
 import { FiMoon, FiSun } from "react-icons/fi";
 import CurveDivider from "./CurveDivider";
-import VideoUploader from "./VideoUploader";
-import ZodiacSlot from "./ZodiacSlot";
+import VideoUploader from "./Videouploader.jsx";
+import ZodiacSlot from "./Zodiacslot.jsx";
 // সঠিক ফাইল পাথ দিয়ে নিচের লাইনটি ঠিক করুন (যেমন: `./uploadArtworkData` অথবা অন্য কোনো পাথ)
 import { THEMES, THEME_STYLES, ZODIACS } from "./uploadArtworkData";
 

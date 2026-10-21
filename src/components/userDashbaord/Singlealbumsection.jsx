@@ -3,7 +3,8 @@ import CurveDivider from "./CurveDivider";
 import VideoUploader from "./Videouploader.jsx";
 import ZodiacSlot from "./Zodiacslot.jsx";
 
-import { THEME_STYLES, ZODIACS } from "./uploadArtworkData";
+// import { THEME_STYLES, ZODIACS } from "./uploadArtworkData";
+import { THEME_STYLES, ZODIACS } from "./Uploadartworkdata.jsx";
 
 /** Top section for albumType = "single": pick one sign + upload 1 photo. */
 const SingleAlbumSection = ({
