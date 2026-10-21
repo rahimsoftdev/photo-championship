@@ -9,7 +9,21 @@ import {
   FiMoreVertical,
   FiShield,
 } from "react-icons/fi";
-import { DETAILS_PATH, formatReportDate, getReportType, REPORTS, STATUS_STYLES } from "./reportsData";
+// import { DETAILS_PATH, formatReportDate, getReportType, REPORTS, STATUS_STYLES } from "./reportsData";
+// import {
+import {
+  DETAILS_PATH,
+  formatReportDate,
+  getReportType,
+  REPORTS,
+  STATUS_STYLES,
+} from "./Reportsdata.js";
+//   DETAILS_PATH,
+//   formatReportDate,
+//   getReportType,
+//   REPORTS,
+//   STATUS_STYLES,
+// } from "./Reportsdata.js";
 // import {
 //   DETAILS_PATH,
 //   REPORTS,

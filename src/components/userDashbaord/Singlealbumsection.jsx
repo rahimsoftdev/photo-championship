@@ -1,7 +1,8 @@
 import { FiChevronDown } from "react-icons/fi";
 import CurveDivider from "./CurveDivider";
-import VideoUploader from "./VideoUploader";
-import ZodiacSlot from "./ZodiacSlot";
+import VideoUploader from "./Videouploader.jsx";
+import ZodiacSlot from "./Zodiacslot.jsx";
+
 import { THEME_STYLES, ZODIACS } from "./uploadArtworkData";
 
 /** Top section for albumType = "single": pick one sign + upload 1 photo. */

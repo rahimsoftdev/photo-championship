@@ -3,7 +3,9 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import { FiArrowLeft, FiCheck, FiCopy } from "react-icons/fi";
 // import ArtworkImages from "./ArtworkImages";
 // import ArtworkGalleryGrid from "./ArtworkGalleryGrid";
-import { ZODIACS, getAlbumById } from "./businessLinkPhotosData";
+// import { ZODIACS, getAlbumById } from "./businessLinkPhotosData";
+// import { ZODIACS, getAlbumById } from "./Businesslinkphotosdata.js";
+import { ZODIACS, getAlbumById } from "./Businesslinkphotosdata.js";
 import ArtworkImages from "../../components/ui/detailsPage/ArtworkImages";
 import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGrid";
 

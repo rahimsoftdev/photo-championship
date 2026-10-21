@@ -13,7 +13,18 @@ import {
 // import ArtworkImages from "./ArtworkImages";
 // import ArtworkGalleryGrid from "./ArtworkGalleryGrid";
 // import ArtworkInfoSection from "./ArtworkInfoSection";
-import { getReportById, LIST_PATH, STATUS_STYLES } from "./reportsData";
+// import { getReportById, LIST_PATH, STATUS_STYLES } from "./reportsData";
+// import {
+//   getReportById,
+//   LIST_PATH,
+//   STATUS_STYLES,
+// } from "./Reportsdata.js";
+
+import {
+  getReportById,
+  LIST_PATH,
+  STATUS_STYLES,
+} from "./Reportsdata.js";
 import ArtworkInfoSection from "../../components/ui/detailsPage/ArtworkInfoSection";
 import ArtworkImages from "../../components/ui/detailsPage/ArtworkImages";
 import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGrid";
