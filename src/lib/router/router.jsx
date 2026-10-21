@@ -66,6 +66,7 @@ import ReportsModeration from "../../pages/adminDashboard/Reportsmoderation.jsx"
 import ReportDetails from "../../pages/adminDashboard/Reportdetails.jsx";
 import PromoLinkManagement from "../../pages/adminDashboard/Promolinkmanagement.jsx";
 import AdsAnnouncements from "../../pages/adminDashboard/AdsAnnouncements.jsx";
+import MyProfile from "../../pages/adminDashboard/MyProfile.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -314,6 +315,9 @@ export const router = createBrowserRouter([
             },
             {
                 path:"settings", Component:AdsAnnouncements
+            },
+            {
+                path:"profile", Component:MyProfile
             },
         ]
     },
