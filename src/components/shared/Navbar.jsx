@@ -37,7 +37,7 @@ const Navbar = () => {
     return (
         // TODO: Navbar will be sticky
         <header className="top-0 z-50 w-full border-b border-gray-100 bg-white">
-            <nav className="mx-auto flex min-h-[84px] max-h-[87px] max-w-[1280px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-5">
+            <nav className="mx-auto flex min-h-[84px] max-h-[87px] max-w-z items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-5">
                 {/* Logo */}
                 <Link
                     to="/"
