@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import {
@@ -9,7 +8,6 @@ import {
   FiArrowRight,
   FiArrowLeft,
 } from "react-icons/fi";
-
 import cervidaeImage from "../../assets/images/Cervidae.jpg";
 
 const LoginPage = () => {
@@ -19,7 +17,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,12 +33,10 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     setError("");
     setSuccess("");
 
     const trimmedEmail = email.trim();
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(trimmedEmail)) {
@@ -72,11 +67,10 @@ const LoginPage = () => {
   };
 
   return (
-    <main className="min-h-screen w-screen bg-white p-0">
-      <div className="flex min-h-screen w-full overflow-hidden bg-white">
-
-        {/* Left side: Image and branding */}
-        <section className="relative hidden min-h-screen w-1/2 shrink-0 overflow-hidden md:block">
+    <main className="min-h-dvh w-full overflow-x-hidden bg-white">
+      <div className="flex min-h-dvh w-full">
+        {/* Desktop image: hidden on mobile and small devices */}
+        <section className="relative hidden min-h-dvh w-1/2 shrink-0 overflow-hidden md:block">
           <img
             src={cervidaeImage}
             alt="Deer standing in a peaceful forest"
@@ -90,7 +84,6 @@ const LoginPage = () => {
               <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
                 My12Photos
               </h1>
-
               <p className="mt-1.5 text-[10px] font-medium tracking-[0.13em] text-white/90 sm:text-xs">
                 CAPTURE. COMPETE. CELEBRATE.
               </p>
@@ -98,48 +91,24 @@ const LoginPage = () => {
           </div>
         </section>
 
-        {/* Right side: Login form */}
-        <section className="flex min-h-screen w-full flex-col bg-white md:w-1/2">
-
-          {/* Mobile branding */}
-          <div className="relative flex min-h-[180px] items-end overflow-hidden md:hidden">
-            <img
-              src={cervidaeImage}
-              alt="Deer in the forest"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-
-            <div className="relative z-10 p-5">
-              <h1 className="text-3xl font-bold text-white">
-                My12Photos
-              </h1>
-
-              <p className="mt-1 text-xs tracking-widest text-white/90">
-                CAPTURE. COMPETE. CELEBRATE.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-1 items-center justify-center px-5 py-10 sm:px-10 md:px-8 lg:px-12 xl:px-16">
+        {/* Login form: shown on every device */}
+        <section className="flex min-h-dvh w-full flex-col bg-white md:w-1/2">
+          <div className="flex flex-1 items-center justify-center px-4 py-8 sm:px-8 md:px-8 lg:px-12 xl:px-16">
             <div className="w-full max-w-[360px]">
-
               {/* Back to home */}
               <Link
                 to="/"
-                className="mb-8 inline-flex items-center gap-2 text-xs text-[#777482] transition hover:text-secondary"
+                className="mb-6 inline-flex items-center gap-2 text-xs text-[#777482] transition hover:text-secondary sm:mb-8"
               >
                 <FiArrowLeft size={15} />
                 Back to Home
               </Link>
 
               {/* Heading */}
-              <div className="mb-8 text-center">
+              <div className="mb-6 text-center sm:mb-8">
                 <h2 className="text-2xl font-semibold tracking-tight text-[#20232E] sm:text-[26px]">
                   Welcome Back
                 </h2>
-
                 <p className="mx-auto mt-2 max-w-[270px] text-xs leading-5 text-[#777482]">
                   Sign in to join competitions and showcase your photography
                 </p>
@@ -167,7 +136,6 @@ const LoginPage = () => {
 
               {/* Login form */}
               <form onSubmit={handleSubmit} noValidate>
-
                 {/* Email */}
                 <div className="mb-5">
                   <label
@@ -177,12 +145,8 @@ const LoginPage = () => {
                     Email Address
                   </label>
 
-                  <div className="flex h-11 items-center gap-3 rounded-md border border-[#DAD6E5] px-3 transition focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/10">
-                    <FiMail
-                      size={17}
-                      className="shrink-0 text-[#898396]"
-                    />
-
+                  <div className="flex h-11 min-w-0 items-center gap-3 rounded-md border border-[#DAD6E5] px-3 transition focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/10">
+                    <FiMail size={17} className="shrink-0 text-[#898396]" />
                     <input
                       id="login-email"
                       type="email"
@@ -194,7 +158,7 @@ const LoginPage = () => {
                       }}
                       placeholder="name@example.com"
                       autoComplete="email"
-                      className="h-full w-full bg-transparent text-sm text-[#373737] outline-none placeholder:text-[#8C8C8C]"
+                      className="h-full min-w-0 w-full bg-transparent text-sm text-[#373737] outline-none placeholder:text-[#8C8C8C]"
                       required
                     />
                   </div>
@@ -209,7 +173,6 @@ const LoginPage = () => {
                     >
                       Password
                     </label>
-
                     <button
                       type="button"
                       onClick={() =>
@@ -217,18 +180,14 @@ const LoginPage = () => {
                           "Forgot password is not configured in this frontend-only demo."
                         )
                       }
-                      className="text-xs text-secondary transition hover:underline"
+                      className="shrink-0 text-xs text-secondary transition hover:underline"
                     >
                       Forgot Password?
                     </button>
                   </div>
 
-                  <div className="flex h-11 items-center gap-3 rounded-md border border-[#DAD6E5] px-3 transition focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/10">
-                    <FiLock
-                      size={17}
-                      className="shrink-0 text-[#898396]"
-                    />
-
+                  <div className="flex h-11 min-w-0 items-center gap-3 rounded-md border border-[#DAD6E5] px-3 transition focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/10">
+                    <FiLock size={17} className="shrink-0 text-[#898396]" />
                     <input
                       id="login-password"
                       type={showPassword ? "text" : "password"}
@@ -242,23 +201,16 @@ const LoginPage = () => {
                       autoComplete="current-password"
                       minLength={8}
                       maxLength={15}
-                      className="h-full w-full bg-transparent text-sm text-[#373737] outline-none placeholder:text-[#8C8C8C]"
+                      className="h-full min-w-0 w-full bg-transparent text-sm text-[#373737] outline-none placeholder:text-[#8C8C8C]"
                       required
                     />
-
                     <button
                       type="button"
                       onClick={() => setShowPassword((prev) => !prev)}
-                      aria-label={
-                        showPassword ? "Hide password" : "Show password"
-                      }
+                      aria-label={showPassword ? "Hide password" : "Show password"}
                       className="shrink-0 text-[#898396] transition hover:text-[#373737]"
                     >
-                      {showPassword ? (
-                        <FiEyeOff size={17} />
-                      ) : (
-                        <FiEye size={17} />
-                      )}
+                      {showPassword ? <FiEyeOff size={17} /> : <FiEye size={17} />}
                     </button>
                   </div>
 
@@ -272,12 +224,9 @@ const LoginPage = () => {
                   <input
                     type="checkbox"
                     checked={rememberMe}
-                    onChange={(event) =>
-                      setRememberMe(event.target.checked)
-                    }
-                    className="h-3.5 w-3.5 cursor-pointer accent-[#F21D2B]"
+                    onChange={(event) => setRememberMe(event.target.checked)}
+                    className="h-3.5 w-3.5 shrink-0 cursor-pointer accent-[#F21D2B]"
                   />
-
                   Remember me for 30 days
                 </label>
 
@@ -317,7 +266,6 @@ const LoginPage = () => {
                   Create Account
                 </Link>
               </p>
-
             </div>
           </div>
         </section>
