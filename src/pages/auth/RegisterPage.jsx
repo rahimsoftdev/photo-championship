@@ -217,14 +217,14 @@ function Register() {
         <main className="min-h-dvh w-full overflow-x-hidden bg-white px-3 py-5 sm:px-6 sm:py-8 lg:px-8">
             <div className="mx-auto w-full min-w-0 max-w-[940px]">
                 {/* Home link */}
-                <Link
-                    to="/"
-                    className="mb-5 inline-flex items-center gap-2 text-sm text-[#6B7280] transition hover:text-secondary"
-                >
-                    <FiArrowLeft size={16} />
-                    Go Home
-                </Link>
                 <div className="mx-auto w-full min-w-0 max-w-[700px]">
+                    <Link
+                        to="/"
+                        className="mb-5 inline-flex items-center gap-2 text-sm text-[#6B7280] transition hover:text-secondary"
+                    >
+                        <FiArrowLeft size={16} />
+                        Go Home
+                    </Link>
                     <h1 className="mb-5 break-words text-xl font-bold tracking-tight text-[#0C0C0C] min-[380px]:text-2xl sm:mb-6 sm:text-[30px]">
                         Create your Account
                     </h1>
