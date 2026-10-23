@@ -15,7 +15,7 @@ import { useOrderDetails } from "../../hooks/useOrderDetails";
 
 // ⚠️ এখন হার্ডকোড। লগইন সিস্টেম থাকলে সেখান থেকে নিন।
 const CURRENT_USER_ID = "user_103";
-const LIST_PATH = "/userDashboard/my-orders";
+const LIST_PATH = "/user-dashboard/my-orders";
 
 const STATUS_BADGE = {
     processing: { label: "Processing", cls: "border-amber-200 bg-amber-50 text-amber-700", dot: "bg-amber-500" },
@@ -280,7 +280,7 @@ const MyOrderDetailsPage = () => {
                         Visit Store
                     </Link>
                     <Link
-                        to={`/userDashboard/messages?to=${seller?.id}`}
+                        to={`/user-dashboard/messages?to=${seller?.id}`}
                         className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100"
                     >
                         <FiMessageSquare size={12} /> Message

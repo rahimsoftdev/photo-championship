@@ -35,7 +35,7 @@ const MyArtwork = () => {
                 </div>
 
                 <Link
-                to={'/userDashboard/artwork-management/UploadArtWorkTypes'}
+                to={'/user-dashboard/artwork-management/UploadArtWorkTypes'}
 
                     type="button"
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:opacity-90"

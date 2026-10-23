@@ -19,7 +19,7 @@ import { useOrderDetails } from "../../hooks/useOrderDetails";
 
 // ⚠️ এখন হার্ডকোড। লগইন সিস্টেম থাকলে সেখান থেকে নিন।
 const CURRENT_USER_ID = "user_104";
-const LIST_PATH = "/userDashboard/orders";
+const LIST_PATH = "/user-dashboard/orders";
 
 const STATUS_OPTIONS = [
     { value: "processing", label: "Processing" },

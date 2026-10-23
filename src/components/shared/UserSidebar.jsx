@@ -30,22 +30,22 @@ const Sidebar = () => {
     };
 
     const navItems = [
-        { name: 'Dashboard', path: '/userDashboard', icon: <FiGrid size={18} /> },
-        { name: 'Artwork Management', path: '/userDashboard/artwork-management', icon: <FiEdit3 size={18} /> },
-        { name: 'News & Message', path: '/userDashboard/news-message', icon: <FiFileText size={18} /> },
-        { name: 'Sell Photos', path: '/userDashboard/sell-photos', icon: <FiDollarSign size={18} /> },
-        { name: 'My Store', path: '/userDashboard/my-store', icon: <FiShoppingBag size={18} /> },
-        { name: 'Orders', path: '/userDashboard/orders', icon: <FiBox size={18} /> },
-        { name: 'My Orders', path: '/userDashboard/my-orders', icon: <FiLayers size={18} /> },
-        { name: 'Favourite Photographers', path: '/userDashboard/favourite-photographers', icon: <FiBookmark size={18} /> },
-        { name: 'Favourite Photos', path: '/userDashboard/favourite-photos', icon: <FiHeart size={18} /> },
-        { name: 'Business Link Photos', path: '/userDashboard/business-link-photos', icon: <FiBriefcase size={18} /> },
-        { name: 'Chat', path: '/userDashboard/chat', icon: <FiMessageSquare size={18} /> },
-        { name: 'Notifications', path: '/userDashboard/notifications', icon: <FiBell size={18} /> },
-        { name: 'Prize & Payments', path: '/userDashboard/prize-payments', icon: <FiAward size={18} /> },
-        { name: 'Contact Us', path: '/userDashboard/contact-us', icon: <FiPhoneCall size={18} /> },
-        { name: 'Profile', path: '/userDashboard/photographers/user_105', icon: <FiUser size={18} /> },
-        { name: 'Settings', path: '/userDashboard/settings', icon: <FiSettings size={18} /> },
+        { name: 'Dashboard', path: '/user-dashboard', icon: <FiGrid size={18} /> },
+        { name: 'Artwork Management', path: '/user-dashboard/artwork-management', icon: <FiEdit3 size={18} /> },
+        { name: 'News & Message', path: '/user-dashboard/news-message', icon: <FiFileText size={18} /> },
+        { name: 'Sell Photos', path: '/user-dashboard/sell-photos', icon: <FiDollarSign size={18} /> },
+        { name: 'My Store', path: '/user-dashboard/my-store', icon: <FiShoppingBag size={18} /> },
+        { name: 'Orders', path: '/user-dashboard/orders', icon: <FiBox size={18} /> },
+        { name: 'My Orders', path: '/user-dashboard/my-orders', icon: <FiLayers size={18} /> },
+        { name: 'Favourite Photographers', path: '/user-dashboard/favourite-photographers', icon: <FiBookmark size={18} /> },
+        { name: 'Favourite Photos', path: '/user-dashboard/favourite-photos', icon: <FiHeart size={18} /> },
+        { name: 'Business Link Photos', path: '/user-dashboard/business-link-photos', icon: <FiBriefcase size={18} /> },
+        { name: 'Chat', path: '/user-dashboard/chat', icon: <FiMessageSquare size={18} /> },
+        { name: 'Notifications', path: '/user-dashboard/notifications', icon: <FiBell size={18} /> },
+        { name: 'Prize & Payments', path: '/user-dashboard/prize-payments', icon: <FiAward size={18} /> },
+        { name: 'Contact Us', path: '/user-dashboard/contact-us', icon: <FiPhoneCall size={18} /> },
+        { name: 'Profile', path: '/user-dashboard/photographers/user_105', icon: <FiUser size={18} /> },
+        { name: 'Settings', path: '/user-dashboard/settings', icon: <FiSettings size={18} /> },
     ];
 
     return (
@@ -108,7 +108,7 @@ const Sidebar = () => {
                             <NavLink
                                 key={index}
                                 to={item.path}
-                                end={item.path === '/userDashboard'}
+                                end={item.path === '/user-dashboard'}
                                 onClick={() => setIsOpen(false)}
                                 className={({ isActive }) =>
                                     `flex items-center gap-3 px-3 py-2.5 rounded-r-lg rounded-l-sm text-sm font-medium transition-all duration-150 border-l-4 ${isActive

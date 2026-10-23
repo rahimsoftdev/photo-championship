@@ -87,7 +87,7 @@ const ArtworkCard = ({ artWorkData,dashboard }) => {
   const handleCardClick = () => {
     const id = artwork.id ?? artwork._id;
     if(dashboard === 'yes'){
-      navigate(`/userDashboard/sell-photos/${id}`)
+      navigate(`/user-dashboard/sell-photos/${id}`)
       return
     }
 

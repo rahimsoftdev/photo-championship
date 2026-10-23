@@ -26,7 +26,7 @@ const ArtworkCard = ({ item, onDeleteSuccess }) => {
     // Handle Image Click for Dynamic Routing
     const handleImageClick = () => {
         if (item?.id) {
-            navigate(`/userDashboard/sell-photos/${item.id}`);
+            navigate(`/user-dashboard/sell-photos/${item.id}`);
         }
     };
 

@@ -30,7 +30,7 @@ const NewsAndMessagePage = () => {
                     </p>
                 </div>
                 <Link 
-                    to="/userDashboard/news-message/new" 
+                    to="/user-dashboard/news-message/new" 
                     className="bg-secondary text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition hover:opacity-90 shadow-sm"
                 >
                     Upload Message

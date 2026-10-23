@@ -48,7 +48,7 @@ const MyStore = () => {
           </div>
 
           <button 
-            onClick={() => navigate('/userDashboard/my-store/new')}
+            onClick={() => navigate('/user-dashboard/my-store/new')}
             className="bg-red-500 hover:bg-red-600 text-white font-medium px-5 py-2.5 rounded-lg text-sm transition shadow-sm flex items-center gap-2 cursor-pointer"
           >
             <FiPlus size={16} />

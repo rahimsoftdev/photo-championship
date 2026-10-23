@@ -132,7 +132,7 @@ export const router = createBrowserRouter([
 
     //user dashboard
     {
-        path: "userDashboard", Component: UserDashboardLayout,
+        path: "user-dashboard", Component: UserDashboardLayout,
         children: [
             {
                 index: true, Component: HomePageDhshboard
@@ -239,7 +239,7 @@ export const router = createBrowserRouter([
 
     //admin dashboard:
     {
-        path: "adminDashboard", Component: AdminDashboardLayout,
+        path: "admin-dashboard", Component: AdminDashboardLayout,
         children: [
             {
                 index: true, Component: AdminOverview

@@ -45,7 +45,7 @@ const UploadMessagePage = () => {
             <div className="max-w-4xl mx-auto">
                 {/* Back to Selection Link */}
                 <Link 
-                    to="/userDashboard/news-message" 
+                    to="/user-dashboard/news-message" 
                     className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 mb-6 transition"
                 >
                     <FiArrowLeft size={16} />

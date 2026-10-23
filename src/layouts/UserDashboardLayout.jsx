@@ -3,7 +3,7 @@ import { Outlet } from 'react-router';
 import Sidebar from '../components/shared/UserSidebar';
 // import Sidebar from './Sidebar'; // আপনার সাইডবার কম্পোনেন্টটি ইমপোর্ট করুন
 
-export default function UserDashboardLayout() {
+export default function UserDashboard() {
   return (
     <div className="min-h-screen bg-[#F8F9FA] flex">
       {/* Dynamic Responsive Sidebar */}

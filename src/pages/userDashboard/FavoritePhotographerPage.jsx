@@ -101,7 +101,7 @@ const PhotographerCard = ({ user }) => {
 
                 {/* ⚠️ আপনার আসল প্রোফাইল রুট বসান */}
                 <a
-                    href={`/userDashboard/photographers/${user.id}`}
+                    href={`/user-dashboard/photographers/${user.id}`}
                     className="flex flex-1 items-center justify-center rounded-lg bg-gray-100 py-2 text-xs font-medium text-gray-800 transition hover:bg-gray-200"
                 >
                     View Profile

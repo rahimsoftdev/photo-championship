@@ -11,7 +11,7 @@ import BusinessLinkForm from "../../components/userDashbaord/BusinessLinkForm";
 import BusinessSuccessModal from "../../components/userDashbaord/ui/BusinessSuccessModal";
 
 // ⚠️ আপনার আসল সিলেকশন/ব্যাক পাথ বসান
-const BACK_PATH = "/userDashboard/artwork-management/UploadArtWorkTypes";
+const BACK_PATH = "/user-dashboard/artwork-management/UploadArtWorkTypes";
 
 const INITIAL_FORM = {
     title: "",

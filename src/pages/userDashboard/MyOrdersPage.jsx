@@ -16,7 +16,7 @@ import { useOrders } from "../../hooks/useOrders";
 // ⚠️ এখন হার্ডকোড। লগইন সিস্টেম থাকলে সেখান থেকে নিন।
 const CURRENT_USER_ID = "user_103";
 const PAGE_SIZE = 3;
-const DETAILS_PATH = "/userDashboard/my-orders";
+const DETAILS_PATH = "/user-dashboard/my-orders";
 
 const STATUS_BADGE = {
     processing: { label: "Processing", cls: "border-amber-200 bg-amber-50 text-amber-700", dot: "bg-amber-500" },

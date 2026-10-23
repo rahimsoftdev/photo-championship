@@ -5,11 +5,11 @@ const PhotographerNavTabs = () => {
   const { id } = useParams();
   const location = useLocation();
 
-  // URL e 'userDashboard' thakle dashboard route, noyto normal route hobe
-  const isDashboard = location.pathname.includes('userDashboard');
+  // URL e 'user-dashboard' thakle dashboard route, noyto normal route hobe
+  const isDashboard = location.pathname.includes('user-dashboard');
 
   const basePath = isDashboard 
-    ? `/userDashboard/photographers/${id}` 
+    ? `/user-dashboard/photographers/${id}` 
     : `/photographers/${id}`;
 
   return (

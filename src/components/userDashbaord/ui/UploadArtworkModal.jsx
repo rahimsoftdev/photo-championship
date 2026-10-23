@@ -10,7 +10,7 @@ const UploadArtworkModal = ({ isOpen, onClose }) => {
 
     // Option click handler with dynamic query params
     const handleSelectOption = (albumType) => {
-        navigate(`/userDashboard/sell-photos/new?albumType=${albumType}&bayphoto=yes`);
+        navigate(`/user-dashboard/sell-photos/new?albumType=${albumType}&bayphoto=yes`);
         onClose();
     };
 

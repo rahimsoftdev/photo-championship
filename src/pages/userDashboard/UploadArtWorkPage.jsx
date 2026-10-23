@@ -16,9 +16,9 @@ import TwelveAlbumSection from "../../components/userDashbaord/Twelvealbumsectio
 import SixAlbumSection from "../../components/userDashbaord/Sixalbumsection";
 import UploadSuccessModal from "../../components/userDashbaord/ui/UploadSuccessModal";
 
-const SELECTION_PATH = "/userDashboard/artwork-management/UploadArtWorkTypes";
+const SELECTION_PATH = "/user-dashboard/artwork-management/UploadArtWorkTypes";
 // ⚠️ sell-photos এর সিলেকশন পেজের আসল পাথ বসান
-const SELL_SELECTION_PATH = "/userDashboard/sell-photos";
+const SELL_SELECTION_PATH = "/user-dashboard/sell-photos";
 const SELL_PARAM = "bayphoto"; // ?bayphoto=yes
 
 const INITIAL_FORM = {

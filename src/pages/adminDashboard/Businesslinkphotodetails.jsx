@@ -9,7 +9,7 @@ import { ZODIACS, getAlbumById } from "./Businesslinkphotosdata.js";
 import ArtworkImages from "../../components/ui/detailsPage/ArtworkImages";
 import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGrid";
 
-const LIST_PATH = "/userDashboard/business-link-photos";
+const LIST_PATH = "/user-dashboard/business-link-photos";
 
 const getInitials = (name = "") =>
   name

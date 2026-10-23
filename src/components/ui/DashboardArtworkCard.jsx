@@ -166,7 +166,7 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
   };
 
   const handleImageClick = () => {
-    navigate(`/userDashboard/artwork-management/${id}`);
+    navigate(`/user-dashboard/artwork-management/${id}`);
   };
 
   const handleAction = () => {

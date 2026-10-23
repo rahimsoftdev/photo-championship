@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import { Link, NavLink } from "react-router";
+import { getSavedUserInfo } from "../../utils/getUserInof";
 
 /**
  * Navbar Component
@@ -25,6 +26,8 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+    let userinfo = getSavedUserInfo()
+    console.log(userinfo, 'user info')
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const [language, setLanguage] = useState("English");

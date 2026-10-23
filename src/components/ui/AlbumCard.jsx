@@ -7,7 +7,7 @@ import { Link } from "react-router";
  *
  * Normal mode (isEdit = false):
  *   "Enter Now" button navigates to the upload page with the albumType query param.
- *   Example: /userDashboard/artwork-management/UploadArtWork?albumType=single
+ *   Example: /user-dashboard/artwork-management/UploadArtWork?albumType=single
  *
  * Admin mode (isEdit = true):
  *   Shows an "Edit Album" button with an edit icon instead of "Enter Now".
@@ -110,7 +110,7 @@ const AlbumCard = ({ album, isEdit = false, onEdit }) => {
         ) : (
           // User mode: Enter Now -> adds ?albumType=single|six|twelve
           <Link
-            to={`/userDashboard/artwork-management/UploadArtWork?albumType=${encodeURIComponent(albumType)}`}
+            to={`/user-dashboard/artwork-management/UploadArtWork?albumType=${encodeURIComponent(albumType)}`}
             className={buttonClass}
           >
             <span>{buttonText}</span>

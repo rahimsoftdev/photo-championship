@@ -76,7 +76,7 @@ const OrderRowMenu = ({ orderId, status, onStatusChange }) => {
                         role="menuitem"
                         onClick={() => {
                             setPos(null);
-                            navigate(`/userDashboard/orders/${orderId}`);
+                            navigate(`/user-dashboard/orders/${orderId}`);
                         }}
                         className="w-full bg-[#4048CD] px-4 py-2.5 text-left text-sm font-medium text-white transition hover:bg-[#343cb5]"
                     >
