@@ -51,6 +51,7 @@ const LoginPage = () => {
 
     setIsSubmitting(true);
 
+    localStorage.setItem("rememberedEmail", trimmedEmail);
     try {
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", trimmedEmail);
