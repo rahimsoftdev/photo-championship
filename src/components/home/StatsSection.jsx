@@ -4,6 +4,8 @@
 import Counter from "../ui/Counter";
 // Displays key photography competition statistics in a responsive grid.
 const StatsSection = () => {
+
+  //data in array 
   const stats = [
     {
       id: 1,

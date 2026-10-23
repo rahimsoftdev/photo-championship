@@ -1,15 +1,21 @@
+
 import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { useSearchParams } from "react-router";
+import { useSearchParams, useNavigate } from "react-router";
 
 /**
  * Reusable search bar that updates the URL's title query while typing.
  */
-const SearchBar = ({ bgColor = "#FFFFFF", width = '400px' }) => {
+const SearchBar = ({
+    bgColor = "#FFFFFF",
+    width = "400px",
+    isHero = false,
+}) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [search, setSearch] = useState(
         searchParams.get("title") || ""
     );
+    const navigate = useNavigate();
 
     // Sync the input with the title query in the URL.
     useEffect(() => {
@@ -19,6 +25,8 @@ const SearchBar = ({ bgColor = "#FFFFFF", width = '400px' }) => {
     // Update the URL automatically after typing stops briefly.
     useEffect(() => {
         const timeout = setTimeout(() => {
+            if (isHero) return;
+
             setSearchParams(
                 (prev) => {
                     const next = new URLSearchParams(prev);
@@ -36,14 +44,32 @@ const SearchBar = ({ bgColor = "#FFFFFF", width = '400px' }) => {
         }, 300);
 
         return () => clearTimeout(timeout);
-    }, [search, setSearchParams]);
+    }, [search, setSearchParams, isHero]);
+
+    // Navigate to the competition page when searching from Hero.
+    useEffect(() => {
+        if (!isHero) return;
+
+        const timeout = setTimeout(() => {
+            const title = search.trim();
+
+            if (title) {
+                navigate(
+                    `/feed/competition?title=${encodeURIComponent(title)}`,
+                    { replace: true }
+                );
+            }
+        }, 300);
+
+        return () => clearTimeout(timeout);
+    }, [search, isHero, navigate]);
 
     return (
         <div
             className="flex h-12 max-w-full items-center gap-3 rounded-lg px-4"
             style={{
                 backgroundColor: bgColor,
-                maxWidth:width
+                maxWidth: width,
             }}
         >
             <FiSearch
