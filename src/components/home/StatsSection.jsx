@@ -34,8 +34,8 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="w-full bg-white  py-8 sm:px-8 sm:py-[60px]">
-      <div className="mx-auto grid max-w-main grid-cols-[repeat(auto-fit,minmax(250px,1fr))] justify-between gap-x-4 gap-y-8  md:gap-10">
+    <section className="w-full bg-white  py-12 sm:px-8 sm:py-[60px]">
+      <div className="mx-auto flex flex-wrap max-md:px-4 max-w-main justify-between gap-x-4 gap-y-8  md:gap-10">
         {stats.map((stat) => (
           <Counter
             key={stat.id}

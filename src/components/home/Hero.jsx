@@ -20,7 +20,7 @@ const Hero = () => {
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#100d2b]/80 via-[#100d2b]/40 to-[#100d2b]/10" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 bg-gradient-to-b from-transparent to-white blur-[6px]" />
       {/* Hero content */}
-      <div className="mx-auto w-full max-w-main px-5 py-16  ">
+      <div className="mx-auto w-full max-w-main px-5 py-8">
         <div className="max-w-3xl">
           {/* Competition badge */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/20 px-4 py-2 backdrop-blur-sm">
@@ -34,7 +34,7 @@ const Hero = () => {
           </div>
 
           {/* Main heading */}
-          <h1 className="text-2xl font-semibold uppercase leading-[1.2] tracking-tight text-white min-[380px]:text-3xl min-[480px]:text-3xl md:text-[36px] lg:text-[40px] xl:text-5xl">
+          <h1 className="text-xl font-semibold uppercase leading-[1.2] tracking-tight text-white min-[380px]:text-2xl min-[480px]:text-3xl md:text-[36px] ">
             Tell us your story using 12 photos same as the sun is telling us
             his using 12 signs of the zodiac
           </h1>
