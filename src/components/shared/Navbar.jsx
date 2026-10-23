@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
+import { FiChevronDown, FiMenu, FiX, FiLogOut } from "react-icons/fi";
 import { Link, NavLink } from "react-router";
 import { getSavedUserInfo } from "../../utils/getUserInof";
 
@@ -17,7 +18,7 @@ const navLinks = [
 const languages = ["English", "বাংলা"];
 
 const Navbar = () => {
-    const userinfo = getSavedUserInfo();
+    const [userinfo, setUserinfo] = useState(() => getSavedUserInfo());
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const [language, setLanguage] = useState("English");
@@ -27,19 +28,28 @@ const Navbar = () => {
         setIsLanguageOpen(false);
     };
 
+    // Logout: remove saved user information from localStorage
+    const handleLogout = () => {
+        localStorage.removeItem("rememberedEmail");
+        setUserinfo(null);
+        closeMenu();
+    };
+
+    // Conditional dashboard link
     const dashboardLink =
         userinfo?.role === "user"
             ? "/user-dashboard"
             : userinfo?.role === "admin"
-              ? "/admin-dashboard"
-              : null;
+                ? "/admin-dashboard"
+                : null;
 
+    // Conditional dashboard text label
     const dashboardLabel =
         userinfo?.role === "user"
             ? "User Dashboard"
             : userinfo?.role === "admin"
-              ? "Admin Dashboard"
-              : null;
+                ? "Admin Dashboard"
+                : null;
 
     const renderAuthActions = (mobile = false) => {
         const baseClass = mobile
@@ -56,6 +66,7 @@ const Navbar = () => {
                     >
                         Log In
                     </Link>
+
                     <Link
                         to="/register"
                         onClick={mobile ? closeMenu : undefined}
@@ -69,13 +80,24 @@ const Navbar = () => {
 
         if (dashboardLink && dashboardLabel) {
             return (
-                <Link
-                    to={dashboardLink}
-                    onClick={mobile ? closeMenu : undefined}
-                    className={`${baseClass} bg-primary`}
-                >
-                    {dashboardLabel}
-                </Link>
+                <>
+                    <Link
+                        to={dashboardLink}
+                        onClick={mobile ? closeMenu : undefined}
+                        className={`${baseClass} bg-primary`}
+                    >
+                        {dashboardLabel}
+                    </Link>
+
+                    <button
+                        type="button"
+                        onClick={handleLogout}
+                        className={`${baseClass} flex items-center gap-2 bg-secondary hover:bg-red-900`}
+                    >
+                        <FiLogOut size={16} />
+                        <span>Logout</span>
+                    </button>
+                </>
             );
         }
 
@@ -106,7 +128,7 @@ const Navbar = () => {
 
     return (
         <header className="sticky top-0 z-[100] w-full border-b border-gray-100 bg-white shadow-sm">
-            <nav className="mx-auto flex min-h-[64px] max-w-[1440px] items-center justify-between gap-2 px-3 py-2 min-[420px]:gap-3 min-[420px]:px-4 sm:min-h-[76px] sm:px-6 lg:px-5">
+            <nav className="mx-auto flex min-h-[64px] max-w-main items-center justify-between gap-2 px-3 py-2 min-[420px]:gap-3 min-[420px]:px-4 sm:min-h-[76px] sm:px-6 lg:px-5">
                 {/* Logo */}
                 <Link
                     to="/"
@@ -145,7 +167,9 @@ const Navbar = () => {
                     <div className="relative z-[150]">
                         <button
                             type="button"
-                            onClick={() => setIsLanguageOpen((open) => !open)}
+                            onClick={() =>
+                                setIsLanguageOpen((open) => !open)
+                            }
                             aria-expanded={isLanguageOpen}
                             className="flex items-center gap-1.5 rounded-lg bg-[#F0F0F0] px-2.5 py-2 text-xs font-medium text-black transition hover:bg-gray-200 2xl:px-3 2xl:text-sm"
                         >
@@ -157,8 +181,10 @@ const Navbar = () => {
                                 size={15}
                             />
                         </button>
+
                         {isLanguageOpen && renderLanguageOptions()}
                     </div>
+
                     <div className="flex items-center gap-2">
                         {renderAuthActions()}
                     </div>
@@ -182,7 +208,7 @@ const Navbar = () => {
             {/* Mobile / Tablet Menu */}
             {isMenuOpen && (
                 <div className="absolute left-0 right-0 top-full z-[120] max-h-[calc(100dvh-64px)] overflow-y-auto border-t border-gray-100 bg-white shadow-xl xl:hidden">
-                    <div className="mx-auto max-w-[1280px] space-y-0.5 px-3 py-3 min-[420px]:px-4 sm:px-6 sm:py-4">
+                    <div className="mx-auto max-w-main space-y-0.5 px-3 py-3 min-[420px]:px-4 sm:px-6 sm:py-4">
                         {navLinks.map((link) => (
                             <NavLink
                                 key={link.name}
@@ -212,6 +238,7 @@ const Navbar = () => {
                                     aria-expanded={isLanguageOpen}
                                 >
                                     <span>{language}</span>
+
                                     <FiChevronDown
                                         size={16}
                                         className={`transition-transform ${
@@ -219,6 +246,7 @@ const Navbar = () => {
                                         }`}
                                     />
                                 </button>
+
                                 {isLanguageOpen && (
                                     <div className="absolute left-0 right-0 top-full z-[200] mt-1 overflow-hidden rounded-lg border border-gray-200 bg-white p-1 shadow-xl ring-1 ring-black/5">
                                         {languages.map((item) => (
@@ -242,6 +270,7 @@ const Navbar = () => {
                                 )}
                             </div>
 
+                            {/* Mobile Auth Actions */}
                             <div className="mt-3 grid grid-cols-2 gap-2 min-[420px]:gap-3 sm:flex">
                                 {renderAuthActions(true)}
                             </div>

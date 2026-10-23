@@ -51,13 +51,13 @@ const LoginPage = () => {
 
     setIsSubmitting(true);
 
-    localStorage.setItem("rememberedEmail", trimmedEmail);
     try {
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", trimmedEmail);
       } else {
         localStorage.removeItem("rememberedEmail");
       }
+      localStorage.setItem("rememberedEmail", trimmedEmail);
 
       setSuccess("Login successful! Redirecting to home...");
     } catch {
