@@ -3,17 +3,6 @@ import { FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import { Link, NavLink } from "react-router";
 import { getSavedUserInfo } from "../../utils/getUserInof";
 
-/**
- * Navbar Component
- *
- * Features:
- * - Responsive navigation
- * - Active navigation link using NavLink
- * - Language dropdown
- * - Mobile menu toggle
- * - Login and registration links
- */
-
 const navLinks = [
     { name: "Competitions", path: "/feed/competition" },
     { name: "Gallery", path: "/feed/gallery" },
@@ -25,9 +14,10 @@ const navLinks = [
     { name: "About", path: "/about" },
 ];
 
+const languages = ["English", "বাংলা"];
+
 const Navbar = () => {
-    let userinfo = getSavedUserInfo()
-    console.log(userinfo, 'user info')
+    const userinfo = getSavedUserInfo();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const [language, setLanguage] = useState("English");
@@ -37,10 +27,86 @@ const Navbar = () => {
         setIsLanguageOpen(false);
     };
 
+    const dashboardLink =
+        userinfo?.role === "user"
+            ? "/user-dashboard"
+            : userinfo?.role === "admin"
+              ? "/admin-dashboard"
+              : null;
+
+    const dashboardLabel =
+        userinfo?.role === "user"
+            ? "User Dashboard"
+            : userinfo?.role === "admin"
+              ? "Admin Dashboard"
+              : null;
+
+    const renderAuthActions = (mobile = false) => {
+        const baseClass = mobile
+            ? "flex w-full min-w-0 items-center justify-center rounded-lg px-3 py-2 text-xs font-semibold text-white transition hover:opacity-90 min-[380px]:px-4 min-[380px]:py-2.5 min-[420px]:text-sm sm:py-3"
+            : "whitespace-nowrap rounded-full px-3 py-2 text-xs font-semibold text-white transition hover:opacity-90 sm:px-4 sm:py-2.5 sm:text-sm";
+
+        if (!userinfo?.email) {
+            return (
+                <>
+                    <Link
+                        to="/login"
+                        onClick={mobile ? closeMenu : undefined}
+                        className={`${baseClass} bg-primary`}
+                    >
+                        Log In
+                    </Link>
+                    <Link
+                        to="/register"
+                        onClick={mobile ? closeMenu : undefined}
+                        className={`${baseClass} bg-secondary`}
+                    >
+                        Register Free
+                    </Link>
+                </>
+            );
+        }
+
+        if (dashboardLink && dashboardLabel) {
+            return (
+                <Link
+                    to={dashboardLink}
+                    onClick={mobile ? closeMenu : undefined}
+                    className={`${baseClass} bg-primary`}
+                >
+                    {dashboardLabel}
+                </Link>
+            );
+        }
+
+        return null;
+    };
+
+    const renderLanguageOptions = () => (
+        <div className="absolute right-0 top-full z-[200] mt-2 w-36 overflow-hidden rounded-lg border border-gray-200 bg-white py-1 text-left shadow-xl ring-1 ring-black/5">
+            {languages.map((item) => (
+                <button
+                    key={item}
+                    type="button"
+                    onClick={() => {
+                        setLanguage(item);
+                        setIsLanguageOpen(false);
+                    }}
+                    className={`block w-full px-4 py-2.5 text-left text-xs transition hover:bg-gray-100 min-[420px]:text-sm ${
+                        language === item
+                            ? "font-semibold text-primary"
+                            : "text-gray-700"
+                    }`}
+                >
+                    {item}
+                </button>
+            ))}
+        </div>
+    );
+
     return (
-        // TODO: Navbar will be sticky
-        <header className="top-0 z-50 w-full border-b border-gray-100 bg-white">
-            <nav className="mx-auto flex min-h-[84px] max-w-main max-h-[87px] max-w-z items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-5">
+        <header className="sticky top-0 z-[100] w-full border-b border-gray-100 bg-white shadow-sm">
+            <nav className="mx-auto flex min-h-[64px] max-w-[1440px] items-center justify-between gap-2 px-3 py-2 min-[420px]:gap-3 min-[420px]:px-4 sm:min-h-[76px] sm:px-6 lg:px-5">
                 {/* Logo */}
                 <Link
                     to="/"
@@ -51,7 +117,7 @@ const Navbar = () => {
                     <img
                         src="/src/assets/images/logo.png"
                         alt="Photo Championship"
-                        className="h-14 w-auto object-contain sm:h-14"
+                        className="h-9 w-auto max-w-[112px] object-contain min-[380px]:h-10 min-[420px]:max-w-[135px] sm:h-12 sm:max-w-none lg:h-14"
                     />
                 </Link>
 
@@ -76,94 +142,56 @@ const Navbar = () => {
 
                 {/* Desktop Actions */}
                 <div className="hidden shrink-0 items-center gap-2 xl:flex">
-                    {/* Language Dropdown */}
-                    <div className="relative">
+                    <div className="relative z-[150]">
                         <button
                             type="button"
-                            onClick={() =>
-                                setIsLanguageOpen(!isLanguageOpen)
-                            }
+                            onClick={() => setIsLanguageOpen((open) => !open)}
                             aria-expanded={isLanguageOpen}
-                            className="flex items-center gap-2 rounded-lg bg-[#F0F0F0] px-3 py-2.5 text-sm font-medium text-black transition hover:bg-gray-200"
+                            className="flex items-center gap-1.5 rounded-lg bg-[#F0F0F0] px-2.5 py-2 text-xs font-medium text-black transition hover:bg-gray-200 2xl:px-3 2xl:text-sm"
                         >
                             {language}
                             <FiChevronDown
                                 className={`transition-transform ${
                                     isLanguageOpen ? "rotate-180" : ""
                                 }`}
-                                size={16}
+                                size={15}
                             />
                         </button>
-
-                        {isLanguageOpen && (
-                            <div className="absolute right-0 top-full mt-2 w-36 overflow-hidden rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
-                                {["English", "বাংলা"].map((item) => (
-                                    <button
-                                        key={item}
-                                        type="button"
-                                        onClick={() => {
-                                            setLanguage(item);
-                                            setIsLanguageOpen(false);
-                                        }}
-                                        className={`block w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100 ${
-                                            language === item
-                                                ? "font-semibold text-primary"
-                                                : "text-gray-700"
-                                        }`}
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
+                        {isLanguageOpen && renderLanguageOptions()}
                     </div>
-
-                    {/* Login */}
-                    <Link
-                        to="/login"
-                        className="whitespace-nowrap rounded-full bg-btn2 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#3038B5]"
-                    >
-                        Log In
-                    </Link>
-
-                    {/* Register */}
-                    <Link
-                        to="/register"
-                        className="whitespace-nowrap rounded-full bg-btn px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#D71920]"
-                    >
-                        Register Free
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        {renderAuthActions()}
+                    </div>
                 </div>
 
                 {/* Mobile / Tablet Menu Button */}
                 <button
                     type="button"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-100 xl:hidden"
+                    onClick={() => {
+                        setIsMenuOpen((open) => !open);
+                        setIsLanguageOpen(false);
+                    }}
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-gray-700 transition hover:bg-gray-100 min-[420px]:h-10 min-[420px]:w-10 xl:hidden"
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     aria-expanded={isMenuOpen}
                 >
-                    {isMenuOpen ? (
-                        <FiX size={24} />
-                    ) : (
-                        <FiMenu size={24} />
-                    )}
+                    {isMenuOpen ? <FiX size={21} /> : <FiMenu size={21} />}
                 </button>
             </nav>
 
-            {/* Mobile / Tablet Dropdown Menu */}
+            {/* Mobile / Tablet Menu */}
             {isMenuOpen && (
-                <div className="border-t border-gray-100 bg-white shadow-lg xl:hidden">
-                    <div className="mx-auto max-w-[1280px] space-y-1 px-4 py-4 sm:px-6">
+                <div className="absolute left-0 right-0 top-full z-[120] max-h-[calc(100dvh-64px)] overflow-y-auto border-t border-gray-100 bg-white shadow-xl xl:hidden">
+                    <div className="mx-auto max-w-[1280px] space-y-0.5 px-3 py-3 min-[420px]:px-4 sm:px-6 sm:py-4">
                         {navLinks.map((link) => (
                             <NavLink
                                 key={link.name}
                                 to={link.path}
                                 onClick={closeMenu}
                                 className={({ isActive }) =>
-                                    `block rounded-lg px-4 py-3 text-base font-semibold transition ${
+                                    `block rounded-lg px-3 py-2 text-xs font-semibold transition min-[380px]:py-2.5 min-[420px]:text-sm sm:px-4 sm:py-3 ${
                                         isActive
-                                            ? "text-primary"
+                                            ? "bg-primary/5 text-primary"
                                             : "text-[#6B7280] hover:bg-gray-50 hover:text-primary"
                                     }`
                                 }
@@ -172,63 +200,50 @@ const Navbar = () => {
                             </NavLink>
                         ))}
 
-                        <div className="mt-3 border-t border-gray-100 pt-4">
+                        <div className="mt-2 border-t border-gray-100 pt-3 sm:mt-3 sm:pt-4">
                             {/* Mobile Language Dropdown */}
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    setIsLanguageOpen(!isLanguageOpen)
-                                }
-                                className="flex w-full items-center justify-between rounded-lg bg-[#F0F0F0] px-4 py-3 text-sm font-medium text-black"
-                                aria-expanded={isLanguageOpen}
-                            >
-                                <span>{language}</span>
-                                <FiChevronDown
-                                    size={18}
-                                    className={`transition-transform ${
-                                        isLanguageOpen ? "rotate-180" : ""
-                                    }`}
-                                />
-                            </button>
-
-                            {isLanguageOpen && (
-                                <div className="mt-1 rounded-lg border border-gray-100 p-1">
-                                    {["English", "বাংলা"].map((item) => (
-                                        <button
-                                            key={item}
-                                            type="button"
-                                            onClick={() => {
-                                                setLanguage(item);
-                                                setIsLanguageOpen(false);
-                                            }}
-                                            className={`block w-full rounded-md px-4 py-2.5 text-left text-sm hover:bg-gray-100 ${
-                                                language === item
-                                                    ? "font-semibold text-primary"
-                                                    : "text-gray-700"
-                                            }`}
-                                        >
-                                            {item}
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
-
-                            <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-                                <Link
-                                    to="/login"
-                                    onClick={closeMenu}
-                                    className="flex flex-1 items-center justify-center rounded-lg bg-[#4048CD] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#3038B5]"
+                            <div className="relative z-[150]">
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        setIsLanguageOpen((open) => !open)
+                                    }
+                                    className="flex w-full items-center justify-between rounded-lg bg-[#F0F0F0] px-3 py-2.5 text-xs font-medium text-black min-[420px]:px-4 min-[420px]:text-sm sm:py-3"
+                                    aria-expanded={isLanguageOpen}
                                 >
-                                    Log In
-                                </Link>
+                                    <span>{language}</span>
+                                    <FiChevronDown
+                                        size={16}
+                                        className={`transition-transform ${
+                                            isLanguageOpen ? "rotate-180" : ""
+                                        }`}
+                                    />
+                                </button>
+                                {isLanguageOpen && (
+                                    <div className="absolute left-0 right-0 top-full z-[200] mt-1 overflow-hidden rounded-lg border border-gray-200 bg-white p-1 shadow-xl ring-1 ring-black/5">
+                                        {languages.map((item) => (
+                                            <button
+                                                key={item}
+                                                type="button"
+                                                onClick={() => {
+                                                    setLanguage(item);
+                                                    setIsLanguageOpen(false);
+                                                }}
+                                                className={`block w-full rounded-md px-3 py-2 text-left text-xs transition hover:bg-gray-100 min-[420px]:px-4 min-[420px]:py-2.5 min-[420px]:text-sm ${
+                                                    language === item
+                                                        ? "font-semibold text-primary"
+                                                        : "text-gray-700"
+                                                }`}
+                                            >
+                                                {item}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
 
-                                <Link
-                                    to="/register"
-                                    onClick={closeMenu}
-                                    className="flex flex-1 items-center justify-center rounded-lg bg-[#EE1C25] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#D71920]"
-                                >
-                                    Register Free
-                                </Link>
+                            <div className="mt-3 grid grid-cols-2 gap-2 min-[420px]:gap-3 sm:flex">
+                                {renderAuthActions(true)}
                             </div>
                         </div>
                     </div>
