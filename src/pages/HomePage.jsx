@@ -14,7 +14,7 @@ const HomePage = () => {
             <StatsSection/>
             <AlbumTypes/>
 
-            <HowItWorks/>
+            <HowItWorks  />
 
             <TopPhotographersSection/>
             

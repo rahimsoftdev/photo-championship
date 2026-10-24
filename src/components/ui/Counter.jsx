@@ -2,7 +2,7 @@
 const Counter = ({ value, suffix, label }) => {
   return (
     <div className="flex min-w-0 flex-col items-center justify-center text-center">
-      <h3 className="whitespace-nowrap text-2xl font-bold leading-tight  sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl">
+      <h3 className="whitespace-nowrap text-xl font-bold leading-tight  sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl">
         {value}
         {suffix}
       </h3>

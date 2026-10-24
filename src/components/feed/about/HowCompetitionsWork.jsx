@@ -46,14 +46,14 @@ export default function HowCompetitionsWork() {
   const currentItem = stepsData[activeStep];
 
   return (
-    <section className="bg-[#ECEDFA] py-section px-4 md:px-12 lg:px-20 min-h-screen flex flex-col items-center justify-center">
+    <section className="bg-[#ECEDFA] py-10 sm:py-12 lg:py-section px-4 md:px-0 lg:px-20 min-h-screen flex flex-col items-center justify-center">
       
       {/* Top Header Section */}
-      <div className="text-center max-w-main mb-12">
-        <span className="text-primary uppercase tracking-widest text-xs font-bold block mb-2">
+      <div className="text-center max-w-main mx-auto mb-12">
+        <span className="text-primary uppercase tracking-widest text-xs md:text-base font-bold block mb-2">
           HOW COMPETITIONS WORK
         </span>
-        <h2 className="text-titleText text-3xl md:text-[48px] font-bold leading-tight mb-4">
+        <h2 className="text-titleText text-xl md:text-2xl lg:text-5xl font-bold leading-tight mb-4">
           How Our Competitions Work
         </h2>
         <p className="text-subTitleText text-sm md:text-base">
@@ -62,7 +62,7 @@ export default function HowCompetitionsWork() {
       </div>
 
       {/* Main Container Layout */}
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="max-w-main mx-auto px-5 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         
         {/* Left Side: Steps List */}
         <div className="flex flex-col gap-4">
@@ -79,7 +79,7 @@ export default function HowCompetitionsWork() {
               >
                 {/* Count Box */}
                 <div 
-                  className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-titleText shrink-0"
+                  className=" w-8 h-8  md:w-10 md:h-10 rounded-lg flex items-center justify-center font-bold text-titleText shrink-0"
                   style={{ backgroundColor: 'rgba(253, 232, 233, 1)' }}
                 >
                   {step.id}
@@ -87,7 +87,7 @@ export default function HowCompetitionsWork() {
 
                 {/* Text Content */}
                 <div className="overflow-hidden">
-                  <h3 className="text-titleText font-bold text-base md:text-lg truncate">
+                  <h3 className="text-titleText font-bold text-sx md:text-base truncate">
                     {step.title}
                   </h3>
                   <p className="text-subTitleText text-xs md:text-sm truncate">
@@ -117,29 +117,29 @@ export default function HowCompetitionsWork() {
                 <span className="text-xs block font-medium" style={{ color: '#FD9C00' }}>
                   Step {currentItem.id} of {stepsData.length}
                 </span>
-                <h4 className="text-titleText font-bold text-lg">
+                <h4 className="text-titleText font-bold text-xs md:text-base">
                   {currentItem.title}
                 </h4>
               </div>
             </div>
 
             {/* Description Paragraphs */}
-            <p className="text-titleText font-medium text-base mb-3">
+            <p className="text-titleText font-medium text-xs md:text-base mb-3 text-justify">
               {currentItem.fullDesc}
             </p>
-            <p className="text-subTitleText text-sm leading-relaxed">
+            <p className="text-subTitleText text-xs md:text-base leading-relaxed text-justify">
               Set up your personal gallery, link your photography socials, and tell the community about your artistic style.
             </p>
           </div>
 
           {/* Footer of the Card */}
-          <div className="pt-6 border-t border-gray-100 flex items-center justify-between mt-8">
+          <div className="pt-6 border-t border-gray-100 md:flex items-center justify-between mt-8">
             <span className="text-xs text-subTitleText font-medium">
               Active Competition Mode
             </span>
             <button 
               onClick={handleNext}
-              className="flex items-center gap-1 text-primary text-sm font-bold hover:underline"
+              className="flex items-center gap-1 max-md:mt-3 text-primary text-xs md:text-base font-bold hover:underline"
             >
               <span>Next Step</span>
               <FiArrowRight />

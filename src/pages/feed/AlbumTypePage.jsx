@@ -5,8 +5,8 @@ import HowItWorks from '../../components/shared/HowItWorks';
 const AlbumTypePage = () => {
     return (
         <div className=''>
-            <AlbumTypes />
-            <HowItWorks />
+            <AlbumTypes  />
+            <HowItWorks pb={true} />
         </div>
     );
 };

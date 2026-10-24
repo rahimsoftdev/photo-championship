@@ -7,7 +7,7 @@ import Counter from "../../ui/Counter";
  */
 const AboutStats = () => {
   return (
-    <section className="w-full max-w-main mx-auto px-4 sm:px-6 lg:px-8 my-16">
+    <section className="w-full max-w-main mx-auto px-4 sm:px-6 lg:px-8 md:my-section sm:my-12 my-10">
       {/* Main Container Card with border rgba(0, 0, 0, 0.2) */}
       <div className="bg-white rounded-2xl shadow border border-[rgba(0,0,0,0.2)] p-6 sm:p-10">
         

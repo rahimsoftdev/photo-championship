@@ -6,7 +6,7 @@ import aboutImg from "../../../assets/images/about.jpg";
  */
 const AboutBanner = () => {
     return (
-        <section className="relative w-full min-h-[600px] lg:h-[700px] flex items-center overflow-hidden">
+        <section className="relative w-full min-h-[400px] lg:h-[700px] flex items-center overflow-hidden">
 
             {/* Background Image with Full Width */}
             <div
@@ -18,39 +18,39 @@ const AboutBanner = () => {
             </div>
 
             {/* Content Container (Max width aligned with max-w-main / max-w-7xl) */}
-            <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div className="relative z-10 w-full max-w-main mx-auto px-4 sm:px-6 lg:px-8 md:py-section">
                 <div className="max-w-2xl">
 
                     {/* Top Badge */}
-                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/20 px-4 py-2 backdrop-blur-sm">
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/20 px-4 py-1 backdrop-blur-sm">
                         <span
                             className="h-2 w-2 shrink-0 rounded-full bg-[#05DF72]"
                             aria-hidden="true"
                         />
-                        <span className="text-sm font-semibold text-white font-manrope">
+                        <span className="text-xs  md:text-xl font-semibold text-white font-manrope">
                             Empowering Creative Visuals
                         </span>
                     </div>
 
                     {/* Main Title: White, 64px, SemiBold */}
-                    <h1 className="font-manrope font-semibold text-4xl sm:text-5xl lg:text-[64px] leading-tight text-white mb-6">
+                    <h1 className="font-manrope font-semibold text-xl sm:text-2xl lg:text-5xl leading-tight text-white mb-6">
                         About My12Photos
                     </h1>
 
                     {/* Description: White/Light Gray, 20px, Regular */}
-                    <p className="font-manrope font-normal text-base sm:text-lg lg:text-[20px] leading-relaxed text-gray-200 mb-8">
+                    <p className="font-manrope font-normal  text-xs sm:text-base md:text-xl lg:text-2xl leading-relaxed text-gray-200 mb-8">
                         Discover a global photography community where creativity is celebrated, stories are shared, and talented photographers compete for monthly recognition and cash prizes.
                     </p>
 
                     {/* Action Buttons */}
                     <div className="flex flex-wrap items-center gap-4">
                         {/* Join Now Button (#EE1C25) */}
-                        <button className="cursor-pointer px-8 py-3.5 bg-secondary hover:bg-red-700 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md">
+                        <button className="cursor-pointer px-8 py-2 md:py-3.5 bg-secondary hover:bg-red-700 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md text-xs sm:text-base md:text-xl">
                             Join Now
                         </button>
 
                         {/* Learn How It Works Button (#4048CD) */}
-                        <button className="px-8 cursor-pointer py-3.5 bg-primary hover:bg-blue-800 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md">
+                        <button className="px-8 cursor-pointer py-2 md:py-3.5 bg-primary hover:bg-blue-800 text-white font-manrope font-medium rounded-full transition-colors duration-200 shadow-md text-xs sm:text-base md:text-xl">
                             Learn How It Works
                         </button>
                     </div>

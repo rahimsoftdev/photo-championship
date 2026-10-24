@@ -25,9 +25,9 @@ const steps = [
   },
 ];
 
-const HowItWorks = () => {
+const HowItWorks = ({pb}) => {
   return (
-    <section className="bg-white py-10 sm:py-12 md:py-16 lg:py-section">
+    <section className={`bg-white ${pb ? 'pt-10 sm:pt-12 md:pt-16 lg:pt-section' : 'py-10 sm:py-12 md:py-16 lg:py-section'} `}>
       <div className="mx-auto grid w-full max-w-main grid-cols-1 items-center gap-8 px-4 sm:gap-10 sm:px-6 md:px-8 lg:grid-cols-2 lg:gap-12 xl:gap-20 2xl:gap-28">
 
         {/* Left Content */}
