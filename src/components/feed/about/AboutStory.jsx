@@ -22,7 +22,7 @@ const AboutStory = () => {
         <div className="w-full lg:w-1/2 flex flex-col justify-center">
           
           {/* Main Title Heading */}
-          <h2 className="text-base sm:text-2xl md:text-3xl lg:text-5xl font-extrabold text-titleText leading-none mb-4">
+          <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-5xl font-extrabold text-titleText leading-none mb-4">
             Our Story
           </h2>
 
@@ -32,13 +32,13 @@ const AboutStory = () => {
           </p>
 
           {/* Secondary Paragraph */}
-          <p className="text-[17px] md:text-[20px] text-[#5B5B5B] font-normal leading-relaxed mb-5 text-justify">
+          <p className="text-xs md:text-base lg:text-xl text-[#5B5B5B] font-normal leading-relaxed mb-5 text-justify">
             Whether you’re capturing breathtaking landscapes, unforgettable moments, or creative storytelling through albums, our platform helps your work reach a wider audience.
           </p>
 
           {/* Quote Section with Red Accent Line */}
           <div className="border-l-2 border-[#EE1C25] pl-4 italic">
-            <p className="text-[15px] md:text-[18px] text-[#6B7280] leading-snug text-justify">
+            <p className="text-xs md:text-base lg:text-xl text-[#6B7280] leading-snug text-justify">
               "Every photographer should have a fair stage to present their visual timeline. We designed My12Photos as that global amphitheater."
             </p>
           </div>

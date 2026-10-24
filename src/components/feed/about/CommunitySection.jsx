@@ -9,18 +9,18 @@ import Community3Img from '../../../assets/images/community3.jpg';
 
 const CommunitySection = () => {
   return (
-    <section className="py-section px-4 md:px-8 bg-white">
-      <div className="max-w-main mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="  py-10 sm:py-12 lg:py-section px-4 md:px-8 bg-white max-w-main mx-auto">
+      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Side: Text and Cards */}
         <div className="flex flex-col space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-titleText">
+          <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-titleText">
             Our Community
           </h2>
-          <p className="text-subTitleText leading-relaxed">
+          <p className="text-subTitleText leading-relaxed text-xs sm:text-base md:text-lg">
             Our growing community consists of photographers, storytellers, hobbyists, and photography enthusiasts from around the world. Members can explore inspiring galleries, discover talented artists, participate in competitions, and celebrate each month's winners together.
           </p>
-          <p className="text-subTitleText font-medium">
+          <p className="text-subTitleText font-medium text-base sm:text-lg md:text-xl">
             We believe every photograph tells a story, and every story deserves an audience.
           </p>
 
@@ -37,10 +37,10 @@ const CommunitySection = () => {
                   <FiGlobe className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg" style={{ color: '#33333A' }}>
+                  <h4 className="font-semibold text-base sm:text-lg" style={{ color: '#33333A' }}>
                     Global Exchange
                   </h4>
-                  <p className="text-sm text-subTitleText mt-1">
+                  <p className="text-xs md:text-base text-subTitleText mt-1">
                     Connect with visual minds across 150+ countries.
                   </p>
                 </div>
@@ -57,10 +57,10 @@ const CommunitySection = () => {
                   <FiAward className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg" style={{ color: '#33333A' }}>
+                  <h4 className="font-semibold text-base sm:text-lg" style={{ color: '#33333A' }}>
                     Empathetic Critique
                   </h4>
-                  <p className="text-sm text-subTitleText mt-1">
+                  <p className="text-xs md:text-base text-subTitleText mt-1">
                     Acquire helpful reviews and votes from peers.
                   </p>
                 </div>
