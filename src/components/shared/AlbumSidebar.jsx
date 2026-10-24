@@ -1,7 +1,7 @@
-
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import {
+  FiCheck,
   FiChevronDown,
   FiChevronRight,
   FiSliders,
@@ -18,6 +18,26 @@ const albumTypes = [
     value: "12-photos-full-zodiac-story",
   },
 ];
+
+// Square checkbox: border changes color and a tick mark appears when checked.
+const Checkbox = ({ name, value, checked, onChange }) => (
+  <span className="relative mt-0.5 inline-flex size-4 shrink-0">
+    <input
+      type="checkbox"
+      name={name}
+      value={value}
+      checked={checked}
+      onChange={onChange}
+      className="peer size-4 cursor-pointer appearance-none rounded-[3px] border border-gray-400 bg-white checked:border-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+    />
+
+    <FiCheck
+      size={12}
+      strokeWidth={3}
+      className="pointer-events-none absolute inset-0 m-auto hidden text-secondary peer-checked:block"
+    />
+  </span>
+);
 
 const AlbumSidebar = () => {
   // Fetch categories and their subcategories from the public JSON file.
@@ -61,9 +81,11 @@ const AlbumSidebar = () => {
     );
   };
 
-  // Save the selected album type in the URL.
+  // Select the album type, or unselect it if it is already selected.
   const handleAlbumTypeChange = (value) => {
-    updateQueryParams({ albumType: value });
+    updateQueryParams({
+      albumType: selectedAlbumType === value ? "" : value,
+    });
   };
 
   // Expand a category or collapse it if it is already expanded.
@@ -73,8 +95,17 @@ const AlbumSidebar = () => {
     );
   };
 
-  // Selecting a subcategory also records its parent category.
+  // Select a subcategory (and its parent category), or unselect if already selected.
   const handleSubcategoryChange = (categoryValue, subcategoryValue) => {
+    const isAlreadySelected =
+      selectedCategory === categoryValue &&
+      selectedSubcategory === subcategoryValue;
+
+    if (isAlreadySelected) {
+      updateQueryParams({ category: "", subcategory: "" });
+      return;
+    }
+
     updateQueryParams({
       category: categoryValue,
       subcategory: subcategoryValue,
@@ -84,14 +115,14 @@ const AlbumSidebar = () => {
   // Reusable sidebar content shared by mobile and desktop layouts.
   const sidebarContent = (
     <div className="flex h-full flex-col bg-white text-[#191919]">
-      {/* Sidebar heading and mobile close button */}
-      <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4">
+      {/* Mobile-only heading and close button */}
+      <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4 md:hidden">
         <h2 className="text-lg font-bold">Filters</h2>
 
         <button
           type="button"
           onClick={() => setIsSidebarOpen(false)}
-          className="rounded-lg p-2 text-gray-600 transition hover:bg-gray-100 md:hidden"
+          className="rounded-lg p-2 text-gray-600 transition hover:bg-gray-100"
           aria-label="Close filters"
         >
           <FiX size={22} />
@@ -99,8 +130,8 @@ const AlbumSidebar = () => {
       </div>
 
       {/* Scrollable content keeps the sidebar usable on small screens */}
-      <div className="flex-1 space-y-6 overflow-y-auto p-5">
-        {/* Album type: radio-style square selection */}
+      <div className="flex-1 space-y-6 overflow-y-auto p-5 md:p-0">
+        {/* Album type: checkbox-style, single selection */}
         <section>
           <h3 className="mb-3 text-base font-bold">Album Type</h3>
 
@@ -110,13 +141,11 @@ const AlbumSidebar = () => {
                 key={type.value}
                 className="flex cursor-pointer items-start gap-3 text-sm leading-5"
               >
-                <input
-                  type="radio"
+                <Checkbox
                   name="albumType"
                   value={type.value}
                   checked={selectedAlbumType === type.value}
                   onChange={() => handleAlbumTypeChange(type.value)}
-                  className="mt-0.5 size-4 shrink-0 appearance-none rounded-none border border-gray-400 checked:border-secondary checked:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                 />
 
                 <span
@@ -133,11 +162,9 @@ const AlbumSidebar = () => {
           </div>
         </section>
 
-        <div className="border-t border-gray-200" />
-
-        {/* Categories and nested subcategories */}
+        {/* Category and nested subcategories */}
         <section>
-          <h3 className="mb-3 text-base font-bold">Categories</h3>
+          <h3 className="mb-2 text-base font-bold">Category</h3>
 
           {isLoading && (
             <p className="text-sm text-gray-500">Loading categories...</p>
@@ -150,26 +177,24 @@ const AlbumSidebar = () => {
           )}
 
           {!isLoading && !error && Array.isArray(data) && (
-            <div className="space-y-1">
+            <div>
               {data.map((category) => {
-                const isExpanded =
-                  expandedCategory === category.value;
-
-                const isSelected =
-                  selectedCategory === category.value;
+                const isExpanded = expandedCategory === category.value;
+                const isSelected = selectedCategory === category.value;
 
                 return (
-                  <div key={category.value}>
+                  <div
+                    key={category.value}
+                    className={isExpanded ? "" : "border-b border-gray-200"}
+                  >
                     {/* Category row expands or collapses its subcategory list */}
                     <button
                       type="button"
-                      onClick={() =>
-                        handleCategoryToggle(category.value)
-                      }
+                      onClick={() => handleCategoryToggle(category.value)}
                       aria-expanded={isExpanded}
-                      className={`flex w-full items-center justify-between gap-3 rounded-md px-2 py-2.5 text-left text-sm font-medium transition hover:bg-gray-50 ${isExpanded || isSelected
+                      className={`flex w-full items-center justify-between gap-3 py-3 text-left text-sm font-medium transition ${isExpanded || isSelected
                         ? "text-secondary"
-                        : "text-gray-700"
+                        : "text-gray-700 hover:text-gray-900"
                         }`}
                     >
                       <span>{category.name}</span>
@@ -183,7 +208,7 @@ const AlbumSidebar = () => {
 
                     {/* Render subcategories only for the expanded category */}
                     {isExpanded && (
-                      <div className="ml-3 space-y-1 border-l border-gray-200 py-1 pl-3">
+                      <div className="space-y-3 pb-3 pl-3 pt-1">
                         {category.subcategories?.map((subcategory) => {
                           const isSubcategorySelected =
                             selectedCategory === category.value &&
@@ -192,10 +217,9 @@ const AlbumSidebar = () => {
                           return (
                             <label
                               key={subcategory.value}
-                              className="flex cursor-pointer items-start gap-3 rounded-md px-2 py-2 text-sm leading-5"
+                              className="flex cursor-pointer items-start gap-3 text-xs leading-5"
                             >
-                              <input
-                                type="radio"
+                              <Checkbox
                                 name="subcategory"
                                 value={subcategory.value}
                                 checked={isSubcategorySelected}
@@ -205,7 +229,6 @@ const AlbumSidebar = () => {
                                     subcategory.value
                                   )
                                 }
-                                className="mt-0.5 size-4 shrink-0 appearance-none rounded-none border border-gray-400 checked:border-secondary checked:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                               />
 
                               <span
@@ -247,14 +270,14 @@ const AlbumSidebar = () => {
         </button>
       </div>
 
-      {/* Desktop sidebar stays in the normal page layout. */}
-      <aside className="hidden w-full shrink-0 overflow-hidden rounded-xl border border-gray-200 md:block md:max-w-[260px] lg:max-w-[280px]">
+      {/* Desktop sidebar stays in the normal page layout (no outer border). */}
+      <aside className="hidden w-full shrink-0 md:block md:max-w-[260px] lg:max-w-[280px]">
         {sidebarContent}
       </aside>
 
       {/* Mobile/tablet drawer: overlay + slide-in sidebar */}
       {isSidebarOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-110 md:hidden">
           {/* Clicking outside the sidebar closes the drawer */}
           <button
             type="button"

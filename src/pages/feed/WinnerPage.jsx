@@ -27,7 +27,7 @@ const WinnerPage = () => {
   });
 
   return (
-    <main className="mx-auto w-full max-w-main px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+    <main className="mx-auto w-full max-w-main px-4 pt-10 sm:px-6 lg:px-8 sm:pt-12 lg:pt-section">
       {/* Archive heading, month selector, and album type filters */}
       <WinnersArchiveFilter />
 

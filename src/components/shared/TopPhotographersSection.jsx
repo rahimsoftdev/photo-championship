@@ -67,36 +67,39 @@ export default function TopPhotographersSection() {
                     {/* Filter Controls */}
 
                     <div className="flex w-full max-w-full flex-wrap items-center gap-1.5 rounded-2xl bg-slate-200/50 p-1.5 min-[350px]:gap-2 sm:w-fit sm:rounded-full">
-                        <button
-                            onClick={() => setSelectedType("single")}
-                            className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${selectedType === "single"
-                                ? "bg-primary text-white shadow-md"
-                                : "text-subTitleText hover:text-titleText"
-                                }`}
-                        >
-                            Single Photo
-                        </button>
+  <button
+    onClick={() => setSelectedType("single")}
+    className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${
+      selectedType === "single"
+        ? "bg-primary text-white shadow-md"
+        : "text-subTitleText hover:text-titleText"
+    }`}
+  >
+    Single Photo
+  </button>
 
-                        <button
-                            onClick={() => setSelectedType("six")}
-                            className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${selectedType === "six"
-                                ? "bg-primary text-white shadow-md"
-                                : "text-subTitleText hover:text-titleText"
-                                }`}
-                        >
-                            6 Photos
-                        </button>
+  <button
+    onClick={() => setSelectedType("six")}
+    className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${
+      selectedType === "six"
+        ? "bg-primary text-white shadow-md"
+        : "text-subTitleText hover:text-titleText"
+    }`}
+  >
+    6 Photos
+  </button>
 
-                        <button
-                            onClick={() => setSelectedType("twelve")}
-                            className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${selectedType === "twelve"
-                                ? "bg-primary text-white shadow-md"
-                                : "text-subTitleText hover:text-titleText"
-                                }`}
-                        >
-                            12 Photos - Full Zodiac Story
-                        </button>
-                    </div>
+  <button
+    onClick={() => setSelectedType("twelve")}
+    className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${
+      selectedType === "twelve"
+        ? "bg-primary text-white shadow-md"
+        : "text-subTitleText hover:text-titleText"
+    }`}
+  >
+    12 Photos - Full Zodiac Story
+  </button>
+</div>
 
                 </div>
 
