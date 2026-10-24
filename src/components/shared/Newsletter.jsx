@@ -16,7 +16,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="px-4 pb-20 sm:px-6 ">
+    <section className=" px-4 pb-10  min-[350px]:px-4 sm:px-6 sm:pb-12 md:px-8 lg:pb-section">
       <div className="relative mx-auto max-w-main   overflow-hidden rounded-lg bg-btn px-4 py-9 text-white sm:py-10">
         {/* Contour background pattern */}
         <svg
