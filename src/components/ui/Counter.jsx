@@ -1,13 +1,13 @@
-// Reusable component for displaying a statistic and its label.
-const Counter = ({ value, suffix = "", label }) => {
+
+const Counter = ({ value, suffix, label }) => {
   return (
-    <div className="flex flex-col items-center text-center">
-      <h3 className="text-2xl font-extrabold leading-tight text-[#212133] sm:text-3xl">
+    <div className="flex min-w-0 flex-col items-center justify-center text-center">
+      <h3 className="whitespace-nowrap text-2xl font-bold leading-tight  sm:text-3xl md:text-2xl lg:text-3xl xl:text-4xl">
         {value}
         {suffix}
       </h3>
 
-      <p className="mt-2 text-[10px] font-semibold uppercase tracking-wide text-[#6B7280] sm:text-xs">
+      <p className="mt-2 max-w-full text-xs leading-relaxed text-gray-600 sm:text-sm md:text-xs lg:text-sm">
         {label}
       </p>
     </div>
