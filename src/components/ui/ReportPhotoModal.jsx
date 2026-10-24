@@ -240,11 +240,10 @@ const ReportPhotoModal = ({ photoTitle = "this single photo" }) => {
                         type="button"
                         onClick={() => handleSelectReason(reason.id)}
                         aria-pressed={isSelected}
-                        className={`relative flex min-h-[65px] items-center gap-2.5 rounded-xl border p-2.5 text-left transition ${
-                          isSelected
+                        className={`relative flex min-h-[65px] items-center gap-2.5 rounded-xl border p-2.5 text-left transition ${isSelected
                             ? "border-primary bg-[#F5F5FF] ring-1 ring-primary"
                             : "border-[#E5E7EB] bg-white hover:border-primary/50 hover:bg-gray-50"
-                        }`}
+                          }`}
                       >
                         {/* Reason icon with grey background */}
                         <span className="flex h-[35px] w-[35px] shrink-0 items-center justify-center rounded-[4px] bg-[#F3F4F6] text-[#6B7280]">
@@ -414,7 +413,7 @@ const ReportPhotoModal = ({ photoTitle = "this single photo" }) => {
 
       {/* Render the modal directly inside <body> so no parent element
           (transform, overflow, z-index) can hide it or cover it. */}
-      {isOpen && createPortal(modal, document.body)}
+      {isOpen && createPortal(d, document.body)}
     </>
   );
 };

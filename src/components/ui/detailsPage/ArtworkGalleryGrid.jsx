@@ -1,13 +1,61 @@
 import React, { useState } from "react";
 import { useSearchParams } from "react-router";
-import { 
-  GiAries, GiTaurus, GiGemini, GiCancer, GiLeo, GiVirgo, 
-  GiLibra, GiScorpio, GiSagittarius, GiCapricorn, GiAquarius, GiPisces 
+import {
+  GiAries,
+  GiTaurus,
+  GiGemini,
+  GiCancer,
+  GiLeo,
+  GiVirgo,
+  GiLibra,
+  GiScorpio,
+  GiSagittarius,
+  GiCapricorn,
+  GiAquarius,
+  GiPisces,
 } from "react-icons/gi";
+
+const RED = "#ef4444";
+const BLUE = "#3b82f6";
+
+// Smile-shape curve line. Dot gulo HTML element, tai SVG stretch holeo gol thake.
+const Curve = ({ color, showStartDot = false, showEndDot = false }) => (
+  <div className="relative h-7 w-full min-w-0 flex-1">
+    <svg
+      className="absolute inset-y-0 left-1 h-full w-[calc(100%-8px)] overflow-visible"
+      viewBox="0 0 100 28"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M 0,4 Q 50,34 100,4"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        vectorEffect="non-scaling-stroke"
+      />
+    </svg>
+
+    {showStartDot && (
+      <span
+        className="absolute left-1 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{ backgroundColor: color, top: `${(4 / 28) * 100}%` }}
+      />
+    )}
+
+    {showEndDot && (
+      <span
+        className="absolute right-1 size-2 translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{ backgroundColor: color, top: `${(4 / 28) * 100}%` }}
+      />
+    )}
+  </div>
+);
 
 const ArtworkGalleryGrid = ({ images = [], zodiacs = [] }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   // URL query params theke initial index nia asha, na thakle 0
   const initialIndex = parseInt(searchParams.get("index")) || 0;
   const [selectedIndex, setSelectedIndex] = useState(
@@ -31,122 +79,198 @@ const ArtworkGalleryGrid = ({ images = [], zodiacs = [] }) => {
 
   // Zodiac icons mapping with react-icons
   const zodiacIcons = [
-    <GiAries />, <GiTaurus />, <GiGemini />, <GiCancer />, <GiLeo />, <GiVirgo />,
-    <GiLibra />, <GiScorpio />, <GiSagittarius />, <GiCapricorn />, <GiAquarius />, <GiPisces />
+    <GiAries />,
+    <GiTaurus />,
+    <GiGemini />,
+    <GiCancer />,
+    <GiLeo />,
+    <GiVirgo />,
+    <GiLibra />,
+    <GiScorpio />,
+    <GiSagittarius />,
+    <GiCapricorn />,
+    <GiAquarius />,
+    <GiPisces />,
   ];
 
   const defaultZodiacNames = [
-    "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+    "Aries",
+    "Taurus",
+    "Gemini",
+    "Cancer",
+    "Leo",
+    "Virgo",
+    "Libra",
+    "Scorpio",
+    "Sagittarius",
+    "Capricorn",
+    "Aquarius",
+    "Pisces",
   ];
 
   const totalImages = images.length;
-  // Jodi total images 6 ba tar kom hoy, tahole grid column 6 ta hobe (full width nibe), ar 12 ta hole 12 ta column hobe
-  const gridColsClass = totalImages <= 6 ? "grid-cols-6" : "grid-cols-6 md:grid-cols-12";
+
+  // 6 ba tar kom hole ek row, 6 er beshi hole 12 layout
+  const isTwelve = totalImages > 6;
+
+  // Protita item er data ek jaygay (name, icon, color, selected state)
+  const getItemData = (index) => {
+    const isRedTheme = index < 6;
+
+    return {
+      imgUrl: images[index],
+      isRedTheme,
+      themeColor: isRedTheme ? RED : BLUE,
+      lightColor: isRedTheme
+        ? "rgba(254, 226, 226, 0.9)"
+        : "rgba(219, 234, 254, 0.9)",
+      zodiacName:
+        zodiacs[index] || defaultZodiacNames[index] || `Item ${index + 1}`,
+      ZodiacIconComponent: zodiacIcons[index] || zodiacIcons[0],
+      isSelected: selectedIndex === index,
+    };
+  };
+
+  // Thumbnail box: selected hole theme color border, na hole transparent
+  const renderThumbnail = (data, aspectClass) => (
+    <div
+      className={`relative w-full overflow-hidden rounded-md border-2 transition-all duration-200 sm:rounded-lg ${aspectClass}`}
+      style={{ borderColor: data.isSelected ? data.themeColor : "transparent" }}
+    >
+      <img
+        src={data.imgUrl}
+        alt={data.zodiacName}
+        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+    </div>
+  );
+
+  // Inline layout: upore [icon + name .... number], tarpor thumbnail
+  const renderInlineItem = (index) => {
+    const data = getItemData(index);
+
+    return (
+      <div
+        key={index}
+        onClick={() => handleImageSelect(index)}
+        className="group flex min-w-0 cursor-pointer flex-col gap-1.5"
+      >
+        {/* Header row: icon + name bame, number badge dane */}
+        <div className="flex min-w-0 items-center justify-between gap-1">
+          <div className="flex min-w-0 items-center gap-1">
+            <span
+              className="flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] text-[10px] text-white sm:h-5 sm:w-5 sm:text-xs"
+              style={{ backgroundColor: data.themeColor }}
+            >
+              {data.ZodiacIconComponent}
+            </span>
+
+            <span className="truncate text-[9px] font-medium text-gray-800 sm:text-xs">
+              {data.zodiacName}
+            </span>
+          </div>
+
+          <span
+            className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full text-[8px] font-bold sm:h-4 sm:w-4 sm:text-[9px]"
+            style={{ backgroundColor: data.lightColor, color: data.themeColor }}
+          >
+            {index + 1}
+          </span>
+        </div>
+
+        {renderThumbnail(data, "aspect-[3/2]")}
+      </div>
+    );
+  };
+
+  // Stacked layout (desktop 12 photo): number, icon, name, tarpor thumbnail
+  const renderStackedItem = (index) => {
+    const data = getItemData(index);
+
+    return (
+      <div
+        key={index}
+        onClick={() => handleImageSelect(index)}
+        className="group flex min-w-0 cursor-pointer flex-col items-center gap-1.5 text-center"
+      >
+        {/* Number badge */}
+        <span
+          className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold"
+          style={{ backgroundColor: data.lightColor, color: data.themeColor }}
+        >
+          {index + 1}
+        </span>
+
+        {/* Zodiac icon */}
+        <span
+          className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[3px] text-xs text-white"
+          style={{ backgroundColor: data.themeColor }}
+        >
+          {data.ZodiacIconComponent}
+        </span>
+
+        {/* Zodiac name */}
+        <span className="max-w-full truncate px-0.5 text-[10px] font-medium text-gray-800 lg:text-[11px]">
+          {data.zodiacName}
+        </span>
+
+        {renderThumbnail(data, "aspect-[4/5]")}
+      </div>
+    );
+  };
 
   return (
-    <div className="w-full py-6 space-y-4 relative">
-      
-      {/* Curved Line Indicator */}
-      <div className="relative w-full h-8 mb-2">
-        {totalImages <= 6 && (
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 30" preserveAspectRatio="none">
-            {/* 6 images er khetre sobai er jonno upore bakano red line */}
-            <path
-              d="M 10,25 Q 500,-10 990,25"
-              fill="none"
-              stroke="#ef4444"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <circle cx="10" cy="25" r="4" fill="#ef4444" />
-            <circle cx="990" cy="25" r="4" fill="#ef4444" />
-          </svg>
-        )}
-        {totalImages >= 12 && (
-          <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 30" preserveAspectRatio="none">
-            {/* 12 images er khetre: Prothom 6 ta red line upore bakano */}
-            <path
-              d="M 10,25 Q 250,-5 495,25"
-              fill="none"
-              stroke="#ef4444"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            {/* Porer 6 ta blue line niche bakano */}
-            <path
-              d="M 505,5 Q 750,35 990,5"
-              fill="none"
-              stroke="#3b82f6"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <circle cx="10" cy="25" r="4" fill="#ef4444" />
-            <circle cx="990" cy="5" r="4" fill="#3b82f6" />
-          </svg>
-        )}
-      </div>
+    <div className="relative w-full py-6">
+      {/* 6 photo: ek ta curve + ek row */}
+      {!isTwelve && (
+        <div>
+          <Curve color={RED} showStartDot showEndDot />
 
-      {/* Grid container */}
-      <div className={`grid ${gridColsClass} gap-2 sm:gap-3 w-full`}>
-        {images.slice(0, 12).map((imgUrl, index) => {
-          const isRedTheme = index < 6;
-          const themeColor = isRedTheme ? "#ef4444" : "#3b82f6"; // Red or Blue
-          
-          const zodiacName = zodiacs[index] || defaultZodiacNames[index] || `Item ${index + 1}`;
-          const ZodiacIconComponent = zodiacIcons[index] || zodiacIcons[0];
+          <div className="mt-2 grid grid-cols-6 gap-2 sm:gap-3">
+            {images.slice(0, 6).map((_, index) => renderInlineItem(index))}
+          </div>
+        </div>
+      )}
 
-          const isSelected = selectedIndex === index;
-
-          return (
-            <div
-              key={index}
-              onClick={() => handleImageSelect(index)}
-              className="cursor-pointer group flex flex-col items-center text-center space-y-1.5 min-w-0"
-            >
-              {/* 1. Sobr upore Count/Badge Number */}
-              <span
-                className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
-                style={{
-                  backgroundColor: isRedTheme ? "rgba(254, 226, 226, 0.8)" : "rgba(219, 234, 254, 0.8)",
-                  color: themeColor,
-                }}
-              >
-                {index + 1}
-              </span>
-
-              {/* 2. Tarpor Icon */}
-              <span
-                className="flex h-6 w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-lg text-xs sm:text-sm text-white shadow-sm"
-                style={{ backgroundColor: themeColor }}
-              >
-                {ZodiacIconComponent}
-              </span>
-
-              {/* 3. Tarpor Name */}
-              <span className="font-medium text-gray-800 truncate text-[10px] sm:text-xs max-w-full px-1">
-                {zodiacName}
-              </span>
-
-              {/* 4. Sobr sheshe Image Box */}
-              <div
-                className={`relative overflow-hidden rounded-lg sm:rounded-xl aspect-[16/10] border-2 transition-all duration-200 w-full ${
-                  isSelected ? "shadow-md" : "opacity-75 hover:opacity-100"
-                }`}
-                style={{
-                  borderColor: isSelected ? themeColor : "transparent",
-                }}
-              >
-                <img
-                  src={imgUrl}
-                  alt={zodiacName}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+      {/* 12 photo */}
+      {isTwelve && (
+        <>
+          {/* Mobile/tablet: duto row, protita row er nijer curve */}
+          <div className="space-y-5 md:hidden">
+            <div>
+              <Curve color={RED} showStartDot showEndDot />
+              <div className="mt-2 grid grid-cols-6 gap-2 sm:gap-3">
+                {images
+                  .slice(0, 6)
+                  .map((_, index) => renderInlineItem(index))}
               </div>
             </div>
-          );
-        })}
-      </div>
+
+            {totalImages > 6 && (
+              <div>
+                <Curve color={BLUE} showStartDot showEndDot />
+                <div className="mt-2 grid grid-cols-6 gap-2 sm:gap-3">
+                  {images
+                    .slice(6, 12)
+                    .map((_, i) => renderInlineItem(i + 6))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Desktop: ek row e 12 ta, upore red + blue curve */}
+          <div className="hidden md:block">
+            <div className="flex gap-4">
+              <Curve color={RED} showStartDot />
+              <Curve color={BLUE} showEndDot />
+            </div>
+
+            <div className="mt-3 grid grid-cols-12 gap-2 lg:gap-3">
+              {images.slice(0, 12).map((_, index) => renderStackedItem(index))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
