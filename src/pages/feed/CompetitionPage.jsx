@@ -43,7 +43,7 @@ const CompetitionPage = () => {
                 ))}
             </div>
 
-            {/* Pagination */}
+            <Pagination  totalPages={totalPages} />
            
         </section>
     );

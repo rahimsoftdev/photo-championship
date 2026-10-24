@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router";
 import useArtwork from "../../hooks/useArtwork";
 import ArtworkCard from "../../components/ui/ArtworkCard";
 import LoadingPage from "../feedback/LoadingPage";
+import Pagination from "../../components/shared/Pagination";
 
 const BayPhotosPage = () => {
     const [searchParams] = useSearchParams();
@@ -11,6 +12,7 @@ const BayPhotosPage = () => {
         artworks,
         loading,
         error,
+        totalPages
     } = useArtwork(params, true, 9, "/bayPhoto.json");
     console.log(artworks, 'paichi')
 
@@ -36,6 +38,8 @@ const BayPhotosPage = () => {
                     ))}
                 </div>
             )}
+
+            <Pagination totalPages={totalPages}  />
         </section>
     );
 };

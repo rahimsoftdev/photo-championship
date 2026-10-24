@@ -44,6 +44,7 @@ const GalleryPage = () => {
             </div>
 
             {/* Pagination */}
+             <Pagination  totalPages={totalPages} />
            
         </section>
     );
