@@ -1,4 +1,3 @@
-
 const steps = [
   {
     number: "01",
@@ -26,58 +25,57 @@ const steps = [
   },
 ];
 
-// Explains how the platform works in four steps.
 const HowItWorks = () => {
   return (
-    <section className="bg-white py-section">
-      <div className="mx-auto grid w-full max-w-main grid-cols-1 items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20 xl:gap-28">
+    <section className="bg-white py-10 sm:py-12 md:py-16 lg:py-section">
+      <div className="mx-auto grid w-full max-w-main grid-cols-1 items-center gap-8 px-4 sm:gap-10 sm:px-6 md:px-8 lg:grid-cols-2 lg:gap-12 xl:gap-20 2xl:gap-28">
 
         {/* Left Content */}
-        <div className="w-full">
-          <span className="mb-4 block text-base font-bold uppercase tracking-wide text-redText">
+        <div className="w-full min-w-0">
+          <span className="mb-3 block text-xs font-bold uppercase tracking-wide text-redText sm:mb-4 sm:text-sm md:text-base">
             How it works
           </span>
 
-          <h2 className="text-4xl font-extrabold leading-[1.12] tracking-tight text-titleText sm:text-5xl">
+          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-titleText min-[350px]:text-4xl sm:text-5xl">
             From Photo to Prize
             <br />
             in 4 Steps
           </h2>
 
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-subTitleText sm:text-xl">
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-subTitleText sm:mt-5 sm:text-base md:text-lg lg:text-xl">
             A simple, transparent process. Join thousands of
             photographers who have already won.
           </p>
         </div>
 
         {/* Right Timeline */}
-        <div className="relative w-full">
-          <div className="relative flex flex-col gap-7 sm:gap-8">
+        <div className="w-full min-w-0">
+          <div className="relative flex flex-col gap-6 sm:gap-7 md:gap-8">
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="relative flex items-start gap-4"
+                className="relative flex min-w-0 items-start gap-3 sm:gap-4"
               >
-                {/* Connector Line: Between Each Number */}
+                {/* Connector Line */}
                 {index < steps.length - 1 && (
                   <div
                     aria-hidden="true"
-                    className="absolute left-[21.5px] top-[22px] bottom-[-32px] w-px -translate-x-1/2 bg-[rgba(0,0,0,0.08)]"
+                    className="absolute bottom-[-28px] left-[19px] top-[20px] w-px -translate-x-1/2 bg-[rgba(0,0,0,0.08)] sm:bottom-[-32px] sm:left-[21.5px] sm:top-[22px]"
                   />
                 )}
 
                 {/* Number Counter */}
-                <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[rgba(227,24,55,0.08)] text-xs font-bold text-redText">
+                <div className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[rgba(227,24,55,0.08)] text-[11px] font-bold text-redText sm:h-11 sm:w-11 sm:text-xs">
                   {step.number}
                 </div>
 
                 {/* Step Details */}
                 <div className="min-w-0 flex-1 pt-0.5">
-                  <h3 className="text-base font-extrabold leading-snug text-titleText sm:text-xl">
+                  <h3 className="break-words text-sm font-extrabold leading-snug text-titleText min-[350px]:text-base sm:text-lg md:text-xl">
                     {step.title}
                   </h3>
 
-                  <p className="mt-1 text-sm leading-relaxed text-subTitleText sm:text-base">
+                  <p className="mt-1 break-words text-xs leading-relaxed text-subTitleText min-[350px]:text-sm sm:text-base">
                     {step.description}
                   </p>
                 </div>

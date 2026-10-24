@@ -54,7 +54,7 @@ const AlbumTypes = () => {
         </div>
 
         {/* Responsive Cards Grid */}
-        <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className="grid grid-cols-[minmax(0,1fr)] items-stretch gap-5 min-[350px]:grid-cols-[minmax(0,1fr)] min-[350px]:gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {albums?.map((album) => (
             <div key={album.id} className="min-w-0">
               <AlbumCard album={album} />
