@@ -66,14 +66,14 @@ const SearchBar = ({
 
     return (
         <div
-            className="flex h-12 max-w-full items-center gap-3 rounded-lg px-4"
+            className="flex h-8 md:h-12 max-w-full items-center gap-3 rounded-lg px-4"
             style={{
                 backgroundColor: bgColor,
                 maxWidth: width,
             }}
         >
             <FiSearch
-                size={20}
+                size={16}
                 className="shrink-0 text-[#8A98A7]"
                 aria-hidden="true"
             />
@@ -84,7 +84,7 @@ const SearchBar = ({
                 onChange={(event) => setSearch(event.target.value)}
                 placeholder="Search"
                 aria-label="Search by title"
-                className="w-full min-w-0 bg-transparent text-sm text-[#8A98A7] outline-none placeholder:text-[#8A98A7]"
+                className="w-full min-w-0 bg-transparent text-xs md:text-base text-[#8A98A7] outline-none placeholder:text-[#8A98A7]"
             />
         </div>
     );

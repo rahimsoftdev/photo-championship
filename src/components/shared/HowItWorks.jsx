@@ -36,13 +36,13 @@ const HowItWorks = () => {
             How it works
           </span>
 
-          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-titleText min-[350px]:text-4xl sm:text-5xl">
+          <h2 className="text-xl sm:text-2xl font-extrabold leading-tight tracking-tight text-titleText md:text-3xl ">
             From Photo to Prize
             <br />
             in 4 Steps
           </h2>
 
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-subTitleText sm:mt-5 sm:text-base md:text-lg lg:text-xl">
+          <p className="mt-4 max-w-xl text-xs sm:text-base leading-relaxed text-subTitleText sm:mt-5 sm:text-base md:text-lg lg:text-xl">
             A simple, transparent process. Join thousands of
             photographers who have already won.
           </p>

@@ -6,7 +6,7 @@ const AdvertisingBanner = () => {
   const location = useLocation()
   console.log(location.pathname, 'c')
   return (
-   <section className={`px-4 pb-10 min-[350px]:px-4 sm:px-6 sm:pb-12 md:px-8 lg:pb-section ${location.pathname.trim() === '/' && 'pt-section'}`}>
+   <section className={`px-4 pb-10 min-[350px]:px-4 sm:px-6 sm:pb-12 md:px-8 lg:pb-section ${location.pathname.trim() === '/' && ' pt-10 sm:pt-12  lg:pt-section '}`}>
   <div
     className="relative mx-auto flex min-h-[190px] h-[220px] md:h-[400px] max-w-main items-center justify-center overflow-hidden rounded-lg bg-cover bg-center px-5 py-8 sm:min-h-[220px] sm:px-10"
     style={{ backgroundImage: `url(${bannerImage})` }}

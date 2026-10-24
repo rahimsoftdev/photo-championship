@@ -56,7 +56,7 @@ export default function TopPhotographersSection() {
                 {/* Header & Filter Nav */}
                 <div className="flex min-w-0 flex-col justify-between gap-5 lg:flex-row md:items-center md:gap-6">
                     <div className="min-w-0">
-                        <h1 className="break-words text-2xl font-extrabold tracking-tight text-titleText min-[350px]:text-3xl ">
+                        <h1 className="break-words text-xl font-extrabold tracking-tight text-titleText min-[350px]:text-3xl ">
                             Top Photographers
                         </h1>
                         <p className="mt-1 text-xs text-subTitleText sm:text-sm md:text-base">

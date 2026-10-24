@@ -44,7 +44,7 @@ const AlbumTypes = () => {
             ACTIVE COMPETITIONS
           </span>
 
-          <h2 className="mb-3 font-manrope text-2xl font-extrabold leading-tight text-[#0D0D14] sm:mb-4 sm:text-3xl md:text-4xl">
+          <h2 className="mb-3 font-manrope text-xl  font-extrabold leading-tight text-[#0D0D14] sm:mb-4 sm:text-2xl md:text-3xl">
             Choose Your Album Type
           </h2>
 
