@@ -35,32 +35,35 @@ const AlbumTypes = () => {
   }
 
   return (
-    <div className="bg-[#F7F8FA] py-section">
-      <section className="mx-auto w-full max-w-main bg-[#F7F8FA] px-4  sm:px-6  lg:px-8">
+
+    <div className="w-full bg-[#F7F8FA] py-10 sm:py-12 md:py-14 lg:py-section">
+      <section className="mx-auto w-full max-w-main px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto mb-8 w-full max-w-2xl text-center sm:mb-10 lg:mb-12">
-          <span className="mb-2 block font-manrope text-sm font-bold uppercase tracking-widest text-[#E31837] sm:text-base">
+          <span className="mb-2 block font-manrope text-xs font-bold uppercase tracking-[0.15em] text-[#E31837] sm:text-sm md:text-base">
             ACTIVE COMPETITIONS
           </span>
 
-          <h2 className="mb-4 font-manrope text-3xl font-extrabold leading-tight text-[#0D0D14] sm:text-4xl sm:leading-tight md:text-[44px] lg:text-[48px] lg:leading-[48px]">
+          <h2 className="mb-3 font-manrope text-2xl font-extrabold leading-tight text-[#0D0D14] sm:mb-4 sm:text-3xl md:text-4xl">
             Choose Your Album Type
           </h2>
 
-          <p className="font-manrope text-sm font-normal leading-relaxed text-[#6B7280] sm:text-base md:text-lg lg:text-[20px] lg:leading-[29.25px]">
-            Three competition album type. One goal: show your talent and win a prize.
+          <p className="mx-auto max-w-xl font-manrope text-sm font-normal leading-relaxed text-[#6B7280] sm:text-base md:text-lg lg:text-xl">
+            Three competition album types. One goal: show your talent and win a prize.
           </p>
         </div>
 
         {/* Responsive Cards Grid */}
-        <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {albums &&
-            albums.map((album) => (
-              <AlbumCard key={album.id} album={album} />
-            ))}
+        <div className="grid grid-cols-1 items-stretch gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {albums?.map((album) => (
+            <div key={album.id} className="min-w-0">
+              <AlbumCard album={album} />
+            </div>
+          ))}
         </div>
       </section>
     </div>
+
   );
 };
 
