@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router";
 import useArtwork from "../../hooks/useArtwork";
 import ArtworkCard from "../../components/ui/ArtworkCard";
-import LoadingPage from "../feedback/LoadingPage";
 import Pagination from "../../components/shared/Pagination";
+import ArtworkSkeleton from "../../components/ui/ArtworkSkeleton";
 
 const GalleryPage = () => {
     // Read query params from the current URL.
@@ -20,7 +20,7 @@ const GalleryPage = () => {
     } = useArtwork(params, false, 9, '/artWork.json');
 
     // Show loading page while data is being fetched.
-    if (loading) return <LoadingPage />;
+    if (loading) return <ArtworkSkeleton/>;
 
     // Show an error if fetching fails.
     if (error) {
@@ -28,7 +28,7 @@ const GalleryPage = () => {
     }
 
     return (
-        <section className="w-full space-y-6">
+        <section className="w-full space-y-6 pt-7">
             {/* Artwork cards */}
             <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
                 {artworks.map((artWorkData) => (

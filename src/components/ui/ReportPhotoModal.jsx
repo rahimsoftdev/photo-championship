@@ -413,7 +413,7 @@ const ReportPhotoModal = ({ photoTitle = "this single photo" }) => {
 
       {/* Render the modal directly inside <body> so no parent element
           (transform, overflow, z-index) can hide it or cover it. */}
-      {isOpen && createPortal(d, document.body)}
+      {isOpen && createPortal(modal, document.body)}
     </>
   );
 };
