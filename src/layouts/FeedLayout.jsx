@@ -31,8 +31,6 @@ const FeedLayout = () => {
           <Outlet />
 
 
-          {/* pagination  */}
-          <Pagination/>
         </section>
       </div>
     </main>

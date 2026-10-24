@@ -25,7 +25,7 @@ const ArtworkComments = ({ artwork }) => {
 
   return (
     <div
-      className="w-full rounded-2xl p-4 sm:p-6 md:p-8 mt-6 shadow-sm"
+      className="w-full rounded-2xl p-4 sm:p-6 md:p-8 mt-10 sm:mt-12 lg:mt-section shadow-sm"
       style={{ backgroundColor: "#F8FAFC" }}
     >
       {/* Comments Header */}

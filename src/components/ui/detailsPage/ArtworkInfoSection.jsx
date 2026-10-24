@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { FiDownload, FiHeart, FiShare2 } from "react-icons/fi";
+import { Link } from "react-router";
 
 const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
+  const [vote, setVote] = useState(false)
   const [copied, setCopied] = useState(false);
 
   const {
@@ -15,14 +17,15 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
     viewsCount,
     imageDetails,
   } = artwork || {};
+  console.log(artwork?.userId, 'is')
 
   // Format date nicely if available
   const formattedDate = info?.createdAt
     ? new Date(info.createdAt).toLocaleDateString("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      })
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    })
     : "01 June, 2026";
 
   // Handle Image Download
@@ -57,7 +60,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
   };
 
   return (
-    <div className="w-full space-y-6 py-section">
+    <div className="w-full space-y-6 ">
       {/* Top Badges / Tags */}
       <div className="flex flex-wrap items-center gap-3">
         {images && images.length > 1 && (
@@ -161,7 +164,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
       </div>
 
       {/* Votes and Views Count Section with border rgba(0, 0, 0, 0.08) */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 border-b pb-7 border-gray-200">
         {/* Votes Received */}
         <div
           className="flex flex-col items-center justify-center rounded-2xl p-6 text-center"
@@ -196,14 +199,14 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
       </div>
 
       {/* Action Buttons: Vote, Download, Share */}
-      <div className="flex flex-wrap items-center gap-3 pt-2">
+      <div className="flex flex-wrap items-center gap-3 pt-2 ">
         {/* Vote Button */}
         <button
-          onClick={onVote}
-          className="flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-secondary transition-opacity hover:opacity-90 shadow-sm"
+          onClick={() => setVote(!vote)}
+          className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-opacity hover:opacity-90 shadow-sm  ${vote ? "bg-secondary text-white " : " text-secondary border border-secondary "} `}
         >
           <FiHeart className="text-lg" />
-          {hasVoted ? "Voted" : "Cast Your Vote"}
+          {vote ? "Voted" : "Cast Your Vote"}
         </button>
 
         {/* Download Button */}
@@ -227,7 +230,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
       </div>
 
       {/* Photographer Profile Section (As shown in screenshot) */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-t border-gray-100 pt-6 gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between  pt-4 gap-4">
         <div className="flex items-center gap-4">
           <img
             src={
@@ -246,15 +249,14 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
             </h4>
           </div>
         </div>
-
-        <button
-          onClick={() => {
-            // Profile view handler or link navigation
-          }}
-          className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 shadow-sm"
+        <Link
+          to={`/photographers/${artwork?.userId}`}
+          className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
         >
           View Profile
-        </button>
+        </Link>
+
+
       </div>
     </div>
   );

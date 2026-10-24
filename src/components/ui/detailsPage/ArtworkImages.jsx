@@ -56,13 +56,13 @@ const ArtworkImages = ({ images = [] }) => {
   const hasMultipleImages = images.length > 1;
 
   return (
-    <section className="mx-auto w-full max-w-main">
+    <section className="py-10 sm:pt-12 lg:pt-15">
       <div className="relative flex w-full items-center justify-center overflow-hidden rounded-2xl bg-gray-100">
         {/* Main Image */}
         <img
           src={images[currentIndex]}
           alt={`Artwork image ${currentIndex + 1}`}
-          className={`block max-h-[650px] w-full object-cover transition-opacity duration-300 ease-in-out ${
+          className={`block max-h-[550px] w-full object-cover transition-opacity duration-300 ease-in-out ${
             isVisible ? "opacity-100" : "opacity-0"
           }`}
         />

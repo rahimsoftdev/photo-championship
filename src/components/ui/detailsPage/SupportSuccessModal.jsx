@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useNavigate } from "react-router";
 import { FaCheck, FaInfoCircle, FaWallet } from "react-icons/fa";
@@ -7,143 +8,250 @@ const SupportSuccessModal = ({ isOpen, onClose, paymentData }) => {
 
   if (!isOpen) return null;
 
+  const amount = Number(paymentData?.amount ?? 25);
+  const safeAmount = Number.isFinite(amount) && amount >= 0 ? amount : 25;
+
+  const platformFee = safeAmount * 0.1;
+  const artistReceives = safeAmount - platformFee;
+
+  const artistName = paymentData?.artistName || "Wong kar-wai";
+  const paymentMethod = paymentData?.method || "PayPal";
+
   const handleDone = () => {
     onClose();
   };
 
   const handleViewProfile = () => {
+    onClose();
     navigate("/feed/gallery");
   };
 
-  // পেমেন্ট ডাটা থেকে হিসাব বা ডিফল্ট মান
-  const amount = parseFloat(paymentData?.amount || 25);
-  const platformFee = amount * 0.1; // ১০% প্লাটফর্ম ফি ধরা যাক
-  const artistReceives = amount - platformFee;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
-      <div 
-        className="w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl bg-white border"
-        style={{ borderColor: "#C6C6CD" }}
+    <div
+      className="fixed inset-0 z-[150] flex items-center justify-center
+      overflow-y-auto overscroll-contain bg-black/50 p-3
+      backdrop-blur-md sm:p-5"
+      onClick={onClose}
+    >
+      {/* Modal */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="support-success-title"
+        className="my-auto flex max-h-[90dvh] w-full max-w-xl
+        flex-col overflow-hidden rounded-2xl border border-[#C6C6CD]
+        bg-white shadow-2xl"
+        onClick={(event) => event.stopPropagation()}
       >
-        {/* Modal Header */}
-        <div 
-          className="p-4 sm:p-6 flex items-center justify-between border-b"
-          style={{ backgroundColor: "#C6C6CD", borderColor: "#C6C6CD" }}
+        {/* Fixed Header */}
+        <div
+          className="flex shrink-0 items-center justify-between gap-3
+          border-b border-[#C6C6CD] bg-[#C6C6CD] p-4 sm:p-6"
         >
-          <h3 className="font-semibold text-gray-800 text-base sm:text-lg">
+          <h3
+            id="support-success-title"
+            className="text-base font-semibold text-gray-800 sm:text-lg"
+          >
             Successful Donation
           </h3>
-          <button 
+
+          <button
+            type="button"
             onClick={onClose}
-            className="text-gray-700 hover:text-black text-xl font-bold cursor-pointer"
+            aria-label="Close modal"
+            className="shrink-0 rounded-lg p-1 text-xl font-bold
+            text-gray-700 transition-colors hover:bg-black/10
+            hover:text-black"
           >
             ✕
           </button>
         </div>
 
-        {/* Modal Body (White background) */}
-        <div className="p-6 sm:p-8 bg-white space-y-6">
-          {/* Success Icon */}
-          <div className="flex flex-col items-center text-center">
-            <div 
-              className="w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-sm"
-              style={{ backgroundColor: "#D0FFCA" }}
-            >
-              <FaCheck className="text-2xl" style={{ color: "#118F00" }} />
-            </div>
+        {/* Scrollable Body */}
+        <div
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain
+          bg-white p-4 sm:p-6 md:p-8"
+        >
+          <div className="space-y-6">
+            {/* Success Message */}
+            <div className="flex flex-col items-center text-center">
+              <div
+                className="mb-4 flex size-16 shrink-0 items-center
+                justify-center rounded-full shadow-sm"
+                style={{ backgroundColor: "#D0FFCA" }}
+              >
+                <FaCheck
+                  className="text-2xl"
+                  style={{ color: "#118F00" }}
+                />
+              </div>
 
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
-              Thank You for Supporting {paymentData?.artistName || "Wong kar-wai"}!
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base max-w-md">
-              Your donation of ${amount.toFixed(2)} has been successfully sent to support this artist.
-            </p>
+              <h2 className="mb-2 text-xl font-bold leading-snug
+              text-gray-900 sm:text-2xl">
+                Thank You for Supporting {artistName}!
+              </h2>
 
-            {/* Payment Successful Badge */}
-            <div 
-              className="mt-4 px-4 py-1.5 rounded-full text-xs font-semibold inline-flex items-center gap-1.5"
-              style={{ backgroundColor: "#D0FFCA", color: "#118F00" }}
-            >
-              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: "#118F00" }}></span>
-              Payment Successful
-            </div>
-          </div>
+              <p className="max-w-md text-sm leading-relaxed
+              text-gray-600 sm:text-base">
+                Your donation of ${safeAmount.toFixed(2)} has been
+                successfully sent to support this artist.
+              </p>
 
-          {/* Transaction Breakdown & Summary Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
-            {/* Left: Breakdown */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-gray-900 text-base">Transaction Breakdown</h4>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between text-gray-600">
-                  <span>Donation</span>
-                  <span className="font-medium text-gray-900">${amount.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-gray-600 items-center">
-                  <span className="flex items-center gap-1">
-                    Platform Fee <FaInfoCircle className="text-xs text-gray-400" />
-                  </span>
-                  <span className="font-medium text-gray-900">-${platformFee.toFixed(2)}</span>
-                </div>
-                <div className="pt-3 border-t border-gray-200 flex justify-between font-semibold text-base text-gray-900">
-                  <span>Artist Receives</span>
-                  <span className="text-gray-900">${artistReceives.toFixed(2)}</span>
-                </div>
+              {/* Payment Status */}
+              <div
+                className="mt-4 inline-flex items-center gap-2
+                rounded-full px-4 py-1.5 text-xs font-semibold"
+                style={{
+                  backgroundColor: "#D0FFCA",
+                  color: "#118F00",
+                }}
+              >
+                <span
+                  className="size-2 rounded-full"
+                  style={{ backgroundColor: "#118F00" }}
+                />
+                Payment Successful
               </div>
             </div>
 
-            {/* Right: Receipt Summary Box */}
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-3 text-xs sm:text-sm">
-              <h5 className="font-bold text-gray-400 uppercase tracking-wider text-[11px]">
-                Receipt Summary
-              </h5>
-              <div>
-                <p className="text-gray-500 text-xs">Artist Name</p>
-                <p className="font-medium text-gray-900">{paymentData?.artistName || "Emma Wilson"}</p>
-              </div>
-              <div>
-                <p className="text-gray-500 text-xs">Amount Paid</p>
-                <p className="font-medium text-gray-900">${amount.toFixed(2)}</p>
-              </div>
-              <div>
-                <p className="text-gray-500 text-xs">Payment Method</p>
-                <p className="font-medium text-gray-900 flex items-center gap-1">
-                  <FaWallet className="text-gray-600" /> {paymentData?.method || "PayPal"}
-                </p>
-              </div>
-              <div>
-                <p className="text-gray-500 text-xs">Transaction ID</p>
-                <p className="font-medium text-gray-900">TXN-8472-991A-EW</p>
-              </div>
-              <div className="grid grid-cols-2 pt-1 border-t border-gray-200">
-                <div>
-                  <p className="text-gray-500 text-[11px]">Date</p>
-                  <p className="font-medium text-gray-900">Oct 24, 2023</p>
+            {/* Transaction Details */}
+            <div className="grid grid-cols-1 gap-6 border-t
+            border-gray-100 pt-5 sm:grid-cols-2 sm:pt-6">
+              {/* Transaction Breakdown */}
+              <div className="min-w-0 space-y-4">
+                <h4 className="text-base font-semibold text-gray-900">
+                  Transaction Breakdown
+                </h4>
+
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center justify-between
+                  gap-3 text-gray-600">
+                    <span>Donation</span>
+                    <span className="shrink-0 font-medium text-gray-900">
+                      ${safeAmount.toFixed(2)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between
+                  gap-3 text-gray-600">
+                    <span className="flex items-center gap-1.5">
+                      Platform Fee
+                      <FaInfoCircle
+                        className="shrink-0 text-xs text-gray-400"
+                        title="Platform fee is 10%"
+                      />
+                    </span>
+
+                    <span className="shrink-0 font-medium text-gray-900">
+                      -${platformFee.toFixed(2)}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between
+                  gap-3 border-t border-gray-200 pt-3 text-sm
+                  font-semibold text-gray-900 sm:text-base">
+                    <span>Artist Receives</span>
+                    <span className="shrink-0">
+                      ${artistReceives.toFixed(2)}
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-gray-500 text-[11px]">Time</p>
-                  <p className="font-medium text-gray-900">14:32 EST</p>
+              </div>
+
+              {/* Receipt Summary */}
+              <div className="min-w-0 space-y-4 rounded-xl
+              border border-gray-200 bg-gray-50 p-4">
+                <h5 className="text-[11px] font-bold uppercase
+                tracking-wider text-gray-400">
+                  Receipt Summary
+                </h5>
+
+                <div className="space-y-1">
+                  <p className="text-xs text-gray-500">Artist Name</p>
+                  <p className="break-words text-sm font-medium text-gray-900">
+                    {artistName}
+                  </p>
+                </div>
+
+                <div className="space-y-1">
+                  <p className="text-xs text-gray-500">Amount Paid</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    ${safeAmount.toFixed(2)}
+                  </p>
+                </div>
+
+                <div className="space-y-1">
+                  <p className="text-xs text-gray-500">Payment Method</p>
+                  <p className="flex items-center gap-2 break-words
+                  text-sm font-medium text-gray-900">
+                    <FaWallet className="shrink-0 text-gray-600" />
+                    {paymentMethod}
+                  </p>
+                </div>
+
+                {paymentData?.transactionId && (
+                  <div className="space-y-1">
+                    <p className="text-xs text-gray-500">
+                      Transaction ID
+                    </p>
+                    <p className="break-all text-sm font-medium text-gray-900">
+                      {paymentData.transactionId}
+                    </p>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-2 gap-3 border-t
+                border-gray-200 pt-3">
+                  <div className="min-w-0">
+                    <p className="text-[11px] text-gray-500">Date</p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {paymentData?.date ||
+                        new Date().toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "2-digit",
+                          year: "numeric",
+                        })}
+                    </p>
+                  </div>
+
+                  <div className="min-w-0">
+                    <p className="text-[11px] text-gray-500">Time</p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {paymentData?.time ||
+                        new Date().toLocaleTimeString("en-US", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Modal Footer */}
-        <div 
-          className="p-4 sm:p-6 flex items-center justify-between border-t"
-          style={{ backgroundColor: "#C6C6CD", borderColor: "#C6C6CD" }}
+        {/* Fixed Footer */}
+        <div
+          className="flex shrink-0 flex-col-reverse gap-3 border-t
+          border-[#C6C6CD] bg-[#C6C6CD] p-4 sm:flex-row
+          sm:items-center sm:justify-between sm:p-5"
         >
           <button
+            type="button"
             onClick={handleViewProfile}
-            className="px-4 py-2.5 rounded-lg border border-gray-400 bg-white text-gray-800 font-medium hover:bg-gray-50 text-sm cursor-pointer transition-colors"
+            className="w-full rounded-lg border border-gray-400
+            bg-white px-4 py-2.5 text-sm font-medium text-gray-800
+            transition-colors hover:bg-gray-50 sm:w-auto"
           >
             View Artist Profile
           </button>
+
           <button
+            type="button"
             onClick={handleDone}
-            className="px-6 py-2.5 rounded-lg text-white font-medium bg-secondary hover:opacity-90 text-sm cursor-pointer transition-opacity"
+            className="w-full rounded-lg bg-secondary px-6 py-2.5
+            text-sm font-medium text-white transition-opacity
+            hover:opacity-90 sm:w-auto"
           >
             Done
           </button>

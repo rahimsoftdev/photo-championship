@@ -26,7 +26,7 @@ const ArtwokDetailsPage = () => {
   }
 
   return (
-    <main className="mx-auto w-full max-w-main px-4 py-6">
+    <main className="mx-auto w-full max-w-main px-4">
 
         {/* art work iamge carosel if 1 photo will show 1 photo if 6 or 12 will show carosel */}
       <ArtworkImages images={artwork.images} />
