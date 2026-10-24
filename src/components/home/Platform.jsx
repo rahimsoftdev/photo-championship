@@ -61,12 +61,12 @@ const Platform = () => {
       <div className="container mx-auto max-w-main px-5">
 
         {/* Section heading */}
-        <div className="mb-8">
+        <div className="mb-8 text-center md:text-start">
           <p className="mb-2 text-base font-bold uppercase tracking-wide text-blueText">
             The Platform
           </p>
 
-          <h2 className=" text-2xl font-extrabold text-titleText md:text-3xl mt-5">
+          <h2 className=" text-xl font-extrabold text-titleText md:text-3xl mt-5">
             Why My12Photos
           </h2>
         </div>
