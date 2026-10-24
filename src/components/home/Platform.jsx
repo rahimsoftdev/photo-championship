@@ -57,7 +57,7 @@ const platformFeatures = [
 
 const Platform = () => {
   return (
-    <section className="bg-white py-section">
+    <section className="bg-white md:pb-section   min-[350px]:px-4 sm:px-6 sm:pb-12 md:px-8  pb-10">
       <div className="container mx-auto max-w-main px-5">
 
         {/* Section heading */}
@@ -66,7 +66,7 @@ const Platform = () => {
             The Platform
           </p>
 
-          <h2 className=" text-3xl font-extrabold text-titleText md:text-4xl mt-5">
+          <h2 className=" text-2xl font-extrabold text-titleText md:text-3xl mt-5">
             Why My12Photos
           </h2>
         </div>
@@ -76,24 +76,24 @@ const Platform = () => {
           {platformFeatures.map((feature) => (
             <div
               key={feature.id}
-              className="rounded-2xl border border-black/[0.17] bg-white p-5 transition-shadow duration-300 hover:shadow-md"
+              className="rounded-xl border border-black/[0.17] bg-white p-3 transition-shadow duration-300 hover:shadow-md min-[400px]:p-4 sm:rounded-2xl sm:p-5"
             >
               {/* Feature icon */}
-              <div className="mb-3">
+              <div className="mb-2 sm:mb-3">
                 <IconDesign
                   icon={feature.icon}
                   color="#3F51B5"
                   bgColor="#EEF2FF"
-                  size={16}
+                  size={12}
                 />
               </div>
 
               {/* Feature content */}
-              <h3 className="mb-2 text-xl font-bold text-[#111827]">
+              <h3 className="mb-1.5 text-sm font-bold text-[#111827] min-[400px]:text-base sm:mb-2 sm:text-lg md:text-xl">
                 {feature.title}
               </h3>
 
-              <p className="text-[13px] font-normal leading-relaxed text-subTitleText">
+              <p className="text-[11px] font-normal leading-relaxed text-subTitleText min-[400px]:text-xs sm:text-[13px]">
                 {feature.description}
               </p>
             </div>
