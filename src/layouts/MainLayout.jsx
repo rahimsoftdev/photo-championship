@@ -4,19 +4,21 @@ import Footer from '../components/shared/Footer';
 import AnnouncementBar from '../components/shared/AnnouncementBar';
 import Newsletter from '../components/shared/Newsletter';
 import AdvertisingBanner from '../components/shared/AdvertisingBanner';
+import ScrollToTop from '../components/shared/ScrollToTop';
 
 //  
 const MainLayout = () => {
     return (
         <div>
-            <AnnouncementBar/>
-            <Navbar/>
+            <ScrollToTop />
+            <AnnouncementBar />
+            <Navbar />
             <main className=''>
                 <Outlet />
             </main>
-            <AdvertisingBanner/>
-            <Newsletter/>
-            <Footer/>
+            <AdvertisingBanner />
+            <Newsletter />
+            <Footer />
         </div>
     );
 };
