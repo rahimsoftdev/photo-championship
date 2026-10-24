@@ -79,12 +79,13 @@ const Newsletter = () => {
         </svg>
 
         {/* Newsletter content */}
-        <div className="relative z-10 mx-auto flex max-w-lg flex-col items-center text-center h-[260px] 2xl:h-[360px] flex justify-center items-center">
-          <h2 className="text-2xl font-semibold leading-tight sm:text-3xl">
+        {/* Newsletter content */}
+        <div className="relative z-10 mx-auto flex h-[260px] w-full max-w-lg flex-col items-center justify-center text-center 2xl:h-[360px]">
+          <h2 className="text-xl font-semibold leading-tight min-[400px]:text-2xl sm:text-3xl">
             Stay Updated
           </h2>
 
-          <p className="mt-1 max-w-sm text-xs font-normal leading-relaxed text-white/90">
+          <p className="mt-1 max-w-sm text-[11px] font-normal leading-relaxed text-white/90 min-[400px]:text-xs">
             Receive competition announcements, winner reveals,
             <br className="hidden sm:block" />
             and photography tips.
@@ -93,11 +94,11 @@ const Newsletter = () => {
           {/* Email and Subscribe container */}
           <form
             onSubmit={handleSubmit}
-            className="mt-5 flex w-full max-w-[390px] items-center gap-1.5 rounded-full bg-[rgba(255,255,255,0.24)] p-1"
+            className="mt-4 flex w-full max-w-[390px] items-center gap-1 rounded-full bg-[rgba(255,255,255,0.24)] p-1 min-[400px]:gap-1.5 sm:mt-5"
           >
             {/* Email input */}
-            <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full bg-white px-3">
-              <FiMail className="shrink-0 text-xs text-gray-400" />
+            <div className="flex min-w-0 flex-1 items-center gap-1.5 rounded-full bg-white px-2.5 min-[400px]:gap-2 min-[400px]:px-3">
+              <FiMail className="shrink-0 text-[10px] text-gray-400 min-[400px]:text-xs" />
 
               <input
                 type="email"
@@ -106,14 +107,14 @@ const Newsletter = () => {
                 placeholder="Enter your email..."
                 aria-label="Email address"
                 required
-                className="w-full min-w-0 bg-transparent py-2 text-xs text-[#191818] outline-none placeholder:text-gray-400"
+                className="w-full min-w-0 bg-transparent py-2 text-[11px] text-[#191818] outline-none placeholder:text-gray-400 min-[400px]:text-xs"
               />
             </div>
 
             {/* Subscribe button */}
             <button
               type="submit"
-              className="shrink-0 rounded-full cursor-pointer bg-[#EE1C25] px-5 py-2 text-xs font-medium text-white transition-colors hover:bg-red-700"
+              className="shrink-0 cursor-pointer rounded-full bg-[#EE1C25] px-3 py-2 text-[11px] font-medium text-white transition-colors hover:bg-red-700 min-[400px]:px-4 min-[400px]:text-xs sm:px-5"
             >
               Subscribe
             </button>

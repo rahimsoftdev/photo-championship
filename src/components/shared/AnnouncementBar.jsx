@@ -1,52 +1,39 @@
 
+import MarqueePackage from "react-fast-marquee";
+
+const Marquee = MarqueePackage.default ?? MarqueePackage;
+
 const announcements = [
   "🎉 May 2026 winners announced — View now",
   "📢 June competition is now open — Free to enter",
   "🏆 This month's prize: $500",
   "📅 Competition ends in 7 days",
 ];
-//This is an announcement bar that will always appear at the top of the page. I created an array to store news announcements. The benefit of using an array is that we can easily add new announcements, and they will automatically be displayed in the announcement bar.
+
 const AnnouncementBar = () => {
   return (
-    <div className="overflow-hidden bg-btn py-2.5 text-white ">
-      <div className="max-w-main">
-        <div className="announcement-track flex  items-center">
-          {[...announcements, ...announcements].map((item, index) => (
+    <div className="bg-primary">
+      <div className="overflow-hidden  py-2.5 text-white max-w-main mx-auto">
+        <Marquee
+          speed={40}
+          direction="left"
+          pauseOnHover
+          gradient={false}
+          autoFill
+        >
+          {announcements.map((item, index) => (
             <span
               key={index}
-              className="shrink-0 whitespace-nowrap px-6 text-sm font-medium md:text-base"
+              className="shrink-0 whitespace-nowrap px-4 text-xs font-medium min-[400px]:px-5 min-[400px]:text-sm sm:px-6 md:text-base"
             >
               {item}
-              <span className="ml-6 text-white/70">·</span>
+              <span className="ml-4 text-white/70 min-[400px]:ml-5 sm:ml-6">
+                ·
+              </span>
             </span>
           ))}
-        </div>
+        </Marquee>
       </div>
-
-      <style>{`
-        .announcement-track {
-          animation: announcement-scroll 35s linear infinite;
-        }
-
-        .announcement-track:hover {
-          animation-play-state: paused;
-        }
-
-        @keyframes announcement-scroll {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .announcement-track {
-            animation: none;
-          }
-        }
-      `}</style>
     </div>
   );
 };

@@ -32,7 +32,7 @@ const MonthlyWinners = () => {
 
         {/* Winner Cards */}
         <div className="mx-auto grid max-w-3xl grid-cols-1 gap-3 min-[500px]:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-          {data.map((winner) => (
+          {data?.map((winner) => (
             <article
               key={winner.id}
               className="flex flex-col items-center rounded-xl border border-white/10 bg-[#666DD7] px-4 py-5 text-center text-white min-[400px]:px-5 sm:rounded-2xl sm:px-5 sm:py-6"
