@@ -116,7 +116,7 @@ const AlbumSidebar = () => {
   const sidebarContent = (
     <div className="flex h-full flex-col bg-white text-[#191919]">
       {/* Mobile-only heading and close button */}
-      <div className="flex items-center justify-between border-b border-gray-200 px-5 py-4 md:hidden">
+      <div className="flex items-center justify-between border-b border-gray-200 px-5  md:hidden">
         <h2 className="text-lg font-bold">Filters</h2>
 
         <button
@@ -258,7 +258,7 @@ const AlbumSidebar = () => {
   return (
     <>
       {/* Mobile/tablet filter button. Hidden on desktop (md and above). */}
-      <div className="mb-4 md:hidden">
+      <div className="mb-1 md:hidden">
         <button
           type="button"
           onClick={() => setIsSidebarOpen(true)}

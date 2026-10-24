@@ -7,7 +7,7 @@ import Pagination from "../components/shared/Pagination";
 
 const FeedLayout = () => {
   return (
-    <main className="mx-auto w-full max-w-main px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+    <main className="mx-auto w-full max-w-main px-4 pt-10 sm:pt-12  sm:px-6 lg:px-8 lg:pt-section">
       <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8 lg:gap-16">
         {/* Sidebar */}
         <aside className="w-full shrink-0 md:w-[220px] lg:w-[238px]">
