@@ -16,7 +16,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4 max-w-main">
 
         {/* Section heading */}
-        <div className="mb-10 text-center">
+        <div className="mb-7  md:mb-10 text-center">
           <p className="text-base font-bold uppercase text-[#E31837]">
             Testimonials
           </p>
@@ -27,7 +27,7 @@ const Testimonials = () => {
         </div>
 
         {/* Testimonial cards */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 md:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {data.map((item) => (
             <div
               key={item.id}
@@ -44,7 +44,7 @@ const Testimonials = () => {
               </div>
 
               {/* Review */}
-              <p className="mb-5 text-sm font-normal leading-relaxed text-[#0D0D14]">
+              <p className="mb-5 text-xs md:text-base font-normal leading-relaxed text-[#0D0D14]">
                 "{item.review}"
               </p>
 
