@@ -4,7 +4,7 @@ import AlbumTypes from '../components/shared/AlbumTypes';
 const UploadArtWorkTypes = () => {
     return (
         <>
-            <AlbumTypes/>
+            <AlbumTypes isArtwork={true} />
         </>
     );
 };

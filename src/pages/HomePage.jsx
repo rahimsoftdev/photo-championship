@@ -12,7 +12,7 @@ const HomePage = () => {
         <div>
             <Hero/>
             <StatsSection/>
-            <AlbumTypes/>
+            <AlbumTypes isHome={true} />
 
             <HowItWorks  />
 
