@@ -13,8 +13,8 @@ const PhotographerNavTabs = () => {
     : `/photographers/${id}`;
 
   return (
-    <div className="max-w-[500px] bg-[#FAFAFA] p-3 rounded border border-gray-200/70 shadow-sm mt-6">
-      <div className="flex items-center gap-8 overflow-x-auto scrollbar-none text-sm font-medium px-2">
+    <div className="max-w-[500px] bg-[#FAFAFA] p-3 rounded-xl border border-gray-200/70 shadow-xs mt-6">
+      <div className="flex items-center gap-8 overflow-x-auto scrollbar-none text-xs sm:text-sm font-medium px-2">
         
         {/* Profile Tab */}
         <NavLink 

@@ -6,7 +6,7 @@ const PhotographerHeader = ({ user }) => {
   const [follow, setFollow] = useState(false);
 
   return (
-    <div className="w-full relative pb-4">
+    <div className="w-full relative md:pb-2 pb-4">
       {/* 1. Cover Photo Container */}
       <div className="w-full h-[120px] sm:h-[220px] md:h-[270px] lg:h-[360px] xl:h-[400px]  rounded-2xl overflow-hidden bg-gray-200">
         <img
