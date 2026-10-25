@@ -23,7 +23,7 @@ const BayPhotosPage = () => {
     }
 
     return (
-        <section className="w-full space-y-6 pt-7">
+        <section className="w-full space-y-6 lg:pt-7">
             {/* <h1>Buy Photos</h1> */}
 
             {artworks.length === 0 ? (

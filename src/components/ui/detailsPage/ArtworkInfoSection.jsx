@@ -60,12 +60,12 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
   };
 
   return (
-    <div className="w-full space-y-6 ">
+    <div className="w-full space-y-5 pt-5  ">
       {/* Top Badges / Tags */}
       <div className="flex flex-wrap items-center gap-3">
         {images && images.length > 1 && (
           <span
-            className="rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+            className="rounded-full px-2 md:px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
             style={{ backgroundColor: "rgba(236, 237, 250, 1)" }}
           >
             {images.length} Photos
@@ -73,7 +73,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
         )}
         {category && (
           <span
-            className="rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+            className="rounded-full px-2 md:px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
             style={{ backgroundColor: "rgba(236, 237, 250, 1)" }}
           >
             {category}
@@ -81,7 +81,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
         )}
         {subCategory && (
           <span
-            className="rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+            className="rounded-full px-2 md:px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
             style={{ backgroundColor: "rgba(236, 237, 250, 1)" }}
           >
             {subCategory}
@@ -90,12 +90,12 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
       </div>
 
       {/* Title */}
-      <h1 className="text-2xl font-bold text-gray-900 md:text-3xl lg:text-4xl">
+      <h1 className="text-xl font-bold text-gray-900 md:text-2xl lg:text-4xl">
         {title}
       </h1>
 
       {/* Description */}
-      <p className="text-base leading-relaxed text-gray-600">{description}</p>
+      <p className="text-xs sm:text-sm md:text-lg leading-relaxed text-gray-600">{description}</p>
 
       {/* Image Details Box with justify-between and responsive layout */}
       <div
@@ -167,7 +167,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 border-b pb-7 border-gray-200">
         {/* Votes Received */}
         <div
-          className="flex flex-col items-center justify-center rounded-2xl p-6 text-center"
+          className="flex flex-col items-center justify-center rounded-2xl py-1 sm:py-2 md:py-3 text-center"
           style={{
             backgroundColor: "rgba(0, 0, 0, 0.08)",
             border: "1px solid rgba(0, 0, 0, 0.08)",
@@ -176,14 +176,14 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
           <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
             Votes Received
           </span>
-          <span className="mt-2 text-2xl font-bold text-gray-900">
+          <span className="mt-2 text-base md:text-xl font-bold text-gray-900">
             {totalReact || 0}
           </span>
         </div>
 
         {/* Views Counted */}
         <div
-          className="flex flex-col items-center justify-center rounded-2xl p-6 text-center"
+          className="flex flex-col items-center justify-center rounded-2xl py-1 sm:py-2 md:py-3 text-center"
           style={{
             backgroundColor: "rgba(0, 0, 0, 0.08)",
             border: "1px solid rgba(0, 0, 0, 0.08)",
@@ -192,7 +192,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
           <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
             Views Counted
           </span>
-          <span className="mt-2 text-2xl font-bold text-gray-900">
+          <span className="mt-2 text-base md:text-xl font-bold text-gray-900">
             {viewsCount || 0}
           </span>
         </div>
@@ -203,7 +203,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
         {/* Vote Button */}
         <button
           onClick={() => setVote(!vote)}
-          className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-opacity hover:opacity-90 shadow-sm  ${vote ? "bg-secondary text-white " : " text-secondary border border-secondary "} `}
+          className={`flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-xs font-semibold transition-opacity hover:opacity-90 shadow-sm  max-sm:w-full ${vote ? "bg-secondary text-white " : " text-secondary border border-secondary "}  `}
         >
           <FiHeart className="text-lg" />
           {vote ? "Voted" : "Cast Your Vote"}
@@ -212,7 +212,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
         {/* Download Button */}
         <button
           onClick={handleDownload}
-          className="flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-primary transition-opacity hover:opacity-90 shadow-sm"
+          className="flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-sm font-semibold text-white bg-primary transition-opacity hover:opacity-90 shadow-sm max-sm:w-full"
         >
           <FiDownload className="text-lg" />
           Download Photo
@@ -221,7 +221,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
         {/* Share Button */}
         <button
           onClick={handleShare}
-          className="relative flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-gray-800 transition-opacity hover:opacity-90 shadow-sm"
+          className="relative flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-sm font-semibold text-gray-800 transition-opacity hover:opacity-90 shadow-sm max-sm:w-full"
           style={{ backgroundColor: "rgba(253, 232, 233, 1)" }}
         >
           <FiShare2 className="text-lg" />
@@ -230,7 +230,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
       </div>
 
       {/* Photographer Profile Section (As shown in screenshot) */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between  pt-4 gap-4">
+      <div className="flex  items-start sm:items-center justify-between   gap-4">
         <div className="flex items-center gap-4">
           <img
             src={
@@ -238,7 +238,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
               "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
             }
             alt={info?.author || "Photographer"}
-            className="h-12 w-12 rounded-full object-cover shadow-sm"
+            className="h-6 w-6 sm:w-12 sm:h-12 rounded-full object-cover shadow-sm"
           />
           <div>
             <span className="text-xs text-gray-500 uppercase tracking-wide">
@@ -251,7 +251,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
         </div>
         <Link
           to={`/photographers/${artwork?.userId}`}
-          className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+          className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-1.5 md:py-2.5 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
         >
           View Profile
         </Link>

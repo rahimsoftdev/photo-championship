@@ -220,7 +220,7 @@ const ArtworkGalleryGrid = ({ images = [], zodiacs = [] }) => {
   };
 
   return (
-    <div className="relative w-full py-6">
+    <div className="relative w-full pt-5 ">
       {/* 6 photo: ek ta curve + ek row */}
       {!isTwelve && (
         <div>

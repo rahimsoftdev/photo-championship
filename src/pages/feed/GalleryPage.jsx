@@ -28,7 +28,7 @@ const GalleryPage = () => {
     }
 
     return (
-        <section className="w-full space-y-6 pt-7">
+        <section className="w-full space-y-6 lg:pt-7">
             {/* Artwork cards */}
             <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
                 {artworks.map((artWorkData) => (
