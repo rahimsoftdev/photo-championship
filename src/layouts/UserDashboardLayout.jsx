@@ -12,17 +12,17 @@ export default function UserDashboard() {
     return <Navigate to="/login" replace />;
   }
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex">
+    <div className="min-h-screen bg-[#F9FAFB]  flex">
       {/* Dynamic Responsive Sidebar */}
       <Sidebar />
 
       {/* Main Content Area */}
-      <main className="flex-1 bg-[#F9FAFB]   lg:ml-[270px] p-4 md:p-6 lg:p-8 transition-all duration-300">
+      <main className="flex-1   lg:ml-[270px] pt-8  transition-all duration-300 max-sm:px-4 px-6">
         {/* Navbar space / top margin for mobile toggle button spacing */}
-        <div className="px-3 ">
+
           {/* React Router Outlet where child page components render */}
           <Outlet />
-        </div>
+        
       </main>
     </div>
   );

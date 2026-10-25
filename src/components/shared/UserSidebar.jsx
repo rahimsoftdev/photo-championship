@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
 import {
     FiGrid,
@@ -21,11 +21,25 @@ import {
     FiMenu,
     FiX
 } from 'react-icons/fi';
+import { getSavedUserInfo } from '../../utils/getUserInof';
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate(); // component er vitore, top e
 
+    const userInfo = getSavedUserInfo()
+
+    // Mobile e sidebar open thakle background page scroll lock
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpen]);
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -50,11 +64,11 @@ const Sidebar = () => {
         { name: 'Settings', path: '/user-dashboard/settings', icon: <FiSettings size={18} /> },
     ];
 
-
     const handleLogout = () => {
         localStorage.removeItem("rememberedEmail");
         navigate("/login");
     };
+
     return (
         <>
             {/* Small Device Toggle Button */}
@@ -77,27 +91,25 @@ const Sidebar = () => {
             )}
 
             {/* Sidebar Container
-                Scrollbar is hidden (Chrome/Safari/Edge, Firefox, old Edge/IE),
-                but the sidebar can still be scrolled with mouse wheel / touch on short screens. */}
+                - Scrollbar hidden (Chrome/Safari/Edge, Firefox, old Edge/IE), tobe mouse wheel / touch diye scroll kora jay.
+                - overscroll-contain: sidebar scroll korle bairer page scroll hobe na. */}
             <aside
-                className={`fixed top-0 left-0 z-40 w-[270px] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col justify-between overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed top-0 left-0 z-40 w-[270px] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col justify-between overflow-y-auto overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
                 <div className="p-5 flex-1 flex flex-col">
                     {/* Logo Section */}
                     <div className="flex items-center gap-3 mb-6 pt-2">
-
                         <div>
                             <Link
                                 to="/"
-
                                 className="shrink-0"
                                 aria-label="Photo Championship home"
                             >
                                 <img
                                     src="/src/assets/images/logo.png"
                                     alt="Photo Championship"
-                                    className="h-20 w-auto object-contain sm:h-14"
+                                    className="h-30 w-auto object-contain sm:h-14"
                                 />
                             </Link>
                             <p className="text-[7px] text-gray-500 uppercase tracking-wider mt-0.5">
@@ -136,13 +148,13 @@ const Sidebar = () => {
                     <div className="mt-6 pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-3 p-2.5 bg-gray-50 rounded-xl">
                             <img
-                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150"
+                                src={userInfo.image}
                                 alt="Atik Adnan"
                                 className="w-10 h-10 rounded-full object-cover border border-gray-200"
                             />
                             <div className="overflow-hidden">
                                 <h4 className="text-sm font-semibold text-gray-800 truncate leading-tight">
-                                    Atik Adnan
+                                    {userInfo.name}
                                 </h4>
                                 <p className="text-xs text-gray-500 truncate">User</p>
                             </div>
