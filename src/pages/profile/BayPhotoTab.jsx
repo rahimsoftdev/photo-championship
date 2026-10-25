@@ -4,7 +4,10 @@ import useArtwork from '../../hooks/useArtwork';
 import LoadingPage from '../feedback/LoadingPage';
 import ArtworkCard from '../../components/ui/ArtworkCard';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
-import { Pagination } from '@heroui/react';
+// import { Pagination } from '@heroui/react';
+import { FaImage } from 'react-icons/fa';
+import Pagination from '../../components/shared/Pagination';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
 
 const BayPhotoTab = () => {
 
@@ -20,21 +23,24 @@ const BayPhotoTab = () => {
     } = useArtwork(params, true, 9, "/bayPhoto.json");
     console.log(artworks, 'paichi')
 
-    if (loading) return <LoadingPage />;
+    if (loading) {
+        return <ArtworkSkeleton />
+    }
 
     if (error) {
         return <p className="text-red-500">{error}</p>;
     }
     return (
-        <div>
-            <div className='mb-5'>
+        <div className='space-y-6'>
+            <div>
                 <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                    <span>🖼️</span> My Premium Photos
+                    <span><FaImage className="text-2xl " /></span> My Artwork
                 </h3>
                 <p className="text-xs text-gray-500 mt-1">
                     Explore single photography prints, 6-photo sets, and 12-photo Zodiac Story editorial albums
                 </p>
             </div>
+
 
             <MyArtworkFilter totalShown={artworks.length}
                 totalFiltered={totalArtworks} />
