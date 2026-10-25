@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import {
     FiGrid,
     FiEdit3,
@@ -24,6 +24,8 @@ import {
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate(); // component er vitore, top e
+
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
@@ -48,6 +50,11 @@ const Sidebar = () => {
         { name: 'Settings', path: '/user-dashboard/settings', icon: <FiSettings size={18} /> },
     ];
 
+
+    const handleLogout = () => {
+        localStorage.removeItem("rememberedEmail");
+        navigate("/login");
+    };
     return (
         <>
             {/* Small Device Toggle Button */}
@@ -69,19 +76,21 @@ const Sidebar = () => {
                 />
             )}
 
-            {/* Sidebar Container */}
+            {/* Sidebar Container
+                Scrollbar is hidden (Chrome/Safari/Edge, Firefox, old Edge/IE),
+                but the sidebar can still be scrolled with mouse wheel / touch on short screens. */}
             <aside
-                className={`fixed top-0 left-0 z-40 w-[270px] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col justify-between overflow-y-auto ${isOpen ? 'translate-x-0' : '-translate-x-full'
+                className={`fixed top-0 left-0 z-40 w-[270px] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col justify-between overflow-y-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'
                     }`}
             >
                 <div className="p-5 flex-1 flex flex-col">
                     {/* Logo Section */}
                     <div className="flex items-center gap-3 mb-6 pt-2">
-                      
+
                         <div>
                             <Link
                                 to="/"
-                               
+
                                 className="shrink-0"
                                 aria-label="Photo Championship home"
                             >
@@ -141,10 +150,7 @@ const Sidebar = () => {
 
                         {/* Logout Button */}
                         <button
-                            onClick={() => {
-                                // Add your logout logic here
-                                console.log('Logging out...');
-                            }}
+                            onClick={handleLogout}
                             className="w-full mt-3 flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#D00000] hover:bg-red-50 transition-colors"
                         >
                             <FiLogOut size={18} />

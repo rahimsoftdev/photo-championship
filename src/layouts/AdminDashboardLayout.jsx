@@ -1,8 +1,18 @@
 import React from 'react';
-import { Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router';
 import AdminSidebar from '../components/shared/AdminSidebar';
+import { getSavedUserInfo } from '../utils/getUserInof';
 
 const AdminDashboardLayout = () => {
+    const userInfo = getSavedUserInfo()
+
+    if (!userInfo) {
+        return <Navigate to="/login" replace />;
+    }
+    console.log(userInfo.role)
+    if(userInfo.role !== 'admin'){
+        return <Navigate to={'/access-denied'}/>
+    }
     return (
         <div className="min-h-screen bg-[#F8F9FA] flex">
             {/* Dynamic Responsive Sidebar */}
