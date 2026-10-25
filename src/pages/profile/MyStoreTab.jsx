@@ -4,12 +4,15 @@ import useProducts from '../../hooks/useProducts.js';
 import Pagination from '../../components/shared/Pagination.jsx';
 import ProductCard from '../../components/userDashbaord/ui/ProductCard.jsx';
 import { FiLayers, FiPlus } from 'react-icons/fi';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton.jsx';
 
 const MyStoreTab = () => {
 
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const { products, totalPages, loading, error, currentCategory } = useProducts(8);
+
+    
 
     const categories = ['All Items', 'Art Prints', 'Handmade Crafts', 'Apparel', 'Photobooks', 'Digital Preset'];
 
@@ -25,12 +28,16 @@ const MyStoreTab = () => {
             return next;
         });
     };
+
+    if(loading){
+        return <ArtworkSkeleton/>
+    }
     return (
-        <div className="min-h-screen  p-6 md:p-10 font-sans">
-            <div className="max-w-7xl mx-auto">
+        <div className="">
+            <div className="">
 
                 {/* HEADER SECTION */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4 ">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
                             <span className="p-1.5 bg-gray-100 rounded-md text-gray-700">
@@ -42,12 +49,13 @@ const MyStoreTab = () => {
                             Explore Art, handmade products and creative merchandise.
                         </p>
                     </div>
+                    
 
                   
                 </div>
 
                 {/* FILTER CATEGORY TABS WITH bg-primary */}
-                <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+                <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar border-b border-[#E5E7EB] pb-3">
                     {categories.map((cat) => {
                         const isActive = currentCategory.toLowerCase() === cat.toLowerCase();
                         return (
