@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { FaHeart, FaShareAlt, FaShoppingCart } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router';
+import { FaHeart, FaShareAlt, FaShoppingCart, FaDownload } from 'react-icons/fa';
 
 const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
     // Correct: useNavigate hook-ti component er top level e call kora holo
@@ -10,6 +10,11 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(bayPhoto?.totalReact || 2150);
     const [copied, setCopied] = useState(false);
+    const [downloading, setDownloading] = useState(false);
+
+    // Download er image link. Nijer link boshaite chaile fallback ta change koro.
+    const imageUrl =
+        bayPhoto?.images?.[0] || "https://picsum.photos/seed/mountain-art-01/1200/800";
 
     // Handle Like Toggle
     const handleLikeToggle = () => {
@@ -34,6 +39,35 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
         });
     };
 
+    // Handle Download: image ta blob hishebe niye browser e save kore
+    const handleDownload = async () => {
+        if (downloading) return;
+        setDownloading(true);
+
+        try {
+            const res = await fetch(imageUrl);
+            if (!res.ok) throw new Error('Download failed');
+
+            const blob = await res.blob();
+            const ext = blob.type.split('/')[1] || 'jpg';
+            const blobUrl = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = `${bayPhoto?.title || 'photo'}.${ext}`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(blobUrl);
+        } catch (err) {
+            console.error('Download failed: ', err);
+            // CORS block korle image new tab e khule jabe
+            window.open(imageUrl, '_blank', 'noopener,noreferrer');
+        } finally {
+            setDownloading(false);
+        }
+    };
+
     // Handle Buy Photo Button Click
     const handleBuyPhoto = () => {
         const queryParams = new URLSearchParams({
@@ -49,33 +83,38 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
 
     return (
         <div className="w-full my-6 space-y-6">
-            
+
             {/* Top Badges / Tags */}
             <div className="flex flex-wrap items-center gap-3">
-                {bayPhoto?.albumType && (
-                    <span className="bg-[#E0E7FF] text-primary px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
-                        {bayPhoto.albumType} Album • {bayPhoto.images?.length || 1} Photos
-                    </span>
-                )}
+
+
+
                 {bayPhoto?.category && (
-                    <span className="bg-[#E0E7FF] text-primary px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
-                        {bayPhoto.category}
+                    <span
+                        className="rounded-full px-2 md:px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+                        style={{ backgroundColor: "rgba(236, 237, 250, 1)" }}
+                    >
+                        {bayPhoto?.category}
                     </span>
                 )}
-                {zodiacs && zodiacs.map((zodiac, index) => (
-                    <span key={index} className="bg-[#E0E7FF] text-primary px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
-                        Zodiac: {zodiac}
+                {bayPhoto?.albumType && (
+                    <span
+                        className="rounded-full px-2 md:px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary"
+                        style={{ backgroundColor: "rgba(236, 237, 250, 1)" }}
+                    >
+                        {bayPhoto?.albumType}
                     </span>
-                ))}
+                )}
+
             </div>
 
             {/* Main 3 Columns Grid Section matching the design */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
+
                 {/* 1st Column: Title & Price Card */}
                 <div className="bg-white border border-[#C6C6CD] rounded-2xl p-6 flex flex-col justify-between shadow-sm">
                     <div>
-                        <h1 className="text-2xl lg:text-3xl font-bold text-[#111827] mb-2 leading-snug">
+                        <h1 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-[#111827] mb-2 leading-snug">
                             {bayPhoto?.title || "Chasing the Neon Stream"}
                         </h1>
                         <p className="text-sm text-gray-500 mb-6">
@@ -83,12 +122,12 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
                         </p>
                     </div>
                     <div>
-                        <div className="text-2xl lg:text-3xl font-bold text-[#111827] mb-4">
+                        <div className="text-lg md:text-2xl lg:text-3xl font-bold text-[#111827] mb-4">
                             $25.00
                         </div>
-                        <button 
+                        <button
                             onClick={handleBuyPhoto}
-                            className="w-full bg-secondary text-white py-3 px-4 rounded-xl font-medium flex items-center justify-center gap-2 hover:opacity-95 transition-all shadow-md cursor-pointer"
+                            className="w-full bg-secondary text-white py-1.5 md:py-3 px-4 rounded-xl font-medium flex items-center justify-center gap-2 hover:opacity-95 transition-all shadow-md cursor-pointer"
                         >
                             <FaShoppingCart /> Buy Photo
                         </button>
@@ -102,10 +141,10 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
                             Creator
                         </h3>
                         <div className="flex items-center gap-4 mb-6">
-                            <img 
-                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" 
-                                alt="Creator" 
-                                className="w-12 h-12 rounded-full object-cover border border-[#C6C6CD]"
+                            <img
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"
+                                alt="Creator"
+                                className="w-6 h-6  md:w-12 md:h-12 rounded-full object-cover border border-[#C6C6CD]"
                             />
                             <div>
                                 <h4 className="font-bold text-[#111827]">
@@ -115,9 +154,12 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
                             </div>
                         </div>
                     </div>
-                    <button className="w-full border border-[#C6C6CD] text-[#111827] py-2.5 rounded-xl font-medium hover:bg-[#F5F5F5] transition-all">
+                    <Link
+                        to={`/photographers/${bayPhoto?.userId}`}
+                        className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-1.5 md:py-2.5 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+                    >
                         View Profile
-                    </button>
+                    </Link>
                 </div>
 
                 {/* 3rd Column: Image Details */}
@@ -166,36 +208,70 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
             </div>
 
             {/* Stats Row Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-[#F5F5F5] border border-[#C6C6CD] rounded-2xl p-6 text-center shadow-sm">
-                    <p className="text-xs font-bold tracking-widest text-gray-500 uppercase mb-1">TOTAL REACT</p>
-                    <h3 className="text-2xl font-bold text-[#111827]">{likesCount}</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 border-b pb-7 border-gray-200">
+                {/* Votes Received */}
+                <div
+                    className="flex flex-col items-center justify-center rounded-2xl py-1 sm:py-2 md:py-3 text-center"
+                    style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.08)",
+                        border: "1px solid rgba(0, 0, 0, 0.08)",
+                    }}
+                >
+                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        TOTAL REACT
+                    </span>
+                    <span className="mt-2 text-base md:text-xl font-bold text-gray-900">
+                        {likesCount || 0}
+                    </span>
                 </div>
-                <div className="bg-[#F5F5F5] border border-[#C6C6CD] rounded-2xl p-6 text-center shadow-sm">
-                    <p className="text-xs font-bold tracking-widest text-gray-500 uppercase mb-1">VIEWS COUNTED</p>
-                    <h3 className="text-2xl font-bold text-[#111827]">{bayPhoto?.viewsCount || 12400}</h3>
+
+                {/* Views Counted */}
+                <div
+                    className="flex flex-col items-center justify-center rounded-2xl py-1 sm:py-2 md:py-3 text-center"
+                    style={{
+                        backgroundColor: "rgba(0, 0, 0, 0.08)",
+                        border: "1px solid rgba(0, 0, 0, 0.08)",
+                    }}
+                >
+                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                        Views Counted
+                    </span>
+                    <span className="mt-2 text-base md:text-xl font-bold text-gray-900">
+                        {bayPhoto?.viewsCount || 0}
+                    </span>
                 </div>
             </div>
 
-            {/* Action Buttons: Like & Share */}
-            <div className="flex items-center gap-4 pt-2">
+
+
+            {/* Action Buttons: Like, Download & Share */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
                 {/* Like Button with Toggle Background */}
-                <button 
+                <button
                     onClick={handleLikeToggle}
-                    className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-medium transition-all shadow-sm cursor-pointer ${
-                        isLiked 
-                            ? 'bg-secondary text-white' 
-                            : 'bg-[#FDE8E9] text-secondary border border-secondary/30 hover:bg-secondary/10'
-                    }`}
+                    className={`flex items-center justify-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-xs font-semibold transition-opacity hover:opacity-90 shadow-sm max-sm:w-full ${isLiked
+                        ? 'bg-secondary text-white'
+                        : 'bg-[#FDE8E9] text-secondary border border-secondary/30 hover:bg-secondary/10'
+                        }`}
                 >
                     <FaHeart className={isLiked ? 'text-white' : 'text-secondary'} />
                     <span>Like</span>
                 </button>
 
+                {/* Download Button */}
+                <button
+                    onClick={handleDownload}
+                    disabled={downloading}
+                    className="flex items-center justify-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-xs font-semibold transition-opacity hover:opacity-90 shadow-sm max-sm:w-full disabled:cursor-not-allowed disabled:opacity-60 bg-primary text-white"
+                >
+                    <FaDownload />
+                    <span>{downloading ? 'Downloading...' : 'Download'}</span>
+                </button>
+
                 {/* Share Button to Copy Link */}
-                <button 
+                <button
                     onClick={handleShare}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-full font-medium bg-[#FDE8E9] text-secondary border border-secondary/30 hover:bg-secondary/10 transition-all shadow-sm cursor-pointer"
+                    className="flex items-center justify-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-xs font-semibold transition-opacity hover:opacity-90 shadow-sm max-sm:w-full bg-[#FDE8E9]"
                 >
                     <FaShareAlt />
                     <span>{copied ? 'Copied!' : 'Share'}</span>
