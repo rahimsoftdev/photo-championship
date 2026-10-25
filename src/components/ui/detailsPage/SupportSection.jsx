@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import SupportSuccessModal from "./SupportSuccessModal"; // Sibling Component import
+import { getSavedUserInfo } from "../../../utils/getUserInof";
+
+const presetAmounts = [5, 10, 25, 50, 100];
 
 const SupportSection = () => {
   // TODO: add real profile (apadtoto fake profile)
   const artistProfile = {
     name: "Wong Kar-Waí",
     role: "Digital Illustrator & Concept Artist. Your support helps me create new photos and tools for the community.",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
   };
 
   const [supportType, setSupportType] = useState("one-time"); // one-time | monthly
@@ -19,11 +23,16 @@ const SupportSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [paymentResultData, setPaymentResultData] = useState(null);
 
-  const presetAmounts = [5, 10, 25, 50, 100];
+  // Stable function so the modal's effect doesn't re-run on every render.
+  const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
 
   // ফর্ম ভ্যালিডেশন: অ্যামাউন্ট (সিলেক্টেড বা কাস্টম) এবং নাম-ইমেইল দিতেই হবে
-  const currentActiveAmount = customAmount !== "" ? Number(customAmount) : selectedAmount;
-  const isFormValid = currentActiveAmount > 0 && fullName.trim() !== "" && emailAddress.trim() !== "";
+  const currentActiveAmount =
+    customAmount !== "" ? Number(customAmount) : selectedAmount;
+  const isFormValid =
+    currentActiveAmount > 0 &&
+    fullName.trim() !== "" &&
+    emailAddress.trim() !== "";
 
   const handlePayNow = (e) => {
     e.preventDefault();
@@ -32,7 +41,8 @@ const SupportSection = () => {
     // Payment Info Object
     const paymentInfo = {
       artistName: artistProfile.name,
-      supportType: supportType === "one-time" ? "One-Time Support" : "Monthly Support",
+      supportType:
+        supportType === "one-time" ? "One-Time Support" : "Monthly Support",
       amount: currentActiveAmount,
       fullName: fullName,
       emailAddress: emailAddress,
@@ -53,65 +63,72 @@ const SupportSection = () => {
     setEmailAddress("");
     setSelectedAmount(25);
   };
+  const userInfo = getSavedUserInfo()
 
   return (
     <>
       <div
-        className="w-full  mx-auto rounded-2xl overflow-hidden shadow-sm border mt-10 sm:mt-12 lg:mt-section "
+        className="mx-auto mt-10 w-full overflow-hidden rounded-2xl border shadow-sm sm:mt-12 lg:mt-section"
         style={{ borderColor: "#C6C6CD" }}
       >
-        {/* Header with #C6C6CD background */}
+        {/* Header */}
         <div
-          className="p-4 sm:p-6 flex items-start justify-between border-b"
+          className="flex items-start justify-between gap-3 border-b p-4 sm:p-6"
           style={{ backgroundColor: "#F8F9FA", borderColor: "#C6C6CD" }}
         >
-          <div className="flex items-center gap-4">
+          {/* min-w-0 lets the text wrap instead of pushing the close button out */}
+          <div className="flex min-w-0 flex-1 items-start gap-3 sm:items-center sm:gap-4">
             {/* TODO: add real profile */}
             <img
-              src={artistProfile.avatar}
+              src={userInfo.image}
               alt={artistProfile.name}
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border border-white shadow-sm"
+              className="size-8 shrink-0 rounded-full border border-white object-cover shadow-sm sm:size-14"
             />
-            <div>
-              <h2 className="text-lg sm:text-xl font-bold text-gray-900">
-                Support {artistProfile.name}
+            <div className="min-w-0">
+              <h2 className="break-words text-sm font-bold leading-snug text-gray-900 sm:text-xl">
+                Support {userInfo.name}
               </h2>
-              <p className="text-xs sm:text-sm text-gray-700 mt-0.5 max-w-lg">
+              <p className="mt-0.5 max-w-lg break-words text-xs leading-relaxed text-gray-700 sm:text-sm max-sm:line-clamp-2">
                 {artistProfile.role}
               </p>
             </div>
           </div>
-          <button className="text-gray-700 hover:text-black p-1">
-            <FaTimes className="text-lg" />
+
+          <button
+            type="button"
+            aria-label="Close"
+            className="shrink-0 rounded-md p-1.5 text-gray-700 transition-colors hover:bg-black/5 hover:text-black"
+          >
+            <FaTimes className="text-base sm:text-lg" />
           </button>
         </div>
 
-        {/* Center / Main content with White background */}
-        <div className="p-6 sm:p-8 bg-white space-y-6">
-
+        {/* Main content */}
+        <div className="space-y-6 bg-white p-4 sm:space-y-7 sm:p-6 md:p-8">
           {/* Choose How You'd Like to Support */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3">
+            <h3 className="mb-3 text-sm font-bold text-gray-900 sm:text-base md:text-lg">
               Choose How You'd Like to Support
             </h3>
-            <div className="flex items-center gap-6">
-              <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-800">
+            {/* flex-wrap: radios stack on very narrow screens */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-gray-800">
                 <input
                   type="radio"
                   name="supportType"
                   checked={supportType === "one-time"}
                   onChange={() => setSupportType("one-time")}
-                  className="accent-primary w-4 h-4 cursor-pointer"
+                  className="size-4 cursor-pointer accent-primary"
                 />
                 One-Time Support
               </label>
-              <label className="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-800">
+              <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-gray-800">
                 <input
                   type="radio"
                   name="supportType"
                   checked={supportType === "monthly"}
                   onChange={() => setSupportType("monthly")}
-                  className="accent-primary w-4 h-4 cursor-pointer"
+                  className="size-4 cursor-pointer accent-primary"
                 />
                 Monthly Support
               </label>
@@ -120,28 +137,31 @@ const SupportSection = () => {
 
           {/* Select Amount */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3">
+            <h3 className="mb-3 text-sm font-bold text-gray-900 sm:text-base md:text-lg">
               Select Amount
             </h3>
 
-            {/* Amount Buttons */}
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-4">
+            {/* 3 columns on mobile, 5 on sm+ */}
+            <div className="mb-4 grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-3">
               {presetAmounts.map((amt) => {
-                const isSelected = customAmount === "" && selectedAmount === amt;
+                const isSelected =
+                  customAmount === "" && selectedAmount === amt;
                 return (
                   <button
                     key={amt}
                     type="button"
                     onClick={() => {
                       setSelectedAmount(amt);
-                      setCustomAmount(""); // কাস্টম ফিল্ড ক্লিয়ার হবে
+                      setCustomAmount(""); // কাস্টম ফিল্ড ক্লিয়ার হবে
                     }}
-                    className={`py-2.5 px-4 rounded-xl border text-base font-semibold transition-all cursor-pointer ${isSelected
-                        ? "border-secondary text-secondary bg-red-50/30 ring-1 ring-secondary"
-                        : "border-gray-300 text-gray-700 hover:border-gray-400 bg-white"
-                      }`}
+                    aria-pressed={isSelected}
+                    className={`cursor-pointer rounded-xl border px-2 py-2.5 text-sm font-semibold transition-all sm:px-4 sm:text-base ${
+                      isSelected
+                        ? "border-secondary bg-red-50/30 text-secondary ring-1 ring-secondary"
+                        : "border-gray-300 bg-white text-gray-700 hover:border-gray-400"
+                    }`}
                     style={{
-                      borderColor: isSelected ? undefined : "#C6C6CD"
+                      borderColor: isSelected ? undefined : "#C6C6CD",
                     }}
                   >
                     ${amt}
@@ -150,70 +170,88 @@ const SupportSection = () => {
               })}
             </div>
 
-            {/* Custom Amount Input */}
-            <div className="relative max-w-xs flex items-center">
-              <span className="absolute left-3.5 text-gray-500 font-medium">$</span>
+            {/* Custom Amount Input: full width on mobile, capped on sm+ */}
+            <div className="relative flex w-full items-center sm:max-w-xs">
+              <span className="absolute left-3.5 font-medium text-gray-500">
+                $
+              </span>
               <input
                 type="number"
+                inputMode="decimal"
+                min="0"
+                step="any"
                 value={customAmount}
                 onChange={(e) => setCustomAmount(e.target.value)}
                 placeholder="Custom Amount"
-                className="w-full pl-8 pr-12 py-2.5 rounded-xl border border-gray-300 outline-none focus:border-secondary text-sm sm:text-base text-gray-800 placeholder-gray-400 bg-white"
+                aria-label="Custom amount in USD"
+                className="w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-8 pr-14 text-base text-gray-800 outline-none placeholder:text-gray-400 focus:border-secondary"
               />
-              <span className="absolute right-3.5 text-xs font-semibold text-gray-500">USD</span>
+              <span className="absolute right-3.5 text-xs font-semibold text-gray-500">
+                USD
+              </span>
             </div>
           </div>
 
           {/* Your Details */}
           <div>
-            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4">
+            <h3 className="mb-4 text-sm font-bold text-gray-900 sm:text-base md:text-lg">
               Your Details
             </h3>
 
-            <div className="space-y-4">
+            {/* Stacked on mobile, side by side from md */}
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {/* Full Name */}
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+              <div className="min-w-0">
+                <label
+                  htmlFor="support-full-name"
+                  className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-700"
+                >
                   Full Name
                 </label>
                 <input
+                  id="support-full-name"
                   type="text"
+                  autoComplete="name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Jane Doe"
                   required
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-300 outline-none focus:border-secondary text-sm sm:text-base text-gray-800 bg-white"
+                  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-base text-gray-800 outline-none focus:border-secondary"
                 />
               </div>
 
               {/* Email Address */}
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+              <div className="min-w-0">
+                <label
+                  htmlFor="support-email"
+                  className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-700"
+                >
                   Email Address
                 </label>
                 <input
+                  id="support-email"
                   type="email"
+                  autoComplete="email"
                   value={emailAddress}
                   onChange={(e) => setEmailAddress(e.target.value)}
                   placeholder="jane@example.com"
                   required
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-300 outline-none focus:border-secondary text-sm sm:text-base text-gray-800 bg-white"
+                  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-base text-gray-800 outline-none focus:border-secondary"
                 />
               </div>
             </div>
           </div>
-
         </div>
 
-        {/* Footer with #C6C6CD background */}
+        {/* Footer: full-width stacked buttons on mobile, right-aligned row on sm+ */}
         <div
-          className="p-4 sm:p-6 flex items-center justify-end gap-3 border-t"
+          className="flex flex-col-reverse gap-2 border-t p-4 sm:flex-row sm:items-center sm:justify-end sm:gap-3 sm:p-6"
           style={{ backgroundColor: "#F8F9FA", borderColor: "#C6C6CD" }}
         >
           <button
             type="button"
             onClick={handleCancel}
-            className="px-5 py-2.5 rounded-lg border border-gray-400 bg-white text-gray-800 font-medium hover:bg-gray-50 text-sm cursor-pointer transition-colors"
+            className="w-full cursor-pointer rounded-lg border border-gray-400 bg-white px-5 py-2.5 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 sm:w-auto"
           >
             Cancel
           </button>
@@ -222,10 +260,11 @@ const SupportSection = () => {
             type="button"
             onClick={handlePayNow}
             disabled={!isFormValid}
-            className={`px-6 py-2.5 rounded-lg text-white font-medium text-sm flex items-center gap-2 transition-all ${isFormValid
-                ? "bg-secondary hover:opacity-90 cursor-pointer"
-                : "bg-gray-400 cursor-not-allowed opacity-70"
-              }`}
+            className={`flex w-full items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-all sm:w-auto ${
+              isFormValid
+                ? "cursor-pointer bg-secondary hover:opacity-90"
+                : "cursor-not-allowed bg-gray-400 opacity-70"
+            }`}
           >
             Pay Now →
           </button>
@@ -235,7 +274,7 @@ const SupportSection = () => {
       {/* Sibling Popup Component */}
       <SupportSuccessModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleCloseModal}
         paymentData={paymentResultData}
       />
     </>
