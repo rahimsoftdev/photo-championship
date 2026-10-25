@@ -15,16 +15,16 @@ const PostTab = () => {
         itemsPerPage
     );
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="">
             {/* Header Section */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Posts</h1>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-xs sm:tesm md:text-lg text-gray-500 ">
                         Photographer announcements, behind-the-scenes logs, and exhibition news
                     </p>
                 </div>
-             
+
             </div>
 
             {/* Cards Grid */}

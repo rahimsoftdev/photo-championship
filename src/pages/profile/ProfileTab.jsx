@@ -20,7 +20,7 @@ const ProfileTab = () => {
     <div className="space-y-8 ">
 
       {/* 1. Stats Row */}
-      <div className="flex items-stretch gap-15 overflow-x-auto max-sm:border-b  border-gray-100 pt-3 text-center [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex items-stretch gap-15 overflow-x-auto max-sm:border-b  border-gray-100  text-center [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <div className="shrink-0 whitespace-nowrap border-r border-gray-200 px-4 first:pl-0 sm:px-5">
           <p className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">{stats.followers}</p>
           <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">Followers</p>
