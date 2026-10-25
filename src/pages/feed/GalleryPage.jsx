@@ -2,7 +2,9 @@ import { useSearchParams } from "react-router";
 import useArtwork from "../../hooks/useArtwork";
 import ArtworkCard from "../../components/ui/ArtworkCard";
 import Pagination from "../../components/shared/Pagination";
-import ArtworkSkeleton from "../../components/ui/ArtworkSkeleton";
+// import ArtworkSkeleton from "../../components/ui/ArtworkSkeleton";
+import NoPhotosFound from "../../components/ui/NoPhotosFound";
+import ArtworkSkeleton from "../../components/ui/Skeletons/ArtworkSkeleton";
 
 const GalleryPage = () => {
     // Read query params from the current URL.
@@ -20,7 +22,7 @@ const GalleryPage = () => {
     } = useArtwork(params, false, 9, '/artWork.json');
 
     // Show loading page while data is being fetched.
-    if (loading) return <ArtworkSkeleton/>;
+    if (loading) return <ArtworkSkeleton />;
 
     // Show an error if fetching fails.
     if (error) {
@@ -29,23 +31,22 @@ const GalleryPage = () => {
 
     return (
         <section className="w-full space-y-6 lg:pt-7">
-            {/* Artwork cards */}
-            <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,280px),320px))] gap-4">
-                {artworks.map((artWorkData) => (
-                    <ArtworkCard
-                        key={
-                            artWorkData.id ??
-                            artWorkData._id ??
-                            `${artWorkData.userId}-${artWorkData.title}`
-                        }
-                        artWorkData={artWorkData}
-                    />
-                ))}
-            </div>
+            {/* <h1>Buy Photos</h1> */}
 
-            {/* Pagination */}
-             <Pagination  totalPages={totalPages} />
-           
+            {artworks.length === 0 ? (
+                <NoPhotosFound />
+            ) : (
+                <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
+                    {artworks.map((artWorkData) => (
+                        <ArtworkCard
+                            key={artWorkData.id}
+                            artWorkData={artWorkData}
+                        />
+                    ))}
+                </div>
+            )}
+
+            <Pagination totalPages={totalPages} />
         </section>
     );
 };

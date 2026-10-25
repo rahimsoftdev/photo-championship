@@ -8,6 +8,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import useFetch from "../../hooks/useFetch";
+import AlbumSidebarSkeleton from "../ui/Skeletons/AlbumSidebarSkeleton";
 
 // Available album types. Only one type can be selected at a time.
 const albumTypes = [
@@ -42,6 +43,7 @@ const Checkbox = ({ name, value, checked, onChange }) => (
 const AlbumSidebar = () => {
   // Fetch categories and their subcategories from the public JSON file.
   const { data, isLoading, error } = useFetch("/albumCategories.json");
+  
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -254,6 +256,10 @@ const AlbumSidebar = () => {
       </div>
     </div>
   );
+
+  if(isLoading) {
+     return <AlbumSidebarSkeleton/>
+  }
 
   return (
     <>
