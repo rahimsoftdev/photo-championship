@@ -17,33 +17,33 @@ const ProfileTab = () => {
   };
 
   return (
-    <div className="space-y-8 pb-8">
-      
+    <div className="space-y-8 ">
+
       {/* 1. Stats Row */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 py-4 border-b border-gray-100 text-center">
-        <div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.followers}</p>
-          <p className="text-xs text-gray-500 mt-0.5">Followers</p>
+      <div className="flex items-stretch gap-15 overflow-x-auto max-sm:border-b  border-gray-100 pt-3 text-center [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="shrink-0 whitespace-nowrap border-r border-gray-200 px-4 first:pl-0 sm:px-5">
+          <p className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">{stats.followers}</p>
+          <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">Followers</p>
         </div>
-        <div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.following}</p>
-          <p className="text-xs text-gray-500 mt-0.5">Following</p>
+        <div className="shrink-0 whitespace-nowrap border-r border-gray-200 px-4 sm:px-5">
+          <p className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">{stats.following}</p>
+          <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">Following</p>
         </div>
-        <div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.profileViews || stats.profileVisitor || 2560}</p>
-          <p className="text-xs text-gray-500 mt-0.5">Profile Visitor</p>
+        <div className="shrink-0 whitespace-nowrap border-r border-gray-200 px-4 sm:px-5">
+          <p className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">{stats.profileViews || stats.profileVisitor || 2560}</p>
+          <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">Profile Visitor</p>
         </div>
-        <div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.totalArtworks}</p>
-          <p className="text-xs text-gray-500 mt-0.5">Total Artwork</p>
+        <div className="shrink-0 whitespace-nowrap border-r border-gray-200 px-4 sm:px-5">
+          <p className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">{stats.totalArtworks}</p>
+          <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">Total Artwork</p>
         </div>
-        <div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.competitionEntries}</p>
-          <p className="text-xs text-gray-500 mt-0.5">Competition Entries</p>
+        <div className="shrink-0 whitespace-nowrap border-r border-gray-200 px-4 sm:px-5">
+          <p className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">{stats.competitionEntries}</p>
+          <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">Competition Entries</p>
         </div>
-        <div>
-          <p className="text-xl sm:text-2xl font-bold text-gray-900">{stats.totalLove || stats.totalHearts || 4320}</p>
-          <p className="text-xs text-gray-500 mt-0.5">Total Hearts</p>
+        <div className="shrink-0 whitespace-nowrap px-4 last:pr-0 sm:px-5">
+          <p className="text-lg font-bold leading-tight text-gray-900 sm:text-xl">{stats.totalLove || stats.totalHearts || 4320}</p>
+          <p className="mt-0.5 text-[11px] text-gray-500 sm:text-xs">Total Hearts</p>
         </div>
       </div>
 
@@ -73,9 +73,9 @@ const ProfileTab = () => {
 
       {/* 3. Intro Video Section */}
       <div className="relative w-full h-[280px] sm:h-[360px] rounded-2xl overflow-hidden shadow-md group cursor-pointer bg-gray-900">
-        <img 
-          src={user?.coverPhoto || "https://picsum.photos/seed/intro-video/1200/500"} 
-          alt="Intro Video Cover" 
+        <img
+          src={user?.coverPhoto || "https://picsum.photos/seed/intro-video/1200/500"}
+          alt="Intro Video Cover"
           className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-500"
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -99,7 +99,7 @@ const ProfileTab = () => {
 
         {/* Appreciation Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          
+
           {/* Gold Card */}
           <div className="bg-[#FAFAFA] border border-gray-200 rounded-xl p-5 flex flex-col items-center text-center relative">
             <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-3 border border-amber-100 shadow-sm">
