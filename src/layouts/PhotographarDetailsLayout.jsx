@@ -14,7 +14,7 @@ const PhotographarDetailsLayout = () => {
   if (error || !user) return <div className="text-center p-8">User not found</div>;
 
   return (
-    <div className="max-w-main mx-auto px-4 py-6">
+    <div className="max-w-main mx-auto px-4 py-5 sm:py-12 lg:py-15">
       {/* Photographer Header Component */}
       <PhotographerHeader user={user} />
       <PhotographerNavTabs/>

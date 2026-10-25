@@ -93,6 +93,7 @@ export const router = createBrowserRouter([
             {
                 path: "winners", Component: WinnerPage
             },
+            //feed:
             {
                 path: "feed",
                 Component: FeedLayout,
@@ -116,8 +117,31 @@ export const router = createBrowserRouter([
             },
             {
                 path: "bayimagedetails/checkout", Component: ByCheckOut
-            }
-        ]
+            },
+
+            //photograhpar profile details routes
+            {
+                path: "photographers/:id", Component: PhotographarDetailsLayout,
+                children: [
+                    {
+                        index: true, Component: ProfileTab
+                    },
+                    {
+                        path: "artworks", Component: ArtworksTab
+                    },
+                    {
+                        path: "premium-photos", Component: BayPhotoTab
+                    },
+                    {
+                        path: "posts", Component: PostTab
+                    },
+                    {
+                        path: "store", Component: MyStoreTab
+                    },
+                ]
+            },
+        ],
+
     },
 
     //auth:
@@ -278,73 +302,54 @@ export const router = createBrowserRouter([
                 path: "premium-photos/:id", Component: BayImageDetailsPage
             },
             {
-                path:"promoted-albums", Component:PromotedProductsPage
+                path: "promoted-albums", Component: PromotedProductsPage
             },
             {
-                path:"support", Component:SupportInbox
+                path: "support", Component: SupportInbox
             },
             {
-                path:"business-link-photos", Component:BusinessLinkPhotos
+                path: "business-link-photos", Component: BusinessLinkPhotos
             },
             {
-                path:"business-link-photos/details", Component:BusinessLinkPhotoDetails
+                path: "business-link-photos/details", Component: BusinessLinkPhotoDetails
             },
             {
-                path:"newsletter", Component:Newsletter
+                path: "newsletter", Component: Newsletter
             },
             {
-                path:"comment", Component:CommentManagement
+                path: "comment", Component: CommentManagement
             },
             {
-                path:"ads-management", Component:AdsManagement
+                path: "ads-management", Component: AdsManagement
             },
             {
-                path:"demo-profile", Component:DemoProfiles
+                path: "demo-profile", Component: DemoProfiles
             },
             {
-                path:"demo-profiles/add", Component:AddDemoProfile
+                path: "demo-profiles/add", Component: AddDemoProfile
             },
             {
-                path:"reports-resolved", Component:ReportsModeration
+                path: "reports-resolved", Component: ReportsModeration
             },
             {
-                path:"reports-resolved/details", Component:ReportDetails
+                path: "reports-resolved/details", Component: ReportDetails
             },
             {
-                path:"promo-links", Component:PromoLinkManagement
+                path: "promo-links", Component: PromoLinkManagement
             },
             {
-                path:"settings", Component:AdsAnnouncements
+                path: "settings", Component: AdsAnnouncements
             },
             {
-                path:"profile", Component:MyProfile
+                path: "profile", Component: MyProfile
             },
         ]
     },
 
 
 
-    //photograhpar profile details routes
-    {
-        path: "photographers/:id", Component: PhotographarDetailsLayout,
-        children: [
-            {
-                index: true, Component: ProfileTab
-            },
-            {
-                path: "artworks", Component: ArtworksTab
-            },
-            {
-                path: "premium-photos", Component: BayPhotoTab
-            },
-            {
-                path: "posts", Component: PostTab
-            },
-            {
-                path: "store", Component: MyStoreTab
-            },
-        ]
-    },
+
+
     {
         path: "*",
         Component: NotFound,
