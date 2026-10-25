@@ -155,7 +155,7 @@ const SupportSection = () => {
                       setCustomAmount(""); // কাস্টম ফিল্ড ক্লিয়ার হবে
                     }}
                     aria-pressed={isSelected}
-                    className={`cursor-pointer rounded-xl border px-2 py-2.5 text-sm font-semibold transition-all sm:px-4 sm:text-base ${
+                    className={`cursor-pointer rounded-xl border py-1.5 px-0.5 md:px-2 md:py-2.5 text-sm font-semibold transition-all sm:px-4 sm:text-base ${
                       isSelected
                         ? "border-secondary bg-red-50/30 text-secondary ring-1 ring-secondary"
                         : "border-gray-300 bg-white text-gray-700 hover:border-gray-400"
@@ -184,7 +184,7 @@ const SupportSection = () => {
                 onChange={(e) => setCustomAmount(e.target.value)}
                 placeholder="Custom Amount"
                 aria-label="Custom amount in USD"
-                className="w-full rounded-xl border border-gray-300 bg-white py-2.5 pl-8 pr-14 text-base text-gray-800 outline-none placeholder:text-gray-400 focus:border-secondary"
+                className="w-full rounded-xl border border-gray-300 bg-white py-1.5 md:py-2.5 pl-8 pr-14 text-base text-gray-800 outline-none placeholder:text-gray-400 focus:border-secondary"
               />
               <span className="absolute right-3.5 text-xs font-semibold text-gray-500">
                 USD
@@ -216,7 +216,7 @@ const SupportSection = () => {
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Jane Doe"
                   required
-                  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-base text-gray-800 outline-none focus:border-secondary"
+                  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-1.5 md:py-2.5 text-base text-gray-800 outline-none focus:border-secondary"
                 />
               </div>
 
@@ -236,7 +236,7 @@ const SupportSection = () => {
                   onChange={(e) => setEmailAddress(e.target.value)}
                   placeholder="jane@example.com"
                   required
-                  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-base text-gray-800 outline-none focus:border-secondary"
+                  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2 md:py-2.5 text-base text-gray-800 outline-none focus:border-secondary"
                 />
               </div>
             </div>
@@ -251,7 +251,7 @@ const SupportSection = () => {
           <button
             type="button"
             onClick={handleCancel}
-            className="w-full cursor-pointer rounded-lg border border-gray-400 bg-white px-5 py-2.5 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 sm:w-auto"
+            className="w-full cursor-pointer rounded-lg border border-gray-400 bg-white px-5 py-1.5 md:py-2.5 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 sm:w-auto"
           >
             Cancel
           </button>
@@ -260,7 +260,7 @@ const SupportSection = () => {
             type="button"
             onClick={handlePayNow}
             disabled={!isFormValid}
-            className={`flex w-full items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-medium text-white transition-all sm:w-auto ${
+            className={`flex w-full items-center justify-center gap-2 rounded-lg px-6 py-2 md:py-2.5 text-sm font-medium text-white transition-all sm:w-auto ${
               isFormValid
                 ? "cursor-pointer bg-secondary hover:opacity-90"
                 : "cursor-not-allowed bg-gray-400 opacity-70"
