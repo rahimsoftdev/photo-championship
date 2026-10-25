@@ -10,10 +10,13 @@ import {
   FiLoader,
   FiPlus,
   FiRefreshCw,
-  FiX,
 } from "react-icons/fi";
 import { useNavigate } from "react-router";
-import ArtworkDropdownMenu from "../userDashbaord/ArtworkDropdownMenu";
+// import ArtworkDropdownMenu from "./ArtworkDropdownMenu";
+import EditArtworkModal from "./EditArtworkModal";
+import PromoteModal from "./PromoteModal";
+import DeleteConfirmModal from "./DeleteConfirmModal";
+import ArtworkDropdownMenu from "./ArtworkDropdownMenu";
 
 /* ---------- helpers ---------- */
 const formatDate = (iso) => {
@@ -55,7 +58,7 @@ const ActionButton = ({ color, icon: Icon, label, loadingLabel, loading, onClick
     type="button"
     onClick={onClick}
     disabled={loading}
-    className={`inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:opacity-90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-80 ${color}`}
+    className={`inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:opacity-90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-80 max-[380px]:w-full ${color}`}
   >
     {loading ? <FiLoader size={14} className="animate-spin" /> : <Icon size={14} />}
     {loading ? loadingLabel : label}
@@ -73,7 +76,7 @@ const SuccessPanel = ({ heading, text, onUndo }) => (
 
     <div className="min-w-0 flex-1">
       <p className="text-sm font-bold text-[#059669]">{heading}</p>
-      <p className="mt-0.5 text-[11px] leading-snug text-[#047857]">{text}</p>
+      <p className="mt-0.5 break-words text-[11px] leading-snug text-[#047857]">{text}</p>
     </div>
 
     <button
@@ -90,21 +93,11 @@ const SuccessPanel = ({ heading, text, onUndo }) => (
 const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
   const [currentArtwork, setCurrentArtwork] = useState(artWorkData);
   const [isDeleted, setIsDeleted] = useState(false);
-  const [toastMsg, setToastMsg] = useState("");
 
-  // Modals state
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isPromoteModalOpen, setIsPromoteModalOpen] = useState(false);
-
-  // Edit form state
-  const [editForm, setEditForm] = useState({
-    title: artWorkData.title || "",
-    price: artWorkData.price || 0,
-    description: artWorkData.description || "",
-  });
-
-  // Selected promotion plan
-  const [selectedPlan, setSelectedPlan] = useState(40);
+  // Modals state (3ta alada modal)
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isPromoteOpen, setIsPromoteOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   // Card action state
   const [actionState, setActionState] = useState("idle");
@@ -147,22 +140,21 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
   const navigate = useNavigate();
 
   /* ---------- handlers ---------- */
-  const showToast = (msg) => {
-    setToastMsg(msg);
-    setTimeout(() => setToastMsg(""), 3000);
+  // Edit modal Save korle card er data update hobe
+  const handleEditSave = (values) => {
+    setCurrentArtwork((prev) => ({ ...prev, ...values }));
   };
 
-  const handleDelete = () => {
+  // Promote confirm korle card e "Promoted" badge dekhabe
+  const handlePromoted = () => {
+    setCurrentArtwork((prev) => ({ ...prev, isPromoted: true }));
+  };
+
+  // Delete success feedback dekhanor por card remove hobe
+  const handleDeleted = () => {
+    setIsDeleteOpen(false);
     setIsDeleted(true);
-    showToast("Artwork deleted successfully!");
     if (onDeleteSuccess) onDeleteSuccess(id);
-  };
-
-  const handleEditSubmit = (e) => {
-    e.preventDefault();
-    setCurrentArtwork((prev) => ({ ...prev, ...editForm }));
-    setIsEditModalOpen(false);
-    showToast("Artwork updated successfully!");
   };
 
   const handleImageClick = () => {
@@ -187,15 +179,8 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
 
   return (
     <>
-      {/* ---------- Success Toast Feedback ---------- */}
-      {toastMsg && (
-        <div className="fixed bottom-5 right-5 z-50 rounded-xl bg-gray-900 px-4 py-2.5 text-xs text-white shadow-lg animate-bounce">
-          {toastMsg}
-        </div>
-      )}
-
       {/* ---------- Main Card UI ---------- */}
-      <div className="group/card flex h-full w-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white p-2 shadow-sm transition-shadow duration-200 hover:shadow-md">
+      <div className="group/card flex h-full w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white p-2 shadow-sm transition-shadow duration-200 hover:shadow-md">
         {/* ---------- Image ---------- */}
         <div
           role="button"
@@ -229,9 +214,8 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
               decoding="async"
               onLoad={() => setImgLoaded(true)}
               onError={() => setImgError(true)}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition duration-500 group-hover/card:scale-105 ${
-                imgLoaded ? "opacity-100" : "opacity-0"
-              }`}
+              className={`absolute inset-0 h-full w-full object-cover object-center transition duration-500 group-hover/card:scale-105 ${imgLoaded ? "opacity-100" : "opacity-0"
+                }`}
             />
           )}
 
@@ -239,69 +223,70 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/45 to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-black/25 to-transparent" />
 
-          {/* top-left album badge */}
-          <span className="pointer-events-none absolute left-2.5 top-2.5 inline-flex max-w-[70%] items-center gap-1.5 truncate rounded-md bg-[#9333EA] px-2.5 py-1 text-[11px] font-semibold text-white shadow">
+          {/* top-left album badge (3 dots button er jonno jayga rakha hoyeche) */}
+          <span className="pointer-events-none absolute left-2 top-2 inline-flex max-w-[calc(100%-3.5rem)] items-center gap-1.5 rounded-md bg-[#9333EA] px-2 py-1 text-[10px] font-semibold text-white shadow sm:left-2.5 sm:top-2.5 sm:px-2.5 sm:text-[11px]">
             <FiLayers size={12} className="shrink-0" />
             <span className="truncate">{getAlbumLabel(albumType, images.length)}</span>
           </span>
 
           {/* top-right 3 dots dropdown */}
           <div
-            className="absolute right-2.5 top-2.5 z-10"
+            className="absolute right-2 top-2 z-10 sm:right-2.5 sm:top-2.5"
             onClick={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.stopPropagation()}
           >
             <ArtworkDropdownMenu
-              artwork={currentArtwork}
-              onEdit={() => setIsEditModalOpen(true)}
-              onDelete={handleDelete}
-              onPromote={() => setIsPromoteModalOpen(true)}
+              onEdit={() => setIsEditOpen(true)}
+              onPromote={() => setIsPromoteOpen(true)}
+              onDelete={() => setIsDeleteOpen(true)}
             />
           </div>
 
           {/* bottom-left promoted */}
           {isPromoted && (
-            <span className="pointer-events-none absolute bottom-2.5 left-2.5 rounded-md bg-black/60 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+            <span className="pointer-events-none absolute bottom-2 left-2 rounded-md bg-black/60 px-2 py-1 text-[10px] font-medium text-white backdrop-blur-sm sm:bottom-2.5 sm:left-2.5 sm:px-2.5 sm:text-[11px]">
               Promoted
             </span>
           )}
 
           {/* bottom-right +N photos */}
           {extraCount > 0 && (
-            <span className="pointer-events-none absolute bottom-2.5 right-2.5 inline-flex items-center gap-1.5 rounded-md bg-black/60 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+            <span className="pointer-events-none absolute bottom-2 right-2 inline-flex items-center gap-1.5 rounded-md bg-black/60 px-2 py-1 text-[10px] font-medium text-white backdrop-blur-sm sm:bottom-2.5 sm:right-2.5 sm:px-2.5 sm:text-[11px]">
               <FiLayers size={12} />+{extraCount} photos
             </span>
           )}
         </div>
 
         {/* ---------- Body ---------- */}
-        <div className="flex flex-1 flex-col px-2 pb-2 pt-3">
-          {/* category + date */}
-          <div className="flex items-center justify-between gap-2 text-[11px] text-gray-500">
-            <span className="truncate font-medium">{prettyCategory(category)}</span>
-            <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap">
-              <FiCalendar size={12} />
-              Uploaded {formatDate(info.createdAt)}
+        <div className="flex min-w-0 flex-1 flex-col px-1.5 pb-2 pt-3 sm:px-2">
+          {/* category + date (choto screen e wrap hobe) */}
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-[11px] text-gray-500">
+            <span className="max-w-full truncate font-medium">{prettyCategory(category)}</span>
+            <span className="inline-flex flex-wrap items-center gap-x-1 gap-y-0.5">
+              <FiCalendar size={12} className="shrink-0" />
+              <span>Uploaded {formatDate(info.createdAt)}</span>
               {isLive && (
                 <>
                   <span className="mx-1 text-gray-300">|</span>
-                  <FiClock size={12} />
-                  {formatTime(info.createdAt)}
+                  <FiClock size={12} className="shrink-0" />
+                  <span>{formatTime(info.createdAt)}</span>
                 </>
               )}
             </span>
           </div>
 
           {/* title */}
-          <h3 className="mt-2 line-clamp-1 text-[15px] font-bold leading-6 text-gray-900">{title}</h3>
+          <h3 className="mt-2 line-clamp-1 break-words text-sm font-bold leading-6 text-gray-900 sm:text-[15px]">
+            {title}
+          </h3>
 
           {/* description */}
-          <p className="mt-0.5 line-clamp-2 min-h-[2.5rem] text-xs leading-5 text-gray-500">
+          <p className="mt-0.5 line-clamp-2 min-h-[2.5rem] break-words text-xs leading-5 text-gray-500">
             {description}
           </p>
 
           {/* views + hearts (+ price if available) */}
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-gray-100 pb-3 text-xs text-gray-600">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 border-b border-gray-100 pb-3 text-xs text-gray-600">
             <span className="inline-flex items-center gap-1.5">
               <FiEye size={14} />
               {viewsCount} Views
@@ -325,9 +310,9 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
           <div className="mt-auto pt-3">
             {/* 1) Competition - LIVE */}
             {isLive && (
-              <div className="rounded-xl border border-[#A7F3D0] bg-[#ECFDF5] p-3">
+              <div className="rounded-xl border border-[#A7F3D0] bg-[#ECFDF5] p-2.5 sm:p-3">
                 <div className="flex items-center justify-between gap-2">
-                  <h4 className="line-clamp-1 text-sm font-semibold text-[#059669]">
+                  <h4 className="line-clamp-1 min-w-0 text-sm font-semibold text-[#059669]">
                     {competitionName}
                   </h4>
                   <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[#059669] px-2 py-0.5 text-[10px] font-bold text-white">
@@ -336,14 +321,14 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
                   </span>
                 </div>
 
-                <div className="mt-3 grid grid-cols-2 gap-3">
+                <div className="mt-3 grid grid-cols-2 gap-2 sm:gap-3">
                   <div className="rounded-lg border border-[#A7F3D0] bg-white py-2 text-center">
                     <p className="text-[11px] text-gray-500">Votes</p>
-                    <p className="text-xl font-bold leading-7 text-[#059669]">{votes}</p>
+                    <p className="text-lg font-bold leading-7 text-[#059669] sm:text-xl">{votes}</p>
                   </div>
                   <div className="rounded-lg border border-[#A7F3D0] bg-white py-2 text-center">
                     <p className="text-[11px] text-gray-500">Rank</p>
-                    <p className="text-xl font-bold leading-7 text-[#1D4ED8]">
+                    <p className="text-lg font-bold leading-7 text-[#1D4ED8] sm:text-xl">
                       {rank ? `#${rank}` : "--"}
                     </p>
                   </div>
@@ -353,8 +338,8 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
                   <div className="h-full w-2/3 rounded-full bg-[#059669]" />
                 </div>
 
-                <div className="mt-2 flex items-center justify-between gap-2 text-[11px]">
-                  <span className="truncate text-gray-500">
+                <div className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[11px]">
+                  <span className="text-gray-500">
                     Voting ends: {votingEndsAt ? votingEndsAt.slice(0, 10) : "--"}
                   </span>
                   <span className="shrink-0 font-semibold text-[#059669]">Active Entry</span>
@@ -371,7 +356,7 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
                   onUndo={handleUndo}
                 />
               ) : (
-                <div className="flex min-h-[76px] items-center justify-between gap-3 rounded-xl border border-[#E9D5FF] bg-[#FAF5FF] p-3">
+                <div className="flex min-h-[76px] flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E9D5FF] bg-[#FAF5FF] p-3">
                   <div className="min-w-0">
                     <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md bg-[#F3E8FF] px-2.5 py-1 text-[11px] font-semibold text-[#9333EA]">
                       <FiClock size={12} />
@@ -400,7 +385,7 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
                   onUndo={handleUndo}
                 />
               ) : (
-                <div className="flex min-h-[76px] items-center justify-between gap-3 rounded-xl bg-gray-100 p-3">
+                <div className="flex min-h-[76px] flex-wrap items-center justify-between gap-3 rounded-xl bg-gray-100 p-3">
                   <div className="min-w-0">
                     <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border border-gray-300 bg-white px-2.5 py-1 text-[11px] font-semibold text-gray-600">
                       <FiClock size={12} />
@@ -423,132 +408,26 @@ const DashboardArtworkCard = ({ artWorkData, onDeleteSuccess }) => {
         </div>
       </div>
 
-      {/* ---------- EDIT MODAL ---------- */}
-      {isEditModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
-            <button
-              type="button"
-              onClick={() => setIsEditModalOpen(false)}
-              className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
-            >
-              <FiX size={20} />
-            </button>
-            <h3 className="mb-4 text-xl font-bold text-gray-900">Edit Artwork</h3>
+      {/* ---------- Modals (card er siblings) ---------- */}
+      <EditArtworkModal
+        open={isEditOpen}
+        artwork={currentArtwork}
+        onClose={() => setIsEditOpen(false)}
+        onSave={handleEditSave}
+      />
 
-            <form onSubmit={handleEditSubmit} className="space-y-4">
-              <div>
-                <label className="mb-1 block text-xs font-semibold text-gray-700">Title</label>
-                <input
-                  type="text"
-                  value={editForm.title}
-                  onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-                  className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-                  required
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-xs font-semibold text-gray-700">Price ($)</label>
-                <input
-                  type="number"
-                  value={editForm.price}
-                  onChange={(e) => setEditForm({ ...editForm, price: e.target.value })}
-                  className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-xs font-semibold text-gray-700">Description</label>
-                <textarea
-                  rows={3}
-                  value={editForm.description}
-                  onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
-                  className="w-full resize-none rounded-xl border border-gray-200 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-                />
-              </div>
-              <div className="flex justify-end gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setIsEditModalOpen(false)}
-                  className="rounded-xl bg-gray-100 px-4 py-2 text-xs font-medium text-gray-600 hover:bg-gray-200"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="rounded-xl bg-blue-600 px-5 py-2 text-xs font-semibold text-white hover:bg-blue-700"
-                >
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <PromoteModal
+        open={isPromoteOpen}
+        onClose={() => setIsPromoteOpen(false)}
+        onPromoted={handlePromoted}
+      />
 
-      {/* ---------- SPONSORED PHOTO (PROMOTE) MODAL ---------- */}
-      {isPromoteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl">
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-lg font-bold text-gray-900">Sponsored Photo</h3>
-              <button
-                type="button"
-                onClick={() => setIsPromoteModalOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200"
-              >
-                <FiX size={16} />
-              </button>
-            </div>
-
-            <p className="mb-3 text-xs font-semibold text-gray-800">Price</p>
-
-            <div className="mb-6 space-y-3">
-              {[
-                { price: 40, days: 7 },
-                { price: 60, days: 15 },
-                { price: 100, days: 30 },
-              ].map((plan) => (
-                <div
-                  key={plan.price}
-                  onClick={() => setSelectedPlan(plan.price)}
-                  className={`flex cursor-pointer items-center justify-between rounded-2xl border p-4 transition ${
-                    selectedPlan === plan.price
-                      ? "border-red-500 bg-red-50/40"
-                      : "border-gray-200 bg-red-50/20"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`flex h-5 w-5 items-center justify-center rounded-full border ${
-                        selectedPlan === plan.price ? "border-red-600" : "border-gray-400"
-                      }`}
-                    >
-                      {selectedPlan === plan.price && (
-                        <div className="h-2.5 w-2.5 rounded-full bg-red-600" />
-                      )}
-                    </div>
-                    <div>
-                      <p className="text-base font-bold text-gray-900">${plan.price}</p>
-                      <p className="text-xs text-gray-500">For {plan.days} days</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                setIsPromoteModalOpen(false);
-                showToast("Photo promoted successfully!");
-              }}
-              className="w-full rounded-xl bg-secondary py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
-            >
-              Confirm Promotion
-            </button>
-          </div>
-        </div>
-      )}
+      <DeleteConfirmModal
+        open={isDeleteOpen}
+        artworkTitle={title}
+        onCancel={() => setIsDeleteOpen(false)}
+        onDeleted={handleDeleted}
+      />
     </>
   );
 };

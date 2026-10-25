@@ -12,11 +12,18 @@ const ALBUM_TYPE_ALIASES = {
 
 const normalize = (value) => String(value ?? "").trim().toLowerCase();
 
+// Count korar somoy album type match korar helper
+const isAlbumType = (artwork, aliasKey) =>
+    ALBUM_TYPE_ALIASES[aliasKey].some(
+        (val) => normalize(artwork.albumType) === normalize(val)
+    );
+
 /**
  * Custom hook to fetch, filter, sort, and paginate both gallery and competition artworks.
  */
 const useAllArtworks = (
     {
+        userId, // user er id dile shudhu oi user er artwork ashbe
         title,
         albumType,
         category,
@@ -73,6 +80,16 @@ const useAllArtworks = (
     // Filter and Sort Artworks
     const filteredArtworks = useMemo(() => {
         let result = allArtworks.filter((artwork) => {
+            // 0. Filter by user id if provided
+            if (
+                userId !== undefined &&
+                userId !== null &&
+                String(userId).trim() &&
+                normalize(artwork.userId) !== normalize(userId)
+            ) {
+                return false;
+            }
+
             // 1. Filter by type (competition / gallery) if provided
             if (type?.trim() && normalize(artwork.type) !== normalize(type)) {
                 return false;
@@ -129,7 +146,18 @@ const useAllArtworks = (
         }
 
         return result;
-    }, [allArtworks, title, albumType, category, subcategory, type, sort]);
+    }, [allArtworks, userId, title, albumType, category, subcategory, type, sort]);
+
+    // Counts (filteredArtworks theke): total, single, six, twelve, competition
+    const counts = useMemo(() => {
+        return {
+            total: filteredArtworks.length,
+            single: filteredArtworks.filter((a) => isAlbumType(a, "single-photo")).length,
+            six: filteredArtworks.filter((a) => isAlbumType(a, "6-photo-story")).length,
+            twelve: filteredArtworks.filter((a) => isAlbumType(a, "12-photos-full-zodiac-story")).length,
+            competition: filteredArtworks.filter((a) => normalize(a.type) === "competition").length,
+        };
+    }, [filteredArtworks]);
 
     // Pagination Calculations
     const totalArtworks = filteredArtworks.length;
@@ -149,6 +177,7 @@ const useAllArtworks = (
         artworks,
         filteredArtworks,
         totalArtworks,
+        counts,
         totalPages,
         currentPage,
         itemsPerPage,

@@ -4,25 +4,34 @@ import useAllArtworks from "../../hooks/useAllArtworks";
 import Pagination from "../../components/shared/Pagination";
 import ArtworkStats from "../../components/ui/ArtworkStats";
 import MyArtworkFilter from "../../components/ui/MyArtworkFilter";
-import DashboardArtworkCard from "../../components/ui/DashboardArtworkCard"; // Notun card import kora holo
+import DashboardArtworkCard from "../../components/userDashbaord/DashboardArtworkCard";
+import { getSavedUserInfo } from "../../utils/getUserInof";
 
 const MyArtwork = () => {
     const [searchParams] = useSearchParams();
     const params = Object.fromEntries(searchParams.entries());
+    const userInfo = getSavedUserInfo();
+    const userId = userInfo?.id;
 
     const {
         artworks,
         filteredArtworks,
+        counts,
         totalPages,
         loading,
         error,
-    } = useAllArtworks(params, 12, '/artWork.json');
+    } = useAllArtworks(
+        // userId sobar sheshe dewa hoyeche, jate URL er query param diye keu onno user er id override korte na pare
+        { ...params, userId },
+        12,
+        '/artWork.json'
+    );
 
     if (loading) return <div className="py-20 text-center text-sm text-gray-500">Loading artworks...</div>;
     if (error) return <div className="py-20 text-center text-sm text-red-500">{error}</div>;
 
     return (
-        <div className="w-full  space-y-6 pb-12">
+        <div className="w-full space-y-6">
             {/* Top Header Section */}
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                 <div>
@@ -35,9 +44,7 @@ const MyArtwork = () => {
                 </div>
 
                 <Link
-                to={'/user-dashboard/artwork-management/UploadArtWorkTypes'}
-
-                    type="button"
+                    to="/user-dashboard/artwork-management/UploadArtWorkTypes"
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:opacity-90"
                 >
                     <FiPlus size={16} />
@@ -46,12 +53,12 @@ const MyArtwork = () => {
             </div>
 
             {/* Stats Cards Component */}
-            <ArtworkStats filteredArtworks={filteredArtworks} />
+            <ArtworkStats counts={counts} />
 
             {/* Filter Component */}
-            <MyArtworkFilter 
-                totalShown={artworks.length} 
-                totalFiltered={filteredArtworks.length} 
+            <MyArtworkFilter
+                totalShown={artworks.length}
+                totalFiltered={filteredArtworks.length}
             />
 
             {/* Artwork Cards Grid Section */}
@@ -71,7 +78,7 @@ const MyArtwork = () => {
             ) : (
                 <div className="rounded-xl border border-dashed border-[#CBD5E1] bg-[#F8FAFC] p-8 text-center">
                     <p className="text-sm font-semibold text-[#334155]">
-                        Kono artwork pawa jayni[cite: 1]!
+                        Kono artwork pawa jayni!
                     </p>
                     <p className="mt-1 text-xs text-[#64748B]">
                         Apnar filter ba criteria change kore abar chesta korun.

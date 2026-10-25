@@ -1,58 +1,98 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FiMoreVertical } from 'react-icons/fi';
+import { useEffect, useRef, useState } from "react";
+import { FiEdit2, FiMoreVertical, FiTrash2, FiTrendingUp } from "react-icons/fi";
 
-const ArtworkDropdownMenu = ({ onEdit, onDelete, onPromote }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const menuRef = useRef(null);
+/**
+ * 3 dot menu: Edit / Promote / Delete
+ * Option e click korle menu bondho hoye oi function call hobe.
+ * Bairе click ba Esc chaple menu bondho hobe.
+ */
+const ArtworkDropdownMenu = ({ onEdit, onPromote, onDelete }) => {
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef(null);
 
-    // Outside click korle menu close hoye jabe
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+  useEffect(() => {
+    if (!open) return;
 
-    return (
-        <div className="relative" ref={menuRef}>
-            <button 
-                type="button"
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-8 h-8 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center hover:bg-black/80 transition cursor-pointer"
-            >
-                <FiMoreVertical size={16} />
-            </button>
+    const onPointerDown = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
 
-            {isOpen && (
-                <div className="absolute right-0 top-10 w-36 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-20 animate-fade-in">
-                    <button
-                        type="button"
-                        onClick={() => { setIsOpen(false); onEdit(); }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition"
-                    >
-                        Edit
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => { setIsOpen(false); onDelete(); }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-medium text-gray-700 hover:bg-gray-50 transition border-t border-gray-100"
-                    >
-                        Delete
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => { setIsOpen(false); onPromote(); }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-medium text-gray-700 hover:bg-gray-50 transition border-t border-gray-100"
-                    >
-                        Promote
-                    </button>
-                </div>
-            )}
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("touchstart", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("touchstart", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  const run = (fn) => () => {
+    setOpen(false);
+    fn?.();
+  };
+
+  const itemClass =
+    "flex w-full items-center gap-2.5 px-3.5 py-2 text-left text-xs font-medium transition-colors";
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Artwork options"
+        className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow backdrop-blur-sm transition hover:bg-white active:scale-95"
+      >
+        <FiMoreVertical size={16} />
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 top-full z-20 mt-1.5 w-40 overflow-hidden rounded-xl border border-gray-100 bg-white py-1 shadow-xl"
+        >
+          <button
+            type="button"
+            role="menuitem"
+            onClick={run(onEdit)}
+            className={`${itemClass} text-gray-700 hover:bg-gray-50`}
+          >
+            <FiEdit2 size={14} className="shrink-0" />
+            Edit
+          </button>
+
+          <button
+            type="button"
+            role="menuitem"
+            onClick={run(onPromote)}
+            className={`${itemClass} text-gray-700 hover:bg-gray-50`}
+          >
+            <FiTrendingUp size={14} className="shrink-0" />
+            Promote
+          </button>
+
+          <div className="my-1 border-t border-gray-100" />
+
+          <button
+            type="button"
+            role="menuitem"
+            onClick={run(onDelete)}
+            className={`${itemClass} text-[#D00000] hover:bg-red-50`}
+          >
+            <FiTrash2 size={14} className="shrink-0" />
+            Delete
+          </button>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default ArtworkDropdownMenu;
