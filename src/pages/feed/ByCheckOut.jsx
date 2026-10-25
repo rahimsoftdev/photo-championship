@@ -26,7 +26,7 @@ const ByCheckOut = () => {
             const response = await fetch(image);
             const blob = await response.blob();
             const blobUrl = window.URL.createObjectURL(blob);
-            
+
             const link = document.createElement('a');
             link.href = blobUrl;
             // File name set kora
@@ -44,8 +44,8 @@ const ByCheckOut = () => {
         }
     };
 
-  // Ei duto block tomar component er bhitore ager jaygay boshaba
-// (if (isSuccess) { return (...) } ar niche final return (...)).
+    // Ei duto block tomar component er bhitore ager jaygay boshaba
+    // (if (isSuccess) { return (...) } ar niche final return (...)).
 
     if (isSuccess) {
         // Success Screen (Image onujayi exact layout ebong #EDEEEF background)
@@ -57,11 +57,11 @@ const ByCheckOut = () => {
                     {/* Top Gray Header Section with #EDEEEF */}
                     <div className="border-b border-[#C6C6CD] bg-[#EDEEEF] px-4 py-8 text-center sm:px-8 sm:py-10">
                         <div className="mb-4 flex justify-center">
-                            <div className="flex size-14 items-center justify-center rounded-full bg-[#111827] text-xl text-white shadow-md sm:size-16 sm:text-2xl">
+                            <div className="flex size-10 items-center justify-center rounded-full bg-[#111827] text-xl text-white shadow-md  sm:size-16 sm:text-2xl">
                                 ✓
                             </div>
                         </div>
-                        <h2 className="mb-2 text-xl font-bold text-[#111827] sm:text-2xl">
+                        <h2 className="mb-2 text-base font-bold text-[#111827] sm:text-2xl">
                             Purchase Successful!
                         </h2>
                         <p className="mx-auto max-w-md text-xs leading-relaxed text-gray-600 sm:text-sm">
@@ -72,22 +72,22 @@ const ByCheckOut = () => {
                     {/* Bottom Body Content */}
                     <div className="p-4 sm:p-6 md:p-8">
                         {/* Purchased item */}
-                        <div className="mb-5 flex items-center justify-between gap-3 rounded-2xl border border-[#C6C6CD] bg-[#F5F5F5] p-3 sm:mb-6 sm:p-4">
-                            <div className="flex min-w-0 items-center gap-3 text-left sm:gap-4">
+                        <div className="mb-5 flex  items-center justify-center gap-3 rounded-2xl border border-[#C6C6CD] bg-[#F5F5F5] p-3 sm:mb-6 sm:p-4">
+                            <div className="flex flex-col justify-center sm:flex-row min-w-0 items-center gap-3 text-left sm:gap-4">
                                 <img
                                     src={image}
                                     alt={title}
                                     className="size-14 shrink-0 rounded-xl border border-[#C6C6CD] object-cover sm:size-16"
                                 />
-                                <div className="min-w-0">
+                                <div className="min-w-0 max-sm:text-center">
                                     <h4 className="break-words text-sm font-bold text-[#111827] sm:text-base">
                                         {title}
                                     </h4>
                                     <p className="break-words text-xs text-gray-500">by {author}</p>
                                 </div>
-                            </div>
-                            <div className="shrink-0 text-lg font-bold text-[#111827] sm:text-xl">
-                                ${price}
+                                <div className="shrink-0 text-lg font-bold text-[#111827] sm:text-xl">
+                                    ${price}
+                                </div>
                             </div>
                         </div>
 
@@ -97,7 +97,7 @@ const ByCheckOut = () => {
                                 Transaction Details
                             </p>
 
-                            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                            <div className="sm:grid grid-cols-2 gap-3 sm:gap-4">
                                 <div className="min-w-0">
                                     <p className="text-xs text-gray-500">Transaction ID</p>
                                     <p className="mt-0.5 break-all text-sm font-medium text-[#111827]">
@@ -112,7 +112,7 @@ const ByCheckOut = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-3 pt-2 sm:gap-4">
+                            <div className="sm:grid grid-cols-2 gap-3 pt-2 sm:gap-4">
                                 <div className="min-w-0">
                                     <p className="text-xs text-gray-500">Payment Method</p>
                                     <p className="mt-0.5 flex items-center gap-1.5 text-sm font-medium text-[#111827]">
@@ -131,7 +131,7 @@ const ByCheckOut = () => {
                         <button
                             onClick={handleDownloadPhoto}
                             disabled={isDownloading}
-                            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary py-3 text-sm font-medium text-white shadow-md transition-all hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-70 sm:py-3.5 sm:text-base"
+                            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary py-2 text-sm font-medium text-white shadow-md transition-all hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-70 sm:py-3.5 sm:text-base"
                         >
                             <FaDownload /> {isDownloading ? "Downloading..." : "Download Photo"}
                         </button>
@@ -144,7 +144,7 @@ const ByCheckOut = () => {
     // Checkout Form Screen
     return (
         <div className="mx-auto my-6 w-full max-w-6xl px-4 sm:my-8 sm:px-6 lg:px-8">
-            <h1 className="mb-6 text-2xl font-bold text-[#111827] sm:mb-8 sm:text-3xl">
+            <h1 className="mb-2 text-2xl font-bold text-[#111827] sm:mb-5 sm:text-3xl max-sm:text-center">
                 Checkout
             </h1>
 
@@ -152,11 +152,11 @@ const ByCheckOut = () => {
                 {/* Left Side: Order Summary (sticky on large screens) */}
                 <div className="space-y-4 sm:space-y-6 lg:sticky lg:top-6 lg:col-span-5 lg:self-start">
                     <div className="rounded-2xl border border-[#C6C6CD] bg-white p-4 shadow-sm sm:p-6">
-                        <h3 className="mb-4 text-base font-bold text-[#111827] sm:text-lg">
+                        <h3 className="mb-4 text-sm font-bold text-[#111827] sm:text-lg  max-sm:text-center ">
                             Order Summary
                         </h3>
 
-                        <div className="flex items-center gap-3 border-b border-[#C6C6CD] pb-5 sm:gap-4 sm:pb-6">
+                        <div className="flex flex-col sm:flex-row  items-center gap-3 border-b border-[#C6C6CD] pb-5 sm:gap-4 sm:pb-6 max-sm:text-center  ">
                             <img
                                 src={image}
                                 alt={title}
@@ -195,7 +195,7 @@ const ByCheckOut = () => {
                     <form onSubmit={handlePaymentSubmit} className="space-y-4 sm:space-y-6">
                         {/* Buyer Information Box */}
                         <div className="space-y-4 rounded-2xl border border-[#C6C6CD] bg-white p-4 shadow-sm sm:p-6">
-                            <h3 className="flex items-center gap-2 border-b border-[#C6C6CD] pb-3 text-base font-bold text-[#111827] sm:text-lg">
+                            <h3 className="flex flex-col sm:flex-row items-center gap-2 border-b border-[#C6C6CD] pb-3 text-base font-bold text-[#111827] text-sm sm:text-lg  ">
                                 <span>👤</span> Buyer Information
                             </h3>
 
@@ -213,7 +213,7 @@ const ByCheckOut = () => {
                                     autoComplete="name"
                                     required
                                     placeholder="Jane Doe"
-                                    className="w-full rounded-xl border border-[#C6C6CD] px-4 py-2.5 text-base focus:border-primary focus:outline-none"
+                                    className="w-full rounded border border-[#C6C6CD] px-4 py-1 sm:py-2.5 text-base focus:border-primary focus:outline-none"
                                 />
                             </div>
 
@@ -230,9 +230,9 @@ const ByCheckOut = () => {
                                     autoComplete="email"
                                     required
                                     placeholder="jane.doe@example.com"
-                                    className="w-full rounded-xl border border-[#C6C6CD] px-4 py-2.5 text-base focus:border-primary focus:outline-none"
+                                    className="w-full rounded border border-[#C6C6CD] py-1 px-4 sm:py-2.5 text-base focus:border-primary focus:outline-none"
                                 />
-                                <p className="mt-1 text-xs text-gray-400">
+                                <p className="mt-1 text-xs mt-2 text-gray-400">
                                     We'll send your high-resolution download link here.
                                 </p>
                             </div>
@@ -240,7 +240,7 @@ const ByCheckOut = () => {
 
                         {/* Payment Method Box */}
                         <div className="space-y-4 rounded-2xl border border-[#C6C6CD] bg-white p-4 shadow-sm sm:p-6">
-                            <h3 className="flex items-center gap-2 border-b border-[#C6C6CD] pb-3 text-base font-bold text-[#111827] sm:text-lg">
+                            <h3 className="flex flex-col sm:flex-row items-center gap-2 border-b border-[#C6C6CD] pb-3 text-base font-bold text-[#111827] text-sm sm:text-lg  ">
                                 <span>💳</span> Payment Method
                             </h3>
 
@@ -267,7 +267,7 @@ const ByCheckOut = () => {
 
                             <button
                                 type="submit"
-                                className="mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary py-3 text-sm font-medium text-white shadow-md transition-all hover:opacity-95 sm:mt-6 sm:py-3.5 sm:text-base"
+                                className="mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary py-2 text-sm font-medium text-white shadow-md transition-all hover:opacity-95 sm:mt-6 sm:py-2.5 sm:text-base"
                             >
                                 Continue with PayPal →
                             </button>
