@@ -1,7 +1,7 @@
 
 const ArtworkSkeleton = ({ count = 9 }) => {
     return (
-        <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
+        <div className="grid w-full max-w-main mx-auto grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
             {Array.from({ length: count }).map((_, index) => (
                 <article
                     key={index}

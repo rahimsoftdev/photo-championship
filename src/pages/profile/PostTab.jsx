@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router';
 import { usePostOrNewsData } from '../../hooks/usePostOrNewsData';
 import MessageCard from '../../components/userDashbaord/ui/MessageCard';
 import Pagination from '../../components/shared/Pagination';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
 
 const PostTab = () => {
     const [searchParams] = useSearchParams();
@@ -14,6 +15,9 @@ const PostTab = () => {
         currentPage,
         itemsPerPage
     );
+      if (loading) {
+        return <ArtworkSkeleton />
+    }
     return (
         <div className="">
             {/* Header Section */}
