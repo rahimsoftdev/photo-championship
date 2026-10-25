@@ -51,7 +51,7 @@ const ByCheckOut = () => {
         // Success Screen (Image onujayi exact layout ebong #EDEEEF background)
         return (
             // Outer wrapper gives side spacing on small screens
-            <div className="w-full px-4 sm:px-6">
+            <div className="w-full md:my-6 pt-3 px-4 sm:px-6">
                 <div className="mx-auto my-6 w-full max-w-xl overflow-hidden rounded-2xl border border-[#C6C6CD] bg-white shadow-sm sm:my-10 sm:rounded-3xl lg:my-12">
 
                     {/* Top Gray Header Section with #EDEEEF */}
@@ -143,7 +143,7 @@ const ByCheckOut = () => {
 
     // Checkout Form Screen
     return (
-        <div className="mx-auto my-6 w-full max-w-6xl px-4 sm:my-8 sm:px-6 lg:px-8">
+        <div className="mx-auto md:my-6 pt-3 w-full max-w-6xl px-4 sm:my-8 sm:px-6 lg:px-8">
             <h1 className="mb-2 text-2xl font-bold text-[#111827] sm:mb-5 sm:text-3xl max-sm:text-center">
                 Checkout
             </h1>
