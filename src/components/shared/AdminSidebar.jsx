@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router';
 import {
     FiGrid,
@@ -26,8 +26,9 @@ import {
     FiX,
     FiChevronRight,
 } from 'react-icons/fi';
+import { getSavedUserInfo } from '../../utils/getUserInof';
 
-const BASE = '/adminDashboard';
+const BASE = '/admin-dashboard';
 
 const menuSections = [
     {
@@ -69,9 +70,28 @@ const menuSections = [
 
 const AdminSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const userInfo = getSavedUserInfo();
 
     const toggleSidebar = () => setIsOpen((prev) => !prev);
     const closeSidebar = () => setIsOpen(false);
+
+    // Mobile e sidebar open thakle background page scroll lock
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpen]);
+
+    // Esc chaple sidebar bondho hobe
+    useEffect(() => {
+        if (!isOpen) return;
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') setIsOpen(false);
+        };
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [isOpen]);
 
     const handleLogout = () => {
         // Add your logout logic here
@@ -80,32 +100,64 @@ const AdminSidebar = () => {
 
     return (
         <>
-            {/* Small Device Toggle Button */}
-            <div className="lg:hidden fixed top-4 left-4 z-50">
+            {/* ===== Mobile Top Bar (shudhu choto device e dekha jabe) ===== */}
+            <header className="lg:hidden fixed top-0 inset-x-0 z-30 h-16 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm flex items-center justify-between px-4">
+                {/* Menu open button */}
                 <button
                     onClick={toggleSidebar}
-                    className="p-2.5 bg-white text-[#494453] rounded-md shadow-md focus:outline-none border border-gray-200 hover:bg-gray-50 transition-all"
-                    aria-label="Toggle Navigation"
+                    className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 text-[#494453] border border-gray-200 hover:bg-[#FDE8E9] hover:text-[#EE1C25] hover:border-[#EE1C25]/30 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EE1C25]/40"
+                    aria-label="Open navigation menu"
+                    aria-expanded={isOpen}
                 >
-                    {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                    <FiMenu size={22} />
                 </button>
-            </div>
 
-            {/* Backdrop Overlay for Mobile */}
-            {isOpen && (
-                <div
-                    onClick={closeSidebar}
-                    className="fixed inset-0 bg-black/40 z-40 lg:hidden backdrop-blur-sm transition-opacity"
-                />
-            )}
+                {/* Logo */}
+                <Link to="/" aria-label="Photo Championship home" className="absolute left-1/2 -translate-x-1/2">
+                    <img
+                        src="/src/assets/images/logo.png"
+                        alt="Photo Championship"
+                        className="h-10 w-auto object-contain"
+                    />
+                </Link>
 
-            {/* Sidebar Container */}
-            <aside
-                className={`fixed top-0 left-0 z-40 w-[270px] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col overflow-y-auto ${
-                    isOpen ? 'translate-x-0' : '-translate-x-full'
+                {/* Admin avatar -> Profile */}
+                <Link to={`${BASE}/profile`} aria-label="Go to profile" className="shrink-0">
+                    <img
+                        src={userInfo?.image}
+                        alt={userInfo?.name || 'Admin'}
+                        className="w-10 h-10 rounded-full object-cover border-2 border-white ring-1 ring-gray-200"
+                    />
+                </Link>
+            </header>
+
+            {/* ===== Backdrop Overlay (Mobile) ===== */}
+            <div
+                onClick={closeSidebar}
+                className={`fixed inset-0 z-40 lg:hidden bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${
+                    isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                 }`}
+                aria-hidden="true"
+            />
+
+            {/* ===== Sidebar Container =====
+                - Scrollbar hidden, tobe mouse wheel / touch diye scroll kora jay.
+                - overscroll-contain: sidebar scroll korle bairer page scroll hobe na. */}
+            <aside
+                className={`fixed top-0 left-0 z-50 w-[270px] max-w-[85vw] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col overflow-y-auto overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+                    isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+                } lg:shadow-none`}
             >
                 <div className="p-5 flex-1 flex flex-col">
+                    {/* Mobile Close Button */}
+                    <button
+                        onClick={closeSidebar}
+                        className="lg:hidden absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600 hover:bg-[#FDE8E9] hover:text-[#EE1C25] active:scale-95 transition-all focus:outline-none"
+                        aria-label="Close navigation menu"
+                    >
+                        <FiX size={20} />
+                    </button>
+
                     {/* Logo Section */}
                     <div className="mb-6 pt-2">
                         <Link
@@ -173,13 +225,13 @@ const AdminSidebar = () => {
                     <div className="mt-6 pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-3 p-2.5 bg-gray-50 rounded-xl">
                             <img
-                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150"
-                                alt="Atik Adnan"
+                                src={userInfo?.image}
+                                alt={userInfo?.name || 'Admin'}
                                 className="w-10 h-10 rounded-full object-cover border border-gray-200"
                             />
                             <div className="overflow-hidden">
                                 <h4 className="text-sm font-semibold text-gray-800 truncate leading-tight">
-                                    Atik Adnan
+                                    {userInfo?.name}
                                 </h4>
                                 <p className="text-xs text-gray-500 truncate">Admin</p>
                             </div>

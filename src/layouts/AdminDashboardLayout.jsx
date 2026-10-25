@@ -4,24 +4,25 @@ import AdminSidebar from '../components/shared/AdminSidebar';
 import { getSavedUserInfo } from '../utils/getUserInof';
 
 const AdminDashboardLayout = () => {
-    const userInfo = getSavedUserInfo()
+    const userInfo = getSavedUserInfo();
 
     if (!userInfo) {
         return <Navigate to="/login" replace />;
     }
-    console.log(userInfo.role)
+
     if (userInfo.role !== 'admin') {
-        return <Navigate to={'/access-denied'} />
+        return <Navigate to="/access-denied" replace />;
     }
+
     return (
         <div className="min-h-screen bg-[#F8F9FA] flex">
-            {/* Dynamic Responsive Sidebar */}
+            {/* Responsive Sidebar (mobile e top bar + slide-in menu) */}
             <AdminSidebar />
 
-            {/* Main Content Area */}
-            <main className="flex-1 lg:ml-[270px] p-2 md:p-4 lg:p-6  transition-all duration-300">
-                {/* Navbar space / top margin for mobile toggle button spacing */}
-                {/* React Router Outlet where child page components render */}
+            {/* Main Content Area
+                pt-20: mobile/tablet e fixed top bar (h-16) er niche content shuru hobe
+                lg:pt-6: desktop e top bar nai */}
+            <main className="flex-1 min-w-0 lg:ml-[270px] p-2 md:p-4 lg:p-6 pt-20 md:pt-20 lg:pt-6 transition-all duration-300">
                 <Outlet />
             </main>
         </div>
