@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router';
 import { FiPlus, FiLayers } from 'react-icons/fi';
@@ -11,6 +11,19 @@ const MyStore = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { products, totalPages, loading, error, currentCategory } = useProducts(8);
+
+  // Edit / Delete-er por data update dekhanor jonno local state
+  const [deletedIds, setDeletedIds] = useState(() => new Set());
+  const [edits, setEdits] = useState({});
+
+  // Delete kora product bad, edit kora product-e notun data boshano
+  const visibleProducts = useMemo(
+    () =>
+      (products || [])
+        .filter((p) => !deletedIds.has(p.id))
+        .map((p) => (edits[p.id] ? { ...p, ...edits[p.id] } : p)),
+    [products, deletedIds, edits]
+  );
 
   const categories = ['All Items', 'Art Prints', 'Handmade Crafts', 'Apparel', 'Photobooks', 'Digital Preset'];
 
@@ -27,6 +40,14 @@ const MyStore = () => {
     });
   };
 
+  const handleEdit = (updated) => {
+    setEdits((prev) => ({ ...prev, [updated.id]: updated }));
+  };
+
+  const handleDelete = (id) => {
+    setDeletedIds((prev) => new Set(prev).add(id));
+  };
+
   if (loading) return <div className="text-center py-12 sm:py-20 text-sm sm:text-base text-gray-500">Loading store...</div>;
   if (error) return <div className="text-center py-12 sm:py-20 px-4 text-sm sm:text-base text-red-500 break-words">Error: {error}</div>;
 
@@ -35,7 +56,7 @@ const MyStore = () => {
       <div className="w-full">
 
         {/* HEADER SECTION */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
           <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <span className="p-1.5 bg-gray-100 rounded-md text-gray-700 shrink-0">
@@ -78,16 +99,16 @@ const MyStore = () => {
         </div>
 
         {/* PRODUCTS GRID */}
-        {products.length === 0 ? (
+        {visibleProducts.length === 0 ? (
           <div className="text-center py-12 sm:py-20 text-sm sm:text-base text-gray-400">No products found in this category.</div>
         ) : (
           <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-            {products.map((product) => (
+            {visibleProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
-                onEdit={(updated) => console.log('Updated:', updated)}
-                onDelete={(id) => console.log('Delete ID:', id)}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
               />
             ))}
           </div>
