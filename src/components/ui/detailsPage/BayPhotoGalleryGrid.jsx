@@ -15,6 +15,9 @@ const ALBUM_LABELS = {
 // user-dashboard ba admin dashboard route hole true
 const DASHBOARD_PATH = /^\/(user-dashboard|admin-dashboard|admin)(\/|$)/;
 
+// shudhu user-dashboard route hole true (ekhane Photographer row dekhabe na)
+const USER_DASHBOARD_PATH = /^\/user-dashboard(\/|$)/;
+
 const formatDate = (value) => {
     if (!value) return '01 June, 2026';
     const d = new Date(value);
@@ -30,6 +33,9 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto, dashboard }) => {
 
     const isDashboard =
         dashboard === 'yes' || dashboard === true || DASHBOARD_PATH.test(pathname);
+
+    // User dashboard hole Photographer row (avatar, nam, View Profile) dekhabe na (admin dashboard-e dekhabe)
+    const isUserDashboard = USER_DASHBOARD_PATH.test(pathname);
 
     // State for interactive features
     const [isLiked, setIsLiked] = useState(false);
@@ -221,29 +227,31 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto, dashboard }) => {
                     ))}
                 </div>
 
-                {/* Photographer row */}
-                <div className="flex items-center justify-between gap-3 border-t border-gray-200 pt-4 sm:pt-5">
-                    <div className="flex items-center gap-3 min-w-0">
-                        <img
-                            src={bayPhoto?.info?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"}
-                            alt={bayPhoto?.info?.author || "Photographer"}
-                            className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full object-cover border border-[#C6C6CD]"
-                        />
-                        <div className="min-w-0">
-                            <p className="text-[11px] sm:text-xs text-gray-500">Photographer</p>
-                            <h4 className="text-sm sm:text-base font-bold text-[#111827] truncate">
-                                {bayPhoto?.info?.author || "Wong Kar-Wai"}
-                            </h4>
+                {/* Photographer row (user dashboard-e avatar, nam, View Profile kichui dekhabe na) */}
+                {!isUserDashboard && (
+                    <div className="flex items-center justify-between gap-3 border-t border-gray-200 pt-4 sm:pt-5">
+                        <div className="flex items-center gap-3 min-w-0">
+                            <img
+                                src={bayPhoto?.info?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"}
+                                alt={bayPhoto?.info?.author || "Photographer"}
+                                className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full object-cover border border-[#C6C6CD]"
+                            />
+                            <div className="min-w-0">
+                                <p className="text-[11px] sm:text-xs text-gray-500">Photographer</p>
+                                <h4 className="text-sm sm:text-base font-bold text-[#111827] truncate">
+                                    {bayPhoto?.info?.author || "Wong Kar-Wai"}
+                                </h4>
+                            </div>
                         </div>
-                    </div>
 
-                    <Link
-                        to={`/photographers/${bayPhoto?.userId}`}
-                        className="shrink-0 inline-flex items-center justify-center rounded-full bg-primary px-4 sm:px-6 py-2 sm:py-2.5 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90 whitespace-nowrap"
-                    >
-                        View Profile
-                    </Link>
-                </div>
+                        <Link
+                            to={`/photographers/${bayPhoto?.userId}`}
+                            className="shrink-0 inline-flex items-center justify-center rounded-full bg-primary px-4 sm:px-6 py-2 sm:py-2.5 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90 whitespace-nowrap"
+                        >
+                            View Profile
+                        </Link>
+                    </div>
+                )}
             </div>
         );
     }

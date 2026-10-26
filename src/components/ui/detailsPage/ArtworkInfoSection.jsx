@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { FiDownload, FiHeart, FiShare2 } from "react-icons/fi";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
-const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
+// user-dashboard ba admin dashboard route hole true
+const DASHBOARD_PATH = /^\/(user-dashboard|admin-dashboard|admin)(\/|$)/;
+
+const ArtworkInfoSection = ({ artwork, onVote, hasVoted, isDashboard: isDashboardProp }) => {
+  const { pathname } = useLocation();
+  // prop diye force kora jay, na dile route theke auto detect hoy
+  const isDashboard = isDashboardProp ?? DASHBOARD_PATH.test(pathname);
   const [vote, setVote] = useState(false)
   const [copied, setCopied] = useState(false);
 
@@ -198,36 +204,38 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted }) => {
         </div>
       </div>
 
-      {/* Action Buttons: Vote, Download, Share */}
-      <div className="flex flex-wrap items-center gap-3 pt-2 ">
-        {/* Vote Button */}
-        <button
-          onClick={() => setVote(!vote)}
-          className={`flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-xs font-semibold transition-opacity hover:opacity-90 shadow-sm  max-sm:w-full ${vote ? "bg-secondary text-white " : " text-secondary border border-secondary "}  `}
-        >
-          <FiHeart className="text-lg" />
-          {vote ? "Voted" : "Cast Your Vote"}
-        </button>
+      {/* Dashboard-e Vote / Download / Share button dekhabe na */}
+      {!isDashboard && (
+        <div className="flex flex-wrap items-center gap-3 pt-2 ">
+          {/* Vote Button */}
+          <button
+            onClick={() => setVote(!vote)}
+            className={`flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-xs font-semibold transition-opacity hover:opacity-90 shadow-sm  max-sm:w-full ${vote ? "bg-secondary text-white " : " text-secondary border border-secondary "}  `}
+          >
+            <FiHeart className="text-lg" />
+            {vote ? "Voted" : "Cast Your Vote"}
+          </button>
 
-        {/* Download Button */}
-        <button
-          onClick={handleDownload}
-          className="flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-sm font-semibold text-white bg-primary transition-opacity hover:opacity-90 shadow-sm max-sm:w-full"
-        >
-          <FiDownload className="text-lg" />
-          Download Photo
-        </button>
+          {/* Download Button */}
+          <button
+            onClick={handleDownload}
+            className="flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-sm font-semibold text-white bg-primary transition-opacity hover:opacity-90 shadow-sm max-sm:w-full"
+          >
+            <FiDownload className="text-lg" />
+            Download Photo
+          </button>
 
-        {/* Share Button */}
-        <button
-          onClick={handleShare}
-          className="relative flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-sm font-semibold text-gray-800 transition-opacity hover:opacity-90 shadow-sm max-sm:w-full"
-          style={{ backgroundColor: "rgba(253, 232, 233, 1)" }}
-        >
-          <FiShare2 className="text-lg" />
-          {copied ? "Copied Link!" : "Share"}
-        </button>
-      </div>
+          {/* Share Button */}
+          <button
+            onClick={handleShare}
+            className="relative flex items-center gap-2 rounded-full px-5 py-1.5 md:py-2.5 text-sm font-semibold text-gray-800 transition-opacity hover:opacity-90 shadow-sm max-sm:w-full"
+            style={{ backgroundColor: "rgba(253, 232, 233, 1)" }}
+          >
+            <FiShare2 className="text-lg" />
+            {copied ? "Copied Link!" : "Share"}
+          </button>
+        </div>
+      )}
 
       {/* Photographer Profile Section (As shown in screenshot) */}
       <div className="flex  items-start sm:items-center justify-between   gap-4">
