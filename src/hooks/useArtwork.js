@@ -11,8 +11,8 @@ const useArtwork = (
     } = {},
     competition = true,
     itemsPerPage = 9,
-    url
-
+    url,
+    userId = null // optional: dile shudhu oi userId-r artwork ashbe
 ) => {
     const [allArtworks, setAllArtworks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ const useArtwork = (
                 setLoading(true);
                 setError(null);
 
-                const response = await fetch(  url, {
+                const response = await fetch(url, {
                     signal: controller.signal,
                 });
 
@@ -55,7 +55,7 @@ const useArtwork = (
         return () => controller.abort();
     }, [url]);
 
-    // Filter artworks by type, title, album type, category, and subcategory.
+    // Filter artworks by userId, type, title, album type, category, and subcategory.
     const filteredArtworks = useMemo(() => {
         const selectedType = competition ? "competition" : "gallery";
 
@@ -73,6 +73,14 @@ const useArtwork = (
             String(value ?? "").trim().toLowerCase();
 
         return allArtworks.filter((artwork) => {
+            // Filter by userId (shudhu userId pathale).
+            if (
+                userId &&
+                normalize(artwork.userId) !== normalize(userId)
+            ) {
+                return false;
+            }
+
             // Filter competition or gallery artworks.
             if (normalize(artwork.type) !== selectedType) {
                 return false;
@@ -123,6 +131,7 @@ const useArtwork = (
         });
     }, [
         allArtworks,
+        userId,
         title,
         albumType,
         category,

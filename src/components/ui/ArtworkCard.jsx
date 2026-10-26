@@ -31,9 +31,11 @@ const getArtworkId = (artwork) =>
     `${artwork.userId ?? "user"}-${artwork.title ?? "artwork"}-${artwork.images?.[0] ?? ""}`
   );
 
-const ArtworkCard = ({ artWorkData, dashboard }) => {
+const ArtworkCard = ({ artWorkData, dashboard, currentUserId }) => {
   const artwork = artWorkData;
   const navigate = useNavigate();
+
+  console.log(artWorkData.userId)
 
   // Keep the initial state synchronized with localStorage.
   const [savedIds, setSavedIds] = useState(() =>
@@ -186,7 +188,11 @@ const formattedDate = artwork.info?.createdAt
 
     {/* Three-dot menu */}
     <div className="absolute right-1.5 top-1.5 z-10 sm:right-2.5 sm:top-2.5">
-      <ReportPhotoModal photoTitle={artwork.title || "this photo"} />
+
+      {
+        artWorkData.userId !== currentUserId && <ReportPhotoModal photoTitle={artwork.title || "this photo"} />
+      }
+      
     </div>
 
     {/* Save button */}

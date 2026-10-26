@@ -3,454 +3,81 @@
     "id": "art_001",
     "albumType": "single",
     "type": "competition",
-    "category": "nature",
-    "subCategory": "mountains",
-    "userId": "user_101",
-    "info": {
-      "author": "Rahim Sikdar",
-      "tags": ["mountain", "nature", "sunrise"],
-      "createdAt": "2026-10-01T08:30:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/mountain-art-01/1200/800"
-    ],
-    "zodiacs": ["Gemini"],
-    "video": null,
-    "title": "Golden Sunrise Over the Mountains",
-    "description": "A beautiful sunrise illuminating the mountain peaks.",
-    "price": 120,
-    "totalReact": 245,
-    "viewsCount": 1840,
-    "isWinner": true,
-    "comments": [
-      {
-        "userId": "user_102",
-        "text": "Absolutely stunning!",
-        "createdAt": "2026-10-02T09:00:00Z"
-      }
-    ],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.8 MB",
-      "location": "Swiss Alps",
-      "camera": "Canon EOS R5"
-    }
-  },
-  {
-    "id": "art_002",
-    "albumType": "six",
-    "type": "gallery",
-    "category": "wildlife",
-    "subCategory": "wildlife",
-    "userId": "user_102",
-    "info": {
-      "author": "Alex Morgan",
-      "tags": ["wildlife", "forest", "animals"],
-      "createdAt": "2026-10-02T10:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/wildlife-art-01/1200/800",
-      "https://picsum.photos/seed/wildlife-art-02/1200/800",
-      "https://picsum.photos/seed/wildlife-art-03/1200/800",
-      "https://picsum.photos/seed/wildlife-art-04/1200/800",
-      "https://picsum.photos/seed/wildlife-art-05/1200/800",
-      "https://picsum.photos/seed/wildlife-art-06/1200/800"
-    ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
-    "video": null,
-    "title": "Wildlife Through My Lens",
-    "description": "A collection capturing the beauty of animals in their natural habitats.",
-    "price": 250,
-    "totalReact": 189,
-    "viewsCount": 1250,
-    "isWinner": false,
-    "comments": [
-      {
-        "userId": "user_103",
-        "text": "Love the collection!",
-        "createdAt": "2026-10-03T11:00:00Z"
-      }
-    ],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "2.4 MB",
-      "location": "Amazon Rainforest",
-      "camera": "Nikon Z7 II"
-    }
-  },
-  {
-    "id": "art_003",
-    "albumType": "twelve",
-    "type": "competition",
-    "category": "portrait",
-    "subCategory": "individual-portraits",
-    "userId": "user_103",
-    "info": {
-      "author": "Sophia Williams",
-      "tags": ["portrait", "people", "emotion"],
-      "createdAt": "2026-10-03T12:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/portrait-art-01/1200/800",
-      "https://picsum.photos/seed/portrait-art-02/1200/800",
-      "https://picsum.photos/seed/portrait-art-03/1200/800",
-      "https://picsum.photos/seed/portrait-art-04/1200/800",
-      "https://picsum.photos/seed/portrait-art-05/1200/800",
-      "https://picsum.photos/seed/portrait-art-06/1200/800",
-      "https://picsum.photos/seed/portrait-art-07/1200/800",
-      "https://picsum.photos/seed/portrait-art-08/1200/800",
-      "https://picsum.photos/seed/portrait-art-09/1200/800",
-      "https://picsum.photos/seed/portrait-art-10/1200/800",
-      "https://picsum.photos/seed/portrait-art-11/1200/800",
-      "https://picsum.photos/seed/portrait-art-12/1200/800"
-    ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "video": null,
-    "title": "Faces of Humanity",
-    "description": "Twelve portraits showing different human emotions and stories.",
-    "price": 480,
-    "totalReact": 560,
-    "viewsCount": 4320,
-    "isWinner": true,
-    "comments": [
-      {
-        "userId": "user_101",
-        "text": "Every portrait tells a story.",
-        "createdAt": "2026-10-04T10:00:00Z"
-      },
-      {
-        "userId": "user_104",
-        "text": "Amazing photography!",
-        "createdAt": "2026-10-04T11:00:00Z"
-      }
-    ],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "2.1 MB",
-      "location": "London, UK",
-      "camera": "Sony A7 IV"
-    }
-  },
-  {
-    "id": "art_004",
-    "albumType": "single",
-    "type": "gallery",
-    "category": "architecture",
-    "subCategory": "modern-buildings",
-    "userId": "user_104",
-    "info": {
-      "author": "Daniel Scott",
-      "tags": ["architecture", "modern", "building"],
-      "createdAt": "2026-10-04T08:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/architecture-art-01/1200/800"
-    ],
-    "zodiacs": ["Libra"],
-    "video": null,
-    "title": "Modern Architectural Beauty",
-    "description": "A minimalist perspective on modern architecture.",
-    "price": 90,
-    "totalReact": 98,
-    "viewsCount": 740,
-    "isWinner": false,
-    "comments": [],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.2 MB",
-      "location": "Dubai, UAE",
-      "camera": "Canon EOS R6"
-    }
-  },
-  {
-    "id": "art_005",
-    "albumType": "six",
-    "type": "competition",
-    "category": "landscape",
-    "subCategory": "countryside",
-    "userId": "user_105",
-    "info": {
-      "author": "Emma Wilson",
-      "tags": ["landscape", "countryside", "green"],
-      "createdAt": "2026-10-05T09:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/countryside-art-01/1200/800",
-      "https://picsum.photos/seed/countryside-art-02/1200/800",
-      "https://picsum.photos/seed/countryside-art-03/1200/800",
-      "https://picsum.photos/seed/countryside-art-04/1200/800",
-      "https://picsum.photos/seed/countryside-art-05/1200/800",
-      "https://picsum.photos/seed/countryside-art-06/1200/800"
-    ],
-    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "video": null,
-    "title": "Peaceful Countryside",
-    "description": "A six-photo journey through peaceful green countryside.",
-    "price": 220,
-    "totalReact": 312,
-    "viewsCount": 2160,
-    "isWinner": false,
-    "comments": [
-      {
-        "userId": "user_102",
-        "text": "Such a peaceful atmosphere.",
-        "createdAt": "2026-10-06T10:00:00Z"
-      }
-    ],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.9 MB",
-      "location": "Yorkshire, UK",
-      "camera": "Fujifilm X-T5"
-    }
-  },
-  {
-    "id": "art_006",
-    "albumType": "twelve",
-    "type": "gallery",
-    "category": "travel",
-    "subCategory": "cultural-experiences",
-    "userId": "user_106",
-    "info": {
-      "author": "Oliver James",
-      "tags": ["travel", "culture", "adventure"],
-      "createdAt": "2026-10-06T12:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/travel-art-01/1200/800",
-      "https://picsum.photos/seed/travel-art-02/1200/800",
-      "https://picsum.photos/seed/travel-art-03/1200/800",
-      "https://picsum.photos/seed/travel-art-04/1200/800",
-      "https://picsum.photos/seed/travel-art-05/1200/800",
-      "https://picsum.photos/seed/travel-art-06/1200/800",
-      "https://picsum.photos/seed/travel-art-07/1200/800",
-      "https://picsum.photos/seed/travel-art-08/1200/800",
-      "https://picsum.photos/seed/travel-art-09/1200/800",
-      "https://picsum.photos/seed/travel-art-10/1200/800",
-      "https://picsum.photos/seed/travel-art-11/1200/800",
-      "https://picsum.photos/seed/travel-art-12/1200/800"
-    ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
-    "title": "Discovering New Cultures",
-    "description": "Twelve photographs from a journey across different cultures.",
-    "price": 350,
-    "totalReact": 421,
-    "viewsCount": 3290,
-    "isWinner": false,
-    "comments": [],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "2.2 MB",
-      "location": "Kyoto, Japan",
-      "camera": "Sony A7 III"
-    }
-  },
-  {
-    "id": "art_007",
-    "albumType": "single",
-    "type": "competition",
-    "category": "macro",
-    "subCategory": "flowers",
+    "category": "pets",
+    "subCategory": "cats",
     "userId": "user_107",
     "info": {
       "author": "Isabella Brown",
-      "tags": ["macro", "flower", "nature"],
-      "createdAt": "2026-10-07T07:00:00Z"
+      "tags": [
+        "cat",
+        "pets",
+        "cats"
+      ],
+      "createdAt": "2026-10-01T12:17:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/macro-art-01/1200/800"
+      "https://picsum.photos/seed/cat-001-01/1200/800"
     ],
-    "zodiacs": ["Gemini"],
+    "zodiacs": [
+      "Libra"
+    ],
     "video": null,
-    "title": "Tiny Wonders of Nature",
-    "description": "A close-up view of the little details we often overlook.",
-    "price": 150,
-    "totalReact": 670,
-    "viewsCount": 5400,
+    "title": "Lost Reflections of Cats",
+    "description": "A single-album collection exploring cats in pets.",
+    "price": 77,
+    "totalReact": 449,
+    "viewsCount": 2390,
     "isWinner": true,
     "comments": [
       {
-        "userId": "user_103",
-        "text": "The details are incredible!",
-        "createdAt": "2026-10-08T08:00:00Z"
+        "userId": "user_113",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-02T17:17:00Z"
       }
     ],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.5 MB",
-      "location": "Dhaka, Bangladesh",
-      "camera": "Nikon D850"
-    }
-  },
-  {
-    "id": "art_008",
-    "albumType": "six",
-    "type": "gallery",
-    "category": "street-photography",
-    "subCategory": "street-life",
-    "userId": "user_108",
-    "info": {
-      "author": "Ethan Davis",
-      "tags": ["street", "city", "people"],
-      "createdAt": "2026-10-08T10:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/street-art-01/1200/800",
-      "https://picsum.photos/seed/street-art-02/1200/800",
-      "https://picsum.photos/seed/street-art-03/1200/800",
-      "https://picsum.photos/seed/street-art-04/1200/800",
-      "https://picsum.photos/seed/street-art-05/1200/800",
-      "https://picsum.photos/seed/street-art-06/1200/800"
-    ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
-    "video": null,
-    "title": "Life on the Streets",
-    "description": "Everyday moments captured in busy city streets.",
-    "price": 180,
-    "totalReact": 145,
-    "viewsCount": 980,
-    "isWinner": false,
-    "comments": [],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.7 MB",
-      "location": "New York, USA",
-      "camera": "Sony A6400"
-    }
-  },
-  {
-    "id": "art_009",
-    "albumType": "twelve",
-    "type": "competition",
-    "category": "black-white",
-    "subCategory": "portraits",
-    "userId": "user_109",
-    "info": {
-      "author": "Mia Taylor",
-      "tags": ["black-white", "portrait", "emotion"],
-      "createdAt": "2026-10-09T08:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/bw-art-01/1200/800",
-      "https://picsum.photos/seed/bw-art-02/1200/800",
-      "https://picsum.photos/seed/bw-art-03/1200/800",
-      "https://picsum.photos/seed/bw-art-04/1200/800",
-      "https://picsum.photos/seed/bw-art-05/1200/800",
-      "https://picsum.photos/seed/bw-art-06/1200/800",
-      "https://picsum.photos/seed/bw-art-07/1200/800",
-      "https://picsum.photos/seed/bw-art-08/1200/800",
-      "https://picsum.photos/seed/bw-art-09/1200/800",
-      "https://picsum.photos/seed/bw-art-10/1200/800",
-      "https://picsum.photos/seed/bw-art-11/1200/800",
-      "https://picsum.photos/seed/bw-art-12/1200/800"
-    ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "video": null,
-    "title": "Monochrome Emotions",
-    "description": "A dramatic collection of black-and-white portraits.",
-    "price": 400,
-    "totalReact": 390,
-    "viewsCount": 2670,
-    "isWinner": false,
-    "comments": [
-      {
-        "userId": "user_105",
-        "text": "Black and white never goes out of style.",
-        "createdAt": "2026-10-10T10:00:00Z"
-      }
-    ],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.6 MB",
-      "location": "Paris, France",
-      "camera": "Canon EOS R5"
-    }
-  },
-  {
-    "id": "art_010",
-    "albumType": "single",
-    "type": "gallery",
-    "category": "pets",
-    "subCategory": "cats",
-    "userId": "user_110",
-    "info": {
-      "author": "Ava Martinez",
-      "tags": ["cats", "pets", "animals"],
-      "createdAt": "2026-10-09T11:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/cat-art-01/1200/800"
-    ],
-    "zodiacs": ["Libra"],
-    "video": null,
-    "title": "Little Cat, Big Personality",
-    "description": "A cute portrait of a curious feline friend.",
-    "price": 75,
-    "totalReact": 850,
-    "viewsCount": 6720,
-    "isWinner": false,
-    "comments": [],
     "imageDetails": {
       "width": 1200,
       "height": 800,
       "format": "jpg",
       "size": "1.3 MB",
-      "location": "Toronto, Canada",
-      "camera": "Nikon Z6 II"
+      "location": "New York, USA",
+      "camera": "Sony A7S III"
     }
   },
   {
-    "id": "art_011",
-    "albumType": "six",
-    "type": "competition",
-    "category": "night-photography",
-    "subCategory": "astrophotography",
-    "userId": "user_111",
+    "id": "art_002",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_116",
     "info": {
-      "author": "Noah Anderson",
-      "tags": ["stars", "night-sky", "space"],
-      "createdAt": "2026-10-10T20:00:00Z"
+      "author": "Benjamin Lee",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-01T17:34:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/astro-art-01/1200/800",
-      "https://picsum.photos/seed/astro-art-02/1200/800",
-      "https://picsum.photos/seed/astro-art-03/1200/800",
-      "https://picsum.photos/seed/astro-art-04/1200/800",
-      "https://picsum.photos/seed/astro-art-05/1200/800",
-      "https://picsum.photos/seed/astro-art-06/1200/800"
+      "https://picsum.photos/seed/countryside-002-01/1200/800"
     ],
-    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
+    "zodiacs": [
+      "Libra"
+    ],
     "video": null,
-    "title": "Beyond the Night Sky",
-    "description": "Six views of the stars and the mysterious night sky.",
-    "price": 300,
-    "totalReact": 520,
-    "viewsCount": 3880,
-    "isWinner": true,
+    "title": "Eternal Horizons of Countryside",
+    "description": "A single-album collection exploring countryside in landscape.",
+    "price": 96,
+    "totalReact": 767,
+    "viewsCount": 4722,
+    "isWinner": false,
     "comments": [
       {
-        "userId": "user_106",
-        "text": "The universe is beautiful.",
-        "createdAt": "2026-10-11T08:00:00Z"
+        "userId": "user_120",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-01T22:34:00Z"
       }
     ],
     "imageDetails": {
@@ -458,285 +85,199 @@
       "height": 800,
       "format": "jpg",
       "size": "2.8 MB",
-      "location": "Atacama Desert, Chile",
+      "location": "Cox's Bazar, Bangladesh",
       "camera": "Sony A7S III"
     }
   },
   {
-    "id": "art_012",
-    "albumType": "twelve",
-    "type": "gallery",
-    "category": "wedding",
-    "subCategory": "bride-groom",
-    "userId": "user_112",
-    "info": {
-      "author": "Grace Thomas",
-      "tags": ["wedding", "couple", "love"],
-      "createdAt": "2026-10-11T09:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/wedding-art-01/1200/800",
-      "https://picsum.photos/seed/wedding-art-02/1200/800",
-      "https://picsum.photos/seed/wedding-art-03/1200/800",
-      "https://picsum.photos/seed/wedding-art-04/1200/800",
-      "https://picsum.photos/seed/wedding-art-05/1200/800",
-      "https://picsum.photos/seed/wedding-art-06/1200/800",
-      "https://picsum.photos/seed/wedding-art-07/1200/800",
-      "https://picsum.photos/seed/wedding-art-08/1200/800",
-      "https://picsum.photos/seed/wedding-art-09/1200/800",
-      "https://picsum.photos/seed/wedding-art-10/1200/800",
-      "https://picsum.photos/seed/wedding-art-11/1200/800",
-      "https://picsum.photos/seed/wedding-art-12/1200/800"
-    ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
-    "title": "Forever Starts Today",
-    "description": "A collection of romantic moments from a wedding day.",
-    "price": 520,
-    "totalReact": 670,
-    "viewsCount": 4920,
-    "isWinner": false,
-    "comments": [],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "2.0 MB",
-      "location": "Bali, Indonesia",
-      "camera": "Canon EOS R6"
-    }
-  },
-  {
-    "id": "art_013",
+    "id": "art_003",
     "albumType": "single",
-    "type": "competition",
-    "category": "fine-art",
-    "subCategory": "abstract",
-    "userId": "user_113",
-    "info": {
-      "author": "Liam White",
-      "tags": ["abstract", "art", "creative"],
-      "createdAt": "2026-10-11T13:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/abstract-art-01/1200/800"
-    ],
-    "zodiacs": ["Gemini"],
-    "video": null,
-    "title": "Abstract Dreams",
-    "description": "An artistic experiment with shapes, colors, and light.",
-    "price": 110,
-    "totalReact": 205,
-    "viewsCount": 1480,
-    "isWinner": false,
-    "comments": [],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.4 MB",
-      "location": "Berlin, Germany",
-      "camera": "Fujifilm X-T5"
-    }
-  },
-  {
-    "id": "art_014",
-    "albumType": "six",
     "type": "gallery",
     "category": "sports",
     "subCategory": "football",
-    "userId": "user_114",
+    "userId": "user_109",
     "info": {
-      "author": "Jack Harris",
-      "tags": ["football", "sports", "action"],
-      "createdAt": "2026-10-12T14:00:00Z"
+      "author": "Mia Taylor",
+      "tags": [
+        "football",
+        "sports",
+        "football"
+      ],
+      "createdAt": "2026-10-01T23:40:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/football-art-01/1200/800",
-      "https://picsum.photos/seed/football-art-02/1200/800",
-      "https://picsum.photos/seed/football-art-03/1200/800",
-      "https://picsum.photos/seed/football-art-04/1200/800",
-      "https://picsum.photos/seed/football-art-05/1200/800",
-      "https://picsum.photos/seed/football-art-06/1200/800"
+      "https://picsum.photos/seed/football-003-01/1200/800"
     ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
+    "zodiacs": [
+      "Libra"
+    ],
     "video": null,
-    "title": "The Spirit of Football",
-    "description": "Fast-paced action and unforgettable moments from the field.",
-    "price": 280,
-    "totalReact": 430,
-    "viewsCount": 3140,
+    "title": "Secret Reflections of Football",
+    "description": "A single-album collection exploring football in sports.",
+    "price": 111,
+    "totalReact": 273,
+    "viewsCount": 4109,
     "isWinner": false,
     "comments": [
       {
-        "userId": "user_110",
-        "text": "Great action shots!",
-        "createdAt": "2026-10-12T15:00:00Z"
+        "userId": "user_102",
+        "text": "Such a peaceful atmosphere.",
+        "createdAt": "2026-10-02T02:40:00Z"
       }
     ],
     "imageDetails": {
       "width": 1200,
       "height": 800,
       "format": "jpg",
-      "size": "2.3 MB",
-      "location": "London, UK",
+      "size": "1.3 MB",
+      "location": "Atacama Desert, Chile",
       "camera": "Canon EOS R3"
     }
   },
   {
-    "id": "art_015",
-    "albumType": "twelve",
+    "id": "art_004",
+    "albumType": "single",
     "type": "competition",
     "category": "nature",
     "subCategory": "oceans-beaches",
-    "userId": "user_115",
+    "userId": "user_103",
     "info": {
-      "author": "Chloe Martin",
-      "tags": ["ocean", "beach", "waves"],
-      "createdAt": "2026-10-12T16:00:00Z"
+      "author": "Sophia Williams",
+      "tags": [
+        "ocean",
+        "nature",
+        "oceans-beaches"
+      ],
+      "createdAt": "2026-10-02T03:39:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/ocean-art-01/1200/800",
-      "https://picsum.photos/seed/ocean-art-02/1200/800",
-      "https://picsum.photos/seed/ocean-art-03/1200/800",
-      "https://picsum.photos/seed/ocean-art-04/1200/800",
-      "https://picsum.photos/seed/ocean-art-05/1200/800",
-      "https://picsum.photos/seed/ocean-art-06/1200/800",
-      "https://picsum.photos/seed/ocean-art-07/1200/800",
-      "https://picsum.photos/seed/ocean-art-08/1200/800",
-      "https://picsum.photos/seed/ocean-art-09/1200/800",
-      "https://picsum.photos/seed/ocean-art-10/1200/800",
-      "https://picsum.photos/seed/ocean-art-11/1200/800",
-      "https://picsum.photos/seed/ocean-art-12/1200/800"
+      "https://picsum.photos/seed/ocean-004-01/1200/800"
     ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
+    "zodiacs": [
+      "Gemini"
+    ],
     "video": null,
-    "title": "Whispers of the Ocean",
-    "description": "Twelve photographs exploring the colors and movement of the sea.",
-    "price": 450,
-    "totalReact": 780,
-    "viewsCount": 6100,
+    "title": "Eternal Horizons of Oceans Beaches",
+    "description": "A single-album collection exploring oceans beaches in nature.",
+    "price": 106,
+    "totalReact": 415,
+    "viewsCount": 5433,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_106",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-02T12:39:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.2 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_005",
+    "albumType": "six",
+    "type": "competition",
+    "category": "pets",
+    "subCategory": "cats",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "cat",
+        "pets",
+        "cats"
+      ],
+      "createdAt": "2026-10-02T10:30:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cat-005-01/1200/800",
+      "https://picsum.photos/seed/cat-005-02/1200/800",
+      "https://picsum.photos/seed/cat-005-03/1200/800",
+      "https://picsum.photos/seed/cat-005-04/1200/800",
+      "https://picsum.photos/seed/cat-005-05/1200/800",
+      "https://picsum.photos/seed/cat-005-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Rising Whispers of Cats",
+    "description": "A six-album collection exploring cats in pets.",
+    "price": 267,
+    "totalReact": 588,
+    "viewsCount": 689,
     "isWinner": true,
     "comments": [],
     "imageDetails": {
       "width": 1200,
       "height": 800,
       "format": "jpg",
-      "size": "2.6 MB",
-      "location": "Maldives",
+      "size": "2.8 MB",
+      "location": "Bali, Indonesia",
       "camera": "Sony A7 IV"
     }
   },
   {
-    "id": "art_016",
-    "albumType": "single",
-    "type": "gallery",
-    "category": "travel",
-    "subCategory": "landmarks",
-    "userId": "user_116",
-    "info": {
-      "author": "Benjamin Lee",
-      "tags": ["travel", "landmark", "city"],
-      "createdAt": "2026-10-12T17:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/landmark-art-01/1200/800"
-    ],
-    "zodiacs": ["Libra"],
-    "video": null,
-    "title": "A Landmark to Remember",
-    "description": "A memorable view of an iconic travel destination.",
-    "price": 85,
-    "totalReact": 165,
-    "viewsCount": 1190,
-    "isWinner": false,
-    "comments": [],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.1 MB",
-      "location": "Rome, Italy",
-      "camera": "Nikon Z7 II"
-    }
-  },
-  {
-    "id": "art_017",
-    "albumType": "six",
-    "type": "competition",
-    "category": "architecture",
-    "subCategory": "bridges",
-    "userId": "user_117",
-    "info": {
-      "author": "Amelia Clark",
-      "tags": ["bridge", "architecture", "city"],
-      "createdAt": "2026-10-12T18:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/bridge-art-01/1200/800",
-      "https://picsum.photos/seed/bridge-art-02/1200/800",
-      "https://picsum.photos/seed/bridge-art-03/1200/800",
-      "https://picsum.photos/seed/bridge-art-04/1200/800",
-      "https://picsum.photos/seed/bridge-art-05/1200/800",
-      "https://picsum.photos/seed/bridge-art-06/1200/800"
-    ],
-    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "video": null,
-    "title": "Bridges That Connect Us",
-    "description": "A collection highlighting engineering and architectural beauty.",
-    "price": 240,
-    "totalReact": 290,
-    "viewsCount": 2050,
-    "isWinner": false,
-    "comments": [
-      {
-        "userId": "user_101",
-        "text": "Beautiful angles!",
-        "createdAt": "2026-10-13T08:00:00Z"
-      }
-    ],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.8 MB",
-      "location": "San Francisco, USA",
-      "camera": "Canon EOS R5"
-    }
-  },
-  {
-    "id": "art_018",
+    "id": "art_006",
     "albumType": "twelve",
-    "type": "gallery",
-    "category": "street-photography",
-    "subCategory": "markets",
-    "userId": "user_118",
+    "type": "competition",
+    "category": "fine-art",
+    "subCategory": "surrealism",
+    "userId": "user_105",
     "info": {
-      "author": "Henry Lewis",
-      "tags": ["market", "street", "daily-life"],
-      "createdAt": "2026-10-13T07:00:00Z"
+      "author": "Emma Wilson",
+      "tags": [
+        "surreal",
+        "fine-art",
+        "surrealism"
+      ],
+      "createdAt": "2026-10-02T16:58:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/market-art-01/1200/800",
-      "https://picsum.photos/seed/market-art-02/1200/800",
-      "https://picsum.photos/seed/market-art-03/1200/800",
-      "https://picsum.photos/seed/market-art-04/1200/800",
-      "https://picsum.photos/seed/market-art-05/1200/800",
-      "https://picsum.photos/seed/market-art-06/1200/800",
-      "https://picsum.photos/seed/market-art-07/1200/800",
-      "https://picsum.photos/seed/market-art-08/1200/800",
-      "https://picsum.photos/seed/market-art-09/1200/800",
-      "https://picsum.photos/seed/market-art-10/1200/800",
-      "https://picsum.photos/seed/market-art-11/1200/800",
-      "https://picsum.photos/seed/market-art-12/1200/800"
+      "https://picsum.photos/seed/surreal-006-01/1200/800",
+      "https://picsum.photos/seed/surreal-006-02/1200/800",
+      "https://picsum.photos/seed/surreal-006-03/1200/800",
+      "https://picsum.photos/seed/surreal-006-04/1200/800",
+      "https://picsum.photos/seed/surreal-006-05/1200/800",
+      "https://picsum.photos/seed/surreal-006-06/1200/800",
+      "https://picsum.photos/seed/surreal-006-07/1200/800",
+      "https://picsum.photos/seed/surreal-006-08/1200/800",
+      "https://picsum.photos/seed/surreal-006-09/1200/800",
+      "https://picsum.photos/seed/surreal-006-10/1200/800",
+      "https://picsum.photos/seed/surreal-006-11/1200/800",
+      "https://picsum.photos/seed/surreal-006-12/1200/800"
     ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
     "video": null,
-    "title": "Stories from the Local Market",
-    "description": "Everyday market scenes full of colors, people, and culture.",
-    "price": 330,
-    "totalReact": 350,
-    "viewsCount": 2710,
+    "title": "Calm Echoes of Surrealism",
+    "description": "A twelve-album collection exploring surrealism in fine art.",
+    "price": 462,
+    "totalReact": 288,
+    "viewsCount": 4862,
     "isWinner": false,
     "comments": [],
     "imageDetails": {
@@ -744,70 +285,38 @@
       "height": 800,
       "format": "jpg",
       "size": "2.0 MB",
-      "location": "Dhaka, Bangladesh",
-      "camera": "Sony A7 III"
-    }
-  },
-  {
-    "id": "art_019",
-    "albumType": "single",
-    "type": "competition",
-    "category": "pets",
-    "subCategory": "dogs",
-    "userId": "user_119",
-    "info": {
-      "author": "Ella Walker",
-      "tags": ["dog", "pets", "animals"],
-      "createdAt": "2026-10-13T08:00:00Z"
-    },
-    "images": [
-      "https://picsum.photos/seed/dog-art-01/1200/800"
-    ],
-    "zodiacs": ["Gemini"],
-    "video": null,
-    "title": "A Loyal Friend",
-    "description": "A heartwarming portrait of a beloved dog.",
-    "price": 95,
-    "totalReact": 410,
-    "viewsCount": 3020,
-    "isWinner": false,
-    "comments": [],
-    "imageDetails": {
-      "width": 1200,
-      "height": 800,
-      "format": "jpg",
-      "size": "1.4 MB",
-      "location": "Melbourne, Australia",
+      "location": "Cox's Bazar, Bangladesh",
       "camera": "Canon EOS R6"
     }
   },
   {
-    "id": "art_020",
-    "albumType": "six",
-    "type": "gallery",
-    "category": "fine-art",
-    "subCategory": "minimalism",
-    "userId": "user_120",
+    "id": "art_007",
+    "albumType": "single",
+    "type": "competition",
+    "category": "wedding",
+    "subCategory": "bride-groom",
+    "userId": "user_111",
     "info": {
-      "author": "Lucas Hall",
-      "tags": ["minimalism", "fine-art", "design"],
-      "createdAt": "2026-10-13T09:00:00Z"
+      "author": "Noah Anderson",
+      "tags": [
+        "wedding",
+        "wedding",
+        "bride-groom"
+      ],
+      "createdAt": "2026-10-02T22:46:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/minimal-art-01/1200/800",
-      "https://picsum.photos/seed/minimal-art-02/1200/800",
-      "https://picsum.photos/seed/minimal-art-03/1200/800",
-      "https://picsum.photos/seed/minimal-art-04/1200/800",
-      "https://picsum.photos/seed/minimal-art-05/1200/800",
-      "https://picsum.photos/seed/minimal-art-06/1200/800"
+      "https://picsum.photos/seed/wedding-007-01/1200/800"
     ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo"],
+    "zodiacs": [
+      "Gemini"
+    ],
     "video": null,
-    "title": "Less Is More",
-    "description": "A minimalistic collection focused on form and simplicity.",
-    "price": 200,
-    "totalReact": 178,
-    "viewsCount": 1320,
+    "title": "Bold Details of Bride Groom",
+    "description": "A single-album collection exploring bride groom in wedding.",
+    "price": 85,
+    "totalReact": 88,
+    "viewsCount": 6972,
     "isWinner": false,
     "comments": [],
     "imageDetails": {
@@ -815,49 +324,54 @@
       "height": 800,
       "format": "jpg",
       "size": "1.5 MB",
-      "location": "Copenhagen, Denmark",
-      "camera": "Fujifilm X-T5"
+      "location": "Istanbul, Turkey",
+      "camera": "Canon EOS R3"
     }
   },
   {
-    "id": "art_021",
-    "albumType": "twelve",
-    "type": "competition",
-    "category": "sports",
-    "subCategory": "cricket",
-    "userId": "user_121",
+    "id": "art_008",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_110",
     "info": {
-      "author": "William Young",
-      "tags": ["cricket", "sports", "action"],
-      "createdAt": "2026-10-13T10:00:00Z"
+      "author": "Ava Martinez",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-03T04:13:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/cricket-art-01/1200/800",
-      "https://picsum.photos/seed/cricket-art-02/1200/800",
-      "https://picsum.photos/seed/cricket-art-03/1200/800",
-      "https://picsum.photos/seed/cricket-art-04/1200/800",
-      "https://picsum.photos/seed/cricket-art-05/1200/800",
-      "https://picsum.photos/seed/cricket-art-06/1200/800",
-      "https://picsum.photos/seed/cricket-art-07/1200/800",
-      "https://picsum.photos/seed/cricket-art-08/1200/800",
-      "https://picsum.photos/seed/cricket-art-09/1200/800",
-      "https://picsum.photos/seed/cricket-art-10/1200/800",
-      "https://picsum.photos/seed/cricket-art-11/1200/800",
-      "https://picsum.photos/seed/cricket-art-12/1200/800"
+      "https://picsum.photos/seed/macro-008-01/1200/800",
+      "https://picsum.photos/seed/macro-008-02/1200/800",
+      "https://picsum.photos/seed/macro-008-03/1200/800",
+      "https://picsum.photos/seed/macro-008-04/1200/800",
+      "https://picsum.photos/seed/macro-008-05/1200/800",
+      "https://picsum.photos/seed/macro-008-06/1200/800"
     ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
-    "title": "Cricket: Moments of Glory",
-    "description": "Twelve action-packed photographs celebrating cricket.",
-    "price": 550,
-    "totalReact": 910,
-    "viewsCount": 7200,
-    "isWinner": true,
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Gentle Whispers of Flowers",
+    "description": "A six-album collection exploring flowers in macro.",
+    "price": 300,
+    "totalReact": 728,
+    "viewsCount": 3318,
+    "isWinner": false,
     "comments": [
       {
-        "userId": "user_114",
-        "text": "What an amazing collection!",
-        "createdAt": "2026-10-13T11:00:00Z"
+        "userId": "user_101",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-04T10:13:00Z"
       }
     ],
     "imageDetails": {
@@ -865,32 +379,204 @@
       "height": 800,
       "format": "jpg",
       "size": "2.5 MB",
-      "location": "Mirpur, Dhaka",
-      "camera": "Canon EOS R3"
+      "location": "London, UK",
+      "camera": "Sony A7S III"
     }
   },
   {
-    "id": "art_022",
-    "albumType": "single",
-    "type": "gallery",
-    "category": "nature",
-    "subCategory": "flowers-plants",
-    "userId": "user_122",
+    "id": "art_009",
+    "albumType": "six",
+    "type": "competition",
+    "category": "wildlife",
+    "subCategory": "wildlife",
+    "userId": "user_108",
     "info": {
-      "author": "Lily King",
-      "tags": ["flowers", "plants", "garden"],
-      "createdAt": "2026-10-13T12:00:00Z"
+      "author": "Ethan Davis",
+      "tags": [
+        "wildlife",
+        "wildlife",
+        "wildlife"
+      ],
+      "createdAt": "2026-10-03T13:25:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/flowers-art-01/1200/800"
+      "https://picsum.photos/seed/wildlife-009-01/1200/800",
+      "https://picsum.photos/seed/wildlife-009-02/1200/800",
+      "https://picsum.photos/seed/wildlife-009-03/1200/800",
+      "https://picsum.photos/seed/wildlife-009-04/1200/800",
+      "https://picsum.photos/seed/wildlife-009-05/1200/800",
+      "https://picsum.photos/seed/wildlife-009-06/1200/800"
     ],
-    "zodiacs": ["Libra"],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
     "video": null,
-    "title": "A Garden in Bloom",
-    "description": "A colorful photograph celebrating the beauty of flowers.",
-    "price": 70,
-    "totalReact": 260,
-    "viewsCount": 1940,
+    "title": "Bright Visions of Wildlife",
+    "description": "A six-album collection exploring wildlife in wildlife.",
+    "price": 265,
+    "totalReact": 222,
+    "viewsCount": 1892,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_114",
+        "text": "Love the collection!",
+        "createdAt": "2026-10-04T13:25:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Barcelona, Spain",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_010",
+    "albumType": "single",
+    "type": "competition",
+    "category": "fine-art",
+    "subCategory": "abstract",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "abstract",
+        "fine-art",
+        "abstract"
+      ],
+      "createdAt": "2026-10-03T18:35:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/abstract-010-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Crimson Rhythms of Abstract",
+    "description": "A single-album collection exploring abstract in fine art.",
+    "price": 144,
+    "totalReact": 81,
+    "viewsCount": 616,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.4 MB",
+      "location": "Dubai, UAE",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_011",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "sports",
+    "subCategory": "football",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "football",
+        "sports",
+        "football"
+      ],
+      "createdAt": "2026-10-03T21:18:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/football-011-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Misty Rhythms of Football",
+    "description": "A single-album collection exploring football in sports.",
+    "price": 87,
+    "totalReact": 914,
+    "viewsCount": 1573,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_109",
+        "text": "Wonderful composition!",
+        "createdAt": "2026-10-04T08:18:00Z"
+      },
+      {
+        "userId": "user_110",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-04T11:18:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Lisbon, Portugal",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_012",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "black-white",
+    "subCategory": "portraits",
+    "userId": "user_102",
+    "info": {
+      "author": "Alex Morgan",
+      "tags": [
+        "bw",
+        "black-white",
+        "portraits"
+      ],
+      "createdAt": "2026-10-04T05:49:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bw-012-01/1200/800",
+      "https://picsum.photos/seed/bw-012-02/1200/800",
+      "https://picsum.photos/seed/bw-012-03/1200/800",
+      "https://picsum.photos/seed/bw-012-04/1200/800",
+      "https://picsum.photos/seed/bw-012-05/1200/800",
+      "https://picsum.photos/seed/bw-012-06/1200/800",
+      "https://picsum.photos/seed/bw-012-07/1200/800",
+      "https://picsum.photos/seed/bw-012-08/1200/800",
+      "https://picsum.photos/seed/bw-012-09/1200/800",
+      "https://picsum.photos/seed/bw-012-10/1200/800",
+      "https://picsum.photos/seed/bw-012-11/1200/800",
+      "https://picsum.photos/seed/bw-012-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Calm Horizons of Portraits",
+    "description": "A twelve-album collection exploring portraits in black white.",
+    "price": 334,
+    "totalReact": 854,
+    "viewsCount": 7046,
     "isWinner": false,
     "comments": [],
     "imageDetails": {
@@ -898,37 +584,798 @@
       "height": 800,
       "format": "jpg",
       "size": "1.3 MB",
-      "location": "Amsterdam, Netherlands",
+      "location": "Yorkshire, UK",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_013",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "wedding",
+    "subCategory": "bride-groom",
+    "userId": "user_111",
+    "info": {
+      "author": "Noah Anderson",
+      "tags": [
+        "wedding",
+        "wedding",
+        "bride-groom"
+      ],
+      "createdAt": "2026-10-04T11:50:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/wedding-013-01/1200/800",
+      "https://picsum.photos/seed/wedding-013-02/1200/800",
+      "https://picsum.photos/seed/wedding-013-03/1200/800",
+      "https://picsum.photos/seed/wedding-013-04/1200/800",
+      "https://picsum.photos/seed/wedding-013-05/1200/800",
+      "https://picsum.photos/seed/wedding-013-06/1200/800",
+      "https://picsum.photos/seed/wedding-013-07/1200/800",
+      "https://picsum.photos/seed/wedding-013-08/1200/800",
+      "https://picsum.photos/seed/wedding-013-09/1200/800",
+      "https://picsum.photos/seed/wedding-013-10/1200/800",
+      "https://picsum.photos/seed/wedding-013-11/1200/800",
+      "https://picsum.photos/seed/wedding-013-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Secret Moments of Bride Groom",
+    "description": "A twelve-album collection exploring bride groom in wedding.",
+    "price": 472,
+    "totalReact": 118,
+    "viewsCount": 2535,
+    "isWinner": true,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Dubai, UAE",
       "camera": "Nikon Z6 II"
     }
   },
   {
-    "id": "art_023",
-    "albumType": "six",
+    "id": "art_014",
+    "albumType": "twelve",
     "type": "competition",
-    "category": "night-photography",
-    "subCategory": "city-lights",
-    "userId": "user_123",
+    "category": "black-white",
+    "subCategory": "portraits",
+    "userId": "user_103",
     "info": {
-      "author": "James Allen",
-      "tags": ["city", "night", "lights"],
-      "createdAt": "2026-10-13T19:00:00Z"
+      "author": "Sophia Williams",
+      "tags": [
+        "bw",
+        "black-white",
+        "portraits"
+      ],
+      "createdAt": "2026-10-04T19:17:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/citynight-art-01/1200/800",
-      "https://picsum.photos/seed/citynight-art-02/1200/800",
-      "https://picsum.photos/seed/citynight-art-03/1200/800",
-      "https://picsum.photos/seed/citynight-art-04/1200/800",
-      "https://picsum.photos/seed/citynight-art-05/1200/800",
-      "https://picsum.photos/seed/citynight-art-06/1200/800"
+      "https://picsum.photos/seed/bw-014-01/1200/800",
+      "https://picsum.photos/seed/bw-014-02/1200/800",
+      "https://picsum.photos/seed/bw-014-03/1200/800",
+      "https://picsum.photos/seed/bw-014-04/1200/800",
+      "https://picsum.photos/seed/bw-014-05/1200/800",
+      "https://picsum.photos/seed/bw-014-06/1200/800",
+      "https://picsum.photos/seed/bw-014-07/1200/800",
+      "https://picsum.photos/seed/bw-014-08/1200/800",
+      "https://picsum.photos/seed/bw-014-09/1200/800",
+      "https://picsum.photos/seed/bw-014-10/1200/800",
+      "https://picsum.photos/seed/bw-014-11/1200/800",
+      "https://picsum.photos/seed/bw-014-12/1200/800"
     ],
-    "zodiacs": ["Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
     "video": null,
-    "title": "City Lights After Dark",
-    "description": "Nighttime cityscapes glowing with color and energy.",
-    "price": 260,
-    "totalReact": 375,
-    "viewsCount": 2810,
+    "title": "Wild Journeys of Portraits",
+    "description": "A twelve-album collection exploring portraits in black white.",
+    "price": 381,
+    "totalReact": 313,
+    "viewsCount": 6227,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_118",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-05T21:17:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.7 MB",
+      "location": "Paris, France",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_015",
+    "albumType": "six",
+    "type": "competition",
+    "category": "architecture",
+    "subCategory": "bridges",
+    "userId": "user_108",
+    "info": {
+      "author": "Ethan Davis",
+      "tags": [
+        "bridge",
+        "architecture",
+        "bridges"
+      ],
+      "createdAt": "2026-10-04T21:27:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bridge-015-01/1200/800",
+      "https://picsum.photos/seed/bridge-015-02/1200/800",
+      "https://picsum.photos/seed/bridge-015-03/1200/800",
+      "https://picsum.photos/seed/bridge-015-04/1200/800",
+      "https://picsum.photos/seed/bridge-015-05/1200/800",
+      "https://picsum.photos/seed/bridge-015-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Misty Whispers of Bridges",
+    "description": "A six-album collection exploring bridges in architecture.",
+    "price": 198,
+    "totalReact": 277,
+    "viewsCount": 5984,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.2 MB",
+      "location": "Yorkshire, UK",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_016",
+    "albumType": "six",
+    "type": "competition",
+    "category": "fine-art",
+    "subCategory": "minimalism",
+    "userId": "user_113",
+    "info": {
+      "author": "Liam White",
+      "tags": [
+        "minimal",
+        "fine-art",
+        "minimalism"
+      ],
+      "createdAt": "2026-10-05T02:25:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/minimal-016-01/1200/800",
+      "https://picsum.photos/seed/minimal-016-02/1200/800",
+      "https://picsum.photos/seed/minimal-016-03/1200/800",
+      "https://picsum.photos/seed/minimal-016-04/1200/800",
+      "https://picsum.photos/seed/minimal-016-05/1200/800",
+      "https://picsum.photos/seed/minimal-016-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Fading Visions of Minimalism",
+    "description": "A six-album collection exploring minimalism in fine art.",
+    "price": 236,
+    "totalReact": 289,
+    "viewsCount": 1822,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_106",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-06T05:25:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.9 MB",
+      "location": "Berlin, Germany",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_017",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "street-photography",
+    "subCategory": "markets",
+    "userId": "user_118",
+    "info": {
+      "author": "Henry Lewis",
+      "tags": [
+        "market",
+        "street-photography",
+        "markets"
+      ],
+      "createdAt": "2026-10-05T11:28:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/market-017-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Distant Whispers of Markets",
+    "description": "A single-album collection exploring markets in street photography.",
+    "price": 62,
+    "totalReact": 453,
+    "viewsCount": 3215,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.0 MB",
+      "location": "Toronto, Canada",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_018",
+    "albumType": "single",
+    "type": "competition",
+    "category": "nature",
+    "subCategory": "flowers-plants",
+    "userId": "user_113",
+    "info": {
+      "author": "Liam White",
+      "tags": [
+        "flowers",
+        "nature",
+        "flowers-plants"
+      ],
+      "createdAt": "2026-10-05T15:17:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/flowers-018-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Hidden Whispers of Flowers Plants",
+    "description": "A single-album collection exploring flowers plants in nature.",
+    "price": 94,
+    "totalReact": 899,
+    "viewsCount": 3959,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.3 MB",
+      "location": "Paris, France",
+      "camera": "Nikon D850"
+    }
+  },
+  {
+    "id": "art_019",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "portrait",
+    "subCategory": "individual-portraits",
+    "userId": "user_120",
+    "info": {
+      "author": "Lucas Hall",
+      "tags": [
+        "portrait",
+        "portrait",
+        "individual-portraits"
+      ],
+      "createdAt": "2026-10-05T20:17:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/portrait-019-01/1200/800",
+      "https://picsum.photos/seed/portrait-019-02/1200/800",
+      "https://picsum.photos/seed/portrait-019-03/1200/800",
+      "https://picsum.photos/seed/portrait-019-04/1200/800",
+      "https://picsum.photos/seed/portrait-019-05/1200/800",
+      "https://picsum.photos/seed/portrait-019-06/1200/800",
+      "https://picsum.photos/seed/portrait-019-07/1200/800",
+      "https://picsum.photos/seed/portrait-019-08/1200/800",
+      "https://picsum.photos/seed/portrait-019-09/1200/800",
+      "https://picsum.photos/seed/portrait-019-10/1200/800",
+      "https://picsum.photos/seed/portrait-019-11/1200/800",
+      "https://picsum.photos/seed/portrait-019-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Distant Whispers of Individual Portraits",
+    "description": "A twelve-album collection exploring individual portraits in portrait.",
+    "price": 438,
+    "totalReact": 880,
+    "viewsCount": 2634,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.2 MB",
+      "location": "New York, USA",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_020",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "travel",
+    "subCategory": "cultural-experiences",
+    "userId": "user_107",
+    "info": {
+      "author": "Isabella Brown",
+      "tags": [
+        "culture",
+        "travel",
+        "cultural-experiences"
+      ],
+      "createdAt": "2026-10-06T06:45:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/culture-020-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Golden Dreams of Cultural Experiences",
+    "description": "A single-album collection exploring cultural experiences in travel.",
+    "price": 94,
+    "totalReact": 172,
+    "viewsCount": 1822,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.5 MB",
+      "location": "Kyoto, Japan",
+      "camera": "Canon EOS R6"
+    }
+  },
+  {
+    "id": "art_021",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "travel",
+    "subCategory": "landmarks",
+    "userId": "user_115",
+    "info": {
+      "author": "Chloe Martin",
+      "tags": [
+        "landmark",
+        "travel",
+        "landmarks"
+      ],
+      "createdAt": "2026-10-06T09:17:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/landmark-021-01/1200/800",
+      "https://picsum.photos/seed/landmark-021-02/1200/800",
+      "https://picsum.photos/seed/landmark-021-03/1200/800",
+      "https://picsum.photos/seed/landmark-021-04/1200/800",
+      "https://picsum.photos/seed/landmark-021-05/1200/800",
+      "https://picsum.photos/seed/landmark-021-06/1200/800",
+      "https://picsum.photos/seed/landmark-021-07/1200/800",
+      "https://picsum.photos/seed/landmark-021-08/1200/800",
+      "https://picsum.photos/seed/landmark-021-09/1200/800",
+      "https://picsum.photos/seed/landmark-021-10/1200/800",
+      "https://picsum.photos/seed/landmark-021-11/1200/800",
+      "https://picsum.photos/seed/landmark-021-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
+    "title": "Calm Frames of Landmarks",
+    "description": "A twelve-album collection exploring landmarks in travel.",
+    "price": 502,
+    "totalReact": 586,
+    "viewsCount": 4389,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_101",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-06T11:17:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.5 MB",
+      "location": "Rome, Italy",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_022",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "fine-art",
+    "subCategory": "minimalism",
+    "userId": "user_115",
+    "info": {
+      "author": "Chloe Martin",
+      "tags": [
+        "minimal",
+        "fine-art",
+        "minimalism"
+      ],
+      "createdAt": "2026-10-06T19:13:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/minimal-022-01/1200/800",
+      "https://picsum.photos/seed/minimal-022-02/1200/800",
+      "https://picsum.photos/seed/minimal-022-03/1200/800",
+      "https://picsum.photos/seed/minimal-022-04/1200/800",
+      "https://picsum.photos/seed/minimal-022-05/1200/800",
+      "https://picsum.photos/seed/minimal-022-06/1200/800",
+      "https://picsum.photos/seed/minimal-022-07/1200/800",
+      "https://picsum.photos/seed/minimal-022-08/1200/800",
+      "https://picsum.photos/seed/minimal-022-09/1200/800",
+      "https://picsum.photos/seed/minimal-022-10/1200/800",
+      "https://picsum.photos/seed/minimal-022-11/1200/800",
+      "https://picsum.photos/seed/minimal-022-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Bright Silhouettes of Minimalism",
+    "description": "A twelve-album collection exploring minimalism in fine art.",
+    "price": 408,
+    "totalReact": 912,
+    "viewsCount": 6289,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.4 MB",
+      "location": "Yorkshire, UK",
+      "camera": "Nikon D850"
+    }
+  },
+  {
+    "id": "art_023",
+    "albumType": "single",
+    "type": "competition",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_104",
+    "info": {
+      "author": "Daniel Scott",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-06T20:42:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-023-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Golden Whispers of Flowers",
+    "description": "A single-album collection exploring flowers in macro.",
+    "price": 115,
+    "totalReact": 673,
+    "viewsCount": 2484,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_118",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-07T06:42:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Kyoto, Japan",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_024",
+    "albumType": "six",
+    "type": "competition",
+    "category": "travel",
+    "subCategory": "cultural-experiences",
+    "userId": "user_120",
+    "info": {
+      "author": "Lucas Hall",
+      "tags": [
+        "culture",
+        "travel",
+        "cultural-experiences"
+      ],
+      "createdAt": "2026-10-07T02:56:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/culture-024-01/1200/800",
+      "https://picsum.photos/seed/culture-024-02/1200/800",
+      "https://picsum.photos/seed/culture-024-03/1200/800",
+      "https://picsum.photos/seed/culture-024-04/1200/800",
+      "https://picsum.photos/seed/culture-024-05/1200/800",
+      "https://picsum.photos/seed/culture-024-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Fading Dreams of Cultural Experiences",
+    "description": "A six-album collection exploring cultural experiences in travel.",
+    "price": 262,
+    "totalReact": 61,
+    "viewsCount": 3247,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_107",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-07T08:56:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.9 MB",
+      "location": "Copenhagen, Denmark",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_025",
+    "albumType": "single",
+    "type": "competition",
+    "category": "architecture",
+    "subCategory": "bridges",
+    "userId": "user_105",
+    "info": {
+      "author": "Emma Wilson",
+      "tags": [
+        "bridge",
+        "architecture",
+        "bridges"
+      ],
+      "createdAt": "2026-10-07T08:25:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bridge-025-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Wild Echoes of Bridges",
+    "description": "A single-album collection exploring bridges in architecture.",
+    "price": 78,
+    "totalReact": 366,
+    "viewsCount": 2992,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.2 MB",
+      "location": "Copenhagen, Denmark",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_026",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "fine-art",
+    "subCategory": "minimalism",
+    "userId": "user_108",
+    "info": {
+      "author": "Ethan Davis",
+      "tags": [
+        "minimal",
+        "fine-art",
+        "minimalism"
+      ],
+      "createdAt": "2026-10-07T18:41:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/minimal-026-01/1200/800",
+      "https://picsum.photos/seed/minimal-026-02/1200/800",
+      "https://picsum.photos/seed/minimal-026-03/1200/800",
+      "https://picsum.photos/seed/minimal-026-04/1200/800",
+      "https://picsum.photos/seed/minimal-026-05/1200/800",
+      "https://picsum.photos/seed/minimal-026-06/1200/800",
+      "https://picsum.photos/seed/minimal-026-07/1200/800",
+      "https://picsum.photos/seed/minimal-026-08/1200/800",
+      "https://picsum.photos/seed/minimal-026-09/1200/800",
+      "https://picsum.photos/seed/minimal-026-10/1200/800",
+      "https://picsum.photos/seed/minimal-026-11/1200/800",
+      "https://picsum.photos/seed/minimal-026-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
+    "title": "Distant Details of Minimalism",
+    "description": "A twelve-album collection exploring minimalism in fine art.",
+    "price": 515,
+    "totalReact": 811,
+    "viewsCount": 6243,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.5 MB",
+      "location": "Yorkshire, UK",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_027",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "sports",
+    "subCategory": "cricket",
+    "userId": "user_117",
+    "info": {
+      "author": "Amelia Clark",
+      "tags": [
+        "cricket",
+        "sports",
+        "cricket"
+      ],
+      "createdAt": "2026-10-07T20:02:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cricket-027-01/1200/800",
+      "https://picsum.photos/seed/cricket-027-02/1200/800",
+      "https://picsum.photos/seed/cricket-027-03/1200/800",
+      "https://picsum.photos/seed/cricket-027-04/1200/800",
+      "https://picsum.photos/seed/cricket-027-05/1200/800",
+      "https://picsum.photos/seed/cricket-027-06/1200/800",
+      "https://picsum.photos/seed/cricket-027-07/1200/800",
+      "https://picsum.photos/seed/cricket-027-08/1200/800",
+      "https://picsum.photos/seed/cricket-027-09/1200/800",
+      "https://picsum.photos/seed/cricket-027-10/1200/800",
+      "https://picsum.photos/seed/cricket-027-11/1200/800",
+      "https://picsum.photos/seed/cricket-027-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Eternal Frames of Cricket",
+    "description": "A twelve-album collection exploring cricket in sports.",
+    "price": 351,
+    "totalReact": 167,
+    "viewsCount": 3585,
     "isWinner": false,
     "comments": [],
     "imageDetails": {
@@ -936,88 +1383,552 @@
       "height": 800,
       "format": "jpg",
       "size": "2.1 MB",
-      "location": "Tokyo, Japan",
-      "camera": "Sony A7 IV"
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Canon EOS R5"
     }
   },
   {
-    "id": "art_024",
+    "id": "art_028",
     "albumType": "twelve",
-    "type": "gallery",
-    "category": "travel",
-    "subCategory": "adventure",
-    "userId": "user_124",
+    "type": "competition",
+    "category": "fine-art",
+    "subCategory": "abstract",
+    "userId": "user_112",
     "info": {
-      "author": "Scarlett Adams",
-      "tags": ["adventure", "travel", "hiking"],
-      "createdAt": "2026-10-14T06:00:00Z"
+      "author": "Grace Thomas",
+      "tags": [
+        "abstract",
+        "fine-art",
+        "abstract"
+      ],
+      "createdAt": "2026-10-08T06:05:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/adventure-art-01/1200/800",
-      "https://picsum.photos/seed/adventure-art-02/1200/800",
-      "https://picsum.photos/seed/adventure-art-03/1200/800",
-      "https://picsum.photos/seed/adventure-art-04/1200/800",
-      "https://picsum.photos/seed/adventure-art-05/1200/800",
-      "https://picsum.photos/seed/adventure-art-06/1200/800",
-      "https://picsum.photos/seed/adventure-art-07/1200/800",
-      "https://picsum.photos/seed/adventure-art-08/1200/800",
-      "https://picsum.photos/seed/adventure-art-09/1200/800",
-      "https://picsum.photos/seed/adventure-art-10/1200/800",
-      "https://picsum.photos/seed/adventure-art-11/1200/800",
-      "https://picsum.photos/seed/adventure-art-12/1200/800"
+      "https://picsum.photos/seed/abstract-028-01/1200/800",
+      "https://picsum.photos/seed/abstract-028-02/1200/800",
+      "https://picsum.photos/seed/abstract-028-03/1200/800",
+      "https://picsum.photos/seed/abstract-028-04/1200/800",
+      "https://picsum.photos/seed/abstract-028-05/1200/800",
+      "https://picsum.photos/seed/abstract-028-06/1200/800",
+      "https://picsum.photos/seed/abstract-028-07/1200/800",
+      "https://picsum.photos/seed/abstract-028-08/1200/800",
+      "https://picsum.photos/seed/abstract-028-09/1200/800",
+      "https://picsum.photos/seed/abstract-028-10/1200/800",
+      "https://picsum.photos/seed/abstract-028-11/1200/800",
+      "https://picsum.photos/seed/abstract-028-12/1200/800"
     ],
-    "zodiacs": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
     "video": null,
-    "title": "The Adventure Collection",
-    "description": "Twelve frames from an unforgettable outdoor adventure.",
-    "price": 380,
-    "totalReact": 480,
-    "viewsCount": 3670,
+    "title": "Bright Echoes of Abstract",
+    "description": "A twelve-album collection exploring abstract in fine art.",
+    "price": 559,
+    "totalReact": 270,
+    "viewsCount": 2390,
     "isWinner": false,
     "comments": [
       {
-        "userId": "user_106",
-        "text": "Adding this place to my travel list!",
-        "createdAt": "2026-10-14T06:30:00Z"
+        "userId": "user_103",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-08T15:05:00Z"
+      },
+      {
+        "userId": "user_103",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-08T14:05:00Z"
       }
     ],
     "imageDetails": {
       "width": 1200,
       "height": 800,
       "format": "jpg",
-      "size": "2.4 MB",
-      "location": "Nepal",
-      "camera": "Nikon Z7 II"
+      "size": "2.9 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Nikon D850"
     }
   },
   {
-    "id": "art_025",
+    "id": "art_029",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "nature",
+    "subCategory": "flowers-plants",
+    "userId": "user_118",
+    "info": {
+      "author": "Henry Lewis",
+      "tags": [
+        "flowers",
+        "nature",
+        "flowers-plants"
+      ],
+      "createdAt": "2026-10-08T09:21:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/flowers-029-01/1200/800",
+      "https://picsum.photos/seed/flowers-029-02/1200/800",
+      "https://picsum.photos/seed/flowers-029-03/1200/800",
+      "https://picsum.photos/seed/flowers-029-04/1200/800",
+      "https://picsum.photos/seed/flowers-029-05/1200/800",
+      "https://picsum.photos/seed/flowers-029-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Silent Textures of Flowers Plants",
+    "description": "A six-album collection exploring flowers plants in nature.",
+    "price": 199,
+    "totalReact": 196,
+    "viewsCount": 602,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_110",
+        "text": "Wonderful composition!",
+        "createdAt": "2026-10-09T04:21:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.9 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Fujifilm X-T5"
+    }
+  },
+  {
+    "id": "art_030",
     "albumType": "single",
     "type": "competition",
     "category": "fine-art",
-    "subCategory": "surrealism",
-    "userId": "user_125",
+    "subCategory": "minimalism",
+    "userId": "user_109",
     "info": {
-      "author": "Oscar Turner",
-      "tags": ["surrealism", "creative", "art"],
-      "createdAt": "2026-10-14T07:00:00Z"
+      "author": "Mia Taylor",
+      "tags": [
+        "minimal",
+        "fine-art",
+        "minimalism"
+      ],
+      "createdAt": "2026-10-08T14:57:00Z"
     },
     "images": [
-      "https://picsum.photos/seed/surreal-art-01/1200/800"
+      "https://picsum.photos/seed/minimal-030-01/1200/800"
     ],
-    "zodiacs": ["Gemini"],
+    "zodiacs": [
+      "Libra"
+    ],
     "video": null,
-    "title": "A World Beyond Reality",
-    "description": "A surreal artistic interpretation of an imaginary world.",
-    "price": 160,
-    "totalReact": 595,
-    "viewsCount": 4560,
-    "isWinner": true,
+    "title": "Bright Echoes of Minimalism",
+    "description": "A single-album collection exploring minimalism in fine art.",
+    "price": 119,
+    "totalReact": 529,
+    "viewsCount": 1126,
+    "isWinner": false,
     "comments": [
       {
-        "userId": "user_103",
-        "text": "Creative and inspiring!",
-        "createdAt": "2026-10-14T07:10:00Z"
+        "userId": "user_107",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-08T17:57:00Z"
+      },
+      {
+        "userId": "user_117",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-09T00:57:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.8 MB",
+      "location": "Rome, Italy",
+      "camera": "Fujifilm X-T5"
+    }
+  },
+  {
+    "id": "art_031",
+    "albumType": "single",
+    "type": "competition",
+    "category": "street-photography",
+    "subCategory": "street-life",
+    "userId": "user_119",
+    "info": {
+      "author": "Ella Walker",
+      "tags": [
+        "street",
+        "street-photography",
+        "street-life"
+      ],
+      "createdAt": "2026-10-08T22:08:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/street-031-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Wild Textures of Street Life",
+    "description": "A single-album collection exploring street life in street photography.",
+    "price": 78,
+    "totalReact": 569,
+    "viewsCount": 4482,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_117",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-10T03:08:00Z"
+      },
+      {
+        "userId": "user_104",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-09T06:08:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.3 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_032",
+    "albumType": "six",
+    "type": "competition",
+    "category": "black-white",
+    "subCategory": "portraits",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "bw",
+        "black-white",
+        "portraits"
+      ],
+      "createdAt": "2026-10-09T02:53:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bw-032-01/1200/800",
+      "https://picsum.photos/seed/bw-032-02/1200/800",
+      "https://picsum.photos/seed/bw-032-03/1200/800",
+      "https://picsum.photos/seed/bw-032-04/1200/800",
+      "https://picsum.photos/seed/bw-032-05/1200/800",
+      "https://picsum.photos/seed/bw-032-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Rising Details of Portraits",
+    "description": "A six-album collection exploring portraits in black white.",
+    "price": 276,
+    "totalReact": 406,
+    "viewsCount": 7373,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_102",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-10T03:53:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.8 MB",
+      "location": "Dhaka, Bangladesh",
+      "camera": "Canon EOS R5"
+    }
+  },
+  {
+    "id": "art_033",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "sports",
+    "subCategory": "football",
+    "userId": "user_111",
+    "info": {
+      "author": "Noah Anderson",
+      "tags": [
+        "football",
+        "sports",
+        "football"
+      ],
+      "createdAt": "2026-10-09T11:48:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/football-033-01/1200/800",
+      "https://picsum.photos/seed/football-033-02/1200/800",
+      "https://picsum.photos/seed/football-033-03/1200/800",
+      "https://picsum.photos/seed/football-033-04/1200/800",
+      "https://picsum.photos/seed/football-033-05/1200/800",
+      "https://picsum.photos/seed/football-033-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Gentle Whispers of Football",
+    "description": "A six-album collection exploring football in sports.",
+    "price": 199,
+    "totalReact": 112,
+    "viewsCount": 7337,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_102",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-09T15:48:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.3 MB",
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_034",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_118",
+    "info": {
+      "author": "Henry Lewis",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-09T14:51:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-034-01/1200/800",
+      "https://picsum.photos/seed/countryside-034-02/1200/800",
+      "https://picsum.photos/seed/countryside-034-03/1200/800",
+      "https://picsum.photos/seed/countryside-034-04/1200/800",
+      "https://picsum.photos/seed/countryside-034-05/1200/800",
+      "https://picsum.photos/seed/countryside-034-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Calm Dreams of Countryside",
+    "description": "A six-album collection exploring countryside in landscape.",
+    "price": 289,
+    "totalReact": 796,
+    "viewsCount": 1160,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_119",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-09T21:51:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Lisbon, Portugal",
+      "camera": "Nikon D850"
+    }
+  },
+  {
+    "id": "art_035",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "black-white",
+    "subCategory": "portraits",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "bw",
+        "black-white",
+        "portraits"
+      ],
+      "createdAt": "2026-10-09T21:10:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bw-035-01/1200/800",
+      "https://picsum.photos/seed/bw-035-02/1200/800",
+      "https://picsum.photos/seed/bw-035-03/1200/800",
+      "https://picsum.photos/seed/bw-035-04/1200/800",
+      "https://picsum.photos/seed/bw-035-05/1200/800",
+      "https://picsum.photos/seed/bw-035-06/1200/800",
+      "https://picsum.photos/seed/bw-035-07/1200/800",
+      "https://picsum.photos/seed/bw-035-08/1200/800",
+      "https://picsum.photos/seed/bw-035-09/1200/800",
+      "https://picsum.photos/seed/bw-035-10/1200/800",
+      "https://picsum.photos/seed/bw-035-11/1200/800",
+      "https://picsum.photos/seed/bw-035-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
+    "title": "Endless Memories of Portraits",
+    "description": "A twelve-album collection exploring portraits in black white.",
+    "price": 470,
+    "totalReact": 475,
+    "viewsCount": 5873,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_115",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-10T07:10:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.5 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_036",
+    "albumType": "six",
+    "type": "competition",
+    "category": "fine-art",
+    "subCategory": "minimalism",
+    "userId": "user_105",
+    "info": {
+      "author": "Emma Wilson",
+      "tags": [
+        "minimal",
+        "fine-art",
+        "minimalism"
+      ],
+      "createdAt": "2026-10-10T05:35:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/minimal-036-01/1200/800",
+      "https://picsum.photos/seed/minimal-036-02/1200/800",
+      "https://picsum.photos/seed/minimal-036-03/1200/800",
+      "https://picsum.photos/seed/minimal-036-04/1200/800",
+      "https://picsum.photos/seed/minimal-036-05/1200/800",
+      "https://picsum.photos/seed/minimal-036-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Quiet Memories of Minimalism",
+    "description": "A six-album collection exploring minimalism in fine art.",
+    "price": 308,
+    "totalReact": 523,
+    "viewsCount": 3226,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.9 MB",
+      "location": "Yorkshire, UK",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_037",
+    "albumType": "single",
+    "type": "competition",
+    "category": "architecture",
+    "subCategory": "bridges",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "bridge",
+        "architecture",
+        "bridges"
+      ],
+      "createdAt": "2026-10-10T09:23:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bridge-037-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Wild Horizons of Bridges",
+    "description": "A single-album collection exploring bridges in architecture.",
+    "price": 131,
+    "totalReact": 80,
+    "viewsCount": 6641,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_120",
+        "text": "Such a peaceful atmosphere.",
+        "createdAt": "2026-10-11T14:23:00Z"
       }
     ],
     "imageDetails": {
@@ -1025,8 +1936,3558 @@
       "height": 800,
       "format": "jpg",
       "size": "1.7 MB",
-      "location": "Barcelona, Spain",
+      "location": "Lisbon, Portugal",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_038",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "architecture",
+    "subCategory": "bridges",
+    "userId": "user_107",
+    "info": {
+      "author": "Isabella Brown",
+      "tags": [
+        "bridge",
+        "architecture",
+        "bridges"
+      ],
+      "createdAt": "2026-10-10T19:32:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bridge-038-01/1200/800",
+      "https://picsum.photos/seed/bridge-038-02/1200/800",
+      "https://picsum.photos/seed/bridge-038-03/1200/800",
+      "https://picsum.photos/seed/bridge-038-04/1200/800",
+      "https://picsum.photos/seed/bridge-038-05/1200/800",
+      "https://picsum.photos/seed/bridge-038-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Distant Frames of Bridges",
+    "description": "A six-album collection exploring bridges in architecture.",
+    "price": 272,
+    "totalReact": 721,
+    "viewsCount": 4152,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_108",
+        "text": "Love the collection!",
+        "createdAt": "2026-10-11T04:32:00Z"
+      },
+      {
+        "userId": "user_109",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-11T08:32:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.8 MB",
+      "location": "Toronto, Canada",
       "camera": "Canon EOS R5"
+    }
+  },
+  {
+    "id": "art_039",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "portrait",
+    "subCategory": "individual-portraits",
+    "userId": "user_119",
+    "info": {
+      "author": "Ella Walker",
+      "tags": [
+        "portrait",
+        "portrait",
+        "individual-portraits"
+      ],
+      "createdAt": "2026-10-11T00:54:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/portrait-039-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Bright Textures of Individual Portraits",
+    "description": "A single-album collection exploring individual portraits in portrait.",
+    "price": 60,
+    "totalReact": 171,
+    "viewsCount": 2333,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_115",
+        "text": "Such a peaceful atmosphere.",
+        "createdAt": "2026-10-12T02:54:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.3 MB",
+      "location": "Copenhagen, Denmark",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_040",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "wildlife",
+    "subCategory": "wildlife",
+    "userId": "user_107",
+    "info": {
+      "author": "Isabella Brown",
+      "tags": [
+        "wildlife",
+        "wildlife",
+        "wildlife"
+      ],
+      "createdAt": "2026-10-11T06:58:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/wildlife-040-01/1200/800",
+      "https://picsum.photos/seed/wildlife-040-02/1200/800",
+      "https://picsum.photos/seed/wildlife-040-03/1200/800",
+      "https://picsum.photos/seed/wildlife-040-04/1200/800",
+      "https://picsum.photos/seed/wildlife-040-05/1200/800",
+      "https://picsum.photos/seed/wildlife-040-06/1200/800",
+      "https://picsum.photos/seed/wildlife-040-07/1200/800",
+      "https://picsum.photos/seed/wildlife-040-08/1200/800",
+      "https://picsum.photos/seed/wildlife-040-09/1200/800",
+      "https://picsum.photos/seed/wildlife-040-10/1200/800",
+      "https://picsum.photos/seed/wildlife-040-11/1200/800",
+      "https://picsum.photos/seed/wildlife-040-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Wild Silhouettes of Wildlife",
+    "description": "A twelve-album collection exploring wildlife in wildlife.",
+    "price": 389,
+    "totalReact": 371,
+    "viewsCount": 1548,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Copenhagen, Denmark",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_041",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "street-photography",
+    "subCategory": "markets",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "market",
+        "street-photography",
+        "markets"
+      ],
+      "createdAt": "2026-10-11T10:14:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/market-041-01/1200/800",
+      "https://picsum.photos/seed/market-041-02/1200/800",
+      "https://picsum.photos/seed/market-041-03/1200/800",
+      "https://picsum.photos/seed/market-041-04/1200/800",
+      "https://picsum.photos/seed/market-041-05/1200/800",
+      "https://picsum.photos/seed/market-041-06/1200/800",
+      "https://picsum.photos/seed/market-041-07/1200/800",
+      "https://picsum.photos/seed/market-041-08/1200/800",
+      "https://picsum.photos/seed/market-041-09/1200/800",
+      "https://picsum.photos/seed/market-041-10/1200/800",
+      "https://picsum.photos/seed/market-041-11/1200/800",
+      "https://picsum.photos/seed/market-041-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Hidden Whispers of Markets",
+    "description": "A twelve-album collection exploring markets in street photography.",
+    "price": 429,
+    "totalReact": 720,
+    "viewsCount": 7376,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_102",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-12T04:14:00Z"
+      },
+      {
+        "userId": "user_111",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-11T19:14:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.7 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_042",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_108",
+    "info": {
+      "author": "Ethan Davis",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-11T15:31:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-042-01/1200/800",
+      "https://picsum.photos/seed/countryside-042-02/1200/800",
+      "https://picsum.photos/seed/countryside-042-03/1200/800",
+      "https://picsum.photos/seed/countryside-042-04/1200/800",
+      "https://picsum.photos/seed/countryside-042-05/1200/800",
+      "https://picsum.photos/seed/countryside-042-06/1200/800",
+      "https://picsum.photos/seed/countryside-042-07/1200/800",
+      "https://picsum.photos/seed/countryside-042-08/1200/800",
+      "https://picsum.photos/seed/countryside-042-09/1200/800",
+      "https://picsum.photos/seed/countryside-042-10/1200/800",
+      "https://picsum.photos/seed/countryside-042-11/1200/800",
+      "https://picsum.photos/seed/countryside-042-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Golden Reflections of Countryside",
+    "description": "A twelve-album collection exploring countryside in landscape.",
+    "price": 335,
+    "totalReact": 439,
+    "viewsCount": 2357,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_103",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-11T23:31:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.3 MB",
+      "location": "Istanbul, Turkey",
+      "camera": "Nikon D850"
+    }
+  },
+  {
+    "id": "art_043",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_115",
+    "info": {
+      "author": "Chloe Martin",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-11T21:31:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-043-01/1200/800",
+      "https://picsum.photos/seed/macro-043-02/1200/800",
+      "https://picsum.photos/seed/macro-043-03/1200/800",
+      "https://picsum.photos/seed/macro-043-04/1200/800",
+      "https://picsum.photos/seed/macro-043-05/1200/800",
+      "https://picsum.photos/seed/macro-043-06/1200/800",
+      "https://picsum.photos/seed/macro-043-07/1200/800",
+      "https://picsum.photos/seed/macro-043-08/1200/800",
+      "https://picsum.photos/seed/macro-043-09/1200/800",
+      "https://picsum.photos/seed/macro-043-10/1200/800",
+      "https://picsum.photos/seed/macro-043-11/1200/800",
+      "https://picsum.photos/seed/macro-043-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Vivid Moments of Flowers",
+    "description": "A twelve-album collection exploring flowers in macro.",
+    "price": 347,
+    "totalReact": 899,
+    "viewsCount": 2088,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.4 MB",
+      "location": "New York, USA",
+      "camera": "Fujifilm X-T5"
+    }
+  },
+  {
+    "id": "art_044",
+    "albumType": "six",
+    "type": "competition",
+    "category": "sports",
+    "subCategory": "cricket",
+    "userId": "user_103",
+    "info": {
+      "author": "Sophia Williams",
+      "tags": [
+        "cricket",
+        "sports",
+        "cricket"
+      ],
+      "createdAt": "2026-10-12T07:03:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cricket-044-01/1200/800",
+      "https://picsum.photos/seed/cricket-044-02/1200/800",
+      "https://picsum.photos/seed/cricket-044-03/1200/800",
+      "https://picsum.photos/seed/cricket-044-04/1200/800",
+      "https://picsum.photos/seed/cricket-044-05/1200/800",
+      "https://picsum.photos/seed/cricket-044-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Crimson Journeys of Cricket",
+    "description": "A six-album collection exploring cricket in sports.",
+    "price": 304,
+    "totalReact": 205,
+    "viewsCount": 3902,
+    "isWinner": true,
+    "comments": [
+      {
+        "userId": "user_106",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-12T09:03:00Z"
+      },
+      {
+        "userId": "user_108",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-13T03:03:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Berlin, Germany",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_045",
+    "albumType": "six",
+    "type": "competition",
+    "category": "fine-art",
+    "subCategory": "surrealism",
+    "userId": "user_104",
+    "info": {
+      "author": "Daniel Scott",
+      "tags": [
+        "surreal",
+        "fine-art",
+        "surrealism"
+      ],
+      "createdAt": "2026-10-12T12:47:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/surreal-045-01/1200/800",
+      "https://picsum.photos/seed/surreal-045-02/1200/800",
+      "https://picsum.photos/seed/surreal-045-03/1200/800",
+      "https://picsum.photos/seed/surreal-045-04/1200/800",
+      "https://picsum.photos/seed/surreal-045-05/1200/800",
+      "https://picsum.photos/seed/surreal-045-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Wild Visions of Surrealism",
+    "description": "A six-album collection exploring surrealism in fine art.",
+    "price": 227,
+    "totalReact": 802,
+    "viewsCount": 3601,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_102",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-13T10:47:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.9 MB",
+      "location": "Rome, Italy",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_046",
+    "albumType": "single",
+    "type": "competition",
+    "category": "wildlife",
+    "subCategory": "wildlife",
+    "userId": "user_119",
+    "info": {
+      "author": "Ella Walker",
+      "tags": [
+        "wildlife",
+        "wildlife",
+        "wildlife"
+      ],
+      "createdAt": "2026-10-12T15:24:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/wildlife-046-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Fading Whispers of Wildlife",
+    "description": "A single-album collection exploring wildlife in wildlife.",
+    "price": 113,
+    "totalReact": 110,
+    "viewsCount": 6277,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_110",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-12T18:24:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.7 MB",
+      "location": "Rome, Italy",
+      "camera": "Canon EOS R6"
+    }
+  },
+  {
+    "id": "art_047",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "travel",
+    "subCategory": "adventure",
+    "userId": "user_109",
+    "info": {
+      "author": "Mia Taylor",
+      "tags": [
+        "adventure",
+        "travel",
+        "adventure"
+      ],
+      "createdAt": "2026-10-12T23:02:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/adventure-047-01/1200/800",
+      "https://picsum.photos/seed/adventure-047-02/1200/800",
+      "https://picsum.photos/seed/adventure-047-03/1200/800",
+      "https://picsum.photos/seed/adventure-047-04/1200/800",
+      "https://picsum.photos/seed/adventure-047-05/1200/800",
+      "https://picsum.photos/seed/adventure-047-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Golden Memories of Adventure",
+    "description": "A six-album collection exploring adventure in travel.",
+    "price": 283,
+    "totalReact": 259,
+    "viewsCount": 6621,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_103",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-13T08:02:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Tokyo, Japan",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_048",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_102",
+    "info": {
+      "author": "Alex Morgan",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-13T04:00:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-048-01/1200/800",
+      "https://picsum.photos/seed/macro-048-02/1200/800",
+      "https://picsum.photos/seed/macro-048-03/1200/800",
+      "https://picsum.photos/seed/macro-048-04/1200/800",
+      "https://picsum.photos/seed/macro-048-05/1200/800",
+      "https://picsum.photos/seed/macro-048-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Crimson Moments of Flowers",
+    "description": "A six-album collection exploring flowers in macro.",
+    "price": 261,
+    "totalReact": 792,
+    "viewsCount": 4315,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_104",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-14T07:00:00Z"
+      },
+      {
+        "userId": "user_109",
+        "text": "Love the collection!",
+        "createdAt": "2026-10-13T20:00:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.8 MB",
+      "location": "Berlin, Germany",
+      "camera": "Fujifilm X-T5"
+    }
+  },
+  {
+    "id": "art_049",
+    "albumType": "six",
+    "type": "competition",
+    "category": "street-photography",
+    "subCategory": "markets",
+    "userId": "user_109",
+    "info": {
+      "author": "Mia Taylor",
+      "tags": [
+        "market",
+        "street-photography",
+        "markets"
+      ],
+      "createdAt": "2026-10-13T13:49:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/market-049-01/1200/800",
+      "https://picsum.photos/seed/market-049-02/1200/800",
+      "https://picsum.photos/seed/market-049-03/1200/800",
+      "https://picsum.photos/seed/market-049-04/1200/800",
+      "https://picsum.photos/seed/market-049-05/1200/800",
+      "https://picsum.photos/seed/market-049-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Bright Horizons of Markets",
+    "description": "A six-album collection exploring markets in street photography.",
+    "price": 257,
+    "totalReact": 681,
+    "viewsCount": 2434,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.6 MB",
+      "location": "Bali, Indonesia",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_050",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "nature",
+    "subCategory": "flowers-plants",
+    "userId": "user_117",
+    "info": {
+      "author": "Amelia Clark",
+      "tags": [
+        "flowers",
+        "nature",
+        "flowers-plants"
+      ],
+      "createdAt": "2026-10-13T14:30:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/flowers-050-01/1200/800",
+      "https://picsum.photos/seed/flowers-050-02/1200/800",
+      "https://picsum.photos/seed/flowers-050-03/1200/800",
+      "https://picsum.photos/seed/flowers-050-04/1200/800",
+      "https://picsum.photos/seed/flowers-050-05/1200/800",
+      "https://picsum.photos/seed/flowers-050-06/1200/800",
+      "https://picsum.photos/seed/flowers-050-07/1200/800",
+      "https://picsum.photos/seed/flowers-050-08/1200/800",
+      "https://picsum.photos/seed/flowers-050-09/1200/800",
+      "https://picsum.photos/seed/flowers-050-10/1200/800",
+      "https://picsum.photos/seed/flowers-050-11/1200/800",
+      "https://picsum.photos/seed/flowers-050-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
+    "title": "Bold Frames of Flowers Plants",
+    "description": "A twelve-album collection exploring flowers plants in nature.",
+    "price": 496,
+    "totalReact": 273,
+    "viewsCount": 1289,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_119",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-13T20:30:00Z"
+      },
+      {
+        "userId": "user_114",
+        "text": "Love the collection!",
+        "createdAt": "2026-10-13T17:30:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.9 MB",
+      "location": "Rome, Italy",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_051",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_102",
+    "info": {
+      "author": "Alex Morgan",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-14T01:48:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-051-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Lost Textures of Countryside",
+    "description": "A single-album collection exploring countryside in landscape.",
+    "price": 155,
+    "totalReact": 858,
+    "viewsCount": 7388,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.6 MB",
+      "location": "Paris, France",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_052",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "travel",
+    "subCategory": "cultural-experiences",
+    "userId": "user_111",
+    "info": {
+      "author": "Noah Anderson",
+      "tags": [
+        "culture",
+        "travel",
+        "cultural-experiences"
+      ],
+      "createdAt": "2026-10-14T03:18:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/culture-052-01/1200/800",
+      "https://picsum.photos/seed/culture-052-02/1200/800",
+      "https://picsum.photos/seed/culture-052-03/1200/800",
+      "https://picsum.photos/seed/culture-052-04/1200/800",
+      "https://picsum.photos/seed/culture-052-05/1200/800",
+      "https://picsum.photos/seed/culture-052-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Fading Stories of Cultural Experiences",
+    "description": "A six-album collection exploring cultural experiences in travel.",
+    "price": 242,
+    "totalReact": 579,
+    "viewsCount": 4811,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_107",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-14T06:18:00Z"
+      },
+      {
+        "userId": "user_114",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-14T11:18:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.4 MB",
+      "location": "Dubai, UAE",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_053",
+    "albumType": "single",
+    "type": "competition",
+    "category": "black-white",
+    "subCategory": "portraits",
+    "userId": "user_118",
+    "info": {
+      "author": "Henry Lewis",
+      "tags": [
+        "bw",
+        "black-white",
+        "portraits"
+      ],
+      "createdAt": "2026-10-14T10:14:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bw-053-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Golden Journeys of Portraits",
+    "description": "A single-album collection exploring portraits in black white.",
+    "price": 117,
+    "totalReact": 111,
+    "viewsCount": 2052,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.6 MB",
+      "location": "Dhaka, Bangladesh",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_054",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_112",
+    "info": {
+      "author": "Grace Thomas",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-14T19:38:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-054-01/1200/800",
+      "https://picsum.photos/seed/macro-054-02/1200/800",
+      "https://picsum.photos/seed/macro-054-03/1200/800",
+      "https://picsum.photos/seed/macro-054-04/1200/800",
+      "https://picsum.photos/seed/macro-054-05/1200/800",
+      "https://picsum.photos/seed/macro-054-06/1200/800",
+      "https://picsum.photos/seed/macro-054-07/1200/800",
+      "https://picsum.photos/seed/macro-054-08/1200/800",
+      "https://picsum.photos/seed/macro-054-09/1200/800",
+      "https://picsum.photos/seed/macro-054-10/1200/800",
+      "https://picsum.photos/seed/macro-054-11/1200/800",
+      "https://picsum.photos/seed/macro-054-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
+    "title": "Lost Textures of Flowers",
+    "description": "A twelve-album collection exploring flowers in macro.",
+    "price": 357,
+    "totalReact": 99,
+    "viewsCount": 5410,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_113",
+        "text": "Such a peaceful atmosphere.",
+        "createdAt": "2026-10-14T21:38:00Z"
+      },
+      {
+        "userId": "user_113",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-15T00:38:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.7 MB",
+      "location": "Swiss Alps",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_055",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "street-photography",
+    "subCategory": "markets",
+    "userId": "user_103",
+    "info": {
+      "author": "Sophia Williams",
+      "tags": [
+        "market",
+        "street-photography",
+        "markets"
+      ],
+      "createdAt": "2026-10-14T23:35:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/market-055-01/1200/800",
+      "https://picsum.photos/seed/market-055-02/1200/800",
+      "https://picsum.photos/seed/market-055-03/1200/800",
+      "https://picsum.photos/seed/market-055-04/1200/800",
+      "https://picsum.photos/seed/market-055-05/1200/800",
+      "https://picsum.photos/seed/market-055-06/1200/800",
+      "https://picsum.photos/seed/market-055-07/1200/800",
+      "https://picsum.photos/seed/market-055-08/1200/800",
+      "https://picsum.photos/seed/market-055-09/1200/800",
+      "https://picsum.photos/seed/market-055-10/1200/800",
+      "https://picsum.photos/seed/market-055-11/1200/800",
+      "https://picsum.photos/seed/market-055-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Quiet Textures of Markets",
+    "description": "A twelve-album collection exploring markets in street photography.",
+    "price": 533,
+    "totalReact": 739,
+    "viewsCount": 5006,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_104",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-15T03:35:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.3 MB",
+      "location": "Nepal",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_056",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "fine-art",
+    "subCategory": "abstract",
+    "userId": "user_115",
+    "info": {
+      "author": "Chloe Martin",
+      "tags": [
+        "abstract",
+        "fine-art",
+        "abstract"
+      ],
+      "createdAt": "2026-10-15T02:19:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/abstract-056-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Fading Reflections of Abstract",
+    "description": "A single-album collection exploring abstract in fine art.",
+    "price": 145,
+    "totalReact": 261,
+    "viewsCount": 3700,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_112",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-15T16:19:00Z"
+      },
+      {
+        "userId": "user_101",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-15T23:19:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.4 MB",
+      "location": "Dhaka, Bangladesh",
+      "camera": "Canon EOS R5"
+    }
+  },
+  {
+    "id": "art_057",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "street-photography",
+    "subCategory": "markets",
+    "userId": "user_104",
+    "info": {
+      "author": "Daniel Scott",
+      "tags": [
+        "market",
+        "street-photography",
+        "markets"
+      ],
+      "createdAt": "2026-10-15T09:08:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/market-057-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Hidden Rhythms of Markets",
+    "description": "A single-album collection exploring markets in street photography.",
+    "price": 111,
+    "totalReact": 112,
+    "viewsCount": 5018,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.3 MB",
+      "location": "Berlin, Germany",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_058",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "night-photography",
+    "subCategory": "city-lights",
+    "userId": "user_106",
+    "info": {
+      "author": "Oliver James",
+      "tags": [
+        "citynight",
+        "night-photography",
+        "city-lights"
+      ],
+      "createdAt": "2026-10-15T15:59:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/citynight-058-01/1200/800",
+      "https://picsum.photos/seed/citynight-058-02/1200/800",
+      "https://picsum.photos/seed/citynight-058-03/1200/800",
+      "https://picsum.photos/seed/citynight-058-04/1200/800",
+      "https://picsum.photos/seed/citynight-058-05/1200/800",
+      "https://picsum.photos/seed/citynight-058-06/1200/800",
+      "https://picsum.photos/seed/citynight-058-07/1200/800",
+      "https://picsum.photos/seed/citynight-058-08/1200/800",
+      "https://picsum.photos/seed/citynight-058-09/1200/800",
+      "https://picsum.photos/seed/citynight-058-10/1200/800",
+      "https://picsum.photos/seed/citynight-058-11/1200/800",
+      "https://picsum.photos/seed/citynight-058-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
+    "title": "Calm Horizons of City Lights",
+    "description": "A twelve-album collection exploring city lights in night photography.",
+    "price": 463,
+    "totalReact": 831,
+    "viewsCount": 7093,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.5 MB",
+      "location": "Dhaka, Bangladesh",
+      "camera": "Fujifilm X-T5"
+    }
+  },
+  {
+    "id": "art_059",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "portrait",
+    "subCategory": "individual-portraits",
+    "userId": "user_111",
+    "info": {
+      "author": "Noah Anderson",
+      "tags": [
+        "portrait",
+        "portrait",
+        "individual-portraits"
+      ],
+      "createdAt": "2026-10-15T21:39:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/portrait-059-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Distant Moments of Individual Portraits",
+    "description": "A single-album collection exploring individual portraits in portrait.",
+    "price": 71,
+    "totalReact": 638,
+    "viewsCount": 2286,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_107",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-16T03:39:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Copenhagen, Denmark",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_060",
+    "albumType": "six",
+    "type": "competition",
+    "category": "street-photography",
+    "subCategory": "street-life",
+    "userId": "user_114",
+    "info": {
+      "author": "Jack Harris",
+      "tags": [
+        "street",
+        "street-photography",
+        "street-life"
+      ],
+      "createdAt": "2026-10-16T06:53:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/street-060-01/1200/800",
+      "https://picsum.photos/seed/street-060-02/1200/800",
+      "https://picsum.photos/seed/street-060-03/1200/800",
+      "https://picsum.photos/seed/street-060-04/1200/800",
+      "https://picsum.photos/seed/street-060-05/1200/800",
+      "https://picsum.photos/seed/street-060-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Endless Stories of Street Life",
+    "description": "A six-album collection exploring street life in street photography.",
+    "price": 190,
+    "totalReact": 743,
+    "viewsCount": 7366,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.7 MB",
+      "location": "Rome, Italy",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_061",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "fine-art",
+    "subCategory": "abstract",
+    "userId": "user_119",
+    "info": {
+      "author": "Ella Walker",
+      "tags": [
+        "abstract",
+        "fine-art",
+        "abstract"
+      ],
+      "createdAt": "2026-10-16T12:28:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/abstract-061-01/1200/800",
+      "https://picsum.photos/seed/abstract-061-02/1200/800",
+      "https://picsum.photos/seed/abstract-061-03/1200/800",
+      "https://picsum.photos/seed/abstract-061-04/1200/800",
+      "https://picsum.photos/seed/abstract-061-05/1200/800",
+      "https://picsum.photos/seed/abstract-061-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Rising Textures of Abstract",
+    "description": "A six-album collection exploring abstract in fine art.",
+    "price": 274,
+    "totalReact": 83,
+    "viewsCount": 528,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_062",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_104",
+    "info": {
+      "author": "Daniel Scott",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-16T16:27:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-062-01/1200/800",
+      "https://picsum.photos/seed/countryside-062-02/1200/800",
+      "https://picsum.photos/seed/countryside-062-03/1200/800",
+      "https://picsum.photos/seed/countryside-062-04/1200/800",
+      "https://picsum.photos/seed/countryside-062-05/1200/800",
+      "https://picsum.photos/seed/countryside-062-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Quiet Frames of Countryside",
+    "description": "A six-album collection exploring countryside in landscape.",
+    "price": 197,
+    "totalReact": 582,
+    "viewsCount": 5882,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_103",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-17T09:27:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_063",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "nature",
+    "subCategory": "flowers-plants",
+    "userId": "user_105",
+    "info": {
+      "author": "Emma Wilson",
+      "tags": [
+        "flowers",
+        "nature",
+        "flowers-plants"
+      ],
+      "createdAt": "2026-10-16T21:01:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/flowers-063-01/1200/800",
+      "https://picsum.photos/seed/flowers-063-02/1200/800",
+      "https://picsum.photos/seed/flowers-063-03/1200/800",
+      "https://picsum.photos/seed/flowers-063-04/1200/800",
+      "https://picsum.photos/seed/flowers-063-05/1200/800",
+      "https://picsum.photos/seed/flowers-063-06/1200/800",
+      "https://picsum.photos/seed/flowers-063-07/1200/800",
+      "https://picsum.photos/seed/flowers-063-08/1200/800",
+      "https://picsum.photos/seed/flowers-063-09/1200/800",
+      "https://picsum.photos/seed/flowers-063-10/1200/800",
+      "https://picsum.photos/seed/flowers-063-11/1200/800",
+      "https://picsum.photos/seed/flowers-063-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Calm Whispers of Flowers Plants",
+    "description": "A twelve-album collection exploring flowers plants in nature.",
+    "price": 497,
+    "totalReact": 809,
+    "viewsCount": 6173,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.5 MB",
+      "location": "Dhaka, Bangladesh",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_064",
+    "albumType": "six",
+    "type": "competition",
+    "category": "pets",
+    "subCategory": "cats",
+    "userId": "user_112",
+    "info": {
+      "author": "Grace Thomas",
+      "tags": [
+        "cat",
+        "pets",
+        "cats"
+      ],
+      "createdAt": "2026-10-17T04:57:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cat-064-01/1200/800",
+      "https://picsum.photos/seed/cat-064-02/1200/800",
+      "https://picsum.photos/seed/cat-064-03/1200/800",
+      "https://picsum.photos/seed/cat-064-04/1200/800",
+      "https://picsum.photos/seed/cat-064-05/1200/800",
+      "https://picsum.photos/seed/cat-064-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Timeless Whispers of Cats",
+    "description": "A six-album collection exploring cats in pets.",
+    "price": 244,
+    "totalReact": 551,
+    "viewsCount": 2206,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_109",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-17T09:57:00Z"
+      },
+      {
+        "userId": "user_109",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-18T10:57:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "New York, USA",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_065",
+    "albumType": "single",
+    "type": "competition",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_107",
+    "info": {
+      "author": "Isabella Brown",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-17T10:57:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-065-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Quiet Reflections of Flowers",
+    "description": "A single-album collection exploring flowers in macro.",
+    "price": 141,
+    "totalReact": 846,
+    "viewsCount": 4847,
+    "isWinner": true,
+    "comments": [
+      {
+        "userId": "user_106",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-17T14:57:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.6 MB",
+      "location": "Rome, Italy",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_066",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "pets",
+    "subCategory": "dogs",
+    "userId": "user_120",
+    "info": {
+      "author": "Lucas Hall",
+      "tags": [
+        "dog",
+        "pets",
+        "dogs"
+      ],
+      "createdAt": "2026-10-17T17:23:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/dog-066-01/1200/800",
+      "https://picsum.photos/seed/dog-066-02/1200/800",
+      "https://picsum.photos/seed/dog-066-03/1200/800",
+      "https://picsum.photos/seed/dog-066-04/1200/800",
+      "https://picsum.photos/seed/dog-066-05/1200/800",
+      "https://picsum.photos/seed/dog-066-06/1200/800",
+      "https://picsum.photos/seed/dog-066-07/1200/800",
+      "https://picsum.photos/seed/dog-066-08/1200/800",
+      "https://picsum.photos/seed/dog-066-09/1200/800",
+      "https://picsum.photos/seed/dog-066-10/1200/800",
+      "https://picsum.photos/seed/dog-066-11/1200/800",
+      "https://picsum.photos/seed/dog-066-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
+    "title": "Fading Silhouettes of Dogs",
+    "description": "A twelve-album collection exploring dogs in pets.",
+    "price": 397,
+    "totalReact": 363,
+    "viewsCount": 7216,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_105",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-18T04:23:00Z"
+      },
+      {
+        "userId": "user_103",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-18T01:23:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.6 MB",
+      "location": "Barcelona, Spain",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_067",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "travel",
+    "subCategory": "adventure",
+    "userId": "user_114",
+    "info": {
+      "author": "Jack Harris",
+      "tags": [
+        "adventure",
+        "travel",
+        "adventure"
+      ],
+      "createdAt": "2026-10-18T00:23:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/adventure-067-01/1200/800",
+      "https://picsum.photos/seed/adventure-067-02/1200/800",
+      "https://picsum.photos/seed/adventure-067-03/1200/800",
+      "https://picsum.photos/seed/adventure-067-04/1200/800",
+      "https://picsum.photos/seed/adventure-067-05/1200/800",
+      "https://picsum.photos/seed/adventure-067-06/1200/800",
+      "https://picsum.photos/seed/adventure-067-07/1200/800",
+      "https://picsum.photos/seed/adventure-067-08/1200/800",
+      "https://picsum.photos/seed/adventure-067-09/1200/800",
+      "https://picsum.photos/seed/adventure-067-10/1200/800",
+      "https://picsum.photos/seed/adventure-067-11/1200/800",
+      "https://picsum.photos/seed/adventure-067-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
+    "title": "Silent Stories of Adventure",
+    "description": "A twelve-album collection exploring adventure in travel.",
+    "price": 436,
+    "totalReact": 687,
+    "viewsCount": 5850,
+    "isWinner": true,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Barcelona, Spain",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_068",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "travel",
+    "subCategory": "landmarks",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "landmark",
+        "travel",
+        "landmarks"
+      ],
+      "createdAt": "2026-10-18T03:13:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/landmark-068-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Calm Dreams of Landmarks",
+    "description": "A single-album collection exploring landmarks in travel.",
+    "price": 112,
+    "totalReact": 74,
+    "viewsCount": 7065,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_117",
+        "text": "Beautiful angles!",
+        "createdAt": "2026-10-18T08:13:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.5 MB",
+      "location": "Yorkshire, UK",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_069",
+    "albumType": "single",
+    "type": "competition",
+    "category": "wildlife",
+    "subCategory": "wildlife",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "wildlife",
+        "wildlife",
+        "wildlife"
+      ],
+      "createdAt": "2026-10-18T08:41:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/wildlife-069-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Endless Rhythms of Wildlife",
+    "description": "A single-album collection exploring wildlife in wildlife.",
+    "price": 111,
+    "totalReact": 590,
+    "viewsCount": 6509,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_113",
+        "text": "Wonderful composition!",
+        "createdAt": "2026-10-19T05:41:00Z"
+      },
+      {
+        "userId": "user_120",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-19T04:41:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.3 MB",
+      "location": "Swiss Alps",
+      "camera": "Canon EOS R5"
+    }
+  },
+  {
+    "id": "art_070",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "nature",
+    "subCategory": "oceans-beaches",
+    "userId": "user_118",
+    "info": {
+      "author": "Henry Lewis",
+      "tags": [
+        "ocean",
+        "nature",
+        "oceans-beaches"
+      ],
+      "createdAt": "2026-10-18T18:35:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/ocean-070-01/1200/800",
+      "https://picsum.photos/seed/ocean-070-02/1200/800",
+      "https://picsum.photos/seed/ocean-070-03/1200/800",
+      "https://picsum.photos/seed/ocean-070-04/1200/800",
+      "https://picsum.photos/seed/ocean-070-05/1200/800",
+      "https://picsum.photos/seed/ocean-070-06/1200/800",
+      "https://picsum.photos/seed/ocean-070-07/1200/800",
+      "https://picsum.photos/seed/ocean-070-08/1200/800",
+      "https://picsum.photos/seed/ocean-070-09/1200/800",
+      "https://picsum.photos/seed/ocean-070-10/1200/800",
+      "https://picsum.photos/seed/ocean-070-11/1200/800",
+      "https://picsum.photos/seed/ocean-070-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
+    "title": "Bold Horizons of Oceans Beaches",
+    "description": "A twelve-album collection exploring oceans beaches in nature.",
+    "price": 333,
+    "totalReact": 590,
+    "viewsCount": 5481,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Maldives",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_071",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "architecture",
+    "subCategory": "modern-buildings",
+    "userId": "user_120",
+    "info": {
+      "author": "Lucas Hall",
+      "tags": [
+        "architecture",
+        "architecture",
+        "modern-buildings"
+      ],
+      "createdAt": "2026-10-19T00:00:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/architecture-071-01/1200/800",
+      "https://picsum.photos/seed/architecture-071-02/1200/800",
+      "https://picsum.photos/seed/architecture-071-03/1200/800",
+      "https://picsum.photos/seed/architecture-071-04/1200/800",
+      "https://picsum.photos/seed/architecture-071-05/1200/800",
+      "https://picsum.photos/seed/architecture-071-06/1200/800",
+      "https://picsum.photos/seed/architecture-071-07/1200/800",
+      "https://picsum.photos/seed/architecture-071-08/1200/800",
+      "https://picsum.photos/seed/architecture-071-09/1200/800",
+      "https://picsum.photos/seed/architecture-071-10/1200/800",
+      "https://picsum.photos/seed/architecture-071-11/1200/800",
+      "https://picsum.photos/seed/architecture-071-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Wild Echoes of Modern Buildings",
+    "description": "A twelve-album collection exploring modern buildings in architecture.",
+    "price": 513,
+    "totalReact": 523,
+    "viewsCount": 1936,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_114",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-19T03:00:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.4 MB",
+      "location": "Dubai, UAE",
+      "camera": "Fujifilm X-T5"
+    }
+  },
+  {
+    "id": "art_072",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_113",
+    "info": {
+      "author": "Liam White",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-19T02:17:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-072-01/1200/800",
+      "https://picsum.photos/seed/countryside-072-02/1200/800",
+      "https://picsum.photos/seed/countryside-072-03/1200/800",
+      "https://picsum.photos/seed/countryside-072-04/1200/800",
+      "https://picsum.photos/seed/countryside-072-05/1200/800",
+      "https://picsum.photos/seed/countryside-072-06/1200/800",
+      "https://picsum.photos/seed/countryside-072-07/1200/800",
+      "https://picsum.photos/seed/countryside-072-08/1200/800",
+      "https://picsum.photos/seed/countryside-072-09/1200/800",
+      "https://picsum.photos/seed/countryside-072-10/1200/800",
+      "https://picsum.photos/seed/countryside-072-11/1200/800",
+      "https://picsum.photos/seed/countryside-072-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Hidden Dreams of Countryside",
+    "description": "A twelve-album collection exploring countryside in landscape.",
+    "price": 512,
+    "totalReact": 282,
+    "viewsCount": 1199,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_115",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-20T04:17:00Z"
+      },
+      {
+        "userId": "user_118",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-19T12:17:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.0 MB",
+      "location": "Paris, France",
+      "camera": "Canon EOS R6"
+    }
+  },
+  {
+    "id": "art_073",
+    "albumType": "single",
+    "type": "competition",
+    "category": "sports",
+    "subCategory": "football",
+    "userId": "user_120",
+    "info": {
+      "author": "Lucas Hall",
+      "tags": [
+        "football",
+        "sports",
+        "football"
+      ],
+      "createdAt": "2026-10-19T13:58:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/football-073-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Distant Stories of Football",
+    "description": "A single-album collection exploring football in sports.",
+    "price": 102,
+    "totalReact": 87,
+    "viewsCount": 4081,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_116",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-20T16:58:00Z"
+      },
+      {
+        "userId": "user_117",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-20T17:58:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.4 MB",
+      "location": "Toronto, Canada",
+      "camera": "Canon EOS R6"
+    }
+  },
+  {
+    "id": "art_074",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "street-photography",
+    "subCategory": "street-life",
+    "userId": "user_117",
+    "info": {
+      "author": "Amelia Clark",
+      "tags": [
+        "street",
+        "street-photography",
+        "street-life"
+      ],
+      "createdAt": "2026-10-19T14:39:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/street-074-01/1200/800",
+      "https://picsum.photos/seed/street-074-02/1200/800",
+      "https://picsum.photos/seed/street-074-03/1200/800",
+      "https://picsum.photos/seed/street-074-04/1200/800",
+      "https://picsum.photos/seed/street-074-05/1200/800",
+      "https://picsum.photos/seed/street-074-06/1200/800",
+      "https://picsum.photos/seed/street-074-07/1200/800",
+      "https://picsum.photos/seed/street-074-08/1200/800",
+      "https://picsum.photos/seed/street-074-09/1200/800",
+      "https://picsum.photos/seed/street-074-10/1200/800",
+      "https://picsum.photos/seed/street-074-11/1200/800",
+      "https://picsum.photos/seed/street-074-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Eternal Visions of Street Life",
+    "description": "A twelve-album collection exploring street life in street photography.",
+    "price": 358,
+    "totalReact": 205,
+    "viewsCount": 6240,
+    "isWinner": true,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Istanbul, Turkey",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_075",
+    "albumType": "single",
+    "type": "competition",
+    "category": "fine-art",
+    "subCategory": "abstract",
+    "userId": "user_108",
+    "info": {
+      "author": "Ethan Davis",
+      "tags": [
+        "abstract",
+        "fine-art",
+        "abstract"
+      ],
+      "createdAt": "2026-10-20T01:04:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/abstract-075-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Silent Whispers of Abstract",
+    "description": "A single-album collection exploring abstract in fine art.",
+    "price": 85,
+    "totalReact": 268,
+    "viewsCount": 1417,
+    "isWinner": true,
+    "comments": [
+      {
+        "userId": "user_104",
+        "text": "Such a peaceful atmosphere.",
+        "createdAt": "2026-10-20T08:04:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.8 MB",
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_076",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "sports",
+    "subCategory": "cricket",
+    "userId": "user_114",
+    "info": {
+      "author": "Jack Harris",
+      "tags": [
+        "cricket",
+        "sports",
+        "cricket"
+      ],
+      "createdAt": "2026-10-20T04:21:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cricket-076-01/1200/800",
+      "https://picsum.photos/seed/cricket-076-02/1200/800",
+      "https://picsum.photos/seed/cricket-076-03/1200/800",
+      "https://picsum.photos/seed/cricket-076-04/1200/800",
+      "https://picsum.photos/seed/cricket-076-05/1200/800",
+      "https://picsum.photos/seed/cricket-076-06/1200/800",
+      "https://picsum.photos/seed/cricket-076-07/1200/800",
+      "https://picsum.photos/seed/cricket-076-08/1200/800",
+      "https://picsum.photos/seed/cricket-076-09/1200/800",
+      "https://picsum.photos/seed/cricket-076-10/1200/800",
+      "https://picsum.photos/seed/cricket-076-11/1200/800",
+      "https://picsum.photos/seed/cricket-076-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
+    "title": "Bright Whispers of Cricket",
+    "description": "A twelve-album collection exploring cricket in sports.",
+    "price": 405,
+    "totalReact": 109,
+    "viewsCount": 6363,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_109",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-20T16:21:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.4 MB",
+      "location": "Atacama Desert, Chile",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_077",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "pets",
+    "subCategory": "dogs",
+    "userId": "user_106",
+    "info": {
+      "author": "Oliver James",
+      "tags": [
+        "dog",
+        "pets",
+        "dogs"
+      ],
+      "createdAt": "2026-10-20T12:49:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/dog-077-01/1200/800",
+      "https://picsum.photos/seed/dog-077-02/1200/800",
+      "https://picsum.photos/seed/dog-077-03/1200/800",
+      "https://picsum.photos/seed/dog-077-04/1200/800",
+      "https://picsum.photos/seed/dog-077-05/1200/800",
+      "https://picsum.photos/seed/dog-077-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Crimson Details of Dogs",
+    "description": "A six-album collection exploring dogs in pets.",
+    "price": 187,
+    "totalReact": 415,
+    "viewsCount": 4341,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.3 MB",
+      "location": "Nepal",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_078",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "architecture",
+    "subCategory": "bridges",
+    "userId": "user_116",
+    "info": {
+      "author": "Benjamin Lee",
+      "tags": [
+        "bridge",
+        "architecture",
+        "bridges"
+      ],
+      "createdAt": "2026-10-20T15:18:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bridge-078-01/1200/800",
+      "https://picsum.photos/seed/bridge-078-02/1200/800",
+      "https://picsum.photos/seed/bridge-078-03/1200/800",
+      "https://picsum.photos/seed/bridge-078-04/1200/800",
+      "https://picsum.photos/seed/bridge-078-05/1200/800",
+      "https://picsum.photos/seed/bridge-078-06/1200/800",
+      "https://picsum.photos/seed/bridge-078-07/1200/800",
+      "https://picsum.photos/seed/bridge-078-08/1200/800",
+      "https://picsum.photos/seed/bridge-078-09/1200/800",
+      "https://picsum.photos/seed/bridge-078-10/1200/800",
+      "https://picsum.photos/seed/bridge-078-11/1200/800",
+      "https://picsum.photos/seed/bridge-078-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
+    "title": "Eternal Rhythms of Bridges",
+    "description": "A twelve-album collection exploring bridges in architecture.",
+    "price": 464,
+    "totalReact": 157,
+    "viewsCount": 4526,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.6 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_079",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_104",
+    "info": {
+      "author": "Daniel Scott",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-20T21:07:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-079-01/1200/800",
+      "https://picsum.photos/seed/macro-079-02/1200/800",
+      "https://picsum.photos/seed/macro-079-03/1200/800",
+      "https://picsum.photos/seed/macro-079-04/1200/800",
+      "https://picsum.photos/seed/macro-079-05/1200/800",
+      "https://picsum.photos/seed/macro-079-06/1200/800",
+      "https://picsum.photos/seed/macro-079-07/1200/800",
+      "https://picsum.photos/seed/macro-079-08/1200/800",
+      "https://picsum.photos/seed/macro-079-09/1200/800",
+      "https://picsum.photos/seed/macro-079-10/1200/800",
+      "https://picsum.photos/seed/macro-079-11/1200/800",
+      "https://picsum.photos/seed/macro-079-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Eternal Horizons of Flowers",
+    "description": "A twelve-album collection exploring flowers in macro.",
+    "price": 457,
+    "totalReact": 773,
+    "viewsCount": 5097,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.5 MB",
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_080",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_102",
+    "info": {
+      "author": "Alex Morgan",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-21T03:19:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-080-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Bold Visions of Flowers",
+    "description": "A single-album collection exploring flowers in macro.",
+    "price": 114,
+    "totalReact": 235,
+    "viewsCount": 3607,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_115",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-21T20:19:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.9 MB",
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Canon EOS R6"
+    }
+  },
+  {
+    "id": "art_081",
+    "albumType": "single",
+    "type": "competition",
+    "category": "black-white",
+    "subCategory": "portraits",
+    "userId": "user_109",
+    "info": {
+      "author": "Mia Taylor",
+      "tags": [
+        "bw",
+        "black-white",
+        "portraits"
+      ],
+      "createdAt": "2026-10-21T11:42:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bw-081-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Gentle Textures of Portraits",
+    "description": "A single-album collection exploring portraits in black white.",
+    "price": 126,
+    "totalReact": 296,
+    "viewsCount": 1532,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_112",
+        "text": "Beautiful angles!",
+        "createdAt": "2026-10-22T02:42:00Z"
+      },
+      {
+        "userId": "user_116",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-22T06:42:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Istanbul, Turkey",
+      "camera": "Canon EOS R6"
+    }
+  },
+  {
+    "id": "art_082",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "pets",
+    "subCategory": "dogs",
+    "userId": "user_113",
+    "info": {
+      "author": "Liam White",
+      "tags": [
+        "dog",
+        "pets",
+        "dogs"
+      ],
+      "createdAt": "2026-10-21T19:20:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/dog-082-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Rising Frames of Dogs",
+    "description": "A single-album collection exploring dogs in pets.",
+    "price": 152,
+    "totalReact": 324,
+    "viewsCount": 6469,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_118",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-22T01:20:00Z"
+      },
+      {
+        "userId": "user_108",
+        "text": "The details are incredible!",
+        "createdAt": "2026-10-22T02:20:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.9 MB",
+      "location": "Kyoto, Japan",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_083",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "wildlife",
+    "subCategory": "wildlife",
+    "userId": "user_116",
+    "info": {
+      "author": "Benjamin Lee",
+      "tags": [
+        "wildlife",
+        "wildlife",
+        "wildlife"
+      ],
+      "createdAt": "2026-10-21T22:12:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/wildlife-083-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Endless Horizons of Wildlife",
+    "description": "A single-album collection exploring wildlife in wildlife.",
+    "price": 153,
+    "totalReact": 713,
+    "viewsCount": 1375,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.5 MB",
+      "location": "Berlin, Germany",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_084",
+    "albumType": "single",
+    "type": "competition",
+    "category": "nature",
+    "subCategory": "oceans-beaches",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "ocean",
+        "nature",
+        "oceans-beaches"
+      ],
+      "createdAt": "2026-10-22T07:18:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/ocean-084-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Bold Rhythms of Oceans Beaches",
+    "description": "A single-album collection exploring oceans beaches in nature.",
+    "price": 148,
+    "totalReact": 678,
+    "viewsCount": 6547,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_102",
+        "text": "Beautiful angles!",
+        "createdAt": "2026-10-22T16:18:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.4 MB",
+      "location": "Maldives",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_085",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "night-photography",
+    "subCategory": "city-lights",
+    "userId": "user_106",
+    "info": {
+      "author": "Oliver James",
+      "tags": [
+        "citynight",
+        "night-photography",
+        "city-lights"
+      ],
+      "createdAt": "2026-10-22T09:41:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/citynight-085-01/1200/800",
+      "https://picsum.photos/seed/citynight-085-02/1200/800",
+      "https://picsum.photos/seed/citynight-085-03/1200/800",
+      "https://picsum.photos/seed/citynight-085-04/1200/800",
+      "https://picsum.photos/seed/citynight-085-05/1200/800",
+      "https://picsum.photos/seed/citynight-085-06/1200/800",
+      "https://picsum.photos/seed/citynight-085-07/1200/800",
+      "https://picsum.photos/seed/citynight-085-08/1200/800",
+      "https://picsum.photos/seed/citynight-085-09/1200/800",
+      "https://picsum.photos/seed/citynight-085-10/1200/800",
+      "https://picsum.photos/seed/citynight-085-11/1200/800",
+      "https://picsum.photos/seed/citynight-085-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Timeless Memories of City Lights",
+    "description": "A twelve-album collection exploring city lights in night photography.",
+    "price": 503,
+    "totalReact": 380,
+    "viewsCount": 2628,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Dubai, UAE",
+      "camera": "Nikon D850"
+    }
+  },
+  {
+    "id": "art_086",
+    "albumType": "six",
+    "type": "competition",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-22T18:54:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-086-01/1200/800",
+      "https://picsum.photos/seed/countryside-086-02/1200/800",
+      "https://picsum.photos/seed/countryside-086-03/1200/800",
+      "https://picsum.photos/seed/countryside-086-04/1200/800",
+      "https://picsum.photos/seed/countryside-086-05/1200/800",
+      "https://picsum.photos/seed/countryside-086-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Quiet Echoes of Countryside",
+    "description": "A six-album collection exploring countryside in landscape.",
+    "price": 296,
+    "totalReact": 247,
+    "viewsCount": 5861,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_118",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-23T16:54:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.0 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_087",
+    "albumType": "six",
+    "type": "competition",
+    "category": "nature",
+    "subCategory": "oceans-beaches",
+    "userId": "user_105",
+    "info": {
+      "author": "Emma Wilson",
+      "tags": [
+        "ocean",
+        "nature",
+        "oceans-beaches"
+      ],
+      "createdAt": "2026-10-22T20:54:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/ocean-087-01/1200/800",
+      "https://picsum.photos/seed/ocean-087-02/1200/800",
+      "https://picsum.photos/seed/ocean-087-03/1200/800",
+      "https://picsum.photos/seed/ocean-087-04/1200/800",
+      "https://picsum.photos/seed/ocean-087-05/1200/800",
+      "https://picsum.photos/seed/ocean-087-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Quiet Details of Oceans Beaches",
+    "description": "A six-album collection exploring oceans beaches in nature.",
+    "price": 312,
+    "totalReact": 714,
+    "viewsCount": 6992,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_116",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-23T03:54:00Z"
+      },
+      {
+        "userId": "user_117",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-22T21:54:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.0 MB",
+      "location": "Maldives",
+      "camera": "Sony A6400"
+    }
+  },
+  {
+    "id": "art_088",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "architecture",
+    "subCategory": "bridges",
+    "userId": "user_114",
+    "info": {
+      "author": "Jack Harris",
+      "tags": [
+        "bridge",
+        "architecture",
+        "bridges"
+      ],
+      "createdAt": "2026-10-23T02:16:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/bridge-088-01/1200/800",
+      "https://picsum.photos/seed/bridge-088-02/1200/800",
+      "https://picsum.photos/seed/bridge-088-03/1200/800",
+      "https://picsum.photos/seed/bridge-088-04/1200/800",
+      "https://picsum.photos/seed/bridge-088-05/1200/800",
+      "https://picsum.photos/seed/bridge-088-06/1200/800",
+      "https://picsum.photos/seed/bridge-088-07/1200/800",
+      "https://picsum.photos/seed/bridge-088-08/1200/800",
+      "https://picsum.photos/seed/bridge-088-09/1200/800",
+      "https://picsum.photos/seed/bridge-088-10/1200/800",
+      "https://picsum.photos/seed/bridge-088-11/1200/800",
+      "https://picsum.photos/seed/bridge-088-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4",
+    "title": "Bold Silhouettes of Bridges",
+    "description": "A twelve-album collection exploring bridges in architecture.",
+    "price": 493,
+    "totalReact": 490,
+    "viewsCount": 5649,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_113",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-23T04:16:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.7 MB",
+      "location": "Paris, France",
+      "camera": "Nikon Z7 II"
+    }
+  },
+  {
+    "id": "art_089",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_110",
+    "info": {
+      "author": "Ava Martinez",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-23T09:08:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-089-01/1200/800",
+      "https://picsum.photos/seed/countryside-089-02/1200/800",
+      "https://picsum.photos/seed/countryside-089-03/1200/800",
+      "https://picsum.photos/seed/countryside-089-04/1200/800",
+      "https://picsum.photos/seed/countryside-089-05/1200/800",
+      "https://picsum.photos/seed/countryside-089-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Calm Stories of Countryside",
+    "description": "A six-album collection exploring countryside in landscape.",
+    "price": 298,
+    "totalReact": 889,
+    "viewsCount": 7040,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_090",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "night-photography",
+    "subCategory": "astrophotography",
+    "userId": "user_112",
+    "info": {
+      "author": "Grace Thomas",
+      "tags": [
+        "astro",
+        "night-photography",
+        "astrophotography"
+      ],
+      "createdAt": "2026-10-23T18:41:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/astro-090-01/1200/800",
+      "https://picsum.photos/seed/astro-090-02/1200/800",
+      "https://picsum.photos/seed/astro-090-03/1200/800",
+      "https://picsum.photos/seed/astro-090-04/1200/800",
+      "https://picsum.photos/seed/astro-090-05/1200/800",
+      "https://picsum.photos/seed/astro-090-06/1200/800",
+      "https://picsum.photos/seed/astro-090-07/1200/800",
+      "https://picsum.photos/seed/astro-090-08/1200/800",
+      "https://picsum.photos/seed/astro-090-09/1200/800",
+      "https://picsum.photos/seed/astro-090-10/1200/800",
+      "https://picsum.photos/seed/astro-090-11/1200/800",
+      "https://picsum.photos/seed/astro-090-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Endless Dreams of Astrophotography",
+    "description": "A twelve-album collection exploring astrophotography in night photography.",
+    "price": 405,
+    "totalReact": 540,
+    "viewsCount": 3406,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.4 MB",
+      "location": "Istanbul, Turkey",
+      "camera": "Nikon D850"
+    }
+  },
+  {
+    "id": "art_091",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "fine-art",
+    "subCategory": "minimalism",
+    "userId": "user_110",
+    "info": {
+      "author": "Ava Martinez",
+      "tags": [
+        "minimal",
+        "fine-art",
+        "minimalism"
+      ],
+      "createdAt": "2026-10-23T21:41:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/minimal-091-01/1200/800",
+      "https://picsum.photos/seed/minimal-091-02/1200/800",
+      "https://picsum.photos/seed/minimal-091-03/1200/800",
+      "https://picsum.photos/seed/minimal-091-04/1200/800",
+      "https://picsum.photos/seed/minimal-091-05/1200/800",
+      "https://picsum.photos/seed/minimal-091-06/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo"
+    ],
+    "video": null,
+    "title": "Quiet Journeys of Minimalism",
+    "description": "A six-album collection exploring minimalism in fine art.",
+    "price": 251,
+    "totalReact": 498,
+    "viewsCount": 5606,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_112",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-24T13:41:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Sylhet, Bangladesh",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_092",
+    "albumType": "six",
+    "type": "gallery",
+    "category": "portrait",
+    "subCategory": "individual-portraits",
+    "userId": "user_106",
+    "info": {
+      "author": "Oliver James",
+      "tags": [
+        "portrait",
+        "portrait",
+        "individual-portraits"
+      ],
+      "createdAt": "2026-10-24T04:40:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/portrait-092-01/1200/800",
+      "https://picsum.photos/seed/portrait-092-02/1200/800",
+      "https://picsum.photos/seed/portrait-092-03/1200/800",
+      "https://picsum.photos/seed/portrait-092-04/1200/800",
+      "https://picsum.photos/seed/portrait-092-05/1200/800",
+      "https://picsum.photos/seed/portrait-092-06/1200/800"
+    ],
+    "zodiacs": [
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Silent Whispers of Individual Portraits",
+    "description": "A six-album collection exploring individual portraits in portrait.",
+    "price": 215,
+    "totalReact": 360,
+    "viewsCount": 2548,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_101",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-24T05:40:00Z"
+      },
+      {
+        "userId": "user_108",
+        "text": "Love the collection!",
+        "createdAt": "2026-10-25T01:40:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Barcelona, Spain",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_093",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "landscape",
+    "subCategory": "countryside",
+    "userId": "user_117",
+    "info": {
+      "author": "Amelia Clark",
+      "tags": [
+        "countryside",
+        "landscape",
+        "countryside"
+      ],
+      "createdAt": "2026-10-24T12:10:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/countryside-093-01/1200/800"
+    ],
+    "zodiacs": [
+      "Gemini"
+    ],
+    "video": null,
+    "title": "Gentle Frames of Countryside",
+    "description": "A single-album collection exploring countryside in landscape.",
+    "price": 86,
+    "totalReact": 364,
+    "viewsCount": 2116,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_103",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-25T17:10:00Z"
+      },
+      {
+        "userId": "user_119",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-25T15:10:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.9 MB",
+      "location": "Dhaka, Bangladesh",
+      "camera": "Nikon Z6 II"
+    }
+  },
+  {
+    "id": "art_094",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "nature",
+    "subCategory": "flowers-plants",
+    "userId": "user_119",
+    "info": {
+      "author": "Ella Walker",
+      "tags": [
+        "flowers",
+        "nature",
+        "flowers-plants"
+      ],
+      "createdAt": "2026-10-24T15:30:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/flowers-094-01/1200/800",
+      "https://picsum.photos/seed/flowers-094-02/1200/800",
+      "https://picsum.photos/seed/flowers-094-03/1200/800",
+      "https://picsum.photos/seed/flowers-094-04/1200/800",
+      "https://picsum.photos/seed/flowers-094-05/1200/800",
+      "https://picsum.photos/seed/flowers-094-06/1200/800",
+      "https://picsum.photos/seed/flowers-094-07/1200/800",
+      "https://picsum.photos/seed/flowers-094-08/1200/800",
+      "https://picsum.photos/seed/flowers-094-09/1200/800",
+      "https://picsum.photos/seed/flowers-094-10/1200/800",
+      "https://picsum.photos/seed/flowers-094-11/1200/800",
+      "https://picsum.photos/seed/flowers-094-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Hidden Silhouettes of Flowers Plants",
+    "description": "A twelve-album collection exploring flowers plants in nature.",
+    "price": 541,
+    "totalReact": 207,
+    "viewsCount": 6237,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_118",
+        "text": "Absolutely stunning!",
+        "createdAt": "2026-10-25T07:30:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.9 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Sony A7 IV"
+    }
+  },
+  {
+    "id": "art_095",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "night-photography",
+    "subCategory": "astrophotography",
+    "userId": "user_113",
+    "info": {
+      "author": "Liam White",
+      "tags": [
+        "astro",
+        "night-photography",
+        "astrophotography"
+      ],
+      "createdAt": "2026-10-24T22:53:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/astro-095-01/1200/800",
+      "https://picsum.photos/seed/astro-095-02/1200/800",
+      "https://picsum.photos/seed/astro-095-03/1200/800",
+      "https://picsum.photos/seed/astro-095-04/1200/800",
+      "https://picsum.photos/seed/astro-095-05/1200/800",
+      "https://picsum.photos/seed/astro-095-06/1200/800",
+      "https://picsum.photos/seed/astro-095-07/1200/800",
+      "https://picsum.photos/seed/astro-095-08/1200/800",
+      "https://picsum.photos/seed/astro-095-09/1200/800",
+      "https://picsum.photos/seed/astro-095-10/1200/800",
+      "https://picsum.photos/seed/astro-095-11/1200/800",
+      "https://picsum.photos/seed/astro-095-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Quiet Rhythms of Astrophotography",
+    "description": "A twelve-album collection exploring astrophotography in night photography.",
+    "price": 500,
+    "totalReact": 752,
+    "viewsCount": 1117,
+    "isWinner": true,
+    "comments": [
+      {
+        "userId": "user_112",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-25T12:53:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.7 MB",
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Canon EOS R5"
+    }
+  },
+  {
+    "id": "art_096",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "nature",
+    "subCategory": "mountains",
+    "userId": "user_110",
+    "info": {
+      "author": "Ava Martinez",
+      "tags": [
+        "mountain",
+        "nature",
+        "mountains"
+      ],
+      "createdAt": "2026-10-25T03:02:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/mountain-096-01/1200/800",
+      "https://picsum.photos/seed/mountain-096-02/1200/800",
+      "https://picsum.photos/seed/mountain-096-03/1200/800",
+      "https://picsum.photos/seed/mountain-096-04/1200/800",
+      "https://picsum.photos/seed/mountain-096-05/1200/800",
+      "https://picsum.photos/seed/mountain-096-06/1200/800",
+      "https://picsum.photos/seed/mountain-096-07/1200/800",
+      "https://picsum.photos/seed/mountain-096-08/1200/800",
+      "https://picsum.photos/seed/mountain-096-09/1200/800",
+      "https://picsum.photos/seed/mountain-096-10/1200/800",
+      "https://picsum.photos/seed/mountain-096-11/1200/800",
+      "https://picsum.photos/seed/mountain-096-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Distant Frames of Mountains",
+    "description": "A twelve-album collection exploring mountains in nature.",
+    "price": 454,
+    "totalReact": 700,
+    "viewsCount": 1539,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.6 MB",
+      "location": "Bali, Indonesia",
+      "camera": "Sony A7 III"
+    }
+  },
+  {
+    "id": "art_097",
+    "albumType": "twelve",
+    "type": "gallery",
+    "category": "pets",
+    "subCategory": "cats",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "cat",
+        "pets",
+        "cats"
+      ],
+      "createdAt": "2026-10-25T11:16:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cat-097-01/1200/800",
+      "https://picsum.photos/seed/cat-097-02/1200/800",
+      "https://picsum.photos/seed/cat-097-03/1200/800",
+      "https://picsum.photos/seed/cat-097-04/1200/800",
+      "https://picsum.photos/seed/cat-097-05/1200/800",
+      "https://picsum.photos/seed/cat-097-06/1200/800",
+      "https://picsum.photos/seed/cat-097-07/1200/800",
+      "https://picsum.photos/seed/cat-097-08/1200/800",
+      "https://picsum.photos/seed/cat-097-09/1200/800",
+      "https://picsum.photos/seed/cat-097-10/1200/800",
+      "https://picsum.photos/seed/cat-097-11/1200/800",
+      "https://picsum.photos/seed/cat-097-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": null,
+    "title": "Secret Frames of Cats",
+    "description": "A twelve-album collection exploring cats in pets.",
+    "price": 417,
+    "totalReact": 338,
+    "viewsCount": 4648,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_103",
+        "text": "Amazing photography!",
+        "createdAt": "2026-10-25T21:16:00Z"
+      },
+      {
+        "userId": "user_113",
+        "text": "Great action shots!",
+        "createdAt": "2026-10-26T00:16:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.7 MB",
+      "location": "Dhaka, Bangladesh",
+      "camera": "Sony A7S III"
+    }
+  },
+  {
+    "id": "art_098",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "pets",
+    "subCategory": "cats",
+    "userId": "user_102",
+    "info": {
+      "author": "Alex Morgan",
+      "tags": [
+        "cat",
+        "pets",
+        "cats"
+      ],
+      "createdAt": "2026-10-25T14:25:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cat-098-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Vivid Dreams of Cats",
+    "description": "A single-album collection exploring cats in pets.",
+    "price": 76,
+    "totalReact": 171,
+    "viewsCount": 550,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_114",
+        "text": "Every frame tells a story.",
+        "createdAt": "2026-10-26T09:25:00Z"
+      },
+      {
+        "userId": "user_103",
+        "text": "Creative and inspiring!",
+        "createdAt": "2026-10-26T00:25:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.1 MB",
+      "location": "Melbourne, Australia",
+      "camera": "Canon EOS R3"
+    }
+  },
+  {
+    "id": "art_099",
+    "albumType": "twelve",
+    "type": "competition",
+    "category": "sports",
+    "subCategory": "cricket",
+    "userId": "user_116",
+    "info": {
+      "author": "Benjamin Lee",
+      "tags": [
+        "cricket",
+        "sports",
+        "cricket"
+      ],
+      "createdAt": "2026-10-26T01:44:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/cricket-099-01/1200/800",
+      "https://picsum.photos/seed/cricket-099-02/1200/800",
+      "https://picsum.photos/seed/cricket-099-03/1200/800",
+      "https://picsum.photos/seed/cricket-099-04/1200/800",
+      "https://picsum.photos/seed/cricket-099-05/1200/800",
+      "https://picsum.photos/seed/cricket-099-06/1200/800",
+      "https://picsum.photos/seed/cricket-099-07/1200/800",
+      "https://picsum.photos/seed/cricket-099-08/1200/800",
+      "https://picsum.photos/seed/cricket-099-09/1200/800",
+      "https://picsum.photos/seed/cricket-099-10/1200/800",
+      "https://picsum.photos/seed/cricket-099-11/1200/800",
+      "https://picsum.photos/seed/cricket-099-12/1200/800"
+    ],
+    "zodiacs": [
+      "Aries",
+      "Taurus",
+      "Gemini",
+      "Cancer",
+      "Leo",
+      "Virgo",
+      "Libra",
+      "Scorpio",
+      "Sagittarius",
+      "Capricorn",
+      "Aquarius",
+      "Pisces"
+    ],
+    "video": "https://videos.pexels.com/video-files/854112/854112-hd_1920_1080_25fps.mp4",
+    "title": "Calm Visions of Cricket",
+    "description": "A twelve-album collection exploring cricket in sports.",
+    "price": 490,
+    "totalReact": 950,
+    "viewsCount": 802,
+    "isWinner": false,
+    "comments": [
+      {
+        "userId": "user_103",
+        "text": "Such a peaceful atmosphere.",
+        "createdAt": "2026-10-26T03:44:00Z"
+      },
+      {
+        "userId": "user_115",
+        "text": "Great use of light.",
+        "createdAt": "2026-10-27T02:44:00Z"
+      }
+    ],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "1.2 MB",
+      "location": "Cox's Bazar, Bangladesh",
+      "camera": "Canon EOS R5"
+    }
+  },
+  {
+    "id": "art_100",
+    "albumType": "single",
+    "type": "gallery",
+    "category": "macro",
+    "subCategory": "flowers",
+    "userId": "user_101",
+    "info": {
+      "author": "Rahim Sikdar",
+      "tags": [
+        "macro",
+        "macro",
+        "flowers"
+      ],
+      "createdAt": "2026-10-26T02:20:00Z"
+    },
+    "images": [
+      "https://picsum.photos/seed/macro-100-01/1200/800"
+    ],
+    "zodiacs": [
+      "Libra"
+    ],
+    "video": null,
+    "title": "Rising Silhouettes of Flowers",
+    "description": "A single-album collection exploring flowers in macro.",
+    "price": 98,
+    "totalReact": 501,
+    "viewsCount": 5139,
+    "isWinner": false,
+    "comments": [],
+    "imageDetails": {
+      "width": 1200,
+      "height": 800,
+      "format": "jpg",
+      "size": "2.2 MB",
+      "location": "Amazon Rainforest",
+      "camera": "Sony A6400"
     }
   }
 ]
