@@ -30,8 +30,8 @@ const MyStore = () => {
   if (error) return <div className="text-center py-20 text-red-500">Error: {error}</div>;
 
   return (
-    <div className="min-h-screen bg-[#F8F9FC] p-6 md:p-10 font-sans">
-      <div className="max-w-7xl mx-auto">
+    <div className="">
+      <div className="">
         
         {/* HEADER SECTION */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
