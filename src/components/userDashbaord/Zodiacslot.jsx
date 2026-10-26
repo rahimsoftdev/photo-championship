@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { FiCheck, FiUpload, FiX } from "react-icons/fi";
-import { THEME_STYLES } from "./uploadArtworkData";
+import { THEME_STYLES } from "./UploadArtworkData";
+// import { THEME_STYLES } from "./uploadArtworkData";
 
 /**
  * One zodiac photo slot: shows sign info + "Add Photo" button.

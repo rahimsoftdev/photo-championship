@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { FiFilm, FiUploadCloud, FiX } from "react-icons/fi";
-import { MAX_VIDEO_SIZE_MB, formatBytes } from "./uploadArtworkData";
+import { MAX_VIDEO_SIZE_MB, formatBytes } from "./UploadArtworkData";
 
 /**
  * Optional video upload box (click or drag & drop).

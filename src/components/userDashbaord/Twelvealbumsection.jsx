@@ -7,7 +7,8 @@ import {
     TWELVE_DISPLAY_ORDER,
     ZODIACS,
     getThemeKeyBySignId,
-} from "./uploadArtworkData";
+} from "./UploadArtworkData.jsx";
+// import UploadArtworkData from "./uploadArtworkData";
 
 /** Top section for albumType = "twelve": all 12 signs, red (1-6) + blue (7-12). */
 const TwelveAlbumSection = ({

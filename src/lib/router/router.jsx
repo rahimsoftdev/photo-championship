@@ -68,6 +68,7 @@ import PromoLinkManagement from "../../pages/adminDashboard/Promolinkmanagement.
 import AdsAnnouncements from "../../pages/adminDashboard/AdsAnnouncements.jsx";
 import MyProfile from "../../pages/adminDashboard/MyProfile.jsx";
 import AdminAccessDenied from "../../pages/auth/Adminaccessdenied.jsx";
+import NewsAndMessageDetailsPage from "../../pages/userDashboard/Newsandmessagedetailspage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -181,6 +182,9 @@ export const router = createBrowserRouter([
             //news and message route:
             {
                 path: "news-message", Component: NewsAndMessagePage
+            },
+            {
+                path: "news-message/:id", Component: NewsAndMessageDetailsPage
             },
             {
                 path: "news-message/new", Component: UploadMessagePage

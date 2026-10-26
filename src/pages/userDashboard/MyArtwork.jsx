@@ -6,6 +6,7 @@ import ArtworkStats from "../../components/ui/ArtworkStats";
 import MyArtworkFilter from "../../components/ui/MyArtworkFilter";
 import DashboardArtworkCard from "../../components/userDashbaord/DashboardArtworkCard";
 import { getSavedUserInfo } from "../../utils/getUserInof";
+import ArtworkSkeleton from "../../components/ui/Skeletons/ArtworkSkeleton";
 
 const MyArtwork = () => {
     const [searchParams] = useSearchParams();
@@ -27,7 +28,7 @@ const MyArtwork = () => {
         '/artWork.json'
     );
 
-    if (loading) return <div className="py-20 text-center text-sm text-gray-500">Loading artworks...</div>;
+    if (loading) return <ArtworkSkeleton/>
     if (error) return <div className="py-20 text-center text-sm text-red-500">{error}</div>;
 
     return (

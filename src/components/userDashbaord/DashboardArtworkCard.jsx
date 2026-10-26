@@ -13,10 +13,13 @@ import {
 } from "react-icons/fi";
 import { useNavigate } from "react-router";
 // import ArtworkDropdownMenu from "./ArtworkDropdownMenu";
+// import EditArtworkModal from "./EditArtworkModal";
+// import PromoteModal from "./PromoteModal";
+// import DeleteConfirmModal from "./DeleteConfirmModal";
+import ArtworkDropdownMenu from "./ArtworkDropdownMenu";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 import EditArtworkModal from "./EditArtworkModal";
 import PromoteModal from "./PromoteModal";
-import DeleteConfirmModal from "./DeleteConfirmModal";
-import ArtworkDropdownMenu from "./ArtworkDropdownMenu";
 
 /* ---------- helpers ---------- */
 const formatDate = (iso) => {
