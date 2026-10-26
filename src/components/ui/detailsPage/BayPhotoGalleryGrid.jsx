@@ -1,10 +1,35 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { FaHeart, FaShareAlt, FaShoppingCart, FaDownload } from 'react-icons/fa';
 
-const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
+// Dashboard layout-e album type-er sundor nam
+const ALBUM_LABELS = {
+    single: 'Single Photo',
+    'single-photo': 'Single Photo',
+    six: '6 Photo Story',
+    '6-photo-story': '6 Photo Story',
+    twelve: '12 Photos Full Zodiac Story',
+    '12-photos-full-zodiac-story': '12 Photos Full Zodiac Story',
+};
+
+// user-dashboard ba admin dashboard route hole true
+const DASHBOARD_PATH = /^\/(user-dashboard|admin-dashboard|admin)(\/|$)/;
+
+const formatDate = (value) => {
+    if (!value) return '01 June, 2026';
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return '01 June, 2026';
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+};
+
+// dashboard prop ("yes" / true) diye force kora jay, na dile route theke auto detect hoy
+const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto, dashboard }) => {
     // Correct: useNavigate hook-ti component er top level e call kora holo
     const navigate = useNavigate();
+    const { pathname } = useLocation();
+
+    const isDashboard =
+        dashboard === 'yes' || dashboard === true || DASHBOARD_PATH.test(pathname);
 
     // State for interactive features
     const [isLiked, setIsLiked] = useState(false);
@@ -81,6 +106,151 @@ const BayPhotoGalleryGrid = ({ images, zodiacs, bayPhoto }) => {
         navigate(`/bayimagedetails/checkout?${queryParams}`);
     };
 
+    /* =====================================================
+       DASHBOARD LAYOUT (user-dashboard / admin dashboard)
+       ===================================================== */
+    if (isDashboard) {
+        const albumKey = String(bayPhoto?.albumType ?? '').trim().toLowerCase();
+        const albumLabel = ALBUM_LABELS[albumKey] || bayPhoto?.albumType;
+
+        const detailRows = [
+            {
+                label: 'Credit:',
+                value: bayPhoto?.info?.author || 'Wong kar-wai',
+                valueClass: 'text-primary',
+            },
+            { label: 'Creative #:', value: bayPhoto?.creativeNo || '2278500954' },
+            {
+                label: 'Resolution:',
+                value: `${bayPhoto?.imageDetails?.width || 1200}×${bayPhoto?.imageDetails?.height || 800}`,
+            },
+            {
+                label: 'Format',
+                value: bayPhoto?.imageDetails?.format || 'JPEG',
+                valueClass: 'uppercase',
+            },
+            { label: 'Quality:', value: '4K' },
+            { label: 'File size:', value: bayPhoto?.imageDetails?.size || '125 KB' },
+            { label: 'Upload date:', value: formatDate(bayPhoto?.info?.createdAt) },
+            {
+                label: 'Categories:',
+                value: [bayPhoto?.category, bayPhoto?.subCategory].filter(Boolean).join(' / ') || 'Stock Photos',
+                valueClass: 'capitalize',
+            },
+        ];
+
+        const stats = [
+            { label: 'Likes Received', value: likesCount || 0 },
+            { label: 'Views Counted', value: bayPhoto?.viewsCount || 0 },
+            { label: 'Total Sell', value: bayPhoto?.totalSell ?? 0 },
+        ];
+
+        return (
+            <div className="w-full my-4 sm:my-6 space-y-4 sm:space-y-6">
+                {/* Top Badges / Tags */}
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                    {albumLabel && (
+                        <span
+                            className="rounded-full px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary"
+                            style={{ backgroundColor: "rgba(236, 237, 250, 1)" }}
+                        >
+                            {albumLabel}
+                        </span>
+                    )}
+                    {bayPhoto?.category && (
+                        <span
+                            className="rounded-full px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-primary"
+                            style={{ backgroundColor: "rgba(236, 237, 250, 1)" }}
+                        >
+                            {bayPhoto.category}
+                        </span>
+                    )}
+                </div>
+
+                {/* Title/Price card + Image Details card */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 items-start">
+                    {/* Title & Price */}
+                    <div className="md:col-span-2 min-w-0 bg-white border border-[#C6C6CD] rounded-2xl p-4 sm:p-6 shadow-sm">
+                        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#111827] leading-snug break-words">
+                            {bayPhoto?.title || "Chasing the Neon Stream"}
+                        </h1>
+                        <p className="text-xs sm:text-sm text-gray-600 mt-2 pb-3 sm:pb-4 border-b border-[#C6C6CD] break-words">
+                            {bayPhoto?.description || "High-Resolution Digital Download"}
+                        </p>
+                        <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#111827] mt-3 sm:mt-4">
+                            $25.00
+                        </div>
+                    </div>
+
+                    {/* Image Details */}
+                    <div className="md:col-span-1 min-w-0 bg-white border border-[#C6C6CD] rounded-2xl p-4 sm:p-5 shadow-sm">
+                        <h3 className="text-base sm:text-lg font-semibold text-[#111827] mb-3 sm:mb-4">
+                            Image Details
+                        </h3>
+                        <div className="space-y-2 sm:space-y-2.5 text-xs sm:text-[13px]">
+                            {detailRows.map(({ label, value, valueClass = '' }) => (
+                                <div key={label} className="flex items-start justify-between gap-3">
+                                    <span className="shrink-0 text-gray-700">{label}</span>
+                                    <span className={`min-w-0 text-right break-words text-[#111827] ${valueClass}`}>
+                                        {value}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Stats Row */}
+                <div className="grid grid-cols-1 min-[480px]:grid-cols-3 gap-3 sm:gap-4">
+                    {stats.map(({ label, value }) => (
+                        <div
+                            key={label}
+                            className="flex flex-col items-center justify-center rounded-xl py-3 sm:py-4 text-center"
+                            style={{
+                                backgroundColor: "rgba(0, 0, 0, 0.04)",
+                                border: "1px solid rgba(0, 0, 0, 0.08)",
+                            }}
+                        >
+                            <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                {label}
+                            </span>
+                            <span className="mt-1.5 text-base sm:text-lg font-bold text-gray-900">
+                                {value}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Photographer row */}
+                <div className="flex items-center justify-between gap-3 border-t border-gray-200 pt-4 sm:pt-5">
+                    <div className="flex items-center gap-3 min-w-0">
+                        <img
+                            src={bayPhoto?.info?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"}
+                            alt={bayPhoto?.info?.author || "Photographer"}
+                            className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full object-cover border border-[#C6C6CD]"
+                        />
+                        <div className="min-w-0">
+                            <p className="text-[11px] sm:text-xs text-gray-500">Photographer</p>
+                            <h4 className="text-sm sm:text-base font-bold text-[#111827] truncate">
+                                {bayPhoto?.info?.author || "Wong Kar-Wai"}
+                            </h4>
+                        </div>
+                    </div>
+
+                    <Link
+                        to={`/photographers/${bayPhoto?.userId}`}
+                        className="shrink-0 inline-flex items-center justify-center rounded-full bg-primary px-4 sm:px-6 py-2 sm:py-2.5 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90 whitespace-nowrap"
+                    >
+                        View Profile
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
+    /* =====================================================
+       PUBLIC LAYOUT (ager moto-i)
+       ===================================================== */
     return (
         <div className="w-full my-6 space-y-6">
 

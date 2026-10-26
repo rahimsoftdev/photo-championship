@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 
-const ArtworkImages = ({ images = [] }) => {
+const ArtworkImages = ({ images = [], isDashboard = false }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isVisible, setIsVisible] = useState(true);
 
@@ -56,15 +56,18 @@ const ArtworkImages = ({ images = [] }) => {
   const hasMultipleImages = images.length > 1;
 
   return (
-    <section className=" pt-5 sm:pt-12 lg:pt-15">
+    // Dashboard hole top padding thakbe na
+    <section className={isDashboard ? "" : "pt-5 sm:pt-12 lg:pt-15"}>
       <div className="relative flex w-full items-center justify-center overflow-hidden rounded-2xl bg-gray-100">
         {/* Main Image */}
         <img
           src={images[currentIndex]}
           alt={`Artwork image ${currentIndex + 1}`}
-          className={`block md:max-h-[400px] xl:max-h-[500px] w-full object-cover transition-opacity duration-300 ease-in-out ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
+          className={`block w-full object-cover
+    aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9]
+    max-h-[260px] sm:max-h-[360px] md:max-h-[420px] xl:max-h-[500px]
+    transition-opacity duration-300 ease-in-out ${isVisible ? "opacity-100" : "opacity-0"
+            }`}
         />
 
         {/* Carousel Controls */}

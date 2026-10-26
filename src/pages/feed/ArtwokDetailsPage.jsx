@@ -6,6 +6,7 @@ import ArtworkInfoSection from "../../components/ui/detailsPage/ArtworkInfoSecti
 import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGrid";
 import ArtworkComments from "../../components/ui/detailsPage/ArtworkComments";
 import SupportSection from "../../components/ui/detailsPage/SupportSection";
+import LoadingPage from "../feedback/LoadingPage";
 // import ArtworkImages from "../../components/shared/ArtworkImages";
 
 const ArtwokDetailsPage = () => {
@@ -14,7 +15,7 @@ const ArtwokDetailsPage = () => {
   const { artwork, loading, error } = useArtworkById(id, '/artWork.json');
 
   if (loading) {
-    return <p>Loading artwork...</p>;
+    return <LoadingPage/>
   }
 
   if (error) {
