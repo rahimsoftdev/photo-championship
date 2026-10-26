@@ -4,7 +4,8 @@ import { useSearchParams } from 'react-router';
 import { FiPlus, FiLayers } from 'react-icons/fi';
 import useProducts from '../../hooks/useProducts.js';
 import ProductCard from '../../components/userDashbaord/ui/ProductCard.jsx';
-import { Pagination } from '@heroui/react';
+import Pagination from '../../components/shared/Pagination.jsx';
+// import { Pagination } from '@heroui/react';
 
 const MyStore = () => {
   const navigate = useNavigate();
@@ -26,45 +27,45 @@ const MyStore = () => {
     });
   };
 
-  if (loading) return <div className="text-center py-20 text-gray-500">Loading store...</div>;
-  if (error) return <div className="text-center py-20 text-red-500">Error: {error}</div>;
+  if (loading) return <div className="text-center py-12 sm:py-20 text-sm sm:text-base text-gray-500">Loading store...</div>;
+  if (error) return <div className="text-center py-12 sm:py-20 px-4 text-sm sm:text-base text-red-500 break-words">Error: {error}</div>;
 
   return (
-    <div className="">
-      <div className="">
-        
+    <div className="w-full max-w-full overflow-x-hidden">
+      <div className="w-full">
+
         {/* HEADER SECTION */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          <div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <span className="p-1.5 bg-gray-100 rounded-md text-gray-700">
+              <span className="p-1.5 bg-gray-100 rounded-md text-gray-700 shrink-0">
                 <FiLayers size={18} />
               </span>
-              <h1 className="text-2xl font-bold text-gray-900 tracking-tight">My Store</h1>
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">My Store</h1>
             </div>
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-500 text-xs sm:text-sm">
               Explore Art, handmade products and creative merchandise.
             </p>
           </div>
 
-          <button 
+          <button
             onClick={() => navigate('/user-dashboard/my-store/new')}
-            className="bg-red-500 hover:bg-red-600 text-white font-medium px-5 py-2.5 rounded-lg text-sm transition shadow-sm flex items-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto shrink-0 bg-red-500 hover:bg-red-600 text-white font-medium px-4 sm:px-5 py-2.5 rounded-lg text-sm transition shadow-sm flex items-center justify-center gap-2 cursor-pointer"
           >
             <FiPlus size={16} />
-            Upload Product
+            <span className="whitespace-nowrap">Upload Product</span>
           </button>
         </div>
 
         {/* FILTER CATEGORY TABS WITH bg-primary */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 sm:pb-4 mb-6 sm:mb-8 no-scrollbar border-b">
           {categories.map((cat) => {
             const isActive = currentCategory.toLowerCase() === cat.toLowerCase();
             return (
               <button
                 key={cat}
                 onClick={() => handleCategoryClick(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
+                className={`shrink-0 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                   isActive
                     ? 'bg-primary text-white shadow-sm'
                     : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
@@ -78,13 +79,13 @@ const MyStore = () => {
 
         {/* PRODUCTS GRID */}
         {products.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">No products found in this category.</div>
+          <div className="text-center py-12 sm:py-20 text-sm sm:text-base text-gray-400">No products found in this category.</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
             {products.map((product) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
+              <ProductCard
+                key={product.id}
+                product={product}
                 onEdit={(updated) => console.log('Updated:', updated)}
                 onDelete={(id) => console.log('Delete ID:', id)}
               />
@@ -93,7 +94,9 @@ const MyStore = () => {
         )}
 
         {/* PAGINATION COMPONENT */}
-        <Pagination totalPages={totalPages} />
+        <div className="flex justify-center overflow-x-auto mt-6 sm:mt-8 pb-2">
+          <Pagination totalPages={totalPages} />
+        </div>
 
       </div>
     </div>
