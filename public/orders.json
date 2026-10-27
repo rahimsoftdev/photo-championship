@@ -1,6 +1,6 @@
 [
   {
-    "id": "ORD-1048", "buyerId": "user_107", "sellerId": "user_101",
+    "id": "ORD-1048", "buyerId": "user_101", "sellerId": "user_101",
     "status": "processing", "paymentStatus": "paid",
     "paymentMethod": { "type": "card", "brand": "Visa", "last4": "4582" },
     "placedAt": "2026-09-14T10:32:00Z",
@@ -17,7 +17,7 @@
     ]
   },
   {
-    "id": "ORD-1047", "buyerId": "user_108", "sellerId": "user_101",
+    "id": "ORD-1047", "buyerId": "user_101", "sellerId": "user_101",
     "status": "shipped", "paymentStatus": "paid",
     "paymentMethod": { "type": "card", "brand": "Mastercard", "last4": "9012" },
     "placedAt": "2026-09-13T15:20:00Z",
@@ -34,7 +34,7 @@
     ]
   },
   {
-    "id": "ORD-1046", "buyerId": "user_109", "sellerId": "user_104",
+    "id": "ORD-1046", "buyerId": "user_101", "sellerId": "user_104",
     "status": "delivered", "paymentStatus": "paid",
     "paymentMethod": { "type": "card", "brand": "Visa", "last4": "1177" },
     "placedAt": "2026-09-12T09:05:00Z",

@@ -11,10 +11,8 @@ import {
     FiShield,
     FiX,
 } from "react-icons/fi";
-import { useOrderDetails } from "../../hooks/useOrderDetails";
+import { useOrder } from "../../hooks/useOrder";
 
-// ⚠️ এখন হার্ডকোড। লগইন সিস্টেম থাকলে সেখান থেকে নিন।
-const CURRENT_USER_ID = "user_103";
 const LIST_PATH = "/user-dashboard/my-orders";
 
 const STATUS_BADGE = {
@@ -23,6 +21,13 @@ const STATUS_BADGE = {
     delivered: { label: "Delivered", cls: "border-green-200 bg-green-50 text-green-700", dot: "bg-green-500" },
     cancelled: { label: "Cancelled", cls: "border-red-200 bg-red-50 text-red-600", dot: "bg-red-500" },
 };
+
+const STEPS = [
+    { key: "placed", label: "Order Placed", note: "Order details confirmed with creator store" },
+    { key: "processing", label: "Processing", note: "Creator is preparing your item" },
+    { key: "shipped", label: "Shipped", note: "Courier pickup & tracking assignment" },
+    { key: "delivered", label: "Delivered", note: "Your order has been delivered" },
+];
 
 /* ---------- হেল্পার ---------- */
 const money = (n) =>
@@ -45,11 +50,48 @@ const initials = (name = "") =>
         .join("")
         .toUpperCase();
 
-const paymentText = (pm) => (pm.last4 ? `${pm.brand} •••• ${pm.last4}` : pm.brand);
+const paymentText = (pm) => {
+    if (!pm) return "—";
+    const name = pm.brand ?? pm.type ?? "";
+    return pm.last4 ? `${name} •••• ${pm.last4}` : name;
+};
+
+// স্ট্যাটাস থেকে টাইমলাইন বানায় (স্ট্যাটাস বদলালেও ঠিক থাকে)
+const buildTimeline = (order) => {
+    const saved = Object.fromEntries((order.timeline ?? []).map((t) => [t.key, t]));
+    const currentIndex = STEPS.findIndex((s) => s.key === order.status);
+    const cancelled = order.status === "cancelled";
+
+    const steps = STEPS.map((s, i) => {
+        let state = "pending";
+        if (cancelled) state = i === 0 ? "done" : "pending";
+        else if (order.status === "delivered") state = "done";
+        else if (i < currentIndex) state = "done";
+        else if (i === currentIndex) state = "current";
+
+        return {
+            ...s,
+            state,
+            note: saved[s.key]?.note ?? s.note,
+            at: state === "pending" ? null : saved[s.key]?.at ?? null,
+        };
+    });
+
+    if (cancelled) {
+        steps.push({
+            key: "cancelled",
+            label: "Cancelled",
+            note: "This order was cancelled and refunded",
+            state: "cancelled",
+            at: null,
+        });
+    }
+    return steps;
+};
 
 /* ---------- ছোট UI অংশ ---------- */
 const Card = ({ children, className = "" }) => (
-    <section className={`rounded-xl border border-gray-200 bg-white p-5 ${className}`}>{children}</section>
+    <section className={`rounded-xl border border-gray-200 bg-white p-4 sm:p-5 ${className}`}>{children}</section>
 );
 
 const Title = ({ children }) => (
@@ -60,7 +102,7 @@ const StatusBadge = ({ status }) => {
     const s = STATUS_BADGE[status] ?? STATUS_BADGE.processing;
     return (
         <span
-            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold ${s.cls}`}
+            className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-semibold ${s.cls}`}
         >
             <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} />
             {s.label}
@@ -69,11 +111,11 @@ const StatusBadge = ({ status }) => {
 };
 
 const PageSkeleton = () => (
-    <div className="mx-auto max-w-3xl animate-pulse space-y-4">
+    <div className="mx-auto w-full max-w-3xl animate-pulse space-y-4">
         <div className="h-4 w-28 rounded bg-gray-200" />
         <div className="h-8 w-1/2 rounded bg-gray-200" />
-        {[44, 28, 20, 32].map((h, i) => (
-            <div key={i} className="rounded-xl bg-gray-200" style={{ height: `${h * 4}px` }} />
+        {[176, 112, 80, 128].map((h, i) => (
+            <div key={i} className="rounded-xl bg-gray-200" style={{ height: h }} />
         ))}
     </div>
 );
@@ -110,15 +152,17 @@ const Step = ({ step, isLast }) => {
                 )}
             </div>
 
-            <div className={`flex flex-1 items-start justify-between gap-3 ${isLast ? "" : "pb-5"}`}>
-                <div>
+            <div className={`flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-3 ${isLast ? "" : "pb-5"}`}>
+                <div className="min-w-0">
                     <p className={`text-xs font-bold ${titleCls}`}>{step.label}</p>
                     <p className={`mt-0.5 text-[11px] ${step.state === "pending" ? "text-gray-400" : "text-gray-500"}`}>
                         {step.note}
                     </p>
                 </div>
-                <span className={`shrink-0 text-[10px] ${step.state === "current" ? "text-amber-600" : "text-gray-400"}`}>
-                    {step.at ? fmtStamp(step.at) : "Pending"}
+                <span
+                    className={`shrink-0 text-[10px] ${step.state === "current" ? "text-amber-600" : "text-gray-400"}`}
+                >
+                    {step.at ? fmtStamp(step.at) : step.state === "pending" ? "Pending" : ""}
                 </span>
             </div>
         </li>
@@ -129,16 +173,16 @@ const Step = ({ step, isLast }) => {
 const MyOrderDetailsPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { order, isLoading, error, notFound } = useOrderDetails(id, CURRENT_USER_ID, "buyer");
+    const { data: order, isLoading, error } = useOrder(id);
 
     if (isLoading) return <PageSkeleton />;
 
-    if (notFound || error || !order) {
+    if (error || !order) {
         return (
-            <div className="mx-auto max-w-md py-20 text-center">
+            <div className="mx-auto max-w-md px-4 py-20 text-center">
                 <FiAlertCircle size={36} className="mx-auto text-red-400" />
-                <h1 className="mt-3 text-lg font-bold text-gray-900">{error || "Order not found"}</h1>
-                <p className="mt-1 text-xs text-gray-500">This order doesn&apos;t exist or isn&apos;t yours.</p>
+                <h1 className="mt-3 text-lg font-bold text-gray-900">{error ? String(error) : "Order not found"}</h1>
+                <p className="mt-1 text-xs text-gray-500">This order doesn&apos;t exist.</p>
                 <button
                     type="button"
                     onClick={() => navigate(LIST_PATH)}
@@ -154,13 +198,15 @@ const MyOrderDetailsPage = () => {
     const storeName = seller?.store?.name ?? seller?.name ?? "Creator Store";
     const verified = seller?.store?.verified;
     const cancelled = order.status === "cancelled";
+    const delivered = order.status === "delivered";
     const paid = order.paymentStatus === "paid";
+    const steps = buildTimeline(order);
 
     // Estimated Delivery লেখা
     let deliveryText = "—";
-    if (order.status === "delivered" && order.deliveredAt) deliveryText = `Delivered on ${fmtLong(order.deliveredAt)}`;
+    if (delivered && order.deliveredAt) deliveryText = `Delivered on ${fmtLong(order.deliveredAt)}`;
     else if (cancelled) deliveryText = "Order cancelled";
-    else if (order.estimatedDelivery) {
+    else if (order.estimatedDelivery?.from) {
         const a = new Date(order.estimatedDelivery.from);
         const b = new Date(order.estimatedDelivery.to);
         const month = (d) => d.toLocaleDateString("en-US", { month: "long" });
@@ -171,7 +217,7 @@ const MyOrderDetailsPage = () => {
     }
 
     return (
-        <div className="mx-auto max-w-3xl space-y-4 pb-12">
+        <div className="mx-auto w-full  space-y-4 pb-12">
             {/* উপরের বার */}
             <div className="flex items-center justify-between">
                 <Link
@@ -192,13 +238,11 @@ const MyOrderDetailsPage = () => {
 
             {/* শিরোনাম */}
             <div className="flex items-start justify-between gap-3">
-                <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
-                        Order Details <span className="mx-1">›</span>
-                        <span className="text-base font-bold normal-case tracking-normal text-gray-900">
-                            Order #{order.id}
-                        </span>
-                    </p>
+                <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-wide text-gray-400">Order Details</p>
+                    <h1 className="mt-0.5 break-all text-lg font-bold text-gray-900 sm:text-xl">
+                        Order #{order.id}
+                    </h1>
                     <p className="mt-1 text-[11px] text-gray-500">
                         Placed on {fmtLong(order.placedAt)} at {fmtTime(order.placedAt)}
                     </p>
@@ -207,7 +251,7 @@ const MyOrderDetailsPage = () => {
             </div>
 
             {/* Order Progress */}
-            <section className="rounded-xl border border-gray-200 bg-gray-50/70 p-5">
+            <section className="rounded-xl border border-gray-200 bg-gray-50/70 p-4 sm:p-5">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
                     <h3 className="text-[10px] font-bold uppercase tracking-wide text-gray-500">Order Progress</h3>
                     {!cancelled && (
@@ -216,12 +260,14 @@ const MyOrderDetailsPage = () => {
                         </span>
                     )}
                 </div>
+
                 <ul>
-                    {order.timeline.map((step, i) => (
-                        <Step key={step.key} step={step} isLast={i === order.timeline.length - 1} />
+                    {steps.map((step, i) => (
+                        <Step key={step.key} step={step} isLast={i === steps.length - 1} />
                     ))}
                 </ul>
-                {order.trackingNote && !cancelled && (
+
+                {order.trackingNote && !cancelled && !delivered && (
                     <p className="mt-3 rounded-md bg-amber-50 px-3 py-1.5 text-[11px] font-medium text-amber-700">
                         {order.trackingNote}
                     </p>
@@ -231,34 +277,40 @@ const MyOrderDetailsPage = () => {
             {/* Purchased Product */}
             <Card>
                 <Title>Purchased Product</Title>
-                <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                    <div className="flex min-w-0 items-center gap-4">
                         <img
                             src={item.image}
                             alt={item.title}
-                            className="h-20 w-20 shrink-0 rounded-lg bg-gray-100 object-cover"
+                            className="h-16 w-16 shrink-0 rounded-lg bg-gray-100 object-cover sm:h-20 sm:w-20"
                         />
-                        <div>
+                        <div className="min-w-0">
                             <h4 className="text-sm font-bold text-gray-900">{item.title}</h4>
-                            <p className="mt-1 text-[11px] text-gray-500">{item.variant}</p>
-                            <p className="mt-0.5 text-[11px] text-gray-500">
+                            {item.variant && <p className="mt-1 text-[11px] text-gray-500">{item.variant}</p>}
+                            <p className="mt-0.5 text-[11px] leading-relaxed text-gray-500">
                                 Sold by: {storeName} <span className="mx-1">•</span> Quantity: {item.quantity}{" "}
                                 <span className="mx-1">•</span> Unit Price: {money(item.unitPrice)}
                             </p>
                         </div>
                     </div>
-                    <p className="text-base font-bold text-gray-900">{money(pricing.subtotal)}</p>
+                    <p
+                        className={`text-base font-bold sm:shrink-0 ${
+                            cancelled ? "text-gray-400 line-through" : "text-gray-900"
+                        }`}
+                    >
+                        {money(pricing.subtotal)}
+                    </p>
                 </div>
             </Card>
 
             {/* Sold by */}
-            <Card className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 text-sm font-bold text-white">
+            <Card className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex min-w-0 items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-500 text-sm font-bold text-white">
                         {initials(storeName)}
                     </span>
-                    <div>
-                        <p className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-wide text-gray-400">
+                    <div className="min-w-0">
+                        <p className="flex flex-wrap items-center gap-2 text-[9px] font-bold uppercase tracking-wide text-gray-400">
                             Sold by
                             {verified && (
                                 <span className="inline-flex items-center gap-1 rounded bg-emerald-50 px-1.5 py-0.5 text-[9px] text-emerald-600">
@@ -266,31 +318,33 @@ const MyOrderDetailsPage = () => {
                                 </span>
                             )}
                         </p>
-                        <p className="text-sm font-bold text-gray-900">{storeName}</p>
-                        <p className="text-[11px] text-gray-500">{seller?.name}</p>
+                        <p className="truncate text-sm font-bold text-gray-900">{storeName}</p>
+                        {seller?.name && <p className="truncate text-[11px] text-gray-500">{seller.name}</p>}
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                    {/* ⚠️ এই দুই পাথ আপনার আসল স্টোর/মেসেজ রুট দিয়ে বদলান */}
-                    <Link
-                        to={`/store/${seller?.id}`}
-                        className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-semibold text-gray-700 transition hover:bg-gray-50"
-                    >
-                        Visit Store
-                    </Link>
-                    <Link
-                        to={`/user-dashboard/messages?to=${seller?.id}`}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100"
-                    >
-                        <FiMessageSquare size={12} /> Message
-                    </Link>
-                </div>
+                {seller?.id && (
+                    <div className="flex items-center gap-2">
+                        {/* ⚠️ এই দুই পাথ আপনার আসল স্টোর/মেসেজ রুট দিয়ে বদলান */}
+                        <Link
+                            to={`/store/${seller.id}`}
+                            className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-center text-xs font-semibold text-gray-700 transition hover:bg-gray-50 sm:flex-none sm:py-1.5"
+                        >
+                            Visit Store
+                        </Link>
+                        <Link
+                            to={`/user-dashboard/messages?to=${seller.id}`}
+                            className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 transition hover:bg-emerald-100 sm:flex-none sm:py-1.5"
+                        >
+                            <FiMessageSquare size={12} /> Message
+                        </Link>
+                    </div>
+                )}
             </Card>
 
             {/* Payment Summary */}
             <Card>
-                <div className="mb-4 flex items-center justify-between">
+                <div className="mb-4 flex items-center justify-between gap-3">
                     <h3 className="text-[10px] font-bold uppercase tracking-wide text-gray-500">Payment Summary</h3>
                     <span
                         className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
@@ -302,15 +356,15 @@ const MyOrderDetailsPage = () => {
                 </div>
 
                 <div className="space-y-2 text-xs">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-3">
                         <span className="text-gray-500">Product Subtotal</span>
                         <span className="text-gray-800">{money(pricing.subtotal)}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-3">
                         <span className="text-gray-500">Shipping</span>
                         <span className="text-gray-800">{money(pricing.shipping)}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between gap-3">
                         <span className="text-gray-500">Discount</span>
                         <span className="text-gray-800">
                             {pricing.discount > 0 ? `−${money(pricing.discount)}` : money(0)}
@@ -318,14 +372,14 @@ const MyOrderDetailsPage = () => {
                     </div>
                 </div>
 
-                <div className="mt-3 flex justify-between border-t border-gray-200 pt-3 text-sm font-bold text-gray-900">
+                <div className="mt-3 flex justify-between gap-3 border-t border-gray-200 pt-3 text-sm font-bold text-gray-900">
                     <span>{cancelled ? "Total Refunded" : "Total Paid"}</span>
                     <span>{money(pricing.totalPaid)}</span>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between text-[11px] text-gray-500">
+                <div className="mt-3 flex flex-col gap-1 text-[11px] text-gray-500 sm:flex-row sm:items-center sm:justify-between">
                     <span className="flex items-center gap-1.5">
-                        <FiCreditCard size={12} /> Payment Method:{" "}
+                        <FiCreditCard size={12} className="shrink-0" /> Payment Method:{" "}
                         <span className="font-semibold text-gray-800">{paymentText(order.paymentMethod)}</span>
                     </span>
                     <span>{fmtStamp(order.placedAt)}</span>
@@ -338,22 +392,23 @@ const MyOrderDetailsPage = () => {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="flex items-start gap-2.5">
                         <FiMapPin size={13} className="mt-0.5 shrink-0 text-gray-400" />
-                        <div className="text-xs leading-relaxed text-gray-700">
+                        <div className="min-w-0 text-xs leading-relaxed text-gray-700">
                             <p className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
                                 Shipping Address
                             </p>
-                            <p className="mt-1 font-semibold text-gray-900">{addr.name}</p>
-                            <p>{addr.line1}</p>
+                            <p className="mt-1 font-semibold text-gray-900">{addr?.name}</p>
+                            <p>{addr?.line1}</p>
+                            {addr?.line2 && <p>{addr.line2}</p>}
                             <p>
-                                {addr.city}, {addr.state} {addr.zip}
+                                {addr?.city}, {addr?.state} {addr?.zip}
                             </p>
-                            <p>{addr.country}</p>
+                            <p>{addr?.country}</p>
                         </div>
                     </div>
 
                     <div className="text-xs">
                         <p className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
-                            {order.status === "delivered" ? "Delivery" : "Estimated Delivery"}
+                            {delivered ? "Delivery" : "Estimated Delivery"}
                         </p>
                         <p className={`mt-1 font-bold ${cancelled ? "text-gray-400" : "text-emerald-600"}`}>
                             {deliveryText}

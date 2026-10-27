@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useSyncExternalStore } from "react";
 import { applyStatus, getSnapshot, loadData, subscribe } from "./ordersStore";
 
-const PAGE_SIZE = 8;
+const DEFAULT_PAGE_SIZE = 8;
 
 const startOfDay = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 
@@ -36,12 +36,20 @@ const round2 = (n) => Math.round(n * 100) / 100;
 /**
  * @param {string} userId           বর্তমান ইউজারের id
  * @param {"buyer"|"seller"} role
- * @param {object} params           { status, date, from, to, sort, page }
+ * @param {object} params           { status, date, from, to, sort, page, pageSize }
  * @returns {{ data, isLoading, error }}
  *   data = { orders, total, totalPages, page, stats, counts }
  */
 export function useOrders(userId, role, params = {}) {
-    const { status = "all", date = "", from = "", to = "", sort = "desc", page = 1 } = params;
+    const {
+        status = "all",
+        date = "",
+        from = "",
+        to = "",
+        sort = "desc",
+        page = 1,
+        pageSize = DEFAULT_PAGE_SIZE,
+    } = params;
 
     const snap = useSyncExternalStore(subscribe, getSnapshot);
 
@@ -110,9 +118,9 @@ export function useOrders(userId, role, params = {}) {
 
     // পেজিনেশন
     const total = filtered.length;
-    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
     const currentPage = Math.min(Math.max(1, Number(page) || 1), totalPages);
-    const orders = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+    const orders = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
     return {
         data: { orders, total, totalPages, page: currentPage, stats, counts },
