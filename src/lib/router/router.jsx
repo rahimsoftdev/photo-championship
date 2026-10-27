@@ -190,6 +190,8 @@ export const router = createBrowserRouter([
             {
                 path: "news-message/new", Component: UploadMessagePage
             },
+
+            //sel photos
             {
                 path: "sell-photos", Component: SellPhotosPage
             },
