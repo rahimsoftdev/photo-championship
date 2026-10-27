@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FaUserPlus, FaUserCheck, FaCommentDots, FaMapMarkerAlt } from 'react-icons/fa';
 
-const PhotographerHeader = ({ user }) => {
+const PhotographerHeader = ({ user, isDashboard }) => {
   if (!user) return null;
-  const [follow, setFollow] = useState(false);
+  const [follow, setFollow] = useState(isDashboard);
 
   return (
     <div className="w-full relative md:pb-2 pb-4">
