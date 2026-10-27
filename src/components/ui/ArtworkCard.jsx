@@ -31,7 +31,7 @@ const getArtworkId = (artwork) =>
     `${artwork.userId ?? "user"}-${artwork.title ?? "artwork"}-${artwork.images?.[0] ?? ""}`
   );
 
-const ArtworkCard = ({ artWorkData, dashboard, currentUserId }) => {
+const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
   const artwork = artWorkData;
   const navigate = useNavigate();
 
@@ -141,138 +141,139 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId }) => {
     Number(value ?? 0).toLocaleString("en-US");
 
   // Format artwork date with a readable fallback.
-const formattedDate = artwork.info?.createdAt
+  const formattedDate = artwork.info?.createdAt
     ? new Date(artwork.info.createdAt).toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
     })
     : "Date unavailable";
 
   return (
-  <article
-  onKeyDown={(event) => {
-    if (
-      event.target === event.currentTarget &&
-      (event.key === "Enter" || event.key === " ")
-    ) {
-      event.preventDefault();
-      handleCardClick();
-    }
-  }}
-  role="link"
-  tabIndex={0}
-  aria-label={`View details for ${artwork.title || "artwork"}`}
-  className="w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-[#E5E7EB] bg-white transition-shadow duration-200 hover:shadow-md"
->
-  {/* Artwork cover and overlaid actions */}
-  <div className="relative h-[170px] w-full overflow-hidden bg-gray-100 min-[360px]:h-[190px] sm:h-[205px]">
-    {coverImage ? (
-      <img
-        onClick={handleCardClick}
-        src={coverImage}
-        alt={artwork.title || "Artwork"}
-        loading="lazy"
-        className="h-full w-full object-cover"
-      />
-    ) : (
-      <div className="flex h-full items-center justify-center text-gray-400">
-        <FiImage size={36} />
-      </div>
-    )}
-
-    {/* Album type badge */}
-    <span className="absolute left-2 top-2 max-w-[68%] truncate rounded-full bg-white/95 px-2 py-0.5 text-[9px] font-semibold tracking-wide text-[#4048CD] shadow-sm min-[360px]:max-w-[72%] sm:left-3 sm:top-3 sm:max-w-[75%] sm:px-2.5 sm:py-1 sm:text-[10px]">
-      {albumLabel}
-    </span>
-
-    {/* Three-dot menu */}
-    <div className="absolute right-1.5 top-1.5 z-10 sm:right-2.5 sm:top-2.5">
-
-      {
-        artWorkData.userId !== currentUserId && <ReportPhotoModal photoTitle={artwork.title || "this photo"} />
-      }
-      
-    </div>
-
-    {/* Save button */}
-    <button
-      type="button"
-      onClick={handleSave}
-      aria-pressed={isSaved}
-      className={`absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition sm:bottom-2.5 sm:left-2.5 sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-sm ${isSaved
-        ? "bg-secondary text-white"
-        : "bg-[#FDE8E9] text-bg-secondary hover:bg-[#FBD5D8]"
-        }`}
+    <article
+      onKeyDown={(event) => {
+        if (
+          event.target === event.currentTarget &&
+          (event.key === "Enter" || event.key === " ")
+        ) {
+          event.preventDefault();
+          handleCardClick();
+        }
+      }}
+      role="link"
+      tabIndex={0}
+      aria-label={`View details for ${artwork.title || "artwork"}`}
+      className="w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-[#E5E7EB] bg-white transition-shadow duration-200 hover:shadow-md"
     >
-      <FiBookmark
-        className={`h-3.5 w-3.5 sm:h-[17px] sm:w-[17px] ${isSaved ? "fill-current" : ""}`}
-      />
-      {isSaved ? "Saved" : "Save"}
-    </button>
+      {/* Artwork cover and overlaid actions */}
+      <div className="relative h-[170px] w-full overflow-hidden bg-gray-100 min-[360px]:h-[190px] sm:h-[205px]">
+        {coverImage ? (
+          <img
+            onClick={handleCardClick}
+            src={coverImage}
+            alt={artwork.title || "Artwork"}
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-gray-400">
+            <FiImage size={36} />
+          </div>
+        )}
 
-    {/* Additional photo count */}
-    {photoCount > 1 && (
-      <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-md bg-[rgba(17,24,39,0.8)] px-2 py-1 text-[10px] font-semibold text-white sm:bottom-2.5 sm:right-2.5 sm:gap-1.5 sm:px-2.5 sm:py-1.5 sm:text-xs">
-        <FiImage className="h-3 w-3 sm:h-[13px] sm:w-[13px]" />
-        +{photoCount - 1}
-        <span className="hidden min-[360px]:inline">photos</span>
-      </span>
-    )}
-  </div>
+        {/* Album type badge */}
+        <span className="absolute left-2 top-2 max-w-[68%] truncate rounded-full bg-white/95 px-2 py-0.5 text-[9px] font-semibold tracking-wide text-[#4048CD] shadow-sm min-[360px]:max-w-[72%] sm:left-3 sm:top-3 sm:max-w-[75%] sm:px-2.5 sm:py-1 sm:text-[10px]">
+          {albumLabel}
+        </span>
 
-  {/* Artwork information */}
-  <div className="p-2.5 sm:p-3">
-    {/* Title */}
-    <h2 className="truncate text-base font-bold leading-6 text-[#111827] sm:text-lg sm:leading-7 lg:text-xl">
-      {artwork.title || "Untitled artwork"}
-    </h2>
+        {/* Three-dot menu */}
+        <div className="absolute right-1.5 top-1.5 z-10 sm:right-2.5 sm:top-2.5">
 
-    {/* Description limited to two lines */}
-    <p className="mt-1 line-clamp-2 min-h-8 break-words text-xs leading-4 text-[#374151] sm:min-h-10 sm:text-sm sm:leading-5">
-      {artwork.description || artwork.info || "No description available."}
-    </p>
+          {artWorkData.userId !== currentUserId && !isFavorite && (
+            <ReportPhotoModal
+              photoTitle={artWorkData.title || "this photo"}
+            />
+          )}
 
-    {/* Love, views, and date */}
-    <div className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 text-[11px] text-subTitleText sm:gap-x-3 sm:gap-y-2 sm:text-xs">
-      {/* Love button */}
-      <button
-        type="button"
-        onClick={handleLove}
-        aria-label={isLoved ? "Remove love" : "Love artwork"}
-        aria-pressed={isLoved}
-        className="inline-flex shrink-0 items-center gap-1 transition hover:opacity-75"
-      >
-        <FiHeart
-          className={`h-4 w-4 sm:h-[17px] sm:w-[17px] ${
-            isLoved
-              ? "fill-bg-secondary text-bg-secondary"
-              : "text-bg-secondary"
-          }`}
-        />
-        <span>{formatCount(artwork.totalReact)}</span>
-      </button>
+        </div>
 
-      {/* View count */}
-      <span className="inline-flex shrink-0 items-center gap-1">
-        <FiEye className="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
-        {formatCount(artwork.viewsCount)}
-      </span>
+        {/* Save button */}
+        <button
+          type="button"
+          onClick={handleSave}
+          aria-pressed={isSaved}
+          className={`absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition sm:bottom-2.5 sm:left-2.5 sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-sm ${isSaved
+            ? "bg-secondary text-white"
+            : "bg-[#FDE8E9] text-bg-secondary hover:bg-[#FBD5D8]"
+            }`}
+        >
+          <FiBookmark
+            className={`h-3.5 w-3.5 sm:h-[17px] sm:w-[17px] ${isSaved ? "fill-current" : ""}`}
+          />
+          {isSaved ? "Saved" : "Save"}
+        </button>
 
-      {/* Upload / creation date */}
-      <span className="inline-flex shrink-0 items-center gap-1">
-        <FiCalendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-        {formattedDate}
-      </span>
-    </div>
+        {/* Additional photo count */}
+        {photoCount > 1 && (
+          <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-md bg-[rgba(17,24,39,0.8)] px-2 py-1 text-[10px] font-semibold text-white sm:bottom-2.5 sm:right-2.5 sm:gap-1.5 sm:px-2.5 sm:py-1.5 sm:text-xs">
+            <FiImage className="h-3 w-3 sm:h-[13px] sm:w-[13px]" />
+            +{photoCount - 1}
+            <span className="hidden min-[360px]:inline">photos</span>
+          </span>
+        )}
+      </div>
 
-    {artWorkData.price && (
-      <span className="my-2 inline-block text-lg font-bold text-primary sm:text-[20px]">
-        $ {artWorkData.price}
-      </span>
-    )}
-  </div>
-</article>
+      {/* Artwork information */}
+      <div className="p-2.5 sm:p-3">
+        {/* Title */}
+        <h2 className="truncate text-base font-bold leading-6 text-[#111827] sm:text-lg sm:leading-7 lg:text-xl">
+          {artwork.title || "Untitled artwork"}
+        </h2>
+
+        {/* Description limited to two lines */}
+        <p className="mt-1 line-clamp-2 min-h-8 break-words text-xs leading-4 text-[#374151] sm:min-h-10 sm:text-sm sm:leading-5">
+          {artwork.description || artwork.info || "No description available."}
+        </p>
+
+        {/* Love, views, and date */}
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 text-[11px] text-subTitleText sm:gap-x-3 sm:gap-y-2 sm:text-xs">
+          {/* Love button */}
+          <button
+            type="button"
+            onClick={handleLove}
+            aria-label={isLoved ? "Remove love" : "Love artwork"}
+            aria-pressed={isLoved}
+            className="inline-flex shrink-0 items-center gap-1 transition hover:opacity-75"
+          >
+            <FiHeart
+              className={`h-4 w-4 sm:h-[17px] sm:w-[17px] ${isLoved
+                  ? "fill-bg-secondary text-bg-secondary"
+                  : "text-bg-secondary"
+                }`}
+            />
+            <span>{formatCount(artwork.totalReact)}</span>
+          </button>
+
+          {/* View count */}
+          <span className="inline-flex shrink-0 items-center gap-1">
+            <FiEye className="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
+            {formatCount(artwork.viewsCount)}
+          </span>
+
+          {/* Upload / creation date */}
+          <span className="inline-flex shrink-0 items-center gap-1">
+            <FiCalendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            {formattedDate}
+          </span>
+        </div>
+
+        {artWorkData.price && (
+          <span className="my-2 inline-block text-lg font-bold text-primary sm:text-[20px]">
+            $ {artWorkData.price}
+          </span>
+        )}
+      </div>
+    </article>
   );
 };
 
