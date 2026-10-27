@@ -5,6 +5,7 @@ import { FiPlus, FiLayers } from 'react-icons/fi';
 import useProducts from '../../hooks/useProducts.js';
 import ProductCard from '../../components/userDashbaord/ui/ProductCard.jsx';
 import Pagination from '../../components/shared/Pagination.jsx';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton.jsx';
 // import { Pagination } from '@heroui/react';
 
 const MyStore = () => {
@@ -48,7 +49,7 @@ const MyStore = () => {
     setDeletedIds((prev) => new Set(prev).add(id));
   };
 
-  if (loading) return <div className="text-center py-12 sm:py-20 text-sm sm:text-base text-gray-500">Loading store...</div>;
+  if (loading) return <ArtworkSkeleton/>
   if (error) return <div className="text-center py-12 sm:py-20 px-4 text-sm sm:text-base text-red-500 break-words">Error: {error}</div>;
 
   return (

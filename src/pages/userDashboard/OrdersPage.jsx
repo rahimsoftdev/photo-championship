@@ -9,6 +9,7 @@ import { getSavedUserInfo } from "../../utils/getUserInof";
 import StatsCard from "../../components/userDashbaord/Statscard";
 import OrderFilters from "../../components/userDashbaord/Orderfilters";
 import OrdersTable from "../../components/userDashbaord/Orderstable";
+import OrdersSkeleton from "../../components/ui/Skeletons/Ordersskeleton";
 
 const ROLE = "seller"; // "buyer" করলে My Orders পেজ হবে
 
@@ -33,6 +34,7 @@ const OrdersPage = () => {
 
     const { data, isLoading, error } = useOrders(userId, ROLE, params);
     const { orders, total, totalPages, page, stats, counts } = data;
+    if(isLoading)return <OrdersSkeleton/>
 
     return (
         <div className="w-full space-y-5 pb-12">

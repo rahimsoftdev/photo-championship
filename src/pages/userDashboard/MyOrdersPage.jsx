@@ -5,6 +5,7 @@ import { getSavedUserInfo } from "../../utils/getUserInof";
 import { useOrders } from "../../hooks/useOrders";
 import MyOrderStats from "../../components/userDashbaord/Myorderstats";
 import MyOrderCard from "../../components/userDashbaord/Myordercard";
+import OrdersSkeleton from "../../components/ui/Skeletons/Ordersskeleton";
 // import { useOrders } from "../../hooks/useOrders";
 // import { getSavedUserInfo } from "../../utils/getUserInof";
 // import MyOrderStats from "../../components/userDashboard/MyOrderStats";
@@ -66,6 +67,7 @@ const MyOrdersPage = () => {
         );
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
+    if(isLoading)return <OrdersSkeleton/>
 
     return (
         <div className="w-full space-y-5 pb-12">
