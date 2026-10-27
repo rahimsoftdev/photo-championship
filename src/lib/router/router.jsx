@@ -69,6 +69,7 @@ import AdsAnnouncements from "../../pages/adminDashboard/AdsAnnouncements.jsx";
 import MyProfile from "../../pages/adminDashboard/MyProfile.jsx";
 import AdminAccessDenied from "../../pages/auth/Adminaccessdenied.jsx";
 import NewsAndMessageDetailsPage from "../../pages/userDashboard/Newsandmessagedetailspage.jsx";
+import ProductDetaisPage from "../../pages/userDashboard/ProductDetaisPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -201,6 +202,9 @@ export const router = createBrowserRouter([
             //my store routs:
             {
                 path: "my-store", Component: MyStore
+            },
+            {
+                path: "my-store/:id", Component:ProductDetaisPage
             },
             {
                 path: "my-store/new", Component: CollectionForm

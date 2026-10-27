@@ -1,27 +1,5 @@
 [
   {
-    "id": 1,
-    "collectionTitle": "Dolomites Dawn - Archival Fine Art Print",
-    "category": "Digital Art",
-    "price": "$68.00",
-    "editionSize": "Limited Edition of 50",
-    "description": "Museum-grade 308gsm Hahnemühle Photo Rag, hand-signed with embossed studio seal.",
-    "bannerImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
-    "othersImages": [
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
-    ]
-  },
-  {
-    "id": 2,
-    "collectionTitle": "Alpine Valley Mist - Art Print",
-    "category": "Art Prints",
-    "price": "$45.00",
-    "editionSize": "Standard Size",
-    "description": "High-resolution archival pigment print on premium matte textured cotton paper.",
-    "bannerImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
-    "othersImages": []
-  },
-  {
     "id": 3,
     "collectionTitle": "Handmade Ceramic Pottery Set",
     "category": "Handmade Crafts",
