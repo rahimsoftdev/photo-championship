@@ -64,7 +64,7 @@ const Sidebar = () => {
         { name: 'Notifications', path: '/user-dashboard/notifications', icon: <FiBell size={18} /> },
         { name: 'Prize & Payments', path: '/user-dashboard/prize-payments', icon: <FiAward size={18} /> },
         { name: 'Contact Us', path: '/user-dashboard/contact-us', icon: <FiPhoneCall size={18} /> },
-        { name: 'Profile', path: '/user-dashboard/photographers/user_105', icon: <FiUser size={18} /> },
+        { name: 'Profile', path: '/user-dashboard/photographers/user_101', icon: <FiUser size={18} /> },
         { name: 'Settings', path: '/user-dashboard/settings', icon: <FiSettings size={18} /> },
     ];
 
