@@ -1,0 +1,257 @@
+{
+  "currentUserId": "user_101",
+  "typingUsers": ["user_102"],
+  "users": [
+    { "id": "user_101", "name": "Tanvir Ahmed", "username": "@tanvir_ahmed", "avatar": "https://i.pravatar.cc/150?img=12", "status": "online" },
+    { "id": "user_102", "name": "Azunyan U. Wu", "username": "@azusanakano_1997", "avatar": "https://i.pravatar.cc/150?img=47", "status": "online" },
+    { "id": "user_103", "name": "X-AE-A-13b", "username": "@xae_a13b", "avatar": "https://i.pravatar.cc/150?img=15", "status": "online" },
+    { "id": "user_104", "name": "Jerome White", "username": "@jerome_white", "avatar": "https://i.pravatar.cc/150?img=32", "status": "online" },
+    { "id": "user_105", "name": "Madagascar Silver", "username": "@mada_silver", "avatar": "https://i.pravatar.cc/150?img=5", "status": "away" },
+    { "id": "user_106", "name": "Pippins McGray", "username": "@pippins_mcgray", "avatar": "https://i.pravatar.cc/150?img=45", "status": "online" },
+    { "id": "user_107", "name": "McKinsey Vermillion", "username": "@mckinsey_v", "avatar": "https://i.pravatar.cc/150?img=33", "status": "online" },
+    { "id": "user_108", "name": "Dorian F. Gray", "username": "@dorian_gray", "avatar": "https://i.pravatar.cc/150?img=52", "status": "away" },
+    { "id": "user_109", "name": "Benedict Combersmacks", "username": "@benedict_c", "avatar": "https://i.pravatar.cc/150?img=60", "status": "busy" },
+    { "id": "user_110", "name": "Kaori D. Miyazono", "username": "@kaori_miyazono", "avatar": "https://i.pravatar.cc/150?img=53", "status": "offline" },
+    { "id": "user_111", "name": "Saylor Twift", "username": "@saylor_twift", "avatar": "https://i.pravatar.cc/150?img=44", "status": "online" },
+    { "id": "user_112", "name": "Miranda Blue", "username": "@miranda_blue", "avatar": "https://i.pravatar.cc/150?img=26", "status": "offline" },
+    { "id": "user_113", "name": "Esmeralda Gray", "username": "@esmeralda_gray", "avatar": "https://i.pravatar.cc/150?img=9", "status": "offline" },
+    { "id": "user_114", "name": "Oarack Babama", "username": "@oarack_b", "avatar": "https://i.pravatar.cc/150?img=68", "status": "online" },
+    { "id": "user_115", "name": "Nusrat Jahan", "username": "@nusrat_jahan", "avatar": "https://i.pravatar.cc/150?img=20", "status": "online" },
+    { "id": "user_116", "name": "Rakib Hossain", "username": "@rakib_hossain", "avatar": "https://i.pravatar.cc/150?img=11", "status": "offline" },
+    { "id": "user_117", "name": "Farhana Akter", "username": "@farhana_akter", "avatar": "https://i.pravatar.cc/150?img=29", "status": "away" },
+    { "id": "user_118", "name": "Sabbir Rahman", "username": "@sabbir_rahman", "avatar": "https://i.pravatar.cc/150?img=14", "status": "busy" },
+    { "id": "user_119", "name": "Mim Chowdhury", "username": "@mim_chowdhury", "avatar": "https://i.pravatar.cc/150?img=38", "status": "online" },
+    { "id": "user_120", "name": "Imran Khan", "username": "@imran_khan", "avatar": "https://i.pravatar.cc/150?img=57", "status": "offline" }
+  ],
+  "messages": [
+    {
+      "id": "msg_001", "senderId": "user_102", "receiverId": "user_101", "type": "text",
+      "text": "Hello my dear sir, I'm here to deliver the design requirement document for our next projects.",
+      "createdAt": "2025-08-19T10:25:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_002", "senderId": "user_102", "receiverId": "user_101", "type": "file",
+      "text": "",
+      "file": { "name": "Design_project_2025.docx", "size": "2.5gb", "ext": "docx", "url": "#" },
+      "createdAt": "2025-08-19T10:26:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_003", "senderId": "user_101", "receiverId": "user_102", "type": "text",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+      "createdAt": "2025-08-19T11:25:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_004", "senderId": "user_102", "receiverId": "user_101", "type": "text",
+      "text": "Do androids truly dream of electric sheeps?",
+      "createdAt": "2025-08-20T12:25:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_005", "senderId": "user_101", "receiverId": "user_102", "type": "audio",
+      "text": "",
+      "audio": { "duration": "02:12", "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+      "createdAt": "2025-08-20T01:25:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_006", "senderId": "user_102", "receiverId": "user_101", "type": "video",
+      "text": "",
+      "video": {
+        "thumbnail": "https://picsum.photos/seed/chatvideo1/600/340",
+        "url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+        "duration": "02:25"
+      },
+      "createdAt": "2025-08-20T02:25:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_007", "senderId": "user_101", "receiverId": "user_103", "type": "text",
+      "text": "Can you send me the latest build link?",
+      "createdAt": "2025-08-18T09:10:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_008", "senderId": "user_103", "receiverId": "user_101", "type": "text",
+      "text": "Sure, uploading it right now. Give me five minutes.",
+      "createdAt": "2025-08-18T09:14:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_009", "senderId": "user_104", "receiverId": "user_101", "type": "text",
+      "text": "Meeting is moved to 4 PM tomorrow.",
+      "createdAt": "2025-08-19T15:40:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_010", "senderId": "user_101", "receiverId": "user_104", "type": "text",
+      "text": "Okay, noted. I will be there.",
+      "createdAt": "2025-08-19T15:42:00Z", "status": "delivered"
+    },
+
+    {
+      "id": "msg_011", "senderId": "user_105", "receiverId": "user_101", "type": "text",
+      "text": "Did you check the new wireframes?",
+      "createdAt": "2025-08-20T08:05:00Z", "status": "delivered"
+    },
+    {
+      "id": "msg_012", "senderId": "user_105", "receiverId": "user_101", "type": "text",
+      "text": "I updated the header section too.",
+      "createdAt": "2025-08-20T08:06:00Z", "status": "delivered"
+    },
+    {
+      "id": "msg_013", "senderId": "user_105", "receiverId": "user_101", "type": "file",
+      "text": "",
+      "file": { "name": "wireframes_v3.pdf", "size": "8.4mb", "ext": "pdf", "url": "#" },
+      "createdAt": "2025-08-20T08:07:00Z", "status": "delivered"
+    },
+    {
+      "id": "msg_014", "senderId": "user_105", "receiverId": "user_101", "type": "text",
+      "text": "Let me know your feedback ASAP.",
+      "createdAt": "2025-08-20T08:08:00Z", "status": "delivered"
+    },
+
+    {
+      "id": "msg_015", "senderId": "user_101", "receiverId": "user_106", "type": "text",
+      "text": "Happy birthday! Have a great day 🎉",
+      "createdAt": "2025-08-17T07:00:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_016", "senderId": "user_106", "receiverId": "user_101", "type": "text",
+      "text": "Thank you so much!",
+      "createdAt": "2025-08-17T07:30:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_017", "senderId": "user_107", "receiverId": "user_101", "type": "text",
+      "text": "Are you free for a quick call?",
+      "createdAt": "2025-08-20T11:50:00Z", "status": "delivered"
+    },
+    {
+      "id": "msg_018", "senderId": "user_107", "receiverId": "user_101", "type": "text",
+      "text": "I need to discuss the payment gateway issue.",
+      "createdAt": "2025-08-20T11:51:00Z", "status": "delivered"
+    },
+    {
+      "id": "msg_019", "senderId": "user_107", "receiverId": "user_101", "type": "video",
+      "text": "",
+      "video": {
+        "thumbnail": "https://picsum.photos/seed/chatvideo2/600/340",
+        "url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+        "duration": "00:48"
+      },
+      "createdAt": "2025-08-20T11:52:00Z", "status": "delivered"
+    },
+
+    {
+      "id": "msg_020", "senderId": "user_108", "receiverId": "user_101", "type": "text",
+      "text": "Check this out when you have time.",
+      "createdAt": "2025-08-19T20:10:00Z", "status": "delivered"
+    },
+    {
+      "id": "msg_021", "senderId": "user_108", "receiverId": "user_101", "type": "image",
+      "text": "",
+      "image": { "url": "https://picsum.photos/seed/chatimage1/600/400" },
+      "createdAt": "2025-08-19T20:11:00Z", "status": "delivered"
+    },
+
+    {
+      "id": "msg_022", "senderId": "user_109", "receiverId": "user_101", "type": "text",
+      "text": "Invoice has been sent to your email.",
+      "createdAt": "2025-08-16T13:20:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_023", "senderId": "user_101", "receiverId": "user_109", "type": "text",
+      "text": "Received, thanks!",
+      "createdAt": "2025-08-16T13:45:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_024", "senderId": "user_101", "receiverId": "user_110", "type": "text",
+      "text": "Did you reach home safely?",
+      "createdAt": "2025-08-15T22:00:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_025", "senderId": "user_110", "receiverId": "user_101", "type": "audio",
+      "text": "",
+      "audio": { "duration": "00:37", "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
+      "createdAt": "2025-08-15T22:10:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_026", "senderId": "user_111", "receiverId": "user_101", "type": "text",
+      "text": "Lunch tomorrow?",
+      "createdAt": "2025-08-20T09:30:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_027", "senderId": "user_101", "receiverId": "user_111", "type": "text",
+      "text": "Sounds good, 1 PM at the usual place.",
+      "createdAt": "2025-08-20T09:35:00Z", "status": "sent"
+    },
+
+    {
+      "id": "msg_028", "senderId": "user_112", "receiverId": "user_101", "type": "text",
+      "text": "Please share the project files.",
+      "createdAt": "2025-08-14T17:00:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_029", "senderId": "user_101", "receiverId": "user_112", "type": "file",
+      "text": "",
+      "file": { "name": "project_files.zip", "size": "120mb", "ext": "zip", "url": "#" },
+      "createdAt": "2025-08-14T17:20:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_030", "senderId": "user_113", "receiverId": "user_101", "type": "text",
+      "text": "Good luck with the presentation!",
+      "createdAt": "2025-08-13T08:00:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_031", "senderId": "user_114", "receiverId": "user_101", "type": "text",
+      "text": "Server is down again.",
+      "createdAt": "2025-08-20T12:10:00Z", "status": "delivered"
+    },
+    {
+      "id": "msg_032", "senderId": "user_114", "receiverId": "user_101", "type": "text",
+      "text": "Can you check the logs?",
+      "createdAt": "2025-08-20T12:11:00Z", "status": "delivered"
+    },
+
+    {
+      "id": "msg_033", "senderId": "user_115", "receiverId": "user_101", "type": "text",
+      "text": "Assalamu alaikum, ki khobor?",
+      "createdAt": "2025-08-19T18:00:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_034", "senderId": "user_101", "receiverId": "user_115", "type": "text",
+      "text": "Walaikum assalam, bhalo. Tumi?",
+      "createdAt": "2025-08-19T18:05:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_035", "senderId": "user_101", "receiverId": "user_116", "type": "text",
+      "text": "Bhai, kal office e asba?",
+      "createdAt": "2025-08-18T20:00:00Z", "status": "delivered"
+    },
+
+    {
+      "id": "msg_036", "senderId": "user_117", "receiverId": "user_101", "type": "text",
+      "text": "Thanks for the help yesterday.",
+      "createdAt": "2025-08-17T10:15:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_037", "senderId": "user_118", "receiverId": "user_101", "type": "text",
+      "text": "Deadline extended to Friday.",
+      "createdAt": "2025-08-16T09:00:00Z", "status": "seen"
+    },
+
+    {
+      "id": "msg_038", "senderId": "user_101", "receiverId": "user_119", "type": "text",
+      "text": "Photos gulo pathiye dao.",
+      "createdAt": "2025-08-12T19:00:00Z", "status": "seen"
+    },
+    {
+      "id": "msg_039", "senderId": "user_119", "receiverId": "user_101", "type": "image",
+      "text": "",
+      "image": { "url": "https://picsum.photos/seed/chatimage2/600/400" },
+      "createdAt": "2025-08-12T19:10:00Z", "status": "seen"
+    }
+  ]
+}
