@@ -264,6 +264,9 @@ export const router = createBrowserRouter([
                 path: "favourite-photos", Component: CompetitionPage
             },
             {
+                path: "favourite-photos/:id", Component: ArtwokDetailsPage
+            },
+            {
                 path: "contact-us", Component: SupportPage
             },
             {

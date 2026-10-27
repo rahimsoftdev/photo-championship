@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import {
-  FiMoreVertical,
   FiBookmark,
   FiHeart,
   FiEye,
@@ -26,29 +25,42 @@ const readStorage = (key) => {
 // Create a stable identifier for each artwork.
 const getArtworkId = (artwork) =>
   String(
-    artwork.id ??
-    artwork._id ??
-    `${artwork.userId ?? "user"}-${artwork.title ?? "artwork"}-${artwork.images?.[0] ?? ""}`
+    artwork?.id ??
+      artwork?._id ??
+      `${artwork?.userId ?? "user"}-${artwork?.title ?? "artwork"}-${artwork?.images?.[0] ?? ""}`
   );
+
+// Read IDs from localStorage. If the card is a favorite, force this artwork to be included.
+const getInitialIds = (key, artworkId, isFavorite) => {
+  const ids = readStorage(key);
+  if (isFavorite && !ids.includes(artworkId)) {
+    return [...ids, artworkId];
+  }
+  return ids;
+};
 
 const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
   const artwork = artWorkData;
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  console.log(artWorkData.userId)
+  const artworkId = getArtworkId(artwork);
 
-  // Keep the initial state synchronized with localStorage.
+  // True when the user is currently on /user-dashboard/favourite-photos (with or without trailing slash).
+  const isOnFavouritePhotosRoute = /^\/user-dashboard\/favourite-photos\/?$/.test(
+    pathname
+  );
+
+  // If isFavorite is true, both Save and Love start as active.
   const [savedIds, setSavedIds] = useState(() =>
-    readStorage(SAVED_STORAGE_KEY)
+    getInitialIds(SAVED_STORAGE_KEY, artworkId, isFavorite)
   );
 
   const [lovedIds, setLovedIds] = useState(() =>
-    readStorage(LOVED_STORAGE_KEY)
+    getInitialIds(LOVED_STORAGE_KEY, artworkId, isFavorite)
   );
 
   if (!artwork) return null;
-
-  const artworkId = getArtworkId(artwork);
 
   const isSaved = savedIds.includes(artworkId);
   const isLoved = lovedIds.includes(artworkId);
@@ -88,15 +100,22 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
   // Navigate to artwork details.
   const handleCardClick = () => {
     const id = artwork.id ?? artwork._id;
-    if (dashboard === 'yes') {
-      navigate(`/user-dashboard/sell-photos/${id}`)
-      return
+    if (!id) return;
+
+    // On /user-dashboard/favourite-photos -> /user-dashboard/favourite-photos/:id
+    if (isOnFavouritePhotosRoute) {
+      navigate(`/user-dashboard/favourite-photos/${id}`);
+      return;
     }
 
-    if (!id) return;
+    if (dashboard === "yes") {
+      navigate(`/user-dashboard/sell-photos/${id}`);
+      return;
+    }
+
     if (artwork.price) {
-      navigate(`/bayimagedetails/${id}`)
-      return
+      navigate(`/bayimagedetails/${id}`);
+      return;
     }
 
     navigate(`/artwokrdetails/${id}`);
@@ -108,9 +127,9 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
 
     const currentIds = readStorage(SAVED_STORAGE_KEY);
 
-    const updatedIds = currentIds.includes(artworkId)
+    const updatedIds = isSaved
       ? currentIds.filter((id) => id !== artworkId)
-      : [...currentIds, artworkId];
+      : [...currentIds.filter((id) => id !== artworkId), artworkId];
 
     localStorage.setItem(SAVED_STORAGE_KEY, JSON.stringify(updatedIds));
     setSavedIds(updatedIds);
@@ -122,18 +141,12 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
 
     const currentIds = readStorage(LOVED_STORAGE_KEY);
 
-    const updatedIds = currentIds.includes(artworkId)
+    const updatedIds = isLoved
       ? currentIds.filter((id) => id !== artworkId)
-      : [...currentIds, artworkId];
+      : [...currentIds.filter((id) => id !== artworkId), artworkId];
 
     localStorage.setItem(LOVED_STORAGE_KEY, JSON.stringify(updatedIds));
     setLovedIds(updatedIds);
-  };
-
-  // TODO: add modal for the three-dot menu.
-  const handleMenuClick = (event) => {
-    event.stopPropagation();
-    // Open the artwork actions modal here in the future.
   };
 
   // Display numeric values in a readable format.
@@ -143,10 +156,10 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
   // Format artwork date with a readable fallback.
   const formattedDate = artwork.info?.createdAt
     ? new Date(artwork.info.createdAt).toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    })
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
     : "Date unavailable";
 
   return (
@@ -186,15 +199,13 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
           {albumLabel}
         </span>
 
-        {/* Three-dot menu */}
+        {/* Report menu */}
         <div className="absolute right-1.5 top-1.5 z-10 sm:right-2.5 sm:top-2.5">
-
           {artWorkData.userId !== currentUserId && !isFavorite && (
             <ReportPhotoModal
               photoTitle={artWorkData.title || "this photo"}
             />
           )}
-
         </div>
 
         {/* Save button */}
@@ -202,10 +213,11 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
           type="button"
           onClick={handleSave}
           aria-pressed={isSaved}
-          className={`absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition sm:bottom-2.5 sm:left-2.5 sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-sm ${isSaved
-            ? "bg-secondary text-white"
-            : "bg-[#FDE8E9] text-bg-secondary hover:bg-[#FBD5D8]"
-            }`}
+          className={`absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition sm:bottom-2.5 sm:left-2.5 sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-sm ${
+            isSaved
+              ? "bg-secondary text-white"
+              : "bg-[#FDE8E9] text-bg-secondary hover:bg-[#FBD5D8]"
+          }`}
         >
           <FiBookmark
             className={`h-3.5 w-3.5 sm:h-[17px] sm:w-[17px] ${isSaved ? "fill-current" : ""}`}
@@ -246,10 +258,11 @@ const ArtworkCard = ({ artWorkData, dashboard, currentUserId, isFavorite }) => {
             className="inline-flex shrink-0 items-center gap-1 transition hover:opacity-75"
           >
             <FiHeart
-              className={`h-4 w-4 sm:h-[17px] sm:w-[17px] ${isLoved
+              className={`h-4 w-4 sm:h-[17px] sm:w-[17px] ${
+                isLoved
                   ? "fill-bg-secondary text-bg-secondary"
                   : "text-bg-secondary"
-                }`}
+              }`}
             />
             <span>{formatCount(artwork.totalReact)}</span>
           </button>
