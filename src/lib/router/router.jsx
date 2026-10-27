@@ -70,6 +70,7 @@ import MyProfile from "../../pages/adminDashboard/MyProfile.jsx";
 import AdminAccessDenied from "../../pages/auth/Adminaccessdenied.jsx";
 import NewsAndMessageDetailsPage from "../../pages/userDashboard/Newsandmessagedetailspage.jsx";
 import ProductDetaisPage from "../../pages/userDashboard/ProductDetaisPage.jsx";
+import ChatPage from "../../pages/userDashboard/ChatPage.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -265,6 +266,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "favourite-photos/:id", Component: ArtwokDetailsPage
+            },
+            {
+                path:"chat", Component:ChatPage
             },
             {
                 path: "contact-us", Component: SupportPage
