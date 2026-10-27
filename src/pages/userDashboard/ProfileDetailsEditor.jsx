@@ -1,5 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiUpload, FiLock, FiCheckCircle, FiX, FiTrash2, FiImage, FiVideo } from 'react-icons/fi';
+
+const inputProfile =
+  'w-full px-4 py-2.5 rounded-lg bg-[#F1F3FF] border border-transparent focus:border-gray-300 focus:bg-white text-sm text-slate-800 outline-none transition';
+const inputSmall =
+  'w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300';
+const labelProfile =
+  'block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5';
+const labelSmall = 'block text-[10px] font-medium text-gray-500 mb-1';
+const saveBtn =
+  'bg-secondary text-white px-6 py-2 rounded-lg text-xs font-semibold hover:opacity-90 transition shadow-sm active:scale-95';
+const card = 'bg-white p-4 sm:p-6 lg:p-8 rounded-2xl border border-gray-100 shadow-sm';
 
 const ProfileDetailsEditor = () => {
   // Photographer Profile Form State
@@ -37,6 +48,33 @@ const ProfileDetailsEditor = () => {
     title: '',
     message: ''
   });
+
+  // Lock background scroll while modal is open + close on Escape
+  useEffect(() => {
+    if (!modalConfig.isOpen) return;
+
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const prevOverflow = document.body.style.overflow;
+    const prevPaddingRight = document.body.style.paddingRight;
+
+    document.body.style.overflow = 'hidden';
+    if (scrollBarWidth > 0) {
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
+    }
+
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setModalConfig({ isOpen: false, title: '', message: '' });
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.style.paddingRight = prevPaddingRight;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [modalConfig.isOpen]);
 
   // Handlers
   const handleProfileChange = (e) => {
@@ -116,9 +154,19 @@ const ProfileDetailsEditor = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] p-6 lg:p-10 text-slate-800 font-sans">
-      <div className="max-w-6xl mx-auto space-y-8">
-        
+    <div className="min-h-screen  text-slate-800 font-sans overflow-x-hidden">
+      {/* Modal animations */}
+      <style>{`
+        @keyframes pd-fade-in { from { opacity: 0 } to { opacity: 1 } }
+        @keyframes pd-slide-up { from { transform: translateY(100%) } to { transform: translateY(0) } }
+        @keyframes pd-pop-in { from { opacity: 0; transform: translateY(12px) scale(.96) } to { opacity: 1; transform: translateY(0) scale(1) } }
+        .pd-backdrop { animation: pd-fade-in .2s ease-out both }
+        .pd-panel { animation: pd-slide-up .3s cubic-bezier(.32,.72,0,1) both }
+        @media (min-width: 640px) { .pd-panel { animation: pd-pop-in .22s ease-out both } }
+      `}</style>
+
+      <div className=" space-y-6 sm:space-y-8">
+
         {/* Header Section */}
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">Profile Details Editor</h1>
@@ -128,197 +176,174 @@ const ProfileDetailsEditor = () => {
         </div>
 
         {/* Top Section: Grid 2 Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+
           {/* Card 1: Your Photographer Profile */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900">Your Photographer Profile</h2>
-              <p className="text-xs text-gray-400 mt-0.5 mb-6">
-                Control how other photographers and judges see your public bio portfolio
-              </p>
+          <div className={`${card} min-w-0`}>
+            <h2 className="text-base sm:text-lg font-bold text-slate-900">Your Photographer Profile</h2>
+            <p className="text-xs text-gray-400 mt-0.5 mb-5 sm:mb-6">
+              Control how other photographers and judges see your public bio portfolio
+            </p>
 
-              <form onSubmit={handleSaveProfile} className="space-y-4">
-                {/* Full Name */}
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-                    FULL NAME
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={profileData.fullName}
-                    onChange={handleProfileChange}
-                    className="w-full px-4 py-2.5 rounded-lg bg-[#F3F4F9] border border-transparent focus:border-gray-300 focus:bg-white text-sm text-slate-800 outline-none transition"
-                  />
-                </div>
+            <form onSubmit={handleSaveProfile} className="space-y-4">
+              <div>
+                <label className={labelProfile}>FULL NAME</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  value={profileData.fullName}
+                  onChange={handleProfileChange}
+                  className={inputProfile}
+                />
+              </div>
 
-                {/* Username */}
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-                    USERNAME
-                  </label>
-                  <input
-                    type="text"
-                    name="username"
-                    value={profileData.username}
-                    onChange={handleProfileChange}
-                    className="w-full px-4 py-2.5 rounded-lg bg-[#F3F4F9] border border-transparent focus:border-gray-300 focus:bg-white text-sm text-slate-800 outline-none transition"
-                  />
-                </div>
+              <div>
+                <label className={labelProfile}>USERNAME</label>
+                <input
+                  type="text"
+                  name="username"
+                  value={profileData.username}
+                  onChange={handleProfileChange}
+                  className={inputProfile}
+                />
+              </div>
 
-                {/* Phone Number */}
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-                    PHONE NUMBER
-                  </label>
-                  <input
-                    type="text"
-                    name="phone"
-                    value={profileData.phone}
-                    onChange={handleProfileChange}
-                    className="w-full px-4 py-2.5 rounded-lg bg-[#F3F4F9] border border-transparent focus:border-gray-300 focus:bg-white text-sm text-slate-800 outline-none transition"
-                  />
-                </div>
+              <div>
+                <label className={labelProfile}>PHONE NUMBER</label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={profileData.phone}
+                  onChange={handleProfileChange}
+                  className={inputProfile}
+                />
+              </div>
 
-                {/* Email ID */}
-                <div>
-                  <label className="block text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
-                    EMAIL ID
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={profileData.email}
-                    onChange={handleProfileChange}
-                    className="w-full px-4 py-2.5 rounded-lg bg-[#F3F4F9] border border-transparent focus:border-gray-300 focus:bg-white text-sm text-slate-800 outline-none transition"
-                  />
-                </div>
+              <div>
+                <label className={labelProfile}>EMAIL ID</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={profileData.email}
+                  onChange={handleProfileChange}
+                  className={inputProfile}
+                />
+              </div>
 
-                {/* Save Button */}
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="bg-secondary text-white px-6 py-2 rounded-lg text-xs font-semibold hover:opacity-90 transition shadow-sm active:scale-95"
-                  >
-                    Save
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div className="pt-2">
+                <button type="submit" className={saveBtn}>
+                  Save
+                </button>
+              </div>
+            </form>
           </div>
 
           {/* Card 2: Portfolio */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900">Portfolio</h2>
-              <p className="text-xs text-gray-400 mt-0.5 mb-6">
-                Upload your portfolio and social media link
-              </p>
+          <div className={`${card} min-w-0`}>
+            <h2 className="text-base sm:text-lg font-bold text-slate-900">Portfolio</h2>
+            <p className="text-xs text-gray-400 mt-0.5 mb-5 sm:mb-6">
+              Upload your portfolio and social media link
+            </p>
 
-              <form onSubmit={handleSavePortfolio} className="p-5 rounded-xl bg-[#EEF2FC]/50 space-y-4">
-                {/* Website URL */}
+            <form
+              onSubmit={handleSavePortfolio}
+              className="p-4 sm:p-5 rounded-xl bg-[#F1F3FF] space-y-4"
+            >
+              <div>
+                <label className={labelSmall}>Website URL</label>
+                <input
+                  type="text"
+                  name="websiteUrl"
+                  value={portfolioData.websiteUrl}
+                  onChange={handlePortfolioChange}
+                  className={inputSmall}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                    Website URL
-                  </label>
+                  <label className={labelSmall}>Facebook URL</label>
                   <input
                     type="text"
-                    name="websiteUrl"
-                    value={portfolioData.websiteUrl}
+                    name="facebookUrl"
+                    value={portfolioData.facebookUrl}
                     onChange={handlePortfolioChange}
-                    className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
+                    className={inputSmall}
                   />
                 </div>
-
-                {/* Facebook & Instagram */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                      Facebook URL
-                    </label>
-                    <input
-                      type="text"
-                      name="facebookUrl"
-                      value={portfolioData.facebookUrl}
-                      onChange={handlePortfolioChange}
-                      className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                      Instagram URL
-                    </label>
-                    <input
-                      type="text"
-                      name="instagramUrl"
-                      value={portfolioData.instagramUrl}
-                      onChange={handlePortfolioChange}
-                      className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
-                    />
-                  </div>
+                <div>
+                  <label className={labelSmall}>Instagram URL</label>
+                  <input
+                    type="text"
+                    name="instagramUrl"
+                    value={portfolioData.instagramUrl}
+                    onChange={handlePortfolioChange}
+                    className={inputSmall}
+                  />
                 </div>
+              </div>
 
-                {/* X & Linkedin */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                      X URL
-                    </label>
-                    <input
-                      type="text"
-                      name="xUrl"
-                      value={portfolioData.xUrl}
-                      onChange={handlePortfolioChange}
-                      className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                      LinkedIn URL
-                    </label>
-                    <input
-                      type="text"
-                      name="linkedinUrl"
-                      value={portfolioData.linkedinUrl}
-                      onChange={handlePortfolioChange}
-                      className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
-                    />
-                  </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className={labelSmall}>X URL</label>
+                  <input
+                    type="text"
+                    name="xUrl"
+                    value={portfolioData.xUrl}
+                    onChange={handlePortfolioChange}
+                    className={inputSmall}
+                  />
                 </div>
+                <div>
+                  <label className={labelSmall}>LinkedIn URL</label>
+                  <input
+                    type="text"
+                    name="linkedinUrl"
+                    value={portfolioData.linkedinUrl}
+                    onChange={handlePortfolioChange}
+                    className={inputSmall}
+                  />
+                </div>
+              </div>
 
-                {/* Save Button */}
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="bg-secondary text-white px-6 py-2 rounded-lg text-xs font-semibold hover:opacity-90 transition shadow-sm active:scale-95"
-                  >
-                    Save
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div className="pt-2">
+                <button type="submit" className={saveBtn}>
+                  Save
+                </button>
+              </div>
+            </form>
           </div>
-
         </div>
 
         {/* Cover Photo Upload */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
+        <div className={card}>
           <h2 className="text-sm font-bold text-slate-900">Cover Photo</h2>
           <p className="text-xs text-gray-400 mt-0.5 mb-4">
             Help your pro prepare by showing them the work area. Optional but highly recommended.
           </p>
 
           {coverPhoto ? (
-            <div className="relative rounded-xl overflow-hidden border border-gray-200 group h-48 bg-slate-900">
-              <img src={coverPhoto.url} alt="Cover Preview" className="w-full h-full object-cover opacity-90" />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3">
+            <div className="relative rounded-xl overflow-hidden border border-gray-200 group h-40 sm:h-48 lg:h-56 bg-slate-900">
+              <img
+                src={coverPhoto.url}
+                alt="Cover Preview"
+                className="w-full h-full object-cover opacity-90"
+              />
+              {/* Always visible on touch devices, hover-only on desktop */}
+              <div className="absolute inset-0 bg-black/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition flex items-center justify-center gap-3 p-2">
                 <label className="bg-white/90 text-slate-800 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer hover:bg-white transition flex items-center gap-1.5">
                   <FiImage /> Change Photo
-                  <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, setCoverPhoto)} />
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={(e) => handleImageUpload(e, setCoverPhoto)}
+                  />
                 </label>
                 <button
+                  type="button"
                   onClick={() => setCoverPhoto(null)}
+                  aria-label="Remove cover photo"
                   className="bg-secondary/90 text-white p-2 rounded-lg text-xs hover:bg-secondary transition"
                 >
                   <FiTrash2 className="w-4 h-4" />
@@ -326,138 +351,166 @@ const ProfileDetailsEditor = () => {
               </div>
             </div>
           ) : (
-            <label className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50/50 transition">
+            <label className="border-2 border-dashed border-gray-200 rounded-xl p-6 sm:p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50/50 transition">
               <FiUpload className="w-6 h-6 text-gray-400 mb-2" />
-              <p className="text-xs font-semibold text-slate-700">Click to upload photos or drag & drop</p>
+              <p className="text-xs font-semibold text-slate-700">
+                Click to upload photos or drag & drop
+              </p>
               <p className="text-[10px] text-gray-400 mt-1">JPG, PNG, — max 20MB each</p>
-              <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, setCoverPhoto)} />
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e, setCoverPhoto)}
+              />
             </label>
           )}
         </div>
 
         {/* Profile Photo Upload */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
+        <div className={card}>
           <h2 className="text-sm font-bold text-slate-900">Profile Photo</h2>
           <p className="text-xs text-gray-400 mt-0.5 mb-4">
             Help your pro prepare by showing them the work area. Optional but highly recommended.
           </p>
 
           {profilePhoto ? (
-            <div className="flex items-center gap-5 p-4 rounded-xl border border-gray-200 bg-gray-50/50">
-              <img src={profilePhoto.url} alt="Profile Preview" className="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm" />
-              <div>
-                <p className="text-xs font-semibold text-slate-800">{profilePhoto.name}</p>
+            <div className="flex items-center gap-4 sm:gap-5 p-3 sm:p-4 rounded-xl border border-gray-200 bg-gray-50/50">
+              <img
+                src={profilePhoto.url}
+                alt="Profile Preview"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-white shadow-sm flex-shrink-0"
+              />
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-slate-800 truncate">{profilePhoto.name}</p>
                 <div className="flex items-center gap-3 mt-2">
                   <label className="text-xs text-primary font-medium hover:underline cursor-pointer">
                     Change Photo
-                    <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, setProfilePhoto)} />
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, setProfilePhoto)}
+                    />
                   </label>
-                  <button onClick={() => setProfilePhoto(null)} className="text-xs text-secondary font-medium hover:underline">
+                  <button
+                    type="button"
+                    onClick={() => setProfilePhoto(null)}
+                    className="text-xs text-secondary font-medium hover:underline"
+                  >
                     Remove
                   </button>
                 </div>
               </div>
             </div>
           ) : (
-            <label className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50/50 transition">
+            <label className="border-2 border-dashed border-gray-200 rounded-xl p-6 sm:p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50/50 transition">
               <FiUpload className="w-6 h-6 text-gray-400 mb-2" />
-              <p className="text-xs font-semibold text-slate-700">Click to upload photos or drag & drop</p>
+              <p className="text-xs font-semibold text-slate-700">
+                Click to upload photos or drag & drop
+              </p>
               <p className="text-[10px] text-gray-400 mt-1">JPG, PNG, — max 20MB each</p>
-              <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, setProfilePhoto)} />
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={(e) => handleImageUpload(e, setProfilePhoto)}
+              />
             </label>
           )}
         </div>
 
         {/* Introduction Video Upload */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
+        <div className={card}>
           <h2 className="text-sm font-bold text-slate-900 mb-4">Introduction Video</h2>
 
           {introVideo ? (
-            <div className="flex items-center justify-between p-4 rounded-xl border border-gray-200 bg-gray-50/50">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-100 text-primary rounded-lg">
+            <div className="flex items-center justify-between gap-3 p-3 sm:p-4 rounded-xl border border-gray-200 bg-gray-50/50">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-3 bg-blue-100 text-primary rounded-lg flex-shrink-0">
                   <FiVideo className="w-5 h-5" />
                 </div>
-                <div>
-                  <p className="text-xs font-semibold text-slate-800">{introVideo.name}</p>
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold text-slate-800 truncate">{introVideo.name}</p>
                   <p className="text-[10px] text-gray-400">{introVideo.size}</p>
                 </div>
               </div>
-              <button onClick={() => setIntroVideo(null)} className="text-secondary p-2 hover:bg-red-50 rounded-lg transition">
+              <button
+                type="button"
+                onClick={() => setIntroVideo(null)}
+                aria-label="Remove video"
+                className="text-secondary p-2 hover:bg-red-50 rounded-lg transition flex-shrink-0"
+              >
                 <FiTrash2 className="w-4 h-4" />
               </button>
             </div>
           ) : (
-            <label className="border-2 border-dashed border-gray-200 rounded-xl p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50/50 transition">
+            <label className="border-2 border-dashed border-gray-200 rounded-xl p-8 sm:p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-gray-50/50 transition">
               <FiUpload className="w-6 h-6 text-gray-400 mb-2" />
               <p className="text-xs font-semibold text-slate-700">Upload Video</p>
               <p className="text-[10px] text-gray-400 mt-1">MP4 • maximum 3 minute video</p>
-              <input type="file" className="hidden" accept="video/mp4,video/mkv" onChange={handleVideoUpload} />
+              <input
+                type="file"
+                className="hidden"
+                accept="video/mp4,video/mkv"
+                onChange={handleVideoUpload}
+              />
             </label>
           )}
         </div>
 
         {/* Account Security Section */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
-          <h2 className="text-lg font-bold text-slate-900">Account Security</h2>
-          <p className="text-xs text-gray-400 mt-0.5 mb-6">
+        <div className={card}>
+          <h2 className="text-base sm:text-lg font-bold text-slate-900">Account Security</h2>
+          <p className="text-xs text-gray-400 mt-0.5 mb-5 sm:mb-6">
             Manage your access and safeguard your creative portfolio
           </p>
 
-          <div className="p-6 rounded-xl bg-[#EEF2FC]/50">
+          <div className="p-4 sm:p-6 rounded-xl bg-[#F1F3FF]">
             <div className="flex items-center gap-2 text-xs font-semibold text-indigo-900 mb-4">
               <FiLock className="w-4 h-4 text-indigo-600" />
               <span>Set New Password</span>
             </div>
 
             <form onSubmit={handleChangePassword} className="space-y-4">
-              {/* Current Password */}
               <div>
-                <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                  Current Password
-                </label>
+                <label className={labelSmall}>Current Password</label>
                 <input
                   type="password"
                   name="currentPassword"
                   placeholder="••••••••"
                   value={securityData.currentPassword}
                   onChange={handleSecurityChange}
-                  className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
+                  className={inputSmall}
                 />
               </div>
 
-              {/* New & Confirm Password */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                    New Password
-                  </label>
+                  <label className={labelSmall}>New Password</label>
                   <input
                     type="password"
                     name="newPassword"
                     placeholder="••••••••"
                     value={securityData.newPassword}
                     onChange={handleSecurityChange}
-                    className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
+                    className={inputSmall}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-medium text-gray-500 mb-1">
-                    Confirm New Password
-                  </label>
+                  <label className={labelSmall}>Confirm New Password</label>
                   <input
                     type="password"
                     name="confirmPassword"
                     placeholder="••••••••"
                     value={securityData.confirmPassword}
                     onChange={handleSecurityChange}
-                    className="w-full px-3.5 py-2 rounded-lg bg-white border border-gray-100 text-xs text-slate-800 outline-none focus:border-gray-300"
+                    className={inputSmall}
                   />
                 </div>
               </div>
 
-              {/* Change Password Button */}
               <div className="pt-2">
                 <button
                   type="submit"
@@ -469,39 +522,60 @@ const ProfileDetailsEditor = () => {
             </form>
           </div>
         </div>
-
       </div>
 
-      {/* Confirmation Modal */}
+      {/* Confirmation Modal — bottom sheet on mobile, centered dialog on sm+ */}
       {modalConfig.isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-fadeIn">
-          <div className="bg-white w-full max-w-sm rounded-2xl p-6 shadow-2xl text-center space-y-4 relative animate-scaleUp">
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"
-            >
-              <FiX className="w-5 h-5" />
-            </button>
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Blurred backdrop (click to close) */}
+          <div
+            className="pd-backdrop absolute inset-0 bg-slate-900/40 backdrop-blur-md"
+            onClick={closeModal}
+          />
 
-            <div className="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
-              <FiCheckCircle className="w-8 h-8" />
+          {/* Panel */}
+          <div className="pd-panel relative bg-white w-full sm:max-w-sm rounded-t-3xl sm:rounded-2xl shadow-2xl text-center max-h-[90vh] max-h-[90dvh] overflow-y-auto overscroll-contain">
+            {/* Mobile drag handle */}
+            <div className="sm:hidden flex justify-center pt-2.5">
+              <span className="w-10 h-1 rounded-full bg-gray-200"></span>
             </div>
 
-            <div>
-              <h3 className="text-lg font-bold text-slate-900">{modalConfig.title}</h3>
-              <p className="text-xs text-gray-500 mt-1 leading-relaxed">{modalConfig.message}</p>
-            </div>
+            <div className="relative p-6 space-y-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+              <button
+                type="button"
+                onClick={closeModal}
+                aria-label="Close"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-600 p-1.5 rounded-full hover:bg-gray-100 transition"
+              >
+                <FiX className="w-5 h-5" />
+              </button>
 
-            <button
-              onClick={closeModal}
-              className="w-full bg-slate-900 text-white py-2.5 rounded-xl text-xs font-semibold hover:bg-slate-800 transition"
-            >
-              Done
-            </button>
+              <div className="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
+                <FiCheckCircle className="w-8 h-8" />
+              </div>
+
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 break-words">{modalConfig.title}</h3>
+                <p className="text-xs text-gray-500 mt-1 leading-relaxed break-words">
+                  {modalConfig.message}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={closeModal}
+                className="w-full bg-slate-900 text-white py-2.5 rounded-xl text-xs font-semibold hover:bg-slate-800 transition"
+              >
+                Done
+              </button>
+            </div>
           </div>
         </div>
       )}
-
     </div>
   );
 };
