@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { FaUserPlus, FaUserCheck, FaCommentDots, FaMapMarkerAlt } from 'react-icons/fa';
+import { getSavedUserInfo } from '../../utils/getUserInof';
 
 const PhotographerHeader = ({ user, isDashboard }) => {
   if (!user) return null;
   const [follow, setFollow] = useState(isDashboard);
+  const userInfo = getSavedUserInfo()
+  // console.log(user.id, 'user', userInfo.id)
 
   return (
     <div className="w-full relative md:pb-2 pb-4">
@@ -58,23 +61,29 @@ const PhotographerHeader = ({ user, isDashboard }) => {
         </div>
 
         {/* Right Side: Follow & Message Action Buttons */}
-        <div className="flex items-center gap-2.5 sm:mb-2">
-          {/* Follow Button with Toggle state & Green color on active */}
-          <button
-            onClick={() => setFollow(!follow)}
-            className={`flex items-center gap-2 px-5 py-1.5 sm:py-2.5 rounded-lg text-sm font-medium transition shadow-sm text-white ${follow ? 'bg-green-600 hover:bg-green-700' : 'bg-primary hover:opacity-90'
-              }`}
-          >
-            {follow ? <FaUserCheck className="text-xs" /> : <FaUserPlus className="text-xs" />}
-            <span>{follow ? 'Following' : 'Follow'}</span>
-          </button>
 
-          {/* Message Button */}
-          <button className="flex items-center gap-2 bg-primary hover:opacity-90 text-white px-5 py-1.5 sm:py-2.5 rounded-lg text-sm font-medium transition shadow-sm">
-            <FaCommentDots className="text-xs" />
-            <span>Message</span>
-          </button>
-        </div>
+        {
+          user.id !== userInfo.id &&(
+            <div className="flex items-center gap-2.5 sm:mb-2">
+              {/* Follow Button with Toggle state & Green color on active */}
+              <button
+                onClick={() => setFollow(!follow)}
+                className={`flex items-center gap-2 px-5 py-1.5 sm:py-2.5 rounded-lg text-sm font-medium transition shadow-sm text-white ${follow ? 'bg-green-600 hover:bg-green-700' : 'bg-primary hover:opacity-90'
+                  }`}
+              >
+                {follow ? <FaUserCheck className="text-xs" /> : <FaUserPlus className="text-xs" />}
+                <span>{follow ? 'Following' : 'Follow'}</span>
+              </button>
+
+              {/* Message Button */}
+              <button className="flex items-center gap-2 bg-primary hover:opacity-90 text-white px-5 py-1.5 sm:py-2.5 rounded-lg text-sm font-medium transition shadow-sm">
+                <FaCommentDots className="text-xs" />
+                <span>Message</span>
+              </button>
+            </div>
+          )
+        }
+
 
       </div>
     </div>
