@@ -134,7 +134,7 @@ const FavoritePhotographarPage = () => {
                 </div>
             )}
 
-            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-5 grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
                 {isLoading && Array.from({ length: LIMIT }).map((_, i) => <SkeletonCard key={i} />)}
 
                 {!isLoading && !error && data.map((user) => <PhotographerCard key={user.id} user={user} />)}

@@ -103,7 +103,7 @@ const MyStore = () => {
         {visibleProducts.length === 0 ? (
           <div className="text-center py-12 sm:py-20 text-sm sm:text-base text-gray-400">No products found in this category.</div>
         ) : (
-          <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+          <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
             {visibleProducts.map((product) => (
               <ProductCard
                 key={product.id}
