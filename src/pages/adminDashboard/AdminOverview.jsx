@@ -179,16 +179,16 @@ const AdminOverview = () => {
     // TODO: add real info or data (fetch revenueData again when selectedYear changes)
 
     return (
-        <div className="min-h-screen bg-[#F6F7FB] px-4 sm:px-6 lg:px-8 py-6 pt-20 lg:pt-8">
+        <div className="w-full max-w-full">
             {/* Header */}
-            <header className="mb-6">
-                <p className="text-[11px] tracking-wider uppercase text-gray-500 font-medium">
+            <header className="mb-5 sm:mb-6">
+                <p className="text-[10px] sm:text-[11px] tracking-wider uppercase text-gray-500 font-medium">
                     Good morning, {adminInfo.name}
                 </p>
-                <h1 className="mt-2 text-2xl sm:text-3xl font-semibold text-gray-900">
+                <h1 className="mt-2 text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 break-words">
                     {adminInfo.title}
                 </h1>
-                <p className="mt-2 text-sm text-gray-500 max-w-2xl">{adminInfo.subtitle}</p>
+                <p className="mt-2 text-xs sm:text-sm text-gray-500 max-w-2xl">{adminInfo.subtitle}</p>
             </header>
 
             {/* Stats Row 1 */}
@@ -199,25 +199,25 @@ const AdminOverview = () => {
             </section>
 
             {/* Stats Row 2 */}
-            <section className="mt-3 sm:mt-4 grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+            <section className="mt-3 sm:mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {bottomStats.map((stat) => (
                     <StatCard key={stat.id} label={stat.label} value={stat.value} />
                 ))}
             </section>
 
             {/* Visitor analytics + Recent competition */}
-            <section className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+            <section className="mt-5 sm:mt-6 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
                 {/* Visitor analytics */}
-                <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-5 sm:p-6">
+                <div className="min-w-0 lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-4 sm:p-5 lg:p-6">
                     <h2 className="text-sm font-semibold text-gray-900">Visitor analytics</h2>
                     <p className="text-xs text-gray-500 mt-1">Unique visitors and return sessions</p>
-                    <p className="mt-4 text-2xl sm:text-3xl font-bold text-gray-900">
+                    <p className="mt-4 text-2xl sm:text-3xl font-bold text-gray-900 break-words">
                         {visitorSummary.total}
                     </p>
 
-                    <div className="mt-2 h-[200px] sm:h-[240px] w-full">
+                    <div className="mt-2 h-[200px] sm:h-[240px] lg:h-[280px] w-full min-w-0">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={visitorData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                            <AreaChart data={visitorData} margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="visitorFill" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="0%" stopColor="#3B6FE8" stopOpacity={0.25} />
@@ -230,8 +230,11 @@ const AdminOverview = () => {
                                     axisLine={false}
                                     tickLine={false}
                                     tick={{ fontSize: 10, fill: '#9CA3AF' }}
+                                    interval="preserveStartEnd"
+                                    minTickGap={8}
                                 />
                                 <YAxis
+                                    width={36}
                                     ticks={[0, 4000, 8000, 12000]}
                                     domain={[0, 12000]}
                                     tickFormatter={(v) => (v === 0 ? '0' : `${v / 1000}k`)}
@@ -274,12 +277,12 @@ const AdminOverview = () => {
                 </div>
 
                 {/* Recent competition */}
-                <div className="bg-white rounded-2xl border border-gray-100 p-5 sm:p-6 flex flex-col">
+                <div className="min-w-0 bg-white rounded-2xl border border-gray-100 p-4 sm:p-5 lg:p-6 flex flex-col">
                     <div className="flex items-start justify-between gap-2">
                         <h2 className="text-sm font-semibold text-gray-900">Recent Competition</h2>
                         <Link
                             to={recentCompetition.reviewAllLink}
-                            className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-[#2563EB] hover:underline"
+                            className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-[#2563EB] hover:underline whitespace-nowrap shrink-0"
                         >
                             Review all <FiArrowUpRight size={12} />
                         </Link>
@@ -296,7 +299,7 @@ const AdminOverview = () => {
                                     alt={item.title}
                                     className="w-10 h-10 rounded-md object-cover shrink-0"
                                 />
-                                <div className="min-w-0">
+                                <div className="min-w-0 flex-1">
                                     <p className="text-[13px] font-semibold text-gray-900 truncate">
                                         {item.title}
                                     </p>
@@ -318,9 +321,11 @@ const AdminOverview = () => {
             </section>
 
             {/* Revenue Trend */}
-            <section className="mt-6 bg-white rounded-2xl border border-gray-100 p-5 sm:p-6">
+            <section className="mt-5 sm:mt-6 min-w-0 bg-white rounded-2xl border border-gray-100 p-4 sm:p-5 lg:p-6">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">Revenue Trend</h2>
+                    <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900">
+                        Revenue Trend
+                    </h2>
 
                     <div className="relative">
                         <select
@@ -341,19 +346,23 @@ const AdminOverview = () => {
                     </div>
                 </div>
 
-                <div className="mt-4 h-[260px] sm:h-[320px] w-full">
+                <div className="mt-4 h-[240px] sm:h-[300px] lg:h-[340px] w-full min-w-0">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={revenueData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+                        <LineChart data={revenueData} margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
                             <CartesianGrid vertical={false} stroke="#EEF0F4" strokeDasharray="3 3" />
                             <XAxis
                                 dataKey="month"
                                 axisLine={false}
                                 tickLine={false}
                                 tick={{ fontSize: 10, fill: '#6B7280' }}
+                                interval="preserveStartEnd"
+                                minTickGap={8}
                             />
                             <YAxis
+                                width={40}
                                 ticks={[0, 20000, 40000, 60000, 80000]}
                                 domain={[0, 80000]}
+                                tickFormatter={(v) => (v === 0 ? '0' : `${v / 1000}k`)}
                                 axisLine={false}
                                 tickLine={false}
                                 tick={{ fontSize: 10, fill: '#6B7280' }}
@@ -378,13 +387,13 @@ const AdminOverview = () => {
                 </div>
 
                 {/* Legend */}
-                <div className="mt-3 flex items-center justify-center gap-5 flex-wrap">
+                <div className="mt-3 flex items-center justify-center gap-x-5 gap-y-2 flex-wrap">
                     {revenueSeries
                         .filter((s) => s.key !== 'donation')
                         .map((series) => (
                             <div key={series.key} className="flex items-center gap-1.5">
                                 <span
-                                    className="inline-block w-2 h-2 rounded-full"
+                                    className="inline-block w-2 h-2 rounded-full shrink-0"
                                     style={{ backgroundColor: series.color }}
                                 />
                                 <span className="text-[11px] text-gray-500">{series.label}</span>
@@ -394,14 +403,14 @@ const AdminOverview = () => {
             </section>
 
             {/* Community reach */}
-            <section className="mt-6 bg-white rounded-2xl border border-gray-100 p-5 sm:p-6">
+            <section className="mt-5 sm:mt-6 bg-white rounded-2xl border border-gray-100 p-4 sm:p-5 lg:p-6">
                 <h2 className="text-sm font-semibold text-gray-900">Community reach</h2>
                 <p className="text-xs text-gray-400 mt-1">Top countries by participation</p>
 
                 <ul className="mt-5 space-y-4">
                     {communityReach.map((item) => (
-                        <li key={item.id} className="flex items-center gap-3">
-                            <div className="flex items-center gap-2.5 w-[120px] sm:w-[150px] shrink-0">
+                        <li key={item.id} className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                            <div className="flex items-center gap-2 sm:gap-2.5 w-[96px] sm:w-[130px] lg:w-[150px] shrink-0 min-w-0">
                                 <img
                                     src={`https://flagcdn.com/w40/${item.code}.png`}
                                     alt={item.country}
@@ -412,14 +421,14 @@ const AdminOverview = () => {
                                 </span>
                             </div>
 
-                            <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div className="flex-1 min-w-0 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                 <div
                                     className="h-full bg-[#3B6FE8] rounded-full"
                                     style={{ width: `${(item.count / maxReach) * 100}%` }}
                                 />
                             </div>
 
-                            <span className="w-12 text-right text-[11px] font-semibold text-gray-700 shrink-0">
+                            <span className="w-12 sm:w-14 text-right text-[11px] font-semibold text-gray-700 shrink-0">
                                 {item.count.toLocaleString()}
                             </span>
                         </li>

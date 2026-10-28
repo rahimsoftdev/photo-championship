@@ -158,7 +158,7 @@ export const router = createBrowserRouter([
         path: "register", Component: Register
     },
     {
-        path:"access-denied", Component:AdminAccessDenied
+        path: "access-denied", Component: AdminAccessDenied
     },
 
     //user dashboard
@@ -207,7 +207,7 @@ export const router = createBrowserRouter([
                 path: "my-store", Component: MyStore
             },
             {
-                path: "my-store/:id", Component:ProductDetaisPage
+                path: "my-store/:id", Component: ProductDetaisPage
             },
             {
                 path: "my-store/new", Component: CollectionForm
@@ -268,7 +268,7 @@ export const router = createBrowserRouter([
                 path: "favourite-photos/:id", Component: ArtwokDetailsPage
             },
             {
-                path:"chat", Component:ChatPage
+                path: "chat", Component: ChatPage
             },
             {
                 path: "contact-us", Component: SupportPage

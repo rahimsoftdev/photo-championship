@@ -15,14 +15,14 @@ const AdminDashboardLayout = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#F8F9FA] flex">
+        <div className="min-h-screen bg-[#F9FAFB] flex">
             {/* Responsive Sidebar (mobile e top bar + slide-in menu) */}
             <AdminSidebar />
 
             {/* Main Content Area
                 pt-20: mobile/tablet e fixed top bar (h-16) er niche content shuru hobe
                 lg:pt-6: desktop e top bar nai */}
-            <main className="flex-1 min-w-0 lg:ml-[270px] p-2 md:p-4 lg:p-6 pt-20 md:pt-20 lg:pt-6 transition-all duration-300">
+            <main className="flex-1 min-w-0 lg:ml-[270px] pt-24 lg:pt-8 pb-8 transition-all duration-300 max-sm:px-4 px-6">
                 <Outlet />
             </main>
         </div>
