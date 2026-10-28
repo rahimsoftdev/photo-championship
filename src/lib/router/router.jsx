@@ -364,6 +364,27 @@ export const router = createBrowserRouter([
             {
                 path: "profile", Component: MyProfile
             },
+
+            {
+                path: "photographers/:id", Component: PhotographarDetailsLayout,
+                children: [
+                    {
+                        index: true, Component: ProfileTab
+                    },
+                    {
+                        path: "artworks", Component: ArtworksTab
+                    },
+                    {
+                        path: "premium-photos", Component: BayPhotoTab
+                    },
+                    {
+                        path: "posts", Component: PostTab
+                    },
+                    {
+                        path: "store", Component: MyStoreTab
+                    },
+                ]
+            },
         ]
     },
 
