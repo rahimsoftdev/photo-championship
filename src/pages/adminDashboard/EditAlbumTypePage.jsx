@@ -122,24 +122,12 @@ const EditAlbumTypesPage = () => {
             </header>
 
             {/* Choose Your Album Type section */}
-            <section className="mx-auto w-full max-w-main">
+            <section className="">
                 {/* Section Header */}
-                <div className="mx-auto mb-8 w-full max-w-2xl text-center sm:mb-10 lg:mb-12">
-                    <span className="mb-2 block font-manrope text-sm font-bold uppercase tracking-widest text-[#E31837] sm:text-base">
-                        ACTIVE COMPETITIONS
-                    </span>
-
-                    <h2 className="mb-4 font-manrope text-3xl font-extrabold leading-tight text-[#0D0D14] sm:text-4xl sm:leading-tight md:text-[44px] lg:text-[48px] lg:leading-[48px]">
-                        Choose Your Album Type
-                    </h2>
-
-                    <p className="font-manrope text-sm font-normal leading-relaxed text-[#6B7280] sm:text-base md:text-lg lg:text-[20px] lg:leading-[29.25px]">
-                        Three competition album type. One goal: show your talent and win a prize.
-                    </p>
-                </div>
+            
 
                 {/* Responsive Cards Grid */}
-                <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3 lg:gap-8">
+                <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
                     {albums.length === 0 && (
                         <p className="col-span-full text-center text-sm text-gray-400">
                             No album types yet.
