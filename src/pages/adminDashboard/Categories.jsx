@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { FiPlus, FiTrash2, FiX, FiChevronDown, FiCheckCircle } from 'react-icons/fi';
-import useFetch from '../../hooks/useFetch';
+import { createPortal } from 'react-dom';
+import {
+    FiPlus,
+    FiTrash2,
+    FiX,
+    FiChevronDown,
+    FiCheckCircle,
+} from 'react-icons/fi';
 // TODO: adjust this import path to where your useFetch hook lives
-// import useFetch from '../../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 
 /* ------------------------------------------------------------------ */
 /*  HELPERS                                                            */
@@ -23,63 +29,77 @@ const slugify = (text) =>
 
 // A single pill (category / subcategory) with a delete icon
 const Chip = ({ label, onDelete }) => (
-    <div className="inline-flex items-center gap-2 bg-[#ECEDFB] text-[#4F46E5] rounded-md px-3.5 py-2 text-xs sm:text-[13px] font-medium">
-        <span>{label}</span>
+    <div className="inline-flex items-center gap-2 bg-[#ECEDFB] text-[#4F46E5] rounded-md px-3.5 py-2 text-xs sm:text-[13px] font-medium max-w-full">
+        <span className="truncate">{label}</span>
         <button
             type="button"
             onClick={onDelete}
             aria-label={`Delete ${label}`}
-            className="text-[#EE1C25] hover:text-[#b9151c] transition-colors"
+            className="shrink-0 text-[#EE1C25] hover:text-[#b9151c] transition-colors"
         >
             <FiTrash2 size={14} />
         </button>
     </div>
 );
 
-// Right-side sliding panel used for both "Add Category" and "Add Subcategory"
-const SideDrawer = ({ open, title, onClose, children }) => {
-    // Close on Escape key
+/**
+ * Modal
+ * - Rendered into document.body, so it covers the whole screen (sidebar too)
+ * - Blurred backdrop, page scroll locked while open
+ * - Mobile: bottom sheet | Tablet/Desktop: centered card
+ * - `locked` stops closing (used while a delete is running)
+ */
+const Modal = ({ open, onClose, locked = false, labelledBy, children }) => {
+    // Lock page scroll while open
     useEffect(() => {
         if (!open) return;
-        const onKey = (e) => e.key === 'Escape' && onClose();
-        window.addEventListener('keydown', onKey);
-        return () => window.removeEventListener('keydown', onKey);
-    }, [open, onClose]);
+        const prev = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = prev;
+        };
+    }, [open]);
 
-    return (
-        <>
-            {/* Backdrop */}
+    // Close on Escape
+    useEffect(() => {
+        if (!open) return;
+        const onKey = (e) => {
+            if (e.key === 'Escape' && !locked) onClose();
+        };
+        document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
+    }, [open, locked, onClose]);
+
+    if (!open) return null;
+
+    return createPortal(
+        <div
+            className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={labelledBy}
+        >
+            {/* Blurred backdrop */}
             <div
-                onClick={onClose}
-                className={`fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300 ${
-                    open ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                }`}
+                className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                onClick={() => !locked && onClose()}
             />
 
             {/* Panel */}
-            <aside
-                className={`fixed top-0 right-0 z-[70] h-full w-full sm:w-[380px] bg-[#F6F7FB] shadow-xl transition-transform duration-300 ease-in-out ${
-                    open ? 'translate-x-0' : 'translate-x-full'
-                }`}
-            >
-                <div className="p-5 sm:p-6">
-                    <div className="bg-white rounded-xl p-5 shadow-sm">
-                        <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
-                            <button
-                                type="button"
-                                onClick={onClose}
-                                aria-label="Close"
-                                className="text-gray-500 hover:text-gray-800"
-                            >
-                                <FiX size={18} />
-                            </button>
-                        </div>
-                        {children}
-                    </div>
-                </div>
-            </aside>
-        </>
+            <div className="relative w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl p-5 sm:p-7 max-h-[90vh] overflow-y-auto">
+                <button
+                    type="button"
+                    onClick={onClose}
+                    disabled={locked}
+                    aria-label="Close"
+                    className="absolute top-3.5 right-3.5 p-1.5 rounded-full text-gray-400 hover:text-gray-800 hover:bg-gray-100 transition disabled:opacity-40"
+                >
+                    <FiX size={18} />
+                </button>
+                {children}
+            </div>
+        </div>,
+        document.body
     );
 };
 
@@ -95,16 +115,24 @@ const Categories = () => {
     // Local copy so add / delete update the UI instantly (frontend only)
     const [categories, setCategories] = useState([]);
 
-    // Drawer state: null | 'category' | 'subcategory'
-    const [drawer, setDrawer] = useState(null);
+    // Add modal state: null | 'category' | 'subcategory'
+    const [addModal, setAddModal] = useState(null);
 
-    // Form state
+    // Add form state
     const [categoryName, setCategoryName] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [subcategoryName, setSubcategoryName] = useState('');
     const [formError, setFormError] = useState('');
 
-    // Success toast message
+    // Delete modal state
+    // deleteTarget: { kind: 'category' | 'subcategory', name, value, parentValue? } | null
+    // deleteStep:   null | 'confirm' | 'success'
+    const [deleteTarget, setDeleteTarget] = useState(null);
+    const [deleteStep, setDeleteStep] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [deleteError, setDeleteError] = useState('');
+
+    // Success toast (used after adding)
     const [toast, setToast] = useState('');
 
     // Copy fetched data into local state once it arrives
@@ -124,44 +152,22 @@ const Categories = () => {
         (cat.subcategories || []).map((sub) => ({ ...sub, parentValue: cat.value }))
     );
 
-    /* ---------------------------- Drawer controls --------------------------- */
+    /* ----------------------------- Add modal ------------------------------- */
 
-    const openCategoryDrawer = () => {
+    const openCategoryModal = () => {
         setCategoryName('');
         setFormError('');
-        setDrawer('category');
+        setAddModal('category');
     };
 
-    const openSubcategoryDrawer = () => {
+    const openSubcategoryModal = () => {
         setSelectedCategory('');
         setSubcategoryName('');
         setFormError('');
-        setDrawer('subcategory');
+        setAddModal('subcategory');
     };
 
-    const closeDrawer = () => setDrawer(null);
-
-    /* ------------------------------- Actions -------------------------------- */
-
-    // Delete category (UI only)
-    const handleDeleteCategory = (value) => {
-        // TODO: call real delete API here
-        setCategories((prev) => prev.filter((cat) => cat.value !== value));
-        setToast('Category deleted successfully');
-    };
-
-    // Delete subcategory (UI only)
-    const handleDeleteSubcategory = (parentValue, subValue) => {
-        // TODO: call real delete API here
-        setCategories((prev) =>
-            prev.map((cat) =>
-                cat.value === parentValue
-                    ? { ...cat, subcategories: cat.subcategories.filter((s) => s.value !== subValue) }
-                    : cat
-            )
-        );
-        setToast('Subcategory deleted successfully');
-    };
+    const closeAddModal = () => setAddModal(null);
 
     // Add category (UI only)
     const handleSaveCategory = (e) => {
@@ -177,7 +183,7 @@ const Categories = () => {
         // TODO: call real add-category API here
         setCategories((prev) => [...prev, { name, value, subcategories: [] }]);
         setToast('Category added successfully');
-        closeDrawer();
+        closeAddModal();
     };
 
     // Add subcategory (UI only)
@@ -189,7 +195,7 @@ const Categories = () => {
 
         const value = slugify(name);
         const parent = categories.find((c) => c.value === selectedCategory);
-        if (parent?.subcategories.some((s) => s.value === value)) {
+        if (parent?.subcategories?.some((s) => s.value === value)) {
             return setFormError('This subcategory already exists in that category');
         }
 
@@ -197,12 +203,79 @@ const Categories = () => {
         setCategories((prev) =>
             prev.map((cat) =>
                 cat.value === selectedCategory
-                    ? { ...cat, subcategories: [...cat.subcategories, { name, value }] }
+                    ? { ...cat, subcategories: [...(cat.subcategories || []), { name, value }] }
                     : cat
             )
         );
         setToast('Subcategory added successfully');
-        closeDrawer();
+        closeAddModal();
+    };
+
+    /* ---------------------------- Delete modal ----------------------------- */
+
+    // Click on a chip's trash icon -> open the confirm modal
+    const askDeleteCategory = (cat) => {
+        setDeleteError('');
+        setDeleteTarget({ kind: 'category', name: cat.name, value: cat.value });
+        setDeleteStep('confirm');
+    };
+
+    const askDeleteSubcategory = (sub) => {
+        setDeleteError('');
+        setDeleteTarget({
+            kind: 'subcategory',
+            name: sub.name,
+            value: sub.value,
+            parentValue: sub.parentValue,
+        });
+        setDeleteStep('confirm');
+    };
+
+    // Cancel / X / backdrop / Escape / Done
+    const closeDeleteModal = () => {
+        if (isDeleting) return;
+        setDeleteStep(null);
+        setDeleteTarget(null);
+        setDeleteError('');
+    };
+
+    // Confirm Delete -> data is deleted, then the modal shows the success message
+    const handleConfirmDelete = async () => {
+        if (!deleteTarget) return;
+
+        try {
+            setIsDeleting(true);
+            setDeleteError('');
+
+            // TODO: call the real delete API here, for example:
+            // if (deleteTarget.kind === 'category') await axiosSecure.delete(`/categories/${deleteTarget.value}`);
+            // else await axiosSecure.delete(`/categories/${deleteTarget.parentValue}/subcategories/${deleteTarget.value}`);
+            await new Promise((resolve) => setTimeout(resolve, 600)); // fake delay, remove with the API
+
+            if (deleteTarget.kind === 'category') {
+                setCategories((prev) => prev.filter((cat) => cat.value !== deleteTarget.value));
+            } else {
+                setCategories((prev) =>
+                    prev.map((cat) =>
+                        cat.value === deleteTarget.parentValue
+                            ? {
+                                  ...cat,
+                                  subcategories: (cat.subcategories || []).filter(
+                                      (s) => s.value !== deleteTarget.value
+                                  ),
+                              }
+                            : cat
+                    )
+                );
+            }
+
+            setDeleteStep('success');
+        } catch (err) {
+            console.error('Delete failed:', err);
+            setDeleteError('Could not delete. Please try again.');
+        } finally {
+            setIsDeleting(false);
+        }
     };
 
     /* ------------------------------ Loading / error ------------------------- */
@@ -226,17 +299,19 @@ const Categories = () => {
     /* --------------------------------- UI ----------------------------------- */
 
     const inputClass =
-        'w-full bg-[#F3F4F6] rounded-md px-3 py-2.5 text-xs text-gray-700 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#EE1C25]/30';
+        'w-full bg-[#F3F4F6] rounded-md px-3 py-2.5 text-sm sm:text-xs text-gray-700 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#EE1C25]/30';
+
+    const deleteLabel = deleteTarget?.kind === 'subcategory' ? 'subcategory' : 'category';
 
     return (
-        <div className="min-h-screen bg-[#F6F7FB] px-4 sm:px-6 lg:px-8 py-6 pt-20 lg:pt-8">
-            {/* Success toast */}
+        <div className="">
+            {/* Success toast (after adding) */}
             <div
-                className={`fixed top-5 right-5 z-[80] flex items-center gap-2 bg-white border border-green-200 text-green-700 text-sm font-medium px-4 py-3 rounded-lg shadow-lg transition-all duration-300 ${
+                className={`fixed top-5 right-5 left-5 sm:left-auto z-[120] flex items-center gap-2 bg-white border border-green-200 text-green-700 text-sm font-medium px-4 py-3 rounded-lg shadow-lg transition-all duration-300 ${
                     toast ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3 pointer-events-none'
                 }`}
             >
-                <FiCheckCircle size={18} />
+                <FiCheckCircle size={18} className="shrink-0" />
                 <span>{toast}</span>
             </div>
 
@@ -257,15 +332,15 @@ const Categories = () => {
                     <h2 className="text-lg sm:text-xl font-medium text-gray-900">Category</h2>
                     <button
                         type="button"
-                        onClick={openCategoryDrawer}
-                        className="inline-flex items-center gap-1.5 bg-[#EE1C25] hover:bg-[#d4161e] text-white text-xs font-medium px-3.5 sm:px-4 py-2.5 rounded-md transition-colors"
+                        onClick={openCategoryModal}
+                        className="inline-flex items-center gap-1.5 bg-[#EE1C25] hover:bg-[#d4161e] text-white text-xs font-medium px-3.5 sm:px-4 py-2.5 rounded-md transition-colors whitespace-nowrap"
                     >
                         <FiPlus size={14} />
                         <span>Add Category</span>
                     </button>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-wrap gap-2.5 sm:gap-3">
                     {categories.length === 0 && (
                         <p className="text-sm text-gray-400">No categories yet.</p>
                     )}
@@ -273,7 +348,7 @@ const Categories = () => {
                         <Chip
                             key={cat.value}
                             label={cat.name}
-                            onDelete={() => handleDeleteCategory(cat.value)}
+                            onDelete={() => askDeleteCategory(cat)}
                         />
                     ))}
                 </div>
@@ -285,15 +360,15 @@ const Categories = () => {
                     <h2 className="text-lg sm:text-xl font-medium text-gray-900">Subcategory</h2>
                     <button
                         type="button"
-                        onClick={openSubcategoryDrawer}
-                        className="inline-flex items-center gap-1.5 bg-[#EE1C25] hover:bg-[#d4161e] text-white text-xs font-medium px-3.5 sm:px-4 py-2.5 rounded-md transition-colors"
+                        onClick={openSubcategoryModal}
+                        className="inline-flex items-center gap-1.5 bg-[#EE1C25] hover:bg-[#d4161e] text-white text-xs font-medium px-3.5 sm:px-4 py-2.5 rounded-md transition-colors whitespace-nowrap"
                     >
                         <FiPlus size={14} />
                         <span>Add Subcategory</span>
                     </button>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-wrap gap-2.5 sm:gap-3">
                     {allSubcategories.length === 0 && (
                         <p className="text-sm text-gray-400">No subcategories yet.</p>
                     )}
@@ -301,17 +376,30 @@ const Categories = () => {
                         <Chip
                             key={`${sub.parentValue}-${sub.value}`}
                             label={sub.name}
-                            onDelete={() => handleDeleteSubcategory(sub.parentValue, sub.value)}
+                            onDelete={() => askDeleteSubcategory(sub)}
                         />
                     ))}
                 </div>
             </section>
 
-            {/* Add Category drawer (right side) */}
-            <SideDrawer open={drawer === 'category'} title="Category name" onClose={closeDrawer}>
-                <form onSubmit={handleSaveCategory} noValidate>
+            {/* ---------------- Add Category modal ---------------- */}
+            <Modal
+                open={addModal === 'category'}
+                onClose={closeAddModal}
+                labelledBy="add-category-title"
+            >
+                <h3 id="add-category-title" className="text-lg sm:text-xl font-semibold text-gray-900 pr-8">
+                    Add Category
+                </h3>
+                <p className="mt-1 text-xs text-gray-500">Enter a name for the new category.</p>
+
+                <form onSubmit={handleSaveCategory} noValidate className="mt-5">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
+                        Category name
+                    </label>
                     <input
                         type="text"
+                        autoFocus
                         value={categoryName}
                         onChange={(e) => {
                             setCategoryName(e.target.value);
@@ -320,21 +408,45 @@ const Categories = () => {
                         placeholder="Category name"
                         className={inputClass}
                     />
-                    {formError && drawer === 'category' && (
-                        <p className="mt-2 text-xs text-red-600">{formError}</p>
+                    {formError && addModal === 'category' && (
+                        <p className="mt-2 text-xs text-red-600" role="alert">{formError}</p>
                     )}
-                    <button
-                        type="submit"
-                        className="mt-4 w-full bg-[#EE1C25] hover:bg-[#d4161e] text-white text-xs font-semibold py-2.5 rounded-md transition-colors"
-                    >
-                        Save
-                    </button>
-                </form>
-            </SideDrawer>
 
-            {/* Add Subcategory drawer (right side) */}
-            <SideDrawer open={drawer === 'subcategory'} title="Select Category" onClose={closeDrawer}>
-                <form onSubmit={handleSaveSubcategory} noValidate>
+                    <div className="mt-6 flex flex-col-reverse sm:flex-row gap-2.5 sm:gap-3">
+                        <button
+                            type="button"
+                            onClick={closeAddModal}
+                            className="w-full sm:flex-1 border border-gray-200 text-gray-700 hover:bg-gray-50 text-sm font-medium py-2.5 rounded-lg transition-colors"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="w-full sm:flex-1 bg-[#EE1C25] hover:bg-[#d4161e] text-white text-sm font-medium py-2.5 rounded-lg transition-colors"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </Modal>
+
+            {/* ---------------- Add Subcategory modal ---------------- */}
+            <Modal
+                open={addModal === 'subcategory'}
+                onClose={closeAddModal}
+                labelledBy="add-subcategory-title"
+            >
+                <h3 id="add-subcategory-title" className="text-lg sm:text-xl font-semibold text-gray-900 pr-8">
+                    Add Subcategory
+                </h3>
+                <p className="mt-1 text-xs text-gray-500">
+                    Choose a category and enter the subcategory name.
+                </p>
+
+                <form onSubmit={handleSaveSubcategory} noValidate className="mt-5">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">
+                        Select Category
+                    </label>
                     <div className="relative">
                         <select
                             value={selectedCategory}
@@ -371,18 +483,115 @@ const Categories = () => {
                         className={inputClass}
                     />
 
-                    {formError && drawer === 'subcategory' && (
-                        <p className="mt-2 text-xs text-red-600">{formError}</p>
+                    {formError && addModal === 'subcategory' && (
+                        <p className="mt-2 text-xs text-red-600" role="alert">{formError}</p>
                     )}
 
-                    <button
-                        type="submit"
-                        className="mt-4 w-full bg-[#EE1C25] hover:bg-[#d4161e] text-white text-xs font-semibold py-2.5 rounded-md transition-colors"
-                    >
-                        Save
-                    </button>
+                    <div className="mt-6 flex flex-col-reverse sm:flex-row gap-2.5 sm:gap-3">
+                        <button
+                            type="button"
+                            onClick={closeAddModal}
+                            className="w-full sm:flex-1 border border-gray-200 text-gray-700 hover:bg-gray-50 text-sm font-medium py-2.5 rounded-lg transition-colors"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="w-full sm:flex-1 bg-[#EE1C25] hover:bg-[#d4161e] text-white text-sm font-medium py-2.5 rounded-lg transition-colors"
+                        >
+                            Save
+                        </button>
+                    </div>
                 </form>
-            </SideDrawer>
+            </Modal>
+
+            {/* ---------------- Delete modal (confirm -> success) ---------------- */}
+            <Modal
+                open={deleteStep !== null}
+                onClose={closeDeleteModal}
+                locked={isDeleting}
+                labelledBy="delete-modal-title"
+            >
+                <div className="text-center">
+                    {deleteStep === 'confirm' && (
+                        <>
+                            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-50 text-[#EE1C25]">
+                                <FiTrash2 size={24} />
+                            </div>
+
+                            <h3
+                                id="delete-modal-title"
+                                className="text-lg sm:text-xl font-semibold text-gray-900"
+                            >
+                                Delete this {deleteLabel}?
+                            </h3>
+                            <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                                Are you sure you want to delete{' '}
+                                <span className="font-semibold text-gray-800 break-words">
+                                    "{deleteTarget?.name}"
+                                </span>
+                                ? This action cannot be undone.
+                            </p>
+                            {deleteTarget?.kind === 'category' && (
+                                <p className="mt-2 text-xs text-gray-400">
+                                    All subcategories inside this category will be deleted too.
+                                </p>
+                            )}
+
+                            {deleteError && (
+                                <p className="mt-3 text-xs font-medium text-[#EE1C25]" role="alert">
+                                    {deleteError}
+                                </p>
+                            )}
+
+                            <div className="mt-6 flex flex-col-reverse sm:flex-row gap-2.5 sm:gap-3">
+                                <button
+                                    type="button"
+                                    onClick={closeDeleteModal}
+                                    disabled={isDeleting}
+                                    className="w-full sm:flex-1 border border-gray-200 text-gray-700 hover:bg-gray-50 text-sm font-medium py-2.5 rounded-lg transition-colors disabled:opacity-50"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleConfirmDelete}
+                                    disabled={isDeleting}
+                                    className="w-full sm:flex-1 bg-[#EE1C25] hover:bg-[#d4161e] text-white text-sm font-medium py-2.5 rounded-lg transition-colors disabled:opacity-70"
+                                >
+                                    {isDeleting ? 'Deleting...' : 'Confirm Delete'}
+                                </button>
+                            </div>
+                        </>
+                    )}
+
+                    {deleteStep === 'success' && (
+                        <>
+                            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-50 text-green-600">
+                                <FiCheckCircle size={26} />
+                            </div>
+
+                            <h3
+                                id="delete-modal-title"
+                                className="text-lg sm:text-xl font-semibold text-gray-900"
+                            >
+                                Deleted successfully
+                            </h3>
+                            <p className="mt-2 text-sm text-gray-500 leading-relaxed">
+                                The {deleteLabel} has been deleted successfully.
+                            </p>
+
+                            <button
+                                type="button"
+                                onClick={closeDeleteModal}
+                                className="mt-6 w-full bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium py-2.5 rounded-lg transition-colors"
+                            >
+                                Done
+                            </button>
+                        </>
+                    )}
+                </div>
+            </Modal>
         </div>
     );
 };

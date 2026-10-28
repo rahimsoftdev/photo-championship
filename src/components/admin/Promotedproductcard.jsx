@@ -1,14 +1,18 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { FaHeart } from 'react-icons/fa';
 import { FiCalendar, FiClock, FiEye, FiList } from 'react-icons/fi';
 
 /**
- * PromotedProductCard (display only, no click events)
+ * PromotedProductCard
  *
  * Props:
  *  - product : one promoted item object
  *      { id, albumType ('single' | 'six' | 'twelve'), category, title, description,
  *        images[], totalReact, viewsCount, price, uploadedAt, expiryDate }
+ *
+ * Image click goes to the CURRENT page path + "/:id", so no extra prop is needed:
+ *   /adminDashboard/promoted  -> /adminDashboard/promoted/:id
  */
 
 // Top-left badge for each album type
@@ -49,7 +53,11 @@ const formatExpiry = (iso) => {
 };
 
 const PromotedProductCard = ({ product = {} }) => {
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+
     const {
+        id,
         albumType = 'single',
         category,
         title,
@@ -67,22 +75,42 @@ const PromotedProductCard = ({ product = {} }) => {
     const isTwelve = albumType === 'twelve';
     const extraPhotos = images.length > 1 ? images.length - 1 : 0;
 
+    // Image click -> current page path + "/:id"
+    const handleImageClick = () => {
+        const basePath = pathname.replace(/\/+$/, ''); // remove trailing slash
+        navigate(`${basePath}/${id}`);
+    };
+
+    const handleImageKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleImageClick();
+        }
+    };
+
     return (
         <article className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden flex flex-col h-full">
-            {/* Image area */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
+            {/* Image area (clickable) */}
+            <div
+                role="button"
+                tabIndex={0}
+                onClick={handleImageClick}
+                onKeyDown={handleImageKeyDown}
+                aria-label={`Open ${title || 'promoted product'}`}
+                className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 cursor-pointer group focus:outline-none focus:ring-2 focus:ring-[#4048CD]/40"
+            >
                 {images[0] && (
                     <img
                         src={images[0]}
                         alt={title || 'Promoted product'}
                         loading="lazy"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 )}
 
                 {/* Album type badge (top-left) */}
                 <span
-                    className={`absolute top-2 left-2 inline-flex items-center gap-1 text-[8px] sm:text-[9px] font-semibold px-2 py-1 rounded ${badge.className}`}
+                    className={`absolute top-2 left-2 max-w-[80%] truncate inline-flex items-center gap-1 text-[8px] sm:text-[9px] font-semibold px-2 py-1 rounded ${badge.className}`}
                 >
                     {badge.icon && <FiList size={10} />}
                     {badge.label}

@@ -8,6 +8,7 @@ import { Link, useSearchParams } from 'react-router';
 import useAllArtworks from '../../hooks/useAllArtworks';
 import AdminArtworkCard from '../../components/admin/Adminartworkcard';
 import Pagination from '../../components/shared/Pagination';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
 
 const CompetitionManagementPage = () => {
     const [searchParams] = useSearchParams();
@@ -30,7 +31,7 @@ const CompetitionManagementPage = () => {
         setDeletedIds((prev) => [...prev, id]);
     };
 
-    if (loading) return <div className="py-20 text-center text-sm text-gray-500">Loading artworks...</div>;
+    if (loading) return <ArtworkSkeleton/>
     if (error) return <div className="py-20 text-center text-sm text-red-500">{error}</div>;
 
     // Hide the ones already deleted
@@ -38,7 +39,7 @@ const CompetitionManagementPage = () => {
     const visibleFilteredCount = filteredArtworks.filter((art) => !deletedIds.includes(art.id)).length;
 
     return (
-        <div className="w-full space-y-6 pb-12">
+        <div className="w-full space-y-4 pb-12">
             {/* Top Header Section */}
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                 <div>

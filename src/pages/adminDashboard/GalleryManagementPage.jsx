@@ -48,15 +48,23 @@ const GalleryManagementPage = () => {
     const visibleFilteredCount = filteredArtworks.filter((art) => !deletedIds.includes(art.id)).length;
 
     return (
-        <section className="w-full space-y-6">
+        <section className="w-full space-y-4">
             {/* Filter Component */}
+
+             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                <div>
+                    <h1 className="text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
+                        Gallery
+                    </h1>
+                </div>
+            </div>
             <MyArtworkFilter
                 totalShown={visibleArtworks.length}
                 totalFiltered={visibleFilteredCount}
             />
 
             {/* Artwork cards */}
-            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
+            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
                 {visibleArtworks.map((artWorkData) => (
                     <AdminArtworkCard
                         key={

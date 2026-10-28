@@ -88,7 +88,7 @@ const EditAlbumTypesPage = () => {
     /* ---------------------------------- UI ------------------------------------- */
 
     return (
-        <div className="min-h-screen bg-[#F6F7FB] px-4 sm:px-6 lg:px-8 py-6 pt-20 lg:pt-8">
+        <div className="">
             {/* Success toast */}
             <div
                 className={`fixed top-5 right-5 z-[80] flex items-center gap-2 bg-white border border-green-200 text-green-700 text-sm font-medium px-4 py-3 rounded-lg shadow-lg transition-all duration-300 ${

@@ -43,8 +43,14 @@ const BayPhotoMangement = () => {
     const visibleFilteredCount = filteredArtworks.filter((art) => !deletedIds.includes(art.id)).length;
 
     return (
-        <section className="w-full space-y-6">
-            <h1>Buy Photos</h1>
+        <section className="w-full space-y-4">
+             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                <div>
+                    <h1 className="text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
+                        Competition
+                    </h1>
+                </div>
+            </div>
 
             {/* Filter Component */}
             <MyArtworkFilter
