@@ -75,14 +75,14 @@ const QuestionIcon = () => (
 const QuestionRow = ({ item, onAnswer, onView }) => (
     <div className="flex items-start gap-3 py-3">
         <QuestionIcon />
-        <div className="min-w-0">
-            <h3 className="text-[13px] font-semibold text-slate-800">{item.subject}</h3>
-            <p className="text-xs italic text-gray-500 truncate max-w-[520px]">
+        <div className="min-w-0 flex-1">
+            <h3 className="text-[13px] font-semibold text-slate-800 break-words">{item.subject}</h3>
+            <p className="text-xs italic text-gray-500 truncate w-full sm:max-w-[520px]">
                 &ldquo;{item.question}&rdquo;
             </p>
             <p className="text-[10px] font-semibold text-slate-700 mt-1">{item.time}</p>
 
-            <div className="flex items-center gap-2 mt-3">
+            <div className="flex flex-wrap items-center gap-2 mt-3">
                 {item.status === 'pending' ? (
                     <button
                         type="button"
@@ -120,11 +120,11 @@ const QuestionRow = ({ item, onAnswer, onView }) => (
 );
 
 const SectionCard = ({ title, children, empty }) => (
-    <section className="bg-white rounded-lg shadow-sm border border-gray-100 mb-5">
-        <h2 className="text-base font-semibold text-slate-800 px-4 py-4 border-b border-gray-100">
+    <section className="bg-white rounded-lg shadow-sm border border-gray-100 mb-4 sm:mb-5">
+        <h2 className="text-sm sm:text-base font-semibold text-slate-800 px-3 sm:px-4 py-3 sm:py-4 border-b border-gray-100">
             {title}
         </h2>
-        <div className="px-4 py-2 divide-y divide-transparent">
+        <div className="px-3 sm:px-4 py-2 divide-y divide-transparent">
             {React.Children.count(children) > 0 ? (
                 children
             ) : (
@@ -136,7 +136,27 @@ const SectionCard = ({ title, children, empty }) => (
 
 /* ------------------------------ Modal shell ------------------------------ */
 
+// Locks background scroll while a modal is open (and avoids layout shift)
+const useLockBodyScroll = () => {
+    useEffect(() => {
+        const { body, documentElement } = document;
+        const prevOverflow = body.style.overflow;
+        const prevPadding = body.style.paddingRight;
+        const scrollbarWidth = window.innerWidth - documentElement.clientWidth;
+
+        body.style.overflow = 'hidden';
+        if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+
+        return () => {
+            body.style.overflow = prevOverflow;
+            body.style.paddingRight = prevPadding;
+        };
+    }, []);
+};
+
 const ModalShell = ({ title, onClose, children }) => {
+    useLockBodyScroll();
+
     useEffect(() => {
         const onKey = (e) => e.key === 'Escape' && onClose();
         window.addEventListener('keydown', onKey);
@@ -145,17 +165,25 @@ const ModalShell = ({ title, onClose, children }) => {
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4 overflow-y-auto"
+            // items-end => bottom sheet on small screens, centered on sm+
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm sm:p-4 overscroll-contain"
             onClick={onClose}
         >
+            <style>{`
+                @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+                @keyframes popIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
+                .modal-anim { animation: sheetUp .25s ease-out; }
+                @media (min-width: 640px) { .modal-anim { animation: popIn .18s ease-out; } }
+            `}</style>
             <div
                 role="dialog"
                 aria-modal="true"
                 aria-label={title}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white w-full max-w-[420px] mt-10 shadow-xl"
+                className="modal-anim bg-white w-full sm:max-w-[420px] max-h-[92vh] sm:max-h-[90vh] flex flex-col
+                           rounded-t-2xl sm:rounded-lg shadow-xl overflow-hidden"
             >
-                <div className="flex items-center gap-3 bg-gray-100 px-4 py-3 border-b border-gray-200">
+                <div className="flex items-center gap-3 bg-gray-100 px-4 py-3 border-b border-gray-200 flex-shrink-0">
                     <button
                         type="button"
                         onClick={onClose}
@@ -168,7 +196,10 @@ const ModalShell = ({ title, onClose, children }) => {
                         {title}
                     </h3>
                 </div>
-                <div className="px-5 py-6">{children}</div>
+                {/* scrolls inside the modal only */}
+                <div className="px-4 sm:px-5 py-5 sm:py-6 overflow-y-auto overscroll-contain pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+                    {children}
+                </div>
             </div>
         </div>
     );
@@ -186,7 +217,7 @@ const OriginalQuestion = ({ text }) => (
             <h4 className="text-xs font-medium text-slate-800">Original Consultant Question</h4>
         </div>
         <div
-            className="bg-gray-100 text-[11px] italic text-gray-600 px-4 py-3 border-l-2"
+            className="bg-gray-100 text-[11px] italic text-gray-600 px-4 py-3 border-l-2 break-words"
             style={{ borderColor: INDIGO }}
         >
             &ldquo;{text}&rdquo;
@@ -206,7 +237,7 @@ const ToolbarButton = ({ onClick, label, children }) => (
             e.preventDefault();
             onClick();
         }}
-        className="p-1 rounded text-gray-600 hover:bg-gray-200 transition"
+        className="p-1.5 sm:p-1 rounded text-gray-600 hover:bg-gray-200 transition"
     >
         {children}
     </button>
@@ -233,7 +264,7 @@ const RichTextEditor = ({ onChange }) => {
 
     return (
         <div className="border border-gray-200 rounded-md overflow-hidden">
-            <div className="flex items-center gap-1 px-2 py-1.5 bg-gray-50 border-b border-gray-200">
+            <div className="flex flex-wrap items-center gap-1 px-2 py-1.5 bg-gray-50 border-b border-gray-200">
                 <ToolbarButton label="Bold" onClick={() => exec('bold')}>
                     <MdFormatBold className="w-4 h-4" />
                 </ToolbarButton>
@@ -264,7 +295,8 @@ const RichTextEditor = ({ onChange }) => {
                 aria-multiline="true"
                 data-placeholder="Provide a detailed answer for the knowledge base..."
                 onInput={() => onChange(ref.current.innerHTML)}
-                className="min-h-[150px] max-h-[260px] overflow-y-auto px-4 py-3 text-xs text-slate-700 outline-none
+                // text-base on mobile prevents iOS zoom-on-focus
+                className="min-h-[130px] sm:min-h-[150px] max-h-[40vh] sm:max-h-[260px] overflow-y-auto px-4 py-3 text-base sm:text-xs text-slate-700 outline-none break-words
                    [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-blue-600 [&_a]:underline [&_img]:max-w-full
                    empty:before:content-[attr(data-placeholder)] empty:before:text-gray-400"
             />
@@ -295,7 +327,7 @@ const AnswerModal = ({ question, onClose, onPublish }) => {
                     disabled={isEmpty}
                     onClick={() => onPublish(question.id, html)}
                     style={{ backgroundColor: BRAND }}
-                    className="inline-flex items-center gap-2 text-white text-xs font-medium px-6 py-2.5 rounded hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-white text-xs font-medium px-6 py-3 sm:py-2.5 rounded hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     Publish &amp; Notify
                 </button>
@@ -310,7 +342,7 @@ const ViewModal = ({ question, onClose }) => (
 
         <p className="text-[11px] font-medium text-slate-800 mt-5 mb-2">Answer Content</p>
         <div
-            className="bg-gray-100 text-[11px] italic text-gray-600 px-4 py-3 border-l-2
+            className="bg-gray-100 text-[11px] italic text-gray-600 px-4 py-3 border-l-2 break-words
                  [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-blue-600 [&_a]:underline [&_img]:max-w-full"
             style={{ borderColor: BRAND }}
             // NOTE: sanitize this HTML (e.g. DOMPurify) before rendering in production
@@ -322,7 +354,7 @@ const ViewModal = ({ question, onClose }) => (
                 type="button"
                 onClick={onClose}
                 style={{ backgroundColor: BRAND }}
-                className="text-white text-xs font-medium px-6 py-2.5 rounded hover:opacity-90 transition"
+                className="w-full sm:w-auto text-white text-xs font-medium px-6 py-3 sm:py-2.5 rounded hover:opacity-90 transition"
             >
                 Back to Support
             </button>
@@ -354,11 +386,11 @@ const SupportInbox = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#F7F8FA] px-6 py-5 text-slate-800 font-sans">
-            <div className="max-w-3xl">
+        <div className="w-full">
+            <div className="w-full max-w-5xl mx-auto">
                 <p className="text-[9px] font-semibold tracking-widest text-gray-500 uppercase">Inbox</p>
-                <h1 className="text-2xl font-semibold text-slate-900 mt-1">Support requests</h1>
-                <p className="text-[11px] text-gray-500 mt-1 mb-5">
+                <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 mt-1">Support requests</h1>
+                <p className="text-[11px] text-gray-500 mt-1 mb-4 sm:mb-5">
                     Every contact-form message, prioritized and kept out of live chat noise.
                 </p>
 
@@ -391,8 +423,8 @@ const SupportInbox = () => {
             )}
 
             {toast && (
-                <div className="fixed bottom-6 right-6 z-[60] flex items-center gap-2 bg-slate-900 text-white text-xs px-4 py-3 rounded-lg shadow-lg">
-                    <FiCheck className="w-4 h-4 text-green-400" />
+                <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-[60] flex items-center gap-2 bg-slate-900 text-white text-xs px-4 py-3 rounded-lg shadow-lg">
+                    <FiCheck className="w-4 h-4 text-green-400 flex-shrink-0" />
                     {toast}
                 </div>
             )}

@@ -35,6 +35,8 @@ const BusinessLinkPhotoDetails = () => {
   const id = searchParams.get("id");
   const album = getAlbumById(id);
 
+  console.log(album, 'alb')
+
   if (!album) {
     return (
       <div className="p-6 text-sm text-gray-500">
@@ -59,8 +61,8 @@ const BusinessLinkPhotoDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F9FC] p-4 font-sans text-slate-800 sm:p-6">
-      <div className="mx-auto max-w-5xl">
+    <div className="">
+      <div className="">
         <button
           type="button"
           onClick={() => navigate(LIST_PATH)}
@@ -71,7 +73,7 @@ const BusinessLinkPhotoDetails = () => {
         </button>
 
         {/* ---------------- User info card ---------------- */}
-        <div className="mb-4 rounded-xl border border-gray-100 bg-white px-5 py-4 shadow-sm">
+        <div className="rounded-xl border border-gray-100 bg-white px-5 py-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50 text-xs font-semibold text-indigo-600">
@@ -150,13 +152,14 @@ const BusinessLinkPhotoDetails = () => {
               <p className="text-[11px] font-semibold text-slate-900">{album.photographer}</p>
             </div>
           </div>
-          <button
+          <Link
+          to={'/admin-dashboard/photographers/user_103'}
             type="button"
             // TODO: navigate to the photographer's profile
             className="rounded-md bg-indigo-600 px-4 py-2 text-[11px] font-medium text-white transition hover:bg-indigo-700"
           >
             View Profile
-          </button>
+          </Link>
         </div>
       </div>
     </div>

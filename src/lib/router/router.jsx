@@ -365,6 +365,8 @@ export const router = createBrowserRouter([
                 path: "profile", Component: MyProfile
             },
 
+
+            //user profile in admin dashboard:
             {
                 path: "photographers/:id", Component: PhotographarDetailsLayout,
                 children: [
