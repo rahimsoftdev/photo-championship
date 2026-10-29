@@ -34,7 +34,7 @@ const PostTab = () => {
             {/* Cards Grid */}
             <div className=" space-y-4 mb-10">
                 {paginatedData.map((item, index) => (
-                    <MessageCard post={'yes'} key={item.userId || index} item={item} />
+                    <MessageCard post={'yes'} key={item?.userId || index} item={item} />
                 ))}
             </div>
 

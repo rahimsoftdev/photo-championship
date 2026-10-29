@@ -75,6 +75,8 @@ const ACTIONS = [
   },
 ];
 
+
+
 /* --------------------------- Small components --------------------------- */
 
 const InfoCard = ({ title, badge, badgeClass, children }) => (
@@ -153,6 +155,10 @@ const ReportDetails = () => {
   const [pendingAction, setPendingAction] = useState(null);
   const [toast, setToast] = useState("");
 
+  const goToPhotographer = (userId) => {
+    navigate(`/admin-dashboard/photographers/${userId || 'user_103'}`);
+  };
+
   if (!baseReport) {
     return (
       <div className="p-6 text-sm text-gray-500">
@@ -191,7 +197,7 @@ const ReportDetails = () => {
 
   return (
     <div className="min-h-screen bg-white p-4 font-sans text-slate-800 sm:p-6">
-      <div className="mx-auto max-w-4xl">
+      <div className="">
         {/* Back + status */}
         <div className="mb-4 flex items-center justify-between">
           <button
@@ -246,6 +252,7 @@ const ReportDetails = () => {
               type="button"
               // TODO: navigate to the reporter's profile
               className="mt-3 w-full rounded-md border border-blue-200 py-2 text-[10px] font-medium text-blue-600 transition hover:bg-blue-50"
+              onClick={()=> goToPhotographer('user_104')}
             >
               View Reporter Profile
             </button>
@@ -271,6 +278,7 @@ const ReportDetails = () => {
             <div className="mt-3 grid grid-cols-2 gap-2">
               <button
                 type="button"
+                onClick={()=> goToPhotographer('user_103')}
                 // TODO: navigate to the reported user's profile
                 className="rounded-md border border-gray-200 py-2 text-[10px] font-medium text-slate-700 transition hover:bg-gray-50"
               >
@@ -312,10 +320,11 @@ const ReportDetails = () => {
         {/* Admin view: hide Vote / Download / Share + photographer block (see note on props) */}
         <ArtworkInfoSection
           artwork={artwork}
-          onVote={() => {}}
+          onVote={() => { }}
           hasVoted={false}
           showActions={false}
           showPhotographer={false}
+          isDashboard={true}
         />
 
         {/* Admin moderation decision actions */}

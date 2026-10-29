@@ -258,7 +258,7 @@ const ArtworkInfoSection = ({ artwork, onVote, hasVoted, isDashboard: isDashboar
           </div>
         </div>
         <Link
-          to={`/photographers/${artwork?.userId}`}
+       to={isDashboard ? '/admin-dashboard/photographers/user_107' : `/photographers/${artwork?.userId}`}
           className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-1.5 md:py-2.5 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
         >
           View Profile

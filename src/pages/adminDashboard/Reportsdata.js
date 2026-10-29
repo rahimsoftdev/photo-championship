@@ -1,7 +1,7 @@
 // Shared fake data + helpers for the Reports & Moderation list and details pages.
 
-export const LIST_PATH = "/adminDashboard/reports-resolved";
-export const DETAILS_PATH = "/adminDashboard/reports-resolved/details";
+export const LIST_PATH = "/admin-dashboard/reports-resolved";
+export const DETAILS_PATH = "/admin-dashboard/reports-resolved/details";
 
 /* ------------------------------------------------------------------ */
 /*  TODO: Add real data                                                */

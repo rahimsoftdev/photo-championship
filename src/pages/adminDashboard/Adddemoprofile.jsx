@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { FiArrowLeft, FiEye, FiEyeOff, FiTrash2, FiUpload, FiX } from "react-icons/fi";
 
-const LIST_PATH = "/adminDashboard/demo-profile"; // TODO: match your route
+const LIST_PATH = "/admin-dashboard/demo-profile"; // TODO: match your route
 
 const BIO_MAX = 200;
 const MAX_SOCIAL_LINKS = 5;
@@ -198,7 +198,7 @@ const AddDemoProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F9FC] p-6 font-sans text-slate-800">
+    <div className="">
       <button
         type="button"
         onClick={() => navigate(LIST_PATH)}
