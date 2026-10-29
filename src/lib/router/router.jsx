@@ -330,6 +330,9 @@ export const router = createBrowserRouter([
                 path: "promoted-albums", Component: PromotedProductsPage
             },
             {
+                path: "promoted-albums/:id", Component: ArtwokDetailsPage
+            },
+            {
                 path: "support", Component: SupportInbox
             },
             {

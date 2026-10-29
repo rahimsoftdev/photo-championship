@@ -78,7 +78,7 @@ const PromotedProductCard = ({ product = {} }) => {
     // Image click -> current page path + "/:id"
     const handleImageClick = () => {
         const basePath = pathname.replace(/\/+$/, ''); // remove trailing slash
-        navigate(`${basePath}/${id}`);
+        navigate(`${basePath}/art_001`);
     };
 
     const handleImageKeyDown = (e) => {

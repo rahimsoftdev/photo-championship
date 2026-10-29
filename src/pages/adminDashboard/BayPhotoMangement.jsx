@@ -33,22 +33,20 @@ const BayPhotoMangement = () => {
         setDeletedIds((prev) => [...prev, id]);
     };
 
-    if (loading) return <ArtworkSkeleton/>
-
     if (error) {
         return <p className="text-red-500">{error}</p>;
     }
 
-    // Hide the ones already deleted
-    const visibleArtworks = artworks.filter((art) => !deletedIds.includes(art.id));
-    const visibleFilteredCount = filteredArtworks.filter((art) => !deletedIds.includes(art.id)).length;
+    // Hide the ones already deleted (loading er somoy artworks undefined hole crash na kore)
+    const visibleArtworks = (artworks || []).filter((art) => !deletedIds.includes(art.id));
+    const visibleFilteredCount = (filteredArtworks || []).filter((art) => !deletedIds.includes(art.id)).length;
 
     return (
         <section className="w-full space-y-4">
              <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
-                        Competition
+                        Bay Photos
                     </h1>
                 </div>
             </div>
@@ -59,7 +57,10 @@ const BayPhotoMangement = () => {
                 totalFiltered={visibleFilteredCount}
             />
 
-            {visibleArtworks.length === 0 ? (
+            {/* loading hole skeleton ekhane dekhabe */}
+            {loading ? (
+                <ArtworkSkeleton />
+            ) : visibleArtworks.length === 0 ? (
                 <p>No photos found.</p>
             ) : (
                 <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
@@ -74,7 +75,7 @@ const BayPhotoMangement = () => {
             )}
 
             {/* Pagination Component */}
-            <Pagination totalPages={totalPages} />
+            {!loading && <Pagination totalPages={totalPages} />}
         </section>
     );
 };

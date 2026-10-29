@@ -27,9 +27,6 @@ const PromotedProductsPage = () => {
     // TODO: confirm the shape your useFetch hook returns ({ data, isLoading, error })
     const { data, isLoading, error } = useFetch('/Promoted.json');
 
-    // Show loading page while data is being fetched.
-    if (isLoading) return <ArtworkSkeleton/>
-
     // Show an error if fetching fails.
     if (error) {
         return <p className="text-red-500">{String(error)}</p>;
@@ -61,8 +58,10 @@ const PromotedProductsPage = () => {
                 totalFiltered={filteredProducts.length}
             />
 
-            {/* Cards grid */}
-            {pageProducts.length > 0 ? (
+            {/* Cards grid (loading hole skeleton ekhane dekhabe) */}
+            {isLoading ? (
+                <ArtworkSkeleton />
+            ) : pageProducts.length > 0 ? (
                 <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
                     {pageProducts.map((product) => (
                         <PromotedProductCard key={product.id} product={product} />
@@ -76,7 +75,7 @@ const PromotedProductsPage = () => {
             )}
 
             {/* Pagination: reads/writes ?page= itself, only needs totalPages */}
-            <Pagination totalPages={totalPages} />
+            {!isLoading && <Pagination totalPages={totalPages} />}
         </section>
     );
 };

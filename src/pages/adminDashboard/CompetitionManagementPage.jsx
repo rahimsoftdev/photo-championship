@@ -1,10 +1,6 @@
-// import { Pagination } from '@heroui/react';
 import React, { useState } from 'react';
-// import AdminArtworkCard from '../../components/ui/AdminArtworkCard';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
-import ArtworkStats from '../../components/ui/ArtworkStats';
-import { FiPlus } from 'react-icons/fi';
-import { Link, useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router';
 import useAllArtworks from '../../hooks/useAllArtworks';
 import AdminArtworkCard from '../../components/admin/Adminartworkcard';
 import Pagination from '../../components/shared/Pagination';
@@ -31,12 +27,56 @@ const CompetitionManagementPage = () => {
         setDeletedIds((prev) => [...prev, id]);
     };
 
-    if (loading) return <ArtworkSkeleton/>
-    if (error) return <div className="py-20 text-center text-sm text-red-500">{error}</div>;
+    // Hide the ones already deleted (loading er somoy artworks undefined hole crash na kore)
+    const visibleArtworks = (artworks || []).filter((art) => !deletedIds.includes(art.id));
+    const visibleFilteredCount = (filteredArtworks || []).filter(
+        (art) => !deletedIds.includes(art.id)
+    ).length;
 
-    // Hide the ones already deleted
-    const visibleArtworks = artworks.filter((art) => !deletedIds.includes(art.id));
-    const visibleFilteredCount = filteredArtworks.filter((art) => !deletedIds.includes(art.id)).length;
+    // Grid er jaygay ki dekhabe: skeleton / error / cards / empty
+    const renderContent = () => {
+        if (loading) {
+            return <ArtworkSkeleton />;
+        }
+
+        if (error) {
+            return (
+                <div className="py-20 text-center text-sm text-red-500">
+                    {error}
+                </div>
+            );
+        }
+
+        if (visibleArtworks.length > 0) {
+            return (
+                <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
+                    {visibleArtworks.map((artWorkData) => (
+                        <AdminArtworkCard
+                            key={
+                                artWorkData.id ??
+                                artWorkData._id ??
+                                `${artWorkData.userId}-${artWorkData.title}`
+                            }
+                            imageData={artWorkData}
+                            onDelete={handleDelete}
+                            isGallery={true}
+                        />
+                    ))}
+                </div>
+            );
+        }
+
+        return (
+            <div className="rounded-xl border border-dashed border-[#CBD5E1] bg-[#F8FAFC] p-8 text-center">
+                <p className="text-sm font-semibold text-[#334155]">
+                    Kono artwork pawa jayni!
+                </p>
+                <p className="mt-1 text-xs text-[#64748B]">
+                    Apnar filter ba criteria change kore abar chesta korun.
+                </p>
+            </div>
+        );
+    };
 
     return (
         <div className="w-full space-y-4 pb-12">
@@ -49,44 +89,17 @@ const CompetitionManagementPage = () => {
                 </div>
             </div>
 
-            {/* Stats Cards Component */}
-            {/* <ArtworkStats filteredArtworks={filteredArtworks} /> */}
-
-            {/* Filter Component */}
+            {/* Filter Component (always visible, loading er somoyo thakbe) */}
             <MyArtworkFilter
                 totalShown={visibleArtworks.length}
                 totalFiltered={visibleFilteredCount}
             />
 
-            {/* Artwork Cards Grid Section */}
-            {visibleArtworks.length > 0 ? (
-                <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
-                    {visibleArtworks.map((artWorkData) => (
-                        <AdminArtworkCard
-                            key={
-                                artWorkData.id ??
-                                artWorkData._id ??
-                                `${artWorkData.userId}-${artWorkData.title}`
-                            }
-                            imageData={artWorkData}
-                            onDelete={handleDelete}
-                            isGallery= {true}
-                        />
-                    ))}
-                </div>
-            ) : (
-                <div className="rounded-xl border border-dashed border-[#CBD5E1] bg-[#F8FAFC] p-8 text-center">
-                    <p className="text-sm font-semibold text-[#334155]">
-                        Kono artwork pawa jayni!
-                    </p>
-                    <p className="mt-1 text-xs text-[#64748B]">
-                        Apnar filter ba criteria change kore abar chesta korun.
-                    </p>
-                </div>
-            )}
+            {/* Artwork Cards Grid Section (skeleton ekhane dekhabe) */}
+            {renderContent()}
 
             {/* Pagination Component */}
-            <Pagination totalPages={totalPages} />
+            {!loading && !error && <Pagination totalPages={totalPages} />}
         </div>
     );
 };

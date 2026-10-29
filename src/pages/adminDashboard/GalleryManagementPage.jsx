@@ -36,17 +36,14 @@ const GalleryManagementPage = () => {
         setDeletedIds((prev) => [...prev, id]);
     };
 
-    // Show loading page while data is being fetched.
-    if (loading) return <ArtworkSkeleton/>
-
     // Show an error if fetching fails.
     if (error) {
         return <p className="text-red-500">{error}</p>;
     }
 
-    // Hide the ones already deleted
-    const visibleArtworks = artworks.filter((art) => !deletedIds.includes(art.id));
-    const visibleFilteredCount = filteredArtworks.filter((art) => !deletedIds.includes(art.id)).length;
+    // Hide the ones already deleted (loading er somoy artworks undefined hole crash na kore)
+    const visibleArtworks = (artworks || []).filter((art) => !deletedIds.includes(art.id));
+    const visibleFilteredCount = (filteredArtworks || []).filter((art) => !deletedIds.includes(art.id)).length;
 
     return (
         <section className="w-full space-y-4">
@@ -64,23 +61,27 @@ const GalleryManagementPage = () => {
                 totalFiltered={visibleFilteredCount}
             />
 
-            {/* Artwork cards */}
-            <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
-                {visibleArtworks.map((artWorkData) => (
-                    <AdminArtworkCard
-                        key={
-                            artWorkData.id ??
-                            artWorkData._id ??
-                            `${artWorkData.userId}-${artWorkData.title}`
-                        }
-                        imageData={artWorkData}
-                        onDelete={handleDelete}
-                    />
-                ))}
-            </div>
+            {/* Artwork cards (loading hole skeleton ekhane dekhabe) */}
+            {loading ? (
+                <ArtworkSkeleton />
+            ) : (
+                <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
+                    {visibleArtworks.map((artWorkData) => (
+                        <AdminArtworkCard
+                            key={
+                                artWorkData.id ??
+                                artWorkData._id ??
+                                `${artWorkData.userId}-${artWorkData.title}`
+                            }
+                            imageData={artWorkData}
+                            onDelete={handleDelete}
+                        />
+                    ))}
+                </div>
+            )}
 
             {/* Pagination Component */}
-            <Pagination totalPages={totalPages} />
+            {!loading && <Pagination totalPages={totalPages} />}
         </section>
     );
 };
