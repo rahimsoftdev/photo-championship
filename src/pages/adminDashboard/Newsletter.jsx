@@ -73,8 +73,9 @@ const Label = ({ htmlFor, children }) => (
     </label>
 );
 
+// text-base on mobile prevents iOS zoom-on-focus; shrinks to text-xs from sm+
 const inputClass =
-    "w-full rounded-lg border border-gray-200 bg-gray-50/50 px-3.5 py-2.5 text-xs text-slate-800 placeholder-gray-400 outline-none transition focus:border-indigo-400 focus:bg-white";
+    "w-full rounded-lg border border-gray-200 bg-gray-50/50 px-3.5 py-2.5 text-base sm:text-xs text-slate-800 placeholder-gray-400 outline-none transition focus:border-indigo-400 focus:bg-white";
 
 const FieldError = ({ message }) =>
     message ? <p className="mt-1.5 text-[11px] text-red-500">{message}</p> : null;
@@ -91,7 +92,7 @@ const ToolbarButton = ({ label, onAction, children }) => (
             e.preventDefault();
             onAction();
         }}
-        className="rounded p-1.5 text-gray-500 transition hover:bg-gray-100 hover:text-slate-800"
+        className="rounded p-2 sm:p-1.5 text-gray-500 transition hover:bg-gray-100 hover:text-slate-800"
     >
         {children}
     </button>
@@ -129,30 +130,30 @@ const RichTextEditor = ({ onChange }) => {
         <div className="overflow-hidden rounded-lg border border-gray-200 focus-within:border-indigo-400">
             <div className="flex flex-wrap items-center gap-0.5 border-b border-gray-100 px-2 py-1">
                 <ToolbarButton label="Bold" onAction={() => exec("bold")}>
-                    <FiBold className="h-3 w-3" />
+                    <FiBold className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
                 </ToolbarButton>
                 <ToolbarButton label="Italic" onAction={() => exec("italic")}>
-                    <FiItalic className="h-3 w-3" />
+                    <FiItalic className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
                 </ToolbarButton>
                 <ToolbarButton label="Underline" onAction={() => exec("underline")}>
-                    <FiUnderline className="h-3 w-3" />
+                    <FiUnderline className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
                 </ToolbarButton>
                 <span className="mx-1 h-3.5 w-px bg-gray-200" />
                 <ToolbarButton label="Bulleted list" onAction={() => exec("insertUnorderedList")}>
-                    <FiList className="h-3 w-3" />
+                    <FiList className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
                 </ToolbarButton>
                 <ToolbarButton label="Align left" onAction={() => exec("justifyLeft")}>
-                    <FiAlignLeft className="h-3 w-3" />
+                    <FiAlignLeft className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
                 </ToolbarButton>
                 <ToolbarButton label="Quote" onAction={() => exec("formatBlock", "blockquote")}>
-                    <MdFormatQuote className="h-3.5 w-3.5" />
+                    <MdFormatQuote className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
                 </ToolbarButton>
                 <span className="mx-1 h-3.5 w-px bg-gray-200" />
                 <ToolbarButton label="Code" onAction={wrapCode}>
-                    <FiCode className="h-3 w-3" />
+                    <FiCode className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
                 </ToolbarButton>
                 <ToolbarButton label="Insert link" onAction={addLink}>
-                    <FiLink className="h-3 w-3" />
+                    <FiLink className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
                 </ToolbarButton>
             </div>
 
@@ -165,7 +166,7 @@ const RichTextEditor = ({ onChange }) => {
                 aria-multiline="true"
                 data-placeholder="Start writing your newsletter..."
                 onInput={emit}
-                className="h-[110px] overflow-y-auto px-3.5 py-3 text-xs leading-relaxed text-slate-700 outline-none
+                className="h-[140px] sm:h-[110px] overflow-y-auto break-words px-3.5 py-3 text-base sm:text-xs leading-relaxed text-slate-700 outline-none
           empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)]
           [&_a]:text-blue-600 [&_a]:underline
           [&_ul]:list-disc [&_ul]:pl-5
@@ -216,12 +217,12 @@ const BannerUpload = ({ file, onChange }) => {
 
             {file ? (
                 <div className="relative overflow-hidden rounded-lg border border-gray-200">
-                    <img src={previewUrl} alt="Banner preview" className="h-28 w-full object-cover" />
+                    <img src={previewUrl} alt="Banner preview" className="h-28 w-full object-cover sm:h-32" />
                     <button
                         type="button"
                         onClick={() => onChange(null)}
                         aria-label="Remove banner image"
-                        className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80"
+                        className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-black/80 sm:h-7 sm:w-7"
                     >
                         <FiTrash2 className="h-3.5 w-3.5" />
                     </button>
@@ -240,15 +241,15 @@ const BannerUpload = ({ file, onChange }) => {
                         setDragging(false);
                         pickFile(e.dataTransfer.files?.[0]);
                     }}
-                    className={`flex w-full items-center justify-center gap-3 rounded-lg border border-dashed px-4 py-6 transition ${dragging
+                    className={`flex w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed px-4 py-5 transition sm:flex-row sm:gap-3 sm:py-6 ${dragging
                             ? "border-indigo-400 bg-indigo-50/50"
                             : "border-gray-300 bg-gray-50/40 hover:bg-gray-50"
                         }`}
                 >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-md border border-gray-200 bg-white text-indigo-500">
+                    <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md border border-gray-200 bg-white text-indigo-500">
                         <FiImage className="h-4 w-4" />
                     </span>
-                    <span className="text-left">
+                    <span className="text-center sm:text-left">
                         <span className="block text-[11px] font-semibold text-slate-800">Click to upload</span>
                         <span className="block text-[10px] text-gray-400">
                             PNG, JPG up to 4MB &middot; 1200&times;600 recommended
@@ -391,212 +392,215 @@ const Newsletter = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#F8F9FC] p-6 font-sans text-slate-800 lg:p-8">
-            <h1 className="text-2xl font-semibold text-slate-900">Newsletter</h1>
-            <p className="mb-5 mt-1 text-[11px] text-gray-500">
-                Manage newsletter subscribers and email campaigns.
-            </p>
+        <div className="">
+            <div className="">
+                <h1 className="text-xl font-semibold text-slate-900 sm:text-2xl">Newsletter</h1>
+                <p className="mb-4 mt-1 text-[11px] text-gray-500 sm:mb-5">
+                    Manage newsletter subscribers and email campaigns.
+                </p>
 
-            <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-                {/* ======================= Left: Subscribers table ======================= */}
-                <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
-                    <div className="max-h-[680px] overflow-y-auto">
-                        <table className="w-full text-left text-[11px]">
-                            <thead className="sticky top-0 z-10 bg-[#F6F9FD] text-slate-700">
-                                <tr>
-                                    {selectionMode && (
-                                        <th className="w-10 px-4 py-3.5">
-                                            <input
-                                                type="checkbox"
-                                                checked={allSelected}
-                                                onChange={toggleAll}
-                                                aria-label="Select all subscribers"
-                                                className="h-3.5 w-3.5 accent-indigo-600"
-                                            />
-                                        </th>
-                                    )}
-                                    <th className="px-5 py-3.5 font-medium">Email</th>
-                                    <th className="px-5 py-3.5 font-medium">Subscribed Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {SUBSCRIBERS.map((sub) => {
-                                    const checked = selectedIds.has(sub.id);
-                                    const isNew = isNewSubscriber(sub.subscribedAt);
-                                    const highlight = recipientType === "new" && isNew;
-                                    return (
-                                        <tr
-                                            key={sub.id}
-                                            onClick={selectionMode ? () => toggleOne(sub.id) : undefined}
-                                            className={`border-b border-gray-100 last:border-b-0 ${selectionMode ? "cursor-pointer hover:bg-gray-50" : ""
-                                                } ${checked || highlight ? "bg-indigo-50/40" : ""}`}
-                                        >
-                                            {selectionMode && (
-                                                <td className="px-4 py-4">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={checked}
-                                                        onChange={() => toggleOne(sub.id)}
-                                                        onClick={(e) => e.stopPropagation()}
-                                                        aria-label={`Select ${sub.email}`}
-                                                        className="h-3.5 w-3.5 accent-indigo-600"
-                                                    />
-                                                </td>
-                                            )}
-                                            <td className="max-w-[150px] break-all px-5 py-4 text-slate-800">
-                                                {sub.email}
-                                                {isNew && (
-                                                    <span className="ml-2 rounded bg-green-100 px-1.5 py-0.5 text-[9px] font-medium text-green-700">
-                                                        New
-                                                    </span>
+                <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+                    {/* ======================= Subscribers table ======================= */}
+                    <div className="w-full overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+                        {/* shorter on mobile, tall on desktop; scrolls inside */}
+                        <div className="max-h-[320px] overflow-auto sm:max-h-[420px] lg:max-h-[680px]">
+                            <table className="w-full text-left text-[11px]">
+                                <thead className="sticky top-0 z-10 bg-[#F6F9FD] text-slate-700">
+                                    <tr>
+                                        {selectionMode && (
+                                            <th className="w-10 px-3 py-3.5 sm:px-4">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={allSelected}
+                                                    onChange={toggleAll}
+                                                    aria-label="Select all subscribers"
+                                                    className="h-4 w-4 accent-indigo-600 sm:h-3.5 sm:w-3.5"
+                                                />
+                                            </th>
+                                        )}
+                                        <th className="px-3 py-3.5 font-medium sm:px-5">Email</th>
+                                        <th className="px-3 py-3.5 font-medium sm:px-5">Subscribed Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {SUBSCRIBERS.map((sub) => {
+                                        const checked = selectedIds.has(sub.id);
+                                        const isNew = isNewSubscriber(sub.subscribedAt);
+                                        const highlight = recipientType === "new" && isNew;
+                                        return (
+                                            <tr
+                                                key={sub.id}
+                                                onClick={selectionMode ? () => toggleOne(sub.id) : undefined}
+                                                className={`border-b border-gray-100 last:border-b-0 ${selectionMode ? "cursor-pointer hover:bg-gray-50" : ""
+                                                    } ${checked || highlight ? "bg-indigo-50/40" : ""}`}
+                                            >
+                                                {selectionMode && (
+                                                    <td className="px-3 py-3.5 sm:px-4 sm:py-4">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={checked}
+                                                            onChange={() => toggleOne(sub.id)}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            aria-label={`Select ${sub.email}`}
+                                                            className="h-4 w-4 accent-indigo-600 sm:h-3.5 sm:w-3.5"
+                                                        />
+                                                    </td>
                                                 )}
-                                            </td>
-                                            <td className="whitespace-nowrap px-5 py-4 text-slate-700">
-                                                {formatDate(sub.subscribedAt)}
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
+                                                <td className="min-w-0 max-w-[170px] break-all px-3 py-3.5 text-slate-800 sm:max-w-[220px] sm:px-5 sm:py-4 lg:max-w-[150px]">
+                                                    {sub.email}
+                                                    {isNew && (
+                                                        <span className="ml-2 rounded bg-green-100 px-1.5 py-0.5 text-[9px] font-medium text-green-700">
+                                                            New
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-3.5 text-slate-700 sm:px-5 sm:py-4">
+                                                    {formatDate(sub.subscribedAt)}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-                {/* ======================= Right: Composer + Recipients ======================= */}
-                <div className="space-y-5">
-                    {/* ---------------- Email Composer ---------------- */}
-                    <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
-                        <div className="mb-5 flex items-center justify-between border-b border-gray-100 pb-4">
-                            <div className="flex items-center gap-2.5">
-                                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-                                    <FiMail className="h-3.5 w-3.5" />
-                                </span>
-                                <h2 className="text-sm font-semibold text-slate-900">Email Composer</h2>
+                    {/* ======================= Composer + Recipients ======================= */}
+                    <div className="min-w-0 space-y-4 sm:space-y-5">
+                        {/* ---------------- Email Composer ---------------- */}
+                        <section className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm sm:p-5">
+                            <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-4 sm:mb-5">
+                                <div className="flex items-center gap-2.5">
+                                    <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+                                        <FiMail className="h-3.5 w-3.5" />
+                                    </span>
+                                    <h2 className="text-sm font-semibold text-slate-900">Email Composer</h2>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={resetComposer}
+                                    aria-label="Clear composer"
+                                    title="Clear composer"
+                                    className="rounded-full p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"
+                                >
+                                    <FiX className="h-4 w-4" />
+                                </button>
                             </div>
+
+                            <div className="space-y-4">
+                                <div>
+                                    <Label htmlFor="newsletter-subject">Subject</Label>
+                                    <input
+                                        id="newsletter-subject"
+                                        name="subject"
+                                        type="text"
+                                        value={form.subject}
+                                        onChange={handleChange}
+                                        placeholder="Enter email subject..."
+                                        className={inputClass}
+                                    />
+                                    <FieldError message={errors.subject} />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="newsletter-title">Email Title</Label>
+                                    <input
+                                        id="newsletter-title"
+                                        name="title"
+                                        type="text"
+                                        value={form.title}
+                                        onChange={handleChange}
+                                        placeholder="Headline shown inside the email..."
+                                        className={inputClass}
+                                    />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="newsletter-content">Content</Label>
+                                    <RichTextEditor
+                                        key={editorKey}
+                                        onChange={(html) => {
+                                            setContentHtml(html);
+                                            setErrors((prev) => ({ ...prev, content: undefined }));
+                                        }}
+                                    />
+                                    <FieldError message={errors.content} />
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="newsletter-banner">Banner Image</Label>
+                                    <BannerUpload file={banner} onChange={setBanner} />
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                    <div className="min-w-0">
+                                        <Label htmlFor="newsletter-cta-text">CTA Button Text</Label>
+                                        <input
+                                            id="newsletter-cta-text"
+                                            name="ctaText"
+                                            type="text"
+                                            value={form.ctaText}
+                                            onChange={handleChange}
+                                            className={inputClass}
+                                        />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <Label htmlFor="newsletter-cta-url">CTA Button URL</Label>
+                                        <input
+                                            id="newsletter-cta-url"
+                                            name="ctaUrl"
+                                            type="url"
+                                            value={form.ctaUrl}
+                                            onChange={handleChange}
+                                            placeholder="https://yoursite.com/post"
+                                            className={inputClass}
+                                        />
+                                        <FieldError message={errors.ctaUrl} />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* ---------------- Recipients ---------------- */}
+                        <section className="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm sm:p-5">
+                            <h2 className="text-sm font-semibold text-slate-900">Recipients</h2>
+                            <p className="mb-4 mt-1 text-[11px] text-gray-500">Choose who receives this campaign.</p>
+
+                            <div role="radiogroup" aria-label="Recipients" className="space-y-2.5">
+                                {RECIPIENT_OPTIONS.map((option) => (
+                                    <RecipientOption
+                                        key={option.value}
+                                        option={option}
+                                        description={descriptions[option.value]}
+                                        checked={recipientType === option.value}
+                                        onSelect={() => {
+                                            setRecipientType(option.value);
+                                            setErrors((prev) => ({ ...prev, recipients: undefined }));
+                                        }}
+                                    />
+                                ))}
+                            </div>
+                            <FieldError message={errors.recipients} />
+
                             <button
                                 type="button"
-                                onClick={resetComposer}
-                                aria-label="Clear composer"
-                                title="Clear composer"
-                                className="rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"
+                                onClick={handleSend}
+                                disabled={sending}
+                                className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-indigo-600 py-3.5 text-xs font-medium text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60 sm:py-3"
                             >
-                                <FiX className="h-4 w-4" />
+                                <FiSend className="h-3.5 w-3.5" />
+                                {sending
+                                    ? "Sending..."
+                                    : `Send Campaign${recipientCount ? ` (${recipientCount.toLocaleString()})` : ""}`}
                             </button>
-                        </div>
-
-                        <div className="space-y-4">
-                            <div>
-                                <Label htmlFor="newsletter-subject">Subject</Label>
-                                <input
-                                    id="newsletter-subject"
-                                    name="subject"
-                                    type="text"
-                                    value={form.subject}
-                                    onChange={handleChange}
-                                    placeholder="Enter email subject..."
-                                    className={inputClass}
-                                />
-                                <FieldError message={errors.subject} />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="newsletter-title">Email Title</Label>
-                                <input
-                                    id="newsletter-title"
-                                    name="title"
-                                    type="text"
-                                    value={form.title}
-                                    onChange={handleChange}
-                                    placeholder="Headline shown inside the email..."
-                                    className={inputClass}
-                                />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="newsletter-content">Content</Label>
-                                <RichTextEditor
-                                    key={editorKey}
-                                    onChange={(html) => {
-                                        setContentHtml(html);
-                                        setErrors((prev) => ({ ...prev, content: undefined }));
-                                    }}
-                                />
-                                <FieldError message={errors.content} />
-                            </div>
-
-                            <div>
-                                <Label htmlFor="newsletter-banner">Banner Image</Label>
-                                <BannerUpload file={banner} onChange={setBanner} />
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                <div>
-                                    <Label htmlFor="newsletter-cta-text">CTA Button Text</Label>
-                                    <input
-                                        id="newsletter-cta-text"
-                                        name="ctaText"
-                                        type="text"
-                                        value={form.ctaText}
-                                        onChange={handleChange}
-                                        className={inputClass}
-                                    />
-                                </div>
-                                <div>
-                                    <Label htmlFor="newsletter-cta-url">CTA Button URL</Label>
-                                    <input
-                                        id="newsletter-cta-url"
-                                        name="ctaUrl"
-                                        type="url"
-                                        value={form.ctaUrl}
-                                        onChange={handleChange}
-                                        placeholder="https://yoursite.com/post"
-                                        className={inputClass}
-                                    />
-                                    <FieldError message={errors.ctaUrl} />
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* ---------------- Recipients ---------------- */}
-                    <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">
-                        <h2 className="text-sm font-semibold text-slate-900">Recipients</h2>
-                        <p className="mb-4 mt-1 text-[11px] text-gray-500">Choose who receives this campaign.</p>
-
-                        <div role="radiogroup" aria-label="Recipients" className="space-y-2.5">
-                            {RECIPIENT_OPTIONS.map((option) => (
-                                <RecipientOption
-                                    key={option.value}
-                                    option={option}
-                                    description={descriptions[option.value]}
-                                    checked={recipientType === option.value}
-                                    onSelect={() => {
-                                        setRecipientType(option.value);
-                                        setErrors((prev) => ({ ...prev, recipients: undefined }));
-                                    }}
-                                />
-                            ))}
-                        </div>
-                        <FieldError message={errors.recipients} />
-
-                        <button
-                            type="button"
-                            onClick={handleSend}
-                            disabled={sending}
-                            className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-indigo-600 py-3 text-xs font-medium text-white shadow-sm transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
-                        >
-                            <FiSend className="h-3.5 w-3.5" />
-                            {sending
-                                ? "Sending..."
-                                : `Send Campaign${recipientCount ? ` (${recipientCount.toLocaleString()})` : ""}`}
-                        </button>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
 
             {toast && (
-                <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-xs text-white shadow-lg">
-                    <FiCheck className="h-4 w-4 text-green-400" />
+                <div className="fixed bottom-4 left-4 right-4 z-50 flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-xs text-white shadow-lg sm:bottom-6 sm:left-auto sm:right-6">
+                    <FiCheck className="h-4 w-4 flex-shrink-0 text-green-400" />
                     {toast}
                 </div>
             )}

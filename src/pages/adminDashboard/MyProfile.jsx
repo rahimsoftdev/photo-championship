@@ -1,11 +1,9 @@
 
 import { useState } from "react";
 import { FiUser, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
+import { getSavedUserInfo } from "../../utils/getUserInof";
 
-const initialProfile = {
-  name: "Chowdhury Group Of Industries",
-  email: "chowdhury@gmail.com",
-};
+const initialProfile = getSavedUserInfo()
 
 const initialPassword = {
   currentPassword: "",
@@ -122,8 +120,8 @@ export default function MyProfile() {
     // Replace this with your change password API request.
     // Never change a password using frontend state alone.
     setPasswordMessage({
-      type: "error",
-      text: "Connect your change-password API to update your password.",
+      type: "success",
+      text: "password changed.",
     });
 
     setIsChangingPassword(false);
@@ -142,11 +140,10 @@ export default function MyProfile() {
     return (
       <div
         role="status"
-        className={`mt-3 flex items-start gap-2 rounded-md border px-3 py-2 text-xs ${
-          isSuccess
-            ? "border-green-200 bg-green-50 text-green-700"
-            : "border-red-200 bg-red-50 text-red-600"
-        }`}
+        className={`mt-3 flex items-start gap-2 rounded-md border px-3 py-2 text-xs ${isSuccess
+          ? "border-green-200 bg-green-50 text-green-700"
+          : "border-red-200 bg-red-50 text-red-600"
+          }`}
       >
         {isSuccess ? (
           <FiCheckCircle className="mt-0.5 shrink-0" size={14} />
@@ -159,8 +156,8 @@ export default function MyProfile() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 px-4 py-5 font-sans text-gray-800 sm:px-6 sm:py-7">
-      <div className="mx-auto max-w-[1400px]">
+    <main className="">
+      <div className="m">
         {/* Page heading */}
         <header className="mb-5">
           <h1 className="text-xl font-semibold tracking-tight text-gray-900">
@@ -177,7 +174,7 @@ export default function MyProfile() {
           {/* User information */}
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500">
-              <FiUser size={25} />
+              <img src={initialProfile.image} className="rounded-full" alt="" />
             </div>
 
             <div className="min-w-0">

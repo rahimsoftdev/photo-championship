@@ -48,7 +48,7 @@ const BusinessLinkPhotos = () => {
             </thead>
             <tbody>
               {rows.map((item) => (
-                <tr key={item.id} className="border-b border-gray-100 last:border-b-0">
+                <tr key={item.id} className="border-b border-gray-100 last:border-b-0 xl:text-sm">
                   <td className="px-4 lg:px-5 py-4 lg:py-5 text-slate-800">{item.user}</td>
                   <td className="px-4 lg:px-5 py-4 lg:py-5 text-slate-700 max-w-[160px] break-all">{item.email}</td>
                   <td className="px-4 lg:px-5 py-4 lg:py-5 text-slate-700 whitespace-nowrap">{item.phone}</td>

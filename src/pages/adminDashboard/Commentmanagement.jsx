@@ -288,13 +288,33 @@ const TYPE_STYLES = {
 const MENU_WIDTH = 150;
 const MENU_HEIGHT = 150;
 
+/* ------------------------------- Hooks ------------------------------- */
+
+// Locks background scroll while an overlay is open (and avoids layout shift)
+const useLockBodyScroll = () => {
+  useEffect(() => {
+    const { body, documentElement } = document;
+    const prevOverflow = body.style.overflow;
+    const prevPadding = body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - documentElement.clientWidth;
+
+    body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+
+    return () => {
+      body.style.overflow = prevOverflow;
+      body.style.paddingRight = prevPadding;
+    };
+  }, []);
+};
+
 /* --------------------------- Small components --------------------------- */
 
 const StatusBadge = ({ status, size = "sm" }) => {
   const s = STATUS_STYLES[status];
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full font-medium ${s.badge} ${
+      className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full font-medium ${s.badge} ${
         size === "sm" ? "px-2 py-0.5 text-[10px]" : "px-2.5 py-0.5 text-[10px]"
       }`}
     >
@@ -305,14 +325,14 @@ const StatusBadge = ({ status, size = "sm" }) => {
 };
 
 const StatCard = ({ label, value, sub, subClass, Icon, iconBox }) => (
-  <div className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
-    <div className="flex items-start justify-between">
+  <div className="min-w-0 rounded-xl border border-gray-100 bg-white p-3 shadow-sm sm:p-4">
+    <div className="flex items-start justify-between gap-2">
       <p className="text-[11px] font-medium text-slate-700">{label}</p>
-      <span className={`flex h-6 w-6 items-center justify-center rounded-md ${iconBox}`}>
+      <span className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md ${iconBox}`}>
         <Icon className="h-3 w-3" />
       </span>
     </div>
-    <p className="mt-2 text-2xl font-bold text-slate-900">{value}</p>
+    <p className="mt-2 text-xl font-bold text-slate-900 sm:text-2xl">{value}</p>
     <p className={`mt-1 text-[10px] font-medium ${subClass}`}>{sub}</p>
   </div>
 );
@@ -321,18 +341,29 @@ const StatCard = ({ label, value, sub, subClass, Icon, iconBox }) => (
 
 const CommentDrawer = ({ comment, onClose, onSetStatus }) => {
   const { photographer: p } = comment;
+  useLockBodyScroll();
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/30" onClick={onClose}>
+    <div
+      // mobile: bottom sheet (items-end) / sm+: right-side drawer
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm overscroll-contain sm:items-stretch sm:justify-end"
+      onClick={onClose}
+    >
+      <style>{`
+        @keyframes cmSheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes cmSlideLeft { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        .cm-anim { animation: cmSheetUp .25s ease-out; }
+        @media (min-width: 640px) { .cm-anim { animation: cmSlideLeft .22s ease-out; } }
+      `}</style>
       <aside
         role="dialog"
         aria-modal="true"
         aria-label="Comment details"
         onClick={(e) => e.stopPropagation()}
-        className="h-full w-full max-w-[380px] overflow-y-auto bg-white shadow-2xl"
+        className="cm-anim flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:h-full sm:max-h-none sm:max-w-[380px] sm:rounded-none"
       >
         {/* Header */}
-        <div className="flex items-start justify-between px-4 pb-3 pt-4">
+        <div className="flex flex-shrink-0 items-start justify-between border-b border-gray-100 px-4 pb-3 pt-4">
           <div>
             <h2 className="text-xs font-semibold text-slate-900">Comment Details</h2>
             <p className="mt-0.5 text-[10px] text-gray-400">{comment.commentId}</p>
@@ -343,17 +374,22 @@ const CommentDrawer = ({ comment, onClose, onSetStatus }) => {
               type="button"
               onClick={onClose}
               aria-label="Close"
-              className="rounded-full p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"
+              className="rounded-full p-1.5 text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"
             >
               <FiX className="h-4 w-4" />
             </button>
           </div>
         </div>
 
-        <div className="space-y-4 px-4 pb-6">
+        {/* Scrolls inside the drawer only */}
+        <div className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-4">
           {/* Photo */}
           <div className="relative overflow-hidden rounded-lg">
-            <img src={comment.photo.image} alt={comment.photo.title} className="h-[110px] w-full object-cover" />
+            <img
+              src={comment.photo.image}
+              alt={comment.photo.title}
+              className="h-[130px] w-full object-cover sm:h-[110px]"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             <div className="absolute bottom-2 left-3 text-white">
               <p className="text-[11px] font-semibold">{comment.photo.title}</p>
@@ -364,7 +400,7 @@ const CommentDrawer = ({ comment, onClose, onSetStatus }) => {
           {/* Comment */}
           <div>
             <p className="mb-2 text-[9px] font-semibold uppercase tracking-wider text-gray-400">Comment</p>
-            <div className="border-l-2 border-indigo-500 bg-gray-50 px-3 py-3 text-[11px] leading-relaxed text-slate-700">
+            <div className="break-words border-l-2 border-indigo-500 bg-gray-50 px-3 py-3 text-[11px] leading-relaxed text-slate-700">
               {comment.comment}
             </div>
           </div>
@@ -375,7 +411,7 @@ const CommentDrawer = ({ comment, onClose, onSetStatus }) => {
               Photographer Profile
             </p>
             <div className="flex items-center gap-2.5">
-              <img src={p.avatar} alt={p.name} className="h-8 w-8 rounded-full object-cover" />
+              <img src={p.avatar} alt={p.name} className="h-8 w-8 flex-shrink-0 rounded-full object-cover" />
               <div className="min-w-0">
                 <p className="text-[11px] font-semibold text-slate-900">{p.name}</p>
                 <p className="truncate text-[9px] text-gray-400">{p.email}</p>
@@ -409,7 +445,7 @@ const CommentDrawer = ({ comment, onClose, onSetStatus }) => {
                 type="button"
                 disabled={comment.status === "Approved"}
                 onClick={() => onSetStatus([comment.id], "Approved")}
-                className="flex items-center justify-center gap-1.5 rounded-md bg-green-600 py-2 text-[11px] font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex items-center justify-center gap-1.5 rounded-md bg-green-600 py-2.5 text-[11px] font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50 sm:py-2"
               >
                 <FiCheck className="h-3 w-3" />
                 Approve
@@ -418,7 +454,7 @@ const CommentDrawer = ({ comment, onClose, onSetStatus }) => {
                 type="button"
                 disabled={comment.status === "Hidden"}
                 onClick={() => onSetStatus([comment.id], "Hidden")}
-                className="flex items-center justify-center gap-1.5 rounded-md bg-gray-100 py-2 text-[11px] font-medium text-slate-700 transition hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex items-center justify-center gap-1.5 rounded-md bg-gray-100 py-2.5 text-[11px] font-medium text-slate-700 transition hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50 sm:py-2"
               >
                 <FiEyeOff className="h-3 w-3" />
                 Hide
@@ -428,7 +464,7 @@ const CommentDrawer = ({ comment, onClose, onSetStatus }) => {
               type="button"
               disabled={comment.status === "Deleted"}
               onClick={() => onSetStatus([comment.id], "Deleted")}
-              className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-md bg-red-600 py-2 text-[11px] font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="mt-2 flex w-full items-center justify-center gap-1.5 rounded-md bg-red-600 py-2.5 text-[11px] font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50 sm:py-2"
             >
               <FiTrash2 className="h-3 w-3" />
               {comment.status === "Deleted" ? "Deleted" : "Delete Comment"}
@@ -509,13 +545,18 @@ const CommentManagement = () => {
   const openMenu = (e, id) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const openUp = rect.bottom + MENU_HEIGHT > window.innerHeight;
+    // keep the menu inside the viewport on every screen size
+    const left = Math.min(
+      Math.max(8, rect.right - MENU_WIDTH),
+      Math.max(8, window.innerWidth - MENU_WIDTH - 8)
+    );
     setMenu((m) =>
       m?.id === id
         ? null
         : {
             id,
-            top: openUp ? rect.top - MENU_HEIGHT - 4 : rect.bottom + 4,
-            left: Math.max(8, rect.right - MENU_WIDTH),
+            top: openUp ? Math.max(8, rect.top - MENU_HEIGHT - 4) : rect.bottom + 4,
+            left,
           }
     );
   };
@@ -549,240 +590,350 @@ const CommentManagement = () => {
 
   /* ------------------------------- render ------------------------------- */
   return (
-    <div className="min-h-screen bg-[#F8F9FC] p-6 font-sans text-slate-800">
-      <h1 className="text-2xl font-bold text-slate-900">Comment Management</h1>
-      <p className="mb-5 mt-1.5 text-[11px] text-gray-500">
-        Manage, review and moderate all user comments across photos and albums.
-      </p>
+    <div className="">
+      <div className="">
+        <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">Comment Management</h1>
+        <p className="mb-4 mt-1.5 text-[11px] text-gray-500 sm:mb-5">
+          Manage, review and moderate all user comments across photos and albums.
+        </p>
 
-      {/* Stat cards */}
-      <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {stats.map((s) => (
-          <StatCard key={s.label} {...s} />
-        ))}
-      </div>
-
-      {/* Table card */}
-      <div className="rounded-xl border border-gray-100 bg-white shadow-sm">
-        {/* Header + filters */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 px-4 py-3.5">
-          <h2 className="text-xs font-semibold text-slate-900">
-            All Comments <span className="font-normal text-gray-400">({total})</span>
-          </h2>
-          <div className="flex items-center gap-1.5">
-            {FILTERS.map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => {
-                  setActiveFilter(tab);
-                  setPage(1);
-                }}
-                className={`rounded px-3 py-1 text-[10px] font-medium transition ${
-                  activeFilter === tab
-                    ? "bg-indigo-600 text-white"
-                    : "border border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+        {/* Stat cards */}
+        <div className="mb-4 grid grid-cols-2 gap-3 sm:mb-5 sm:gap-4 lg:grid-cols-4">
+          {stats.map((s) => (
+            <StatCard key={s.label} {...s} />
+          ))}
         </div>
 
-        {/* Bulk actions bar */}
-        {selectedIds.size > 0 && (
-          <div className="flex flex-wrap items-center gap-2 border-b border-indigo-100 bg-indigo-50/60 px-4 py-2 text-[11px]">
-            <span className="font-medium text-indigo-700">{selectedIds.size} selected</span>
-            <button
-              type="button"
-              onClick={() => setStatus([...selectedIds], "Approved")}
-              className="rounded bg-green-600 px-2.5 py-1 font-medium text-white transition hover:bg-green-700"
-            >
-              Approve
-            </button>
-            <button
-              type="button"
-              onClick={() => setStatus([...selectedIds], "Hidden")}
-              className="rounded bg-gray-200 px-2.5 py-1 font-medium text-slate-700 transition hover:bg-gray-300"
-            >
-              Hide
-            </button>
-            <button
-              type="button"
-              onClick={() => setStatus([...selectedIds], "Deleted")}
-              className="rounded bg-red-600 px-2.5 py-1 font-medium text-white transition hover:bg-red-700"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedIds(new Set())}
-              className="ml-auto text-gray-500 hover:text-slate-800"
-            >
-              Clear
-            </button>
+        {/* Table card */}
+        <div className="rounded-xl border border-gray-100 bg-white shadow-sm">
+          {/* Header + filters */}
+          <div className="flex flex-col gap-3 border-b border-gray-100 px-3 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-4">
+            <h2 className="text-xs font-semibold text-slate-900">
+              All Comments <span className="font-normal text-gray-400">({total})</span>
+            </h2>
+            {/* horizontally scrollable on small screens */}
+            <div className="-mx-3 overflow-x-auto px-3 sm:mx-0 sm:overflow-visible sm:px-0">
+              <div className="flex w-max items-center gap-1.5 sm:w-auto">
+                {FILTERS.map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => {
+                      setActiveFilter(tab);
+                      setPage(1);
+                    }}
+                    className={`whitespace-nowrap rounded px-3 py-1.5 text-[10px] font-medium transition sm:py-1 ${
+                      activeFilter === tab
+                        ? "bg-indigo-600 text-white"
+                        : "border border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-        )}
 
-        {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[1000px] text-left text-[11px]">
-            <thead>
-              <tr className="border-b border-gray-100 text-[10px] font-semibold uppercase tracking-wide text-gray-500">
-                <th className="w-10 px-4 py-3">
-                  <input
-                    type="checkbox"
-                    checked={allRowsSelected}
-                    onChange={toggleAllRows}
-                    aria-label="Select all comments on this page"
-                    className="h-3.5 w-3.5 accent-indigo-600"
-                  />
-                </th>
-                <th className="px-3 py-3">Comment ID</th>
-                <th className="px-3 py-3">User</th>
-                <th className="px-3 py-3">Photo</th>
-                <th className="px-3 py-3">Type</th>
-                <th className="px-3 py-3">Comment</th>
-                <th className="px-3 py-3">Date</th>
-                <th className="px-3 py-3">Status</th>
-                <th className="px-3 py-3">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((c) => (
-                <tr
-                  key={c.id}
-                  className={`border-b border-gray-50 last:border-b-0 ${
-                    selectedIds.has(c.id) ? "bg-indigo-50/40" : "hover:bg-gray-50/60"
-                  }`}
-                >
-                  <td className="px-4 py-3">
+          {/* Bulk actions bar */}
+          {selectedIds.size > 0 && (
+            <div className="flex flex-wrap items-center gap-2 border-b border-indigo-100 bg-indigo-50/60 px-3 py-2 text-[11px] sm:px-4">
+              <span className="font-medium text-indigo-700">{selectedIds.size} selected</span>
+              <button
+                type="button"
+                onClick={() => setStatus([...selectedIds], "Approved")}
+                className="rounded bg-green-600 px-2.5 py-1.5 font-medium text-white transition hover:bg-green-700 sm:py-1"
+              >
+                Approve
+              </button>
+              <button
+                type="button"
+                onClick={() => setStatus([...selectedIds], "Hidden")}
+                className="rounded bg-gray-200 px-2.5 py-1.5 font-medium text-slate-700 transition hover:bg-gray-300 sm:py-1"
+              >
+                Hide
+              </button>
+              <button
+                type="button"
+                onClick={() => setStatus([...selectedIds], "Deleted")}
+                className="rounded bg-red-600 px-2.5 py-1.5 font-medium text-white transition hover:bg-red-700 sm:py-1"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedIds(new Set())}
+                className="ml-auto text-gray-500 hover:text-slate-800"
+              >
+                Clear
+              </button>
+            </div>
+          )}
+
+          {/* ---------- Desktop: table (lg+) ---------- */}
+          <div className="hidden overflow-x-auto lg:block">
+            <table className="w-full min-w-[1000px] text-left text-[11px]">
+              <thead>
+                <tr className="border-b border-gray-100 text-[10px] font-semibold uppercase tracking-wide text-gray-500">
+                  <th className="w-10 px-4 py-3">
                     <input
                       type="checkbox"
-                      checked={selectedIds.has(c.id)}
-                      onChange={() => toggleRow(c.id)}
-                      aria-label={`Select ${c.commentId}`}
+                      checked={allRowsSelected}
+                      onChange={toggleAllRows}
+                      aria-label="Select all comments on this page"
                       className="h-3.5 w-3.5 accent-indigo-600"
                     />
-                  </td>
-
-                  <td className="whitespace-nowrap px-3 py-3 text-gray-600">
-                    <span className="inline-flex items-center gap-1">
-                      {c.pinned && <FaThumbtack className="h-2.5 w-2.5 -rotate-45 text-red-500" />}
-                      {c.commentId}
-                    </span>
-                  </td>
-
-                  <td className="px-3 py-3">
-                    <div className="flex items-center gap-2">
-                      <img src={c.user.avatar} alt={c.user.name} className="h-6 w-6 rounded-full object-cover" />
-                      <div>
-                        <p className="whitespace-nowrap text-[11px] font-semibold text-slate-800">{c.user.name}</p>
-                        <p className="text-[9px] text-gray-400">{c.user.country}</p>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td className="px-3 py-3">
-                    <div className="flex items-center gap-2">
-                      <img src={c.photo.image} alt={c.photo.title} className="h-7 w-7 rounded object-cover" />
-                      <div>
-                        <p className="max-w-[110px] truncate text-[11px] font-semibold text-slate-800">
-                          {c.photo.title}
-                        </p>
-                        <p className="text-[9px] text-gray-400">{c.photo.category}</p>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td className="px-3 py-3">
-                    <span
-                      className={`whitespace-nowrap rounded px-2 py-0.5 text-[9px] font-medium ${TYPE_STYLES[c.type]}`}
-                    >
-                      {c.type}
-                    </span>
-                  </td>
-
-                  <td className="px-3 py-3">
-                    <p className="max-w-[200px] truncate text-slate-700">{c.comment}</p>
-                  </td>
-
-                  <td className="whitespace-nowrap px-3 py-3 text-gray-400">{c.date}</td>
-
-                  <td className="px-3 py-3">
-                    <StatusBadge status={c.status} />
-                  </td>
-
-                  <td className="px-3 py-3">
-                    <button
-                      type="button"
-                      data-menu-trigger
-                      onClick={(e) => openMenu(e, c.id)}
-                      aria-label={`Actions for ${c.commentId}`}
-                      aria-haspopup="menu"
-                      className="rounded-md border border-gray-200 p-1 text-slate-700 transition hover:bg-gray-100"
-                    >
-                      <FiMoreVertical className="h-3.5 w-3.5" />
-                    </button>
-                  </td>
+                  </th>
+                  <th className="px-3 py-3">Comment ID</th>
+                  <th className="px-3 py-3">User</th>
+                  <th className="px-3 py-3">Photo</th>
+                  <th className="px-3 py-3">Type</th>
+                  <th className="px-3 py-3">Comment</th>
+                  <th className="px-3 py-3">Date</th>
+                  <th className="px-3 py-3">Status</th>
+                  <th className="px-3 py-3">Actions</th>
                 </tr>
+              </thead>
+              <tbody>
+                {rows.map((c) => (
+                  <tr
+                    key={c.id}
+                    className={`border-b border-gray-50 last:border-b-0 ${
+                      selectedIds.has(c.id) ? "bg-indigo-50/40" : "hover:bg-gray-50/60"
+                    }`}
+                  >
+                    <td className="px-4 py-3">
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.has(c.id)}
+                        onChange={() => toggleRow(c.id)}
+                        aria-label={`Select ${c.commentId}`}
+                        className="h-3.5 w-3.5 accent-indigo-600"
+                      />
+                    </td>
+
+                    <td className="whitespace-nowrap px-3 py-3 text-gray-600">
+                      <span className="inline-flex items-center gap-1">
+                        {c.pinned && <FaThumbtack className="h-2.5 w-2.5 -rotate-45 text-red-500" />}
+                        {c.commentId}
+                      </span>
+                    </td>
+
+                    <td className="px-3 py-3">
+                      <div className="flex items-center gap-2">
+                        <img src={c.user.avatar} alt={c.user.name} className="h-6 w-6 rounded-full object-cover" />
+                        <div>
+                          <p className="whitespace-nowrap text-[11px] font-semibold text-slate-800">{c.user.name}</p>
+                          <p className="text-[9px] text-gray-400">{c.user.country}</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="px-3 py-3">
+                      <div className="flex items-center gap-2">
+                        <img src={c.photo.image} alt={c.photo.title} className="h-7 w-7 rounded object-cover" />
+                        <div>
+                          <p className="max-w-[110px] truncate text-[11px] font-semibold text-slate-800">
+                            {c.photo.title}
+                          </p>
+                          <p className="text-[9px] text-gray-400">{c.photo.category}</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="px-3 py-3">
+                      <span
+                        className={`whitespace-nowrap rounded px-2 py-0.5 text-[9px] font-medium ${TYPE_STYLES[c.type]}`}
+                      >
+                        {c.type}
+                      </span>
+                    </td>
+
+                    <td className="px-3 py-3">
+                      <p className="max-w-[200px] truncate text-slate-700 xl:max-w-[300px]">{c.comment}</p>
+                    </td>
+
+                    <td className="whitespace-nowrap px-3 py-3 text-gray-400">{c.date}</td>
+
+                    <td className="px-3 py-3">
+                      <StatusBadge status={c.status} />
+                    </td>
+
+                    <td className="px-3 py-3">
+                      <button
+                        type="button"
+                        data-menu-trigger
+                        onClick={(e) => openMenu(e, c.id)}
+                        aria-label={`Actions for ${c.commentId}`}
+                        aria-haspopup="menu"
+                        className="rounded-md border border-gray-200 p-1 text-slate-700 transition hover:bg-gray-100"
+                      >
+                        <FiMoreVertical className="h-3.5 w-3.5" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+
+                {rows.length === 0 && (
+                  <tr>
+                    <td colSpan={9} className="py-12 text-center text-gray-400">
+                      No comments found in {activeFilter}.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* ---------- Mobile / tablet: card list (below lg) ---------- */}
+          <div className="lg:hidden">
+            {rows.length > 0 && (
+              <label className="flex items-center gap-2 border-b border-gray-100 px-3 py-2.5 text-[10px] font-medium text-gray-500 sm:px-4">
+                <input
+                  type="checkbox"
+                  checked={allRowsSelected}
+                  onChange={toggleAllRows}
+                  aria-label="Select all comments on this page"
+                  className="h-4 w-4 accent-indigo-600"
+                />
+                Select all on this page
+              </label>
+            )}
+
+            <div className="divide-y divide-gray-100">
+              {rows.map((c) => (
+                <div
+                  key={c.id}
+                  className={`flex items-start gap-3 px-3 py-4 sm:px-4 ${
+                    selectedIds.has(c.id) ? "bg-indigo-50/40" : ""
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.has(c.id)}
+                    onChange={() => toggleRow(c.id)}
+                    aria-label={`Select ${c.commentId}`}
+                    className="mt-1 h-4 w-4 flex-shrink-0 accent-indigo-600"
+                  />
+
+                  <div className="min-w-0 flex-1 space-y-2.5">
+                    {/* top row: id + status + actions */}
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-gray-500">
+                          {c.pinned && <FaThumbtack className="h-2.5 w-2.5 -rotate-45 text-red-500" />}
+                          {c.commentId}
+                        </span>
+                        <StatusBadge status={c.status} />
+                      </div>
+                      <button
+                        type="button"
+                        data-menu-trigger
+                        onClick={(e) => openMenu(e, c.id)}
+                        aria-label={`Actions for ${c.commentId}`}
+                        aria-haspopup="menu"
+                        className="flex-shrink-0 rounded-md border border-gray-200 p-1.5 text-slate-700 transition hover:bg-gray-100"
+                      >
+                        <FiMoreVertical className="h-4 w-4" />
+                      </button>
+                    </div>
+
+                    {/* user */}
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={c.user.avatar}
+                        alt={c.user.name}
+                        className="h-7 w-7 flex-shrink-0 rounded-full object-cover"
+                      />
+                      <div className="min-w-0">
+                        <p className="truncate text-[12px] font-semibold text-slate-800">{c.user.name}</p>
+                        <p className="text-[10px] text-gray-400">{c.user.country}</p>
+                      </div>
+                    </div>
+
+                    {/* comment */}
+                    <p className="line-clamp-3 break-words text-[12px] leading-relaxed text-slate-700">
+                      {c.comment}
+                    </p>
+
+                    {/* photo + type + date */}
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <img
+                          src={c.photo.image}
+                          alt={c.photo.title}
+                          className="h-8 w-8 flex-shrink-0 rounded object-cover"
+                        />
+                        <div className="min-w-0">
+                          <p className="max-w-[140px] truncate text-[11px] font-semibold text-slate-800">
+                            {c.photo.title}
+                          </p>
+                          <p className="text-[10px] text-gray-400">{c.photo.category}</p>
+                        </div>
+                      </div>
+                      <span
+                        className={`whitespace-nowrap rounded px-2 py-0.5 text-[10px] font-medium ${TYPE_STYLES[c.type]}`}
+                      >
+                        {c.type}
+                      </span>
+                      <span className="text-[10px] text-gray-400">{c.date}</span>
+                    </div>
+                  </div>
+                </div>
               ))}
 
               {rows.length === 0 && (
-                <tr>
-                  <td colSpan={9} className="py-12 text-center text-gray-400">
-                    No comments found in {activeFilter}.
-                  </td>
-                </tr>
+                <p className="py-12 text-center text-[11px] text-gray-400">
+                  No comments found in {activeFilter}.
+                </p>
               )}
-            </tbody>
-          </table>
-        </div>
+            </div>
+          </div>
 
-        {/* Footer / pagination */}
-        <div className="flex items-center justify-between px-4 py-3.5">
-          <p className="text-[10px] text-gray-400">
-            Showing {rows.length} of {filtered.length} comments
-          </p>
-          <div className="flex items-center gap-1">
-            <button
-              type="button"
-              onClick={() => setPage(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              aria-label="Previous page"
-              className="flex h-6 w-6 items-center justify-center rounded border border-gray-200 text-gray-500 transition hover:bg-gray-50 disabled:opacity-40"
-            >
-              <FiChevronLeft className="h-3 w-3" />
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+          {/* Footer / pagination */}
+          <div className="flex flex-col items-center justify-between gap-3 border-t border-gray-100 px-3 py-3.5 sm:flex-row sm:px-4">
+            <p className="text-[10px] text-gray-400">
+              Showing {rows.length} of {filtered.length} comments
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-1">
               <button
-                key={n}
                 type="button"
-                onClick={() => setPage(n)}
-                className={`h-6 w-6 rounded text-[10px] font-medium transition ${
-                  n === currentPage
-                    ? "bg-indigo-600 text-white"
-                    : "border border-gray-200 text-gray-600 hover:bg-gray-50"
-                }`}
+                onClick={() => setPage(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                aria-label="Previous page"
+                className="flex h-7 w-7 items-center justify-center rounded border border-gray-200 text-gray-500 transition hover:bg-gray-50 disabled:opacity-40 sm:h-6 sm:w-6"
               >
-                {n}
+                <FiChevronLeft className="h-3 w-3" />
               </button>
-            ))}
-            <button
-              type="button"
-              onClick={() => setPage(Math.min(totalPages, currentPage + 1))}
-              disabled={currentPage === totalPages}
-              aria-label="Next page"
-              className="flex h-6 w-6 items-center justify-center rounded border border-gray-200 text-gray-500 transition hover:bg-gray-50 disabled:opacity-40"
-            >
-              <FiChevronRight className="h-3 w-3" />
-            </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setPage(n)}
+                  className={`h-7 w-7 rounded text-[10px] font-medium transition sm:h-6 sm:w-6 ${
+                    n === currentPage
+                      ? "bg-indigo-600 text-white"
+                      : "border border-gray-200 text-gray-600 hover:bg-gray-50"
+                  }`}
+                >
+                  {n}
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={() => setPage(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+                aria-label="Next page"
+                className="flex h-7 w-7 items-center justify-center rounded border border-gray-200 text-gray-500 transition hover:bg-gray-50 disabled:opacity-40 sm:h-6 sm:w-6"
+              >
+                <FiChevronRight className="h-3 w-3" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Row actions dropdown (fixed so the table's overflow never clips it) */}
+      {/* Row actions dropdown (fixed so overflow never clips it) */}
       {menu && menuComment && (
         <div
           ref={menuRef}
@@ -797,7 +948,7 @@ const CommentManagement = () => {
               setDrawerId(menu.id);
               setMenu(null);
             }}
-            className="flex w-full items-center gap-2 px-3 py-2 text-left font-medium text-indigo-700 hover:bg-indigo-50"
+            className="flex w-full items-center gap-2 px-3 py-2.5 text-left font-medium text-indigo-700 hover:bg-indigo-50 sm:py-2"
           >
             <FiEye className="h-3 w-3" />
             See Details
@@ -807,7 +958,7 @@ const CommentManagement = () => {
             role="menuitem"
             disabled={menuComment.status === "Hidden"}
             onClick={() => setStatus([menu.id], "Hidden")}
-            className="block w-full px-3 py-2 text-left text-slate-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+            className="block w-full px-3 py-2.5 text-left text-slate-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 sm:py-2"
           >
             Hide
           </button>
@@ -816,7 +967,7 @@ const CommentManagement = () => {
             role="menuitem"
             disabled={menuComment.status === "Approved"}
             onClick={() => setStatus([menu.id], "Approved")}
-            className="block w-full px-3 py-2 text-left text-slate-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+            className="block w-full px-3 py-2.5 text-left text-slate-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 sm:py-2"
           >
             Approve
           </button>
@@ -825,7 +976,7 @@ const CommentManagement = () => {
             role="menuitem"
             disabled={menuComment.status === "Pending"}
             onClick={() => setStatus([menu.id], "Pending")}
-            className="block w-full px-3 py-2 text-left text-slate-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+            className="block w-full px-3 py-2.5 text-left text-slate-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 sm:py-2"
           >
             Pending
           </button>
@@ -843,8 +994,8 @@ const CommentManagement = () => {
 
       {/* Toast */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-[60] flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-xs text-white shadow-lg">
-          <FiCheck className="h-4 w-4 text-green-400" />
+        <div className="fixed bottom-4 left-4 right-4 z-[60] flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-xs text-white shadow-lg sm:bottom-6 sm:left-auto sm:right-6">
+          <FiCheck className="h-4 w-4 flex-shrink-0 text-green-400" />
           {toast}
         </div>
       )}

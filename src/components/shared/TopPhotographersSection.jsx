@@ -1,153 +1,173 @@
 import React, { useState } from 'react';
 import { useTopPhotographers } from '../../hooks/useTopPhotographers';
 
-export default function TopPhotographersSection() {
-    // Plain state use kora holo router chara filter korar jonno (default 'six')
+const FILTERS = [
+    { key: 'single', label: 'Single Photo', shortLabel: 'Single' },
+    { key: 'six', label: '6 Photos', shortLabel: '6 Photos' },
+    { key: 'twelve', label: '12 Photos - Full Zodiac Story', shortLabel: '12 Photos' },
+];
+
+const RenderMedal = ({ rank, size = 'md' }) => {
+    const sizeClass =
+        size === 'lg'
+            ? 'h-6 w-6 text-xs sm:h-7 sm:w-7 sm:text-sm'
+            : 'h-5 w-5 text-[10px] sm:h-6 sm:w-6 sm:text-xs';
+
+    const base = `inline-flex shrink-0 items-center justify-center rounded-full font-bold shadow-sm ${sizeClass}`;
+
+    if (rank === 1) {
+        return (
+            <span
+                className={`${base} text-black`}
+                style={{ backgroundColor: '#FDC700' }}
+            >
+                1
+            </span>
+        );
+    }
+
+    if (rank === 2) {
+        return <span className={`${base} bg-slate-300 text-slate-800`}>2</span>;
+    }
+
+    if (rank === 3) {
+        return <span className={`${base} bg-amber-600 text-white`}>3</span>;
+    }
+
+    return (
+        <span className="text-xs font-medium text-subTitleText sm:text-sm">
+            {rank}
+        </span>
+    );
+};
+
+export default function TopPhotographersSection({ isAdmin = false }) {
     const [selectedType, setSelectedType] = useState('six');
 
-    // Pass selected type to the clean hook
-    const { isLoading, error, data } = useTopPhotographers(selectedType);
-
-
+    const { isLoading, error, data = [] } = useTopPhotographers(selectedType);
 
     const topThree = data.slice(0, 3);
     const tableData = data;
 
-    // Helper ranking badge component
-    const RenderMedal = ({ rank }) => {
-        if (rank === 1) {
-            return (
-                <span
-                    className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full text-black shadow-sm"
-                    style={{ backgroundColor: '#FDC700' }}
-                >
-                    1
-                </span>
-            );
-        }
-        if (rank === 2) {
-            return (
-                <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full bg-slate-300 text-slate-800 shadow-sm">
-                    2
-                </span>
-            );
-        }
-        if (rank === 3) {
-            return (
-                <span className="inline-flex items-center justify-center w-5 h-5 text-xs font-bold rounded-full bg-amber-600 text-white shadow-sm">
-                    3
-                </span>
-            );
-        }
-        return <span className="text-subTitleText font-medium text-sm">{rank}</span>;
-    };
-
-    // Reorder top 3 for podium layout: [Rank 2, Rank 1, Rank 3]
-    const podiumOrder = [];
-    if (topThree[1]) podiumOrder.push(topThree[1]);
-    if (topThree[0]) podiumOrder.push(topThree[0]);
-    if (topThree[2]) podiumOrder.push(topThree[2]);
+    // Podium order: Rank 2, Rank 1, Rank 3
+    const podiumOrder = [topThree[1], topThree[0], topThree[2]].filter(Boolean);
 
     return (
-
-        <section className="w-full bg-[#f8fafc] px-4 py-10 font-sans min-[350px]:px-4 sm:px-6 sm:py-12 md:px-8 lg:py-section">
-            <div className="mx-auto max-w-main space-y-8 sm:space-y-10 md:space-y-12">
-
+        <section
+            className={`w-full overflow-x-hidden bg-[#f8fafc] font-sans ${
+                isAdmin
+                    ? 'm-0 p-0'
+                    : 'px-3 py-8 min-[400px]:px-4 sm:px-6 sm:py-10 md:px-8 md:py-12 lg:py-section'
+            }`}
+        >
+            <div
+                className={`w-full ${
+                    isAdmin
+                        ? 'm-0 max-w-none space-y-4 sm:space-y-6'
+                        : 'mx-auto max-w-main space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12'
+                }`}
+            >
                 {/* Header & Filter Nav */}
-                <div className="flex min-w-0 flex-col justify-between gap-5 lg:flex-row md:items-center md:gap-6">
+                <div
+                    className={`flex min-w-0 flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-6 ${
+                        isAdmin ? 'p-0' : ''
+                    }`}
+                >
                     <div className="min-w-0">
-                        <h1 className="break-words text-xl font-extrabold tracking-tight text-titleText min-[350px]:text-3xl ">
+                        <h1 className="break-words text-2xl font-extrabold tracking-tight text-titleText sm:text-3xl md:text-4xl">
                             Top Photographers
                         </h1>
+
                         <p className="mt-1 text-xs text-subTitleText sm:text-sm md:text-base">
                             July 2026 — Live standings
                         </p>
                     </div>
 
                     {/* Filter Controls */}
-
-                    <div className="flex w-full max-w-full flex-wrap items-center gap-1.5 rounded-2xl bg-slate-200/50 p-1.5 min-[350px]:gap-2 sm:w-fit sm:rounded-full">
-  <button
-    onClick={() => setSelectedType("single")}
-    className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${
-      selectedType === "single"
-        ? "bg-primary text-white shadow-md"
-        : "text-subTitleText hover:text-titleText"
-    }`}
-  >
-    Single Photo
-  </button>
-
-  <button
-    onClick={() => setSelectedType("six")}
-    className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${
-      selectedType === "six"
-        ? "bg-primary text-white shadow-md"
-        : "text-subTitleText hover:text-titleText"
-    }`}
-  >
-    6 Photos
-  </button>
-
-  <button
-    onClick={() => setSelectedType("twelve")}
-    className={`rounded-full px-3 py-2 text-xs font-medium transition-all duration-200 sm:px-4 sm:text-sm ${
-      selectedType === "twelve"
-        ? "bg-primary text-white shadow-md"
-        : "text-subTitleText hover:text-titleText"
-    }`}
-  >
-    12 Photos - Full Zodiac Story
-  </button>
-</div>
-
+                    <div className="grid w-full grid-cols-3 gap-1 rounded-2xl bg-slate-200/50 p-1 sm:gap-1.5 sm:p-1.5 md:inline-flex md:w-fit md:rounded-full lg:shrink-0">
+                        {FILTERS.map((f) => (
+                            <button
+                                key={f.key}
+                                onClick={() => setSelectedType(f.key)}
+                                className={`rounded-full px-2 py-2 text-center text-[11px] font-medium leading-tight transition-all duration-200 min-[400px]:text-xs sm:px-3 sm:text-sm md:whitespace-nowrap md:px-4 ${
+                                    selectedType === f.key
+                                        ? 'bg-primary text-white shadow-md'
+                                        : 'text-subTitleText hover:text-titleText'
+                                }`}
+                            >
+                                {/* Short label on mobile, full label from md */}
+                                <span className="md:hidden">{f.shortLabel}</span>
+                                <span className="hidden md:inline">{f.label}</span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
+                {/* Loading and Error States */}
+                {isLoading && (
+                    <p className="py-6 text-center text-sm text-subTitleText">
+                        Loading photographers...
+                    </p>
+                )}
+
+                {error && (
+                    <p className="py-6 text-center text-sm text-red-500">
+                        Failed to load photographers. Please try again.
+                    </p>
+                )}
+
                 {/* Podium Section */}
-                {podiumOrder.length > 0 && (
-                    <div className="flex items-end justify-center gap-2 overflow-x-auto px-1 pb-2 pt-5 min-[350px]:gap-3 sm:gap-6 md:gap-10">
+                {!isLoading && !error && podiumOrder.length > 0 && (
+                    <div className="mx-auto flex w-full max-w-2xl items-end justify-center gap-2 px-1 pb-2 pt-6 min-[400px]:gap-4 sm:gap-8 sm:pt-8 md:gap-12">
                         {podiumOrder.map((photographer) => {
                             const isFirst = photographer.ranking === 1;
 
                             return (
                                 <div
                                     key={photographer.userId}
-                                    className={`flex min-w-0 shrink-0 flex-col items-center text-center transition-transform ${isFirst
-                                            ? "-translate-y-2 scale-105 sm:-translate-y-3"
-                                            : "scale-95"
-                                        }`}
+                                    className={`flex min-w-0 flex-1 basis-0 flex-col items-center text-center transition-transform ${
+                                        isFirst
+                                            ? '-translate-y-2 sm:-translate-y-3'
+                                            : ''
+                                    }`}
                                 >
-                                    <div className="relative mb-1.5 sm:mb-2">
-                                        <div className="absolute -top-2.5 left-1/2 z-10 -translate-x-1/2 sm:-top-3">
-                                            <RenderMedal rank={photographer.ranking} />
+                                    <div className="relative mb-2">
+                                        <div className="absolute -top-3 left-1/2 z-10 -translate-x-1/2">
+                                            <RenderMedal
+                                                rank={photographer.ranking}
+                                                size="lg"
+                                            />
                                         </div>
 
                                         <div
-                                            className={`rounded-full p-0.5 sm:p-1 ${isFirst
-                                                    ? "ring-2 ring-[#FDC700] sm:ring-4"
-                                                    : "ring-1 ring-slate-300 sm:ring-2"
-                                                }`}
+                                            className={`rounded-full p-0.5 sm:p-1 ${
+                                                isFirst
+                                                    ? 'ring-2 ring-[#FDC700] sm:ring-4'
+                                                    : 'ring-1 ring-slate-300 sm:ring-2'
+                                            }`}
                                         >
                                             <img
                                                 src={photographer.photographerinfo.image}
                                                 alt={photographer.photographerinfo.name}
-                                                className={`rounded-full object-cover shadow-lg ${isFirst
-                                                        ? "h-12 w-12 min-[350px]:h-14 min-[350px]:w-14 sm:h-20 sm:w-20 md:h-24 md:w-24"
-                                                        : "h-9 w-9 min-[350px]:h-11 min-[350px]:w-11 sm:h-14 sm:w-14 md:h-16 md:w-16"
-                                                    }`}
+                                                loading="lazy"
+                                                className={`rounded-full object-cover shadow-lg ${
+                                                    isFirst
+                                                        ? 'h-16 w-16 min-[400px]:h-20 min-[400px]:w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
+                                                        : 'h-12 w-12 min-[400px]:h-14 min-[400px]:w-14 sm:h-18 sm:w-18 sm:h-[72px] sm:w-[72px] md:h-20 md:w-20'
+                                                }`}
                                             />
                                         </div>
                                     </div>
 
-                                    <h3 className="max-w-20 break-words text-[10px] font-bold text-titleText min-[350px]:text-xs sm:max-w-28 sm:text-sm md:text-base">
-                                        {photographer.photographerinfo.name.split(" ")[0]}
+                                    <h3 className="w-full truncate px-0.5 text-xs font-bold text-titleText min-[400px]:text-sm sm:text-base md:text-lg">
+                                        {photographer.photographerinfo.name.split(' ')[0]}
                                     </h3>
 
-                                    <p className="mb-0.5 max-w-20 break-words text-[9px] text-subTitleText min-[350px]:text-[10px] sm:mb-1 sm:max-w-28 sm:text-xs">
+                                    <p className="mb-0.5 w-full truncate px-0.5 text-[10px] text-subTitleText min-[400px]:text-xs sm:mb-1 sm:text-sm">
                                         {photographer.city}
                                     </p>
 
-                                    <p className="whitespace-nowrap text-[9px] font-bold text-secondary min-[350px]:text-[10px] sm:text-xs md:text-sm">
+                                    <p className="whitespace-nowrap text-[10px] font-bold text-secondary min-[400px]:text-xs sm:text-sm md:text-base">
                                         {photographer.vots.toLocaleString()} votes
                                     </p>
                                 </div>
@@ -156,91 +176,137 @@ export default function TopPhotographersSection() {
                     </div>
                 )}
 
-                {/* Main Leaderboard Table */}
-                <div
-                    className="overflow-hidden rounded-xl bg-white shadow-sm sm:rounded-2xl"
-                    style={{ border: "1px solid rgba(0, 0, 0, 0.2)" }}
-                >
-                    <div className="w-full overflow-x-auto">
-                        <table className="w-full min-w-[600px] border-collapse text-left">
-                            <thead>
-                                <tr
-                                    className="bg-slate-50/50 text-[10px] font-bold uppercase tracking-wider text-subTitleText sm:text-xs"
-                                    style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.2)" }}
-                                >
-                                    <th className="w-12 px-3 py-3 text-center sm:w-16 sm:px-6 sm:py-4">
-                                        #
-                                    </th>
-                                    <th className="px-3 py-3 sm:px-6 sm:py-4">
-                                        Photographer
-                                    </th>
-                                    <th className="px-3 py-3 sm:px-6 sm:py-4">
-                                        City
-                                    </th>
-                                    <th className="px-3 py-3 text-right sm:px-6 sm:py-4">
-                                        Votes
-                                    </th>
-                                    <th className="px-3 py-3 text-right sm:px-6 sm:py-4">
-                                        Points
-                                    </th>
-                                </tr>
-                            </thead>
+                {/* Leaderboard */}
+                {!isLoading && !error && (
+                    <div
+                        className="overflow-hidden rounded-xl bg-white shadow-sm sm:rounded-2xl"
+                        style={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}
+                    >
+                        {/* Mobile: Card list (below md) */}
+                        <ul className="divide-y divide-slate-100 md:hidden">
+                            {tableData.length > 0 ? (
+                                tableData.map((row) => (
+                                    <li
+                                        key={row.userId}
+                                        className="flex items-center gap-3 px-3 py-3 min-[400px]:px-4"
+                                    >
+                                        <div className="flex w-6 shrink-0 justify-center">
+                                            <RenderMedal rank={row.ranking} />
+                                        </div>
 
-                            <tbody className="divide-y text-xs sm:text-sm">
-                                {tableData.length > 0 ? (
-                                    tableData.map((row) => (
-                                        <tr
-                                            key={row.userId}
-                                            className="transition-colors hover:bg-slate-50/80"
-                                            style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
-                                        >
-                                            <td className="px-3 py-3 text-center sm:px-6 sm:py-4">
-                                                <RenderMedal rank={row.ranking} />
-                                            </td>
+                                        <img
+                                            src={row.photographerinfo.image}
+                                            alt={row.photographerinfo.name}
+                                            loading="lazy"
+                                            className="h-10 w-10 shrink-0 rounded-full object-cover shadow-sm"
+                                        />
 
-                                            <td className="px-3 py-3 sm:px-6 sm:py-4">
-                                                <div className="flex items-center gap-2 sm:gap-3">
-                                                    <img
-                                                        src={row.photographerinfo.image}
-                                                        alt={row.photographerinfo.name}
-                                                        className="h-7 w-7 shrink-0 rounded-full object-cover shadow-sm sm:h-8 sm:w-8"
-                                                    />
-                                                    <span className="font-semibold text-titleText">
-                                                        {row.photographerinfo.name}
-                                                    </span>
-                                                </div>
-                                            </td>
-
-                                            <td className="px-3 py-3 font-medium text-subTitleText sm:px-6 sm:py-4">
+                                        <div className="min-w-0 flex-1">
+                                            <p className="truncate text-sm font-semibold text-titleText">
+                                                {row.photographerinfo.name}
+                                            </p>
+                                            <p className="truncate text-xs text-subTitleText">
                                                 {row.city}
-                                            </td>
+                                            </p>
+                                        </div>
 
-                                            <td className="px-3 py-3 text-right font-bold text-titleText sm:px-6 sm:py-4">
+                                        <div className="shrink-0 text-right">
+                                            <p className="text-sm font-bold text-titleText">
                                                 {row.vots.toLocaleString()}
-                                            </td>
+                                                <span className="ml-1 text-[10px] font-medium text-subTitleText">
+                                                    votes
+                                                </span>
+                                            </p>
+                                            <p className="text-xs text-subTitleText">
+                                                {row.point.toLocaleString()} pts
+                                            </p>
+                                        </div>
+                                    </li>
+                                ))
+                            ) : (
+                                <li className="px-4 py-8 text-center text-xs text-subTitleText">
+                                    No photographers found for this category.
+                                </li>
+                            )}
+                        </ul>
 
-                                            <td className="px-3 py-3 text-right font-medium text-subTitleText sm:px-6 sm:py-4">
-                                                {row.point.toLocaleString()}
+                        {/* Tablet & Desktop: Table (md and up) */}
+                        <div className="hidden w-full overflow-x-auto md:block">
+                            <table className="w-full border-collapse text-left">
+                                <thead>
+                                    <tr
+                                        className="bg-slate-50/50 text-xs font-bold uppercase tracking-wider text-subTitleText"
+                                        style={{
+                                            borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
+                                        }}
+                                    >
+                                        <th className="w-14 px-4 py-4 text-center lg:w-16 lg:px-6">
+                                            #
+                                        </th>
+                                        <th className="px-4 py-4 lg:px-6">Photographer</th>
+                                        <th className="px-4 py-4 lg:px-6">City</th>
+                                        <th className="px-4 py-4 text-right lg:px-6">Votes</th>
+                                        <th className="px-4 py-4 text-right lg:px-6">Points</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody className="text-sm">
+                                    {tableData.length > 0 ? (
+                                        tableData.map((row) => (
+                                            <tr
+                                                key={row.userId}
+                                                className="transition-colors hover:bg-slate-50/80"
+                                                style={{
+                                                    borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+                                                }}
+                                            >
+                                                <td className="px-4 py-4 text-center lg:px-6">
+                                                    <RenderMedal rank={row.ranking} />
+                                                </td>
+
+                                                <td className="px-4 py-4 lg:px-6">
+                                                    <div className="flex min-w-0 items-center gap-3">
+                                                        <img
+                                                            src={row.photographerinfo.image}
+                                                            alt={row.photographerinfo.name}
+                                                            loading="lazy"
+                                                            className="h-8 w-8 shrink-0 rounded-full object-cover shadow-sm lg:h-9 lg:w-9"
+                                                        />
+                                                        <span className="max-w-[160px] truncate font-semibold text-titleText lg:max-w-[260px]">
+                                                            {row.photographerinfo.name}
+                                                        </span>
+                                                    </div>
+                                                </td>
+
+                                                <td className="max-w-[140px] truncate px-4 py-4 font-medium text-subTitleText lg:max-w-[220px] lg:px-6">
+                                                    {row.city}
+                                                </td>
+
+                                                <td className="whitespace-nowrap px-4 py-4 text-right font-bold text-titleText lg:px-6">
+                                                    {row.vots.toLocaleString()}
+                                                </td>
+
+                                                <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-subTitleText lg:px-6">
+                                                    {row.point.toLocaleString()}
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td
+                                                colSpan={5}
+                                                className="px-4 py-8 text-center text-sm text-subTitleText"
+                                            >
+                                                No photographers found for this category.
                                             </td>
                                         </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td
-                                            colSpan={5}
-                                            className="px-4 py-8 text-center text-xs text-subTitleText sm:text-sm"
-                                        >
-                                            No photographers found for this category.
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
-
+                )}
             </div>
         </section>
-
     );
 }
