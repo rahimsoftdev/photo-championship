@@ -228,7 +228,7 @@ export default function AdvertisePage() {
 
       {/* ================= HERO ================= */}
       <section
-        className="relative px-4 pb-16 pt-10 text-center sm:pb-20 sm:pt-14"
+        className="relative px-4 pb-16 border pt-10 text-center  sm:pt-14"
         style={{
           background: `linear-gradient(90deg, ${PINK} 0%, #ffffff 50%, ${INDIGO}26 100%)`,
         }}
@@ -253,7 +253,7 @@ export default function AdvertisePage() {
       </section>
 
       {/* ================= FORM CARD ================= */}
-      <main className="mx-auto -mt-4 w-full max-w-main px-3 pb-16 sm:px-4">
+      <main className="mx-auto mt-4 w-full max-w-main px-3  sm:px-4">
         <form
           onSubmit={handlePay}
           noValidate
