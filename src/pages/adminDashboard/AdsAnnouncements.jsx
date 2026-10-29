@@ -400,7 +400,7 @@ export default function AdsAnnouncements() {
         setCurrentPage(1);
         setSearch("");
         setFilterStatus("All");
-        setIsModalOpen(false);
+        // modal is closed by the modal itself (after the success screen)
     }
 
     function updateStatus(id, status) {
@@ -432,8 +432,8 @@ export default function AdsAnnouncements() {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 p-4 font-sans text-slate-800 sm:p-6">
-            <div className="mx-auto max-w-[1600px]">
+        <div className="">
+            <div className="">
                 {/* Header */}
                 <header className="mb-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
@@ -491,7 +491,7 @@ export default function AdsAnnouncements() {
                 </section>
 
                 {/* Filters */}
-                <section className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <section className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center justify-between">
                     <div className="relative flex-1 sm:max-w-sm">
                         <FiSearch
                             size={15}
@@ -509,7 +509,7 @@ export default function AdsAnnouncements() {
                     <select
                         value={filterStatus}
                         onChange={(event) => handleFilterChange(event.target.value)}
-                        className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-400"
+                        className="rounded-lg border border-slate-200 pr-2 bg-white px-3 py-2 text-xs outline-none focus:border-blue-400"
                     >
                         <option value="All">All statuses</option>
                         <option value="Active">Active</option>
@@ -520,9 +520,79 @@ export default function AdsAnnouncements() {
                 </section>
 
                 {/* Table */}
-                <section className="overflow-visible rounded-xl border border-slate-200 bg-white shadow-sm">
-                    <div className="overflow-x-auto rounded-xl">
-                        <table className="w-full min-w-[900px] border-collapse text-left">
+                <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
+                    {/* ===== Mobile: Card layout (< md) ===== */}
+                    <div className="divide-y divide-slate-100 md:hidden">
+                        {visibleAnnouncements.map((item) => (
+                            <div key={item.id} className="space-y-3 p-3">
+                                <div className="flex items-start justify-between gap-2">
+                                    <div className="min-w-0 flex-1">
+                                        <p className="line-clamp-2 break-words text-xs font-medium text-slate-800">
+                                            {item.message}
+                                        </p>
+                                        <p className="mt-1 text-[10px] text-slate-400">{item.id}</p>
+                                    </div>
+
+                                    <div className="relative shrink-0">
+                                        <button
+                                            onClick={() => setOpenMenu(openMenu === item.id ? null : item.id)}
+                                            aria-label={`Actions for ${item.id}`}
+                                            className="rounded-md p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                                        >
+                                            <FiMoreHorizontal size={18} />
+                                        </button>
+
+                                        {openMenu === item.id && (
+                                            <div className="absolute right-0 top-9 z-20 w-40 rounded-lg border border-slate-200 bg-white p-1 text-left shadow-xl">
+                                                {["Active", "Inactive", "Scheduled", "Expired"]
+                                                    .filter((status) => status !== item.status)
+                                                    .map((status) => (
+                                                        <button
+                                                            key={status}
+                                                            onClick={() => updateStatus(item.id, status)}
+                                                            className="block w-full rounded-md px-3 py-2 text-left text-xs hover:bg-slate-50"
+                                                        >
+                                                            Set {status}
+                                                        </button>
+                                                    ))}
+                                                <button
+                                                    onClick={() => deleteAnnouncement(item.id)}
+                                                    className="block w-full rounded-md px-3 py-2 text-left text-xs text-red-600 hover:bg-red-50"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <TypeBadge type={item.type} />
+                                    <PriorityLabel priority={item.priority} />
+                                    <StatusBadge status={item.status} />
+                                </div>
+
+                                <div className="text-[11px] text-slate-600">
+                                    <p>Start: {formatDate(item.startDate)}</p>
+                                    <p className="mt-0.5 text-slate-400">
+                                        {item.endDate
+                                            ? `End: ${formatDate(item.endDate)}`
+                                            : "Until manually disabled"}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+
+                        {visibleAnnouncements.length === 0 && (
+                            <p className="px-4 py-12 text-center text-sm text-slate-400">
+                                No announcements found.
+                            </p>
+                        )}
+                    </div>
+
+                    {/* ===== Tablet / Desktop: Table (>= md) ===== */}
+                    <div className="hidden overflow-x-auto rounded-t-xl md:block">
+                        <table className="w-full min-w-[760px] border-collapse text-left">
                             <thead>
                                 <tr className="border-b border-slate-100 bg-slate-50/70 text-[10px] font-medium uppercase tracking-wide text-slate-500">
                                     <th className="px-3 py-3 font-medium">Announcement</th>
@@ -536,20 +606,15 @@ export default function AdsAnnouncements() {
 
                             <tbody className="divide-y divide-slate-100">
                                 {visibleAnnouncements.map((item) => (
-                                    <tr
-                                        key={item.id}
-                                        className="transition hover:bg-slate-50/80"
-                                    >
-                                        <td className="max-w-[320px] px-3 py-2.5">
+                                    <tr key={item.id} className="transition hover:bg-slate-50/80">
+                                        <td className="max-w-[240px] px-3 py-2.5 lg:max-w-[320px]">
                                             <p
-                                                className="truncate text-[11px] font-medium text-slate-800"
+                                                className="truncate text-[11px] 2xl:text-sm  font-medium text-slate-800"
                                                 title={item.message}
                                             >
                                                 {item.message}
                                             </p>
-                                            <p className="mt-1 text-[9px] text-slate-400">
-                                                {item.id}
-                                            </p>
+                                            <p className="mt-1 text-[9px] 2xl:text-sm text-slate-400">{item.id}</p>
                                         </td>
 
                                         <td className="px-3 py-2.5">
@@ -557,10 +622,10 @@ export default function AdsAnnouncements() {
                                         </td>
 
                                         <td className="px-3 py-2.5">
-                                            <p className="whitespace-nowrap text-[10px] text-slate-600">
+                                            <p className="whitespace-nowrap text-[10px] 2xl:text-sm text-slate-600">
                                                 Start: {formatDate(item.startDate)}
                                             </p>
-                                            <p className="mt-1 whitespace-nowrap text-[10px] text-slate-400">
+                                            <p className="mt-1 whitespace-nowrap text-[10px] 2xl:text-sm text-slate-400">
                                                 {item.endDate
                                                     ? `End: ${formatDate(item.endDate)}`
                                                     : "Until manually disabled"}
@@ -578,9 +643,7 @@ export default function AdsAnnouncements() {
                                         <td className="px-3 py-2.5 text-center">
                                             <div className="relative inline-block">
                                                 <button
-                                                    onClick={() =>
-                                                        setOpenMenu(openMenu === item.id ? null : item.id)
-                                                    }
+                                                    onClick={() => setOpenMenu(openMenu === item.id ? null : item.id)}
                                                     aria-label={`Actions for ${item.id}`}
                                                     className="rounded-md p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
                                                 >
@@ -600,7 +663,6 @@ export default function AdsAnnouncements() {
                                                                     Set {status}
                                                                 </button>
                                                             ))}
-
                                                         <button
                                                             onClick={() => deleteAnnouncement(item.id)}
                                                             className="block w-full rounded-md px-3 py-2 text-left text-xs text-red-600 hover:bg-red-50"
@@ -628,22 +690,20 @@ export default function AdsAnnouncements() {
                         </table>
                     </div>
 
-                    {/* Pagination */}
-                    <footer className="flex flex-col gap-3 border-t border-slate-100 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
-                        <p className="text-[10px] text-slate-500">
+                    {/* ===== Pagination ===== */}
+                    <footer className="flex flex-col items-center gap-3 border-t border-slate-100 px-3 py-3 sm:flex-row sm:justify-between">
+                        <p className="text-center text-[10px] text-slate-500 sm:text-left">
                             Showing{" "}
-                            {filteredAnnouncements.length
-                                ? (currentPage - 1) * pageSize + 1
-                                : 0}
-                            –
-                            {Math.min(currentPage * pageSize, filteredAnnouncements.length)}{" "}
-                            of {filteredAnnouncements.length} announcements
+                            {filteredAnnouncements.length ? (currentPage - 1) * pageSize + 1 : 0}–
+                            {Math.min(currentPage * pageSize, filteredAnnouncements.length)} of{" "}
+                            {filteredAnnouncements.length} announcements
                         </p>
 
-                        <div className="flex items-center justify-end gap-1">
+                        <div className="flex flex-wrap items-center justify-center gap-1 sm:justify-end">
                             <button
                                 disabled={currentPage === 1}
                                 onClick={() => setCurrentPage((page) => page - 1)}
+                                aria-label="Previous page"
                                 className="rounded-md border border-slate-200 px-2 py-1.5 text-xs text-slate-500 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
                             >
                                 <FiChevronLeft size={14} />
@@ -676,6 +736,7 @@ export default function AdsAnnouncements() {
                             <button
                                 disabled={currentPage >= totalPages}
                                 onClick={() => setCurrentPage((page) => page + 1)}
+                                aria-label="Next page"
                                 className="rounded-md border border-slate-200 px-2 py-1.5 text-xs text-slate-500 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
                             >
                                 <FiChevronRight size={14} />
