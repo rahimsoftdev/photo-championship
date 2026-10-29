@@ -387,7 +387,7 @@ const SupportInbox = () => {
 
     return (
         <div className="w-full">
-            <div className="w-full max-w-5xl mx-auto">
+            <div className="">
                 <p className="text-[9px] font-semibold tracking-widest text-gray-500 uppercase">Inbox</p>
                 <h1 className="text-xl sm:text-2xl font-semibold text-slate-900 mt-1">Support requests</h1>
                 <p className="text-[11px] text-gray-500 mt-1 mb-4 sm:mb-5">

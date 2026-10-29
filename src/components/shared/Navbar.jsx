@@ -137,9 +137,9 @@ const Navbar = () => {
                     aria-label="Photo Championship home"
                 >
                     <img
-                        src="/src/assets/images/logo.png"
+                        src="/logo.png"
                         alt="Photo Championship"
-                        className="h-9 w-auto max-w-[112px] object-contain min-[380px]:h-10 min-[420px]:max-w-[135px] sm:h-12 sm:max-w-none lg:h-14"
+                        className="h-9 w-auto  object-contain min-[380px]:h-10 sm:h-12 sm:max-w-none lg:h-14"
                     />
                 </Link>
 

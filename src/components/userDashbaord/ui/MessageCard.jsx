@@ -4,7 +4,8 @@ import { FiHeart, FiShare2, FiCalendar, FiClock } from 'react-icons/fi';
 
 const MessageCard = ({ item, post,userInfo }) => {
     const navigate = useNavigate();
-    const { id, userId, usrinfo, date, desciption, image, loves } = item || {};
+    const {  userId, usrinfo, date, desciption, image, loves } = item || {};
+    console.log(item)
 
     const formattedDate = date
         ? new Date(date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
@@ -16,7 +17,7 @@ const MessageCard = ({ item, post,userInfo }) => {
     const isPost = post === 'yes';
 
     // Details page-e jawar id (item.id thakle seta, na hole userId)
-    const itemId = id || userId;
+    const itemId = userId;
     const goToDetails = () => {
         if (itemId) navigate(`/user-dashboard/news-message/${itemId || 897}`);
     };
@@ -44,7 +45,7 @@ const MessageCard = ({ item, post,userInfo }) => {
                 <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2 mb-3 sm:mb-4">
                     <div className="flex items-start gap-2.5 sm:gap-3 min-w-0 flex-1 basis-[190px]">
                         <img
-                            src={userInfo.id === item.userId && userInfo?.image || "https://i.pravatar.cc/150"}
+                            src={userInfo?.id === item.userId && userInfo?.image || "https://i.pravatar.cc/150"}
                             alt={usrinfo?.name || "User"}
                             loading="lazy"
                             className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full object-cover border border-gray-100 mt-0.5"

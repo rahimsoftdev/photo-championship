@@ -71,6 +71,7 @@ import AdminAccessDenied from "../../pages/auth/Adminaccessdenied.jsx";
 import NewsAndMessageDetailsPage from "../../pages/userDashboard/Newsandmessagedetailspage.jsx";
 import ProductDetaisPage from "../../pages/userDashboard/ProductDetaisPage.jsx";
 import ChatPage from "../../pages/userDashboard/ChatPage.jsx";
+import AdvertisePage from "../../pages/feed/Advertise.jsx";
 
 //for user dashboard use:  /user route
 //for admin dashboard use:  /admin route
@@ -121,6 +122,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: "bayimagedetails/checkout", Component: ByCheckOut
+            },
+            {
+                path:"advertise", Component: AdvertisePage
             },
 
             //photograhpar profile details routes
