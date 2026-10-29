@@ -68,8 +68,8 @@ const visitorSummary = {
 // TODO: add real info or data (recent competition submissions from API)
 const recentCompetition = {
     pendingCount: 126,
-    reviewAllLink: '/adminDashboard/competitions',
-    openLink: '/adminDashboard/competitions',
+    reviewAllLink: '/admin-dashboard/competitions',
+    openLink: '/admin-dashboard/competitions',
     items: [
         {
             id: 1,
