@@ -4,7 +4,7 @@ import TopPhotographersSection from '../../components/shared/TopPhotographersSec
 const LeaderboardPage = () => {
     return (
         <div>
-            <TopPhotographersSection/>
+            <TopPhotographersSection  />
         </div>
     );
 };

@@ -90,10 +90,11 @@ const Sidebar = () => {
                 {/* Logo */}
                 <Link to="/" aria-label="Photo Championship home" className="absolute left-1/2 -translate-x-1/2">
                     <img
-                        src="/src/assets/images/logo.png"
+                        src="/logo.png"
                         alt="Photo Championship"
                         className="h-10 w-auto object-contain"
                     />
+                    Home
                 </Link>
 
                 {/* User avatar -> Profile */}
@@ -145,7 +146,7 @@ const Sidebar = () => {
                                 aria-label="Photo Championship home"
                             >
                                 <img
-                                    src="/src/assets/images/logo.png"
+                                    src="/logo.png"
                                     alt="Photo Championship"
                                     className="h-24 w-auto object-contain sm:h-14"
                                 />

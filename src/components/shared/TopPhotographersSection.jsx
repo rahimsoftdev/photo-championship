@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router';
 import { useTopPhotographers } from '../../hooks/useTopPhotographers';
 
 const FILTERS = [
@@ -7,13 +8,17 @@ const FILTERS = [
     { key: 'twelve', label: '12 Photos - Full Zodiac Story', shortLabel: '12 Photos' },
 ];
 
+/**
+ * Medal circle (1st / 2nd / 3rd).
+ * Size fluid hoy (clamp) — mobile theke 4K screen porjonto auto scale kore.
+ */
 const RenderMedal = ({ rank, size = 'md' }) => {
     const sizeClass =
         size === 'lg'
-            ? 'h-6 w-6 text-xs sm:h-7 sm:w-7 sm:text-sm'
-            : 'h-5 w-5 text-[10px] sm:h-6 sm:w-6 sm:text-xs';
+            ? 'h-[clamp(1.25rem,3.5vw,1.875rem)] w-[clamp(1.25rem,3.5vw,1.875rem)] text-[clamp(0.625rem,1.5vw,0.875rem)]'
+            : 'h-[clamp(1.25rem,3.5vw,1.75rem)] w-[clamp(1.25rem,3.5vw,1.75rem)] text-[clamp(0.625rem,1.5vw,0.875rem)]';
 
-    const base = `inline-flex shrink-0 items-center justify-center rounded-full font-bold shadow-sm ${sizeClass}`;
+    const base = `inline-flex shrink-0 items-center justify-center rounded-full font-bold leading-none shadow-sm ${sizeClass}`;
 
     if (rank === 1) {
         return (
@@ -41,7 +46,11 @@ const RenderMedal = ({ rank, size = 'md' }) => {
     );
 };
 
-export default function TopPhotographersSection({ isAdmin = false }) {
+export default function TopPhotographersSection() {
+    const { pathname } = useLocation();
+    // /admin-dashboard/winners (ba /admin-dashboard/** ) hole admin layout
+    const isAdmin = pathname.startsWith('/admin-dashboard');
+
     const [selectedType, setSelectedType] = useState('six');
 
     const { isLoading, error, data = [] } = useTopPhotographers(selectedType);
@@ -57,28 +66,28 @@ export default function TopPhotographersSection({ isAdmin = false }) {
             className={`w-full overflow-x-hidden bg-[#f8fafc] font-sans ${
                 isAdmin
                     ? 'm-0 p-0'
-                    : 'px-3 py-8 min-[400px]:px-4 sm:px-6 sm:py-10 md:px-8 md:py-12 lg:py-section'
+                    : 'px-3 py-8 min-[400px]:px-4 sm:px-6 sm:py-10 md:px-8 md:py-12 lg:px-10 lg:py-section xl:px-12 2xl:px-16'
             }`}
         >
             <div
                 className={`w-full ${
                     isAdmin
-                        ? 'm-0 max-w-none space-y-4 sm:space-y-6'
+                        ? 'm-0 max-w-none space-y-4 p-0 sm:space-y-6'
                         : 'mx-auto max-w-main space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12'
                 }`}
             >
                 {/* Header & Filter Nav */}
                 <div
-                    className={`flex min-w-0 flex-col gap-4 sm:gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-6 ${
-                        isAdmin ? 'p-0' : ''
+                    className={`flex w-full min-w-0 flex-col gap-3 sm:gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6 ${
+                        isAdmin ? 'm-0 p-0' : ''
                     }`}
                 >
                     <div className="min-w-0">
-                        <h1 className="break-words text-2xl font-extrabold tracking-tight text-titleText sm:text-3xl md:text-4xl">
+                        <h1 className="break-words text-xl font-extrabold tracking-tight text-titleText min-[400px]:text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl">
                             Top Photographers
                         </h1>
 
-                        <p className="mt-1 text-xs text-subTitleText sm:text-sm md:text-base">
+                        <p className="mt-1 text-xs text-subTitleText sm:text-sm md:text-base 2xl:text-lg">
                             July 2026 — Live standings
                         </p>
                     </div>
@@ -88,8 +97,9 @@ export default function TopPhotographersSection({ isAdmin = false }) {
                         {FILTERS.map((f) => (
                             <button
                                 key={f.key}
+                                type="button"
                                 onClick={() => setSelectedType(f.key)}
-                                className={`rounded-full px-2 py-2 text-center text-[11px] font-medium leading-tight transition-all duration-200 min-[400px]:text-xs sm:px-3 sm:text-sm md:whitespace-nowrap md:px-4 ${
+                                className={`rounded-full px-2 py-2 text-center text-[11px] font-medium leading-tight transition-all duration-200 min-[400px]:text-xs sm:px-3 sm:text-sm md:whitespace-nowrap md:px-4 xl:px-5 xl:py-2.5 2xl:text-base ${
                                     selectedType === f.key
                                         ? 'bg-primary text-white shadow-md'
                                         : 'text-subTitleText hover:text-titleText'
@@ -118,21 +128,29 @@ export default function TopPhotographersSection({ isAdmin = false }) {
 
                 {/* Podium Section */}
                 {!isLoading && !error && podiumOrder.length > 0 && (
-                    <div className="mx-auto flex w-full max-w-2xl items-end justify-center gap-2 px-1 pb-2 pt-6 min-[400px]:gap-4 sm:gap-8 sm:pt-8 md:gap-12">
+                    <div
+                        className={`flex w-full items-end justify-center gap-[clamp(0.5rem,3vw,3rem)] pb-2 pt-8 sm:pt-10 ${
+                            isAdmin
+                                ? 'm-0 max-w-none px-0'
+                                : 'mx-auto max-w-2xl px-1 lg:max-w-3xl 2xl:max-w-4xl'
+                        }`}
+                    >
                         {podiumOrder.map((photographer) => {
                             const isFirst = photographer.ranking === 1;
+                            const info = photographer.photographerinfo || {};
 
                             return (
                                 <div
                                     key={photographer.userId}
-                                    className={`flex min-w-0 flex-1 basis-0 flex-col items-center text-center transition-transform ${
+                                    className={`flex min-w-0 max-w-[16rem] flex-1 basis-0 flex-col items-center text-center transition-transform ${
                                         isFirst
-                                            ? '-translate-y-2 sm:-translate-y-3'
+                                            ? '-translate-y-2 sm:-translate-y-3 lg:-translate-y-4'
                                             : ''
                                     }`}
                                 >
-                                    <div className="relative mb-2">
-                                        <div className="absolute -top-3 left-1/2 z-10 -translate-x-1/2">
+                                    {/* Avatar + medal circle */}
+                                    <div className="relative mb-2 sm:mb-3">
+                                        <div className="absolute -top-[clamp(0.625rem,1.8vw,1rem)] left-1/2 z-10 -translate-x-1/2">
                                             <RenderMedal
                                                 rank={photographer.ranking}
                                                 size="lg"
@@ -147,28 +165,29 @@ export default function TopPhotographersSection({ isAdmin = false }) {
                                             }`}
                                         >
                                             <img
-                                                src={photographer.photographerinfo.image}
-                                                alt={photographer.photographerinfo.name}
+                                                src={info.image}
+                                                alt={info.name || 'Photographer'}
                                                 loading="lazy"
-                                                className={`rounded-full object-cover shadow-lg ${
+                                                decoding="async"
+                                                className={`aspect-square rounded-full object-cover shadow-lg ${
                                                     isFirst
-                                                        ? 'h-16 w-16 min-[400px]:h-20 min-[400px]:w-20 sm:h-24 sm:w-24 md:h-28 md:w-28'
-                                                        : 'h-12 w-12 min-[400px]:h-14 min-[400px]:w-14 sm:h-18 sm:w-18 sm:h-[72px] sm:w-[72px] md:h-20 md:w-20'
+                                                        ? 'h-[clamp(3.25rem,13vw,6rem)] w-[clamp(3.25rem,13vw,6rem)]'
+                                                        : 'h-[clamp(2.5rem,10vw,4.5rem)] w-[clamp(2.5rem,10vw,4.5rem)]'
                                                 }`}
                                             />
                                         </div>
                                     </div>
 
-                                    <h3 className="w-full truncate px-0.5 text-xs font-bold text-titleText min-[400px]:text-sm sm:text-base md:text-lg">
-                                        {photographer.photographerinfo.name.split(' ')[0]}
+                                    <h3 className="w-full truncate px-0.5 text-xs font-bold text-titleText min-[400px]:text-sm sm:text-base md:text-lg 2xl:text-xl">
+                                        {(info.name || '').split(' ')[0]}
                                     </h3>
 
-                                    <p className="mb-0.5 w-full truncate px-0.5 text-[10px] text-subTitleText min-[400px]:text-xs sm:mb-1 sm:text-sm">
+                                    <p className="mb-0.5 w-full truncate px-0.5 text-[10px] text-subTitleText min-[400px]:text-xs sm:mb-1 sm:text-sm 2xl:text-base">
                                         {photographer.city}
                                     </p>
 
-                                    <p className="whitespace-nowrap text-[10px] font-bold text-secondary min-[400px]:text-xs sm:text-sm md:text-base">
-                                        {photographer.vots.toLocaleString()} votes
+                                    <p className="whitespace-nowrap text-[10px] font-bold text-secondary min-[400px]:text-xs sm:text-sm md:text-base 2xl:text-lg">
+                                        {(photographer.vots ?? 0).toLocaleString()} votes
                                     </p>
                                 </div>
                             );
@@ -179,50 +198,55 @@ export default function TopPhotographersSection({ isAdmin = false }) {
                 {/* Leaderboard */}
                 {!isLoading && !error && (
                     <div
-                        className="overflow-hidden rounded-xl bg-white shadow-sm sm:rounded-2xl"
+                        className="w-full overflow-hidden rounded-xl bg-white shadow-sm sm:rounded-2xl"
                         style={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}
                     >
                         {/* Mobile: Card list (below md) */}
                         <ul className="divide-y divide-slate-100 md:hidden">
                             {tableData.length > 0 ? (
-                                tableData.map((row) => (
-                                    <li
-                                        key={row.userId}
-                                        className="flex items-center gap-3 px-3 py-3 min-[400px]:px-4"
-                                    >
-                                        <div className="flex w-6 shrink-0 justify-center">
-                                            <RenderMedal rank={row.ranking} />
-                                        </div>
+                                tableData.map((row) => {
+                                    const info = row.photographerinfo || {};
 
-                                        <img
-                                            src={row.photographerinfo.image}
-                                            alt={row.photographerinfo.name}
-                                            loading="lazy"
-                                            className="h-10 w-10 shrink-0 rounded-full object-cover shadow-sm"
-                                        />
+                                    return (
+                                        <li
+                                            key={row.userId}
+                                            className="flex items-center gap-2 px-3 py-3 min-[400px]:gap-3 min-[400px]:px-4"
+                                        >
+                                            <div className="flex w-7 shrink-0 justify-center">
+                                                <RenderMedal rank={row.ranking} />
+                                            </div>
 
-                                        <div className="min-w-0 flex-1">
-                                            <p className="truncate text-sm font-semibold text-titleText">
-                                                {row.photographerinfo.name}
-                                            </p>
-                                            <p className="truncate text-xs text-subTitleText">
-                                                {row.city}
-                                            </p>
-                                        </div>
+                                            <img
+                                                src={info.image}
+                                                alt={info.name || 'Photographer'}
+                                                loading="lazy"
+                                                decoding="async"
+                                                className="aspect-square h-10 w-10 shrink-0 rounded-full object-cover shadow-sm min-[400px]:h-11 min-[400px]:w-11"
+                                            />
 
-                                        <div className="shrink-0 text-right">
-                                            <p className="text-sm font-bold text-titleText">
-                                                {row.vots.toLocaleString()}
-                                                <span className="ml-1 text-[10px] font-medium text-subTitleText">
-                                                    votes
-                                                </span>
-                                            </p>
-                                            <p className="text-xs text-subTitleText">
-                                                {row.point.toLocaleString()} pts
-                                            </p>
-                                        </div>
-                                    </li>
-                                ))
+                                            <div className="min-w-0 flex-1">
+                                                <p className="truncate text-sm font-semibold text-titleText">
+                                                    {info.name}
+                                                </p>
+                                                <p className="truncate text-xs text-subTitleText">
+                                                    {row.city}
+                                                </p>
+                                            </div>
+
+                                            <div className="shrink-0 text-right">
+                                                <p className="text-sm font-bold text-titleText">
+                                                    {(row.vots ?? 0).toLocaleString()}
+                                                    <span className="ml-1 text-[10px] font-medium text-subTitleText">
+                                                        votes
+                                                    </span>
+                                                </p>
+                                                <p className="text-xs text-subTitleText">
+                                                    {(row.point ?? 0).toLocaleString()} pts
+                                                </p>
+                                            </div>
+                                        </li>
+                                    );
+                                })
                             ) : (
                                 <li className="px-4 py-8 text-center text-xs text-subTitleText">
                                     No photographers found for this category.
@@ -230,67 +254,73 @@ export default function TopPhotographersSection({ isAdmin = false }) {
                             )}
                         </ul>
 
-                        {/* Tablet & Desktop: Table (md and up) */}
+                        {/* Tablet, Laptop & Desktop: Table (md and up) */}
                         <div className="hidden w-full overflow-x-auto md:block">
                             <table className="w-full border-collapse text-left">
                                 <thead>
                                     <tr
-                                        className="bg-slate-50/50 text-xs font-bold uppercase tracking-wider text-subTitleText"
+                                        className="bg-slate-50/50 text-xs font-bold uppercase tracking-wider text-subTitleText 2xl:text-sm"
                                         style={{
                                             borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
                                         }}
                                     >
-                                        <th className="w-14 px-4 py-4 text-center lg:w-16 lg:px-6">
+                                        <th className="w-14 px-3 py-4 text-center lg:w-16 lg:px-6 2xl:w-20">
                                             #
                                         </th>
-                                        <th className="px-4 py-4 lg:px-6">Photographer</th>
-                                        <th className="px-4 py-4 lg:px-6">City</th>
-                                        <th className="px-4 py-4 text-right lg:px-6">Votes</th>
-                                        <th className="px-4 py-4 text-right lg:px-6">Points</th>
+                                        <th className="px-3 py-4 lg:px-6">Photographer</th>
+                                        <th className="px-3 py-4 lg:px-6">City</th>
+                                        <th className="px-3 py-4 text-right lg:px-6">Votes</th>
+                                        <th className="px-3 py-4 text-right lg:px-6">Points</th>
                                     </tr>
                                 </thead>
 
-                                <tbody className="text-sm">
+                                <tbody className="text-sm 2xl:text-base">
                                     {tableData.length > 0 ? (
-                                        tableData.map((row) => (
-                                            <tr
-                                                key={row.userId}
-                                                className="transition-colors hover:bg-slate-50/80"
-                                                style={{
-                                                    borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-                                                }}
-                                            >
-                                                <td className="px-4 py-4 text-center lg:px-6">
-                                                    <RenderMedal rank={row.ranking} />
-                                                </td>
+                                        tableData.map((row) => {
+                                            const info = row.photographerinfo || {};
 
-                                                <td className="px-4 py-4 lg:px-6">
-                                                    <div className="flex min-w-0 items-center gap-3">
-                                                        <img
-                                                            src={row.photographerinfo.image}
-                                                            alt={row.photographerinfo.name}
-                                                            loading="lazy"
-                                                            className="h-8 w-8 shrink-0 rounded-full object-cover shadow-sm lg:h-9 lg:w-9"
-                                                        />
-                                                        <span className="max-w-[160px] truncate font-semibold text-titleText lg:max-w-[260px]">
-                                                            {row.photographerinfo.name}
-                                                        </span>
-                                                    </div>
-                                                </td>
+                                            return (
+                                                <tr
+                                                    key={row.userId}
+                                                    className="transition-colors hover:bg-slate-50/80"
+                                                    style={{
+                                                        borderBottom:
+                                                            '1px solid rgba(0, 0, 0, 0.1)',
+                                                    }}
+                                                >
+                                                    <td className="px-3 py-3 text-center lg:px-6 lg:py-4">
+                                                        <RenderMedal rank={row.ranking} />
+                                                    </td>
 
-                                                <td className="max-w-[140px] truncate px-4 py-4 font-medium text-subTitleText lg:max-w-[220px] lg:px-6">
-                                                    {row.city}
-                                                </td>
+                                                    <td className="px-3 py-3 lg:px-6 lg:py-4">
+                                                        <div className="flex min-w-0 items-center gap-3">
+                                                            <img
+                                                                src={info.image}
+                                                                alt={info.name || 'Photographer'}
+                                                                loading="lazy"
+                                                                decoding="async"
+                                                                className="aspect-square h-8 w-8 shrink-0 rounded-full object-cover shadow-sm lg:h-9 lg:w-9 2xl:h-11 2xl:w-11"
+                                                            />
+                                                            <span className="max-w-[140px] truncate font-semibold text-titleText lg:max-w-[260px] 2xl:max-w-[360px]">
+                                                                {info.name}
+                                                            </span>
+                                                        </div>
+                                                    </td>
 
-                                                <td className="whitespace-nowrap px-4 py-4 text-right font-bold text-titleText lg:px-6">
-                                                    {row.vots.toLocaleString()}
-                                                </td>
+                                                    <td className="max-w-[120px] truncate px-3 py-3 font-medium text-subTitleText lg:max-w-[220px] lg:px-6 lg:py-4 2xl:max-w-[320px]">
+                                                        {row.city}
+                                                    </td>
 
-                                                <td className="whitespace-nowrap px-4 py-4 text-right font-medium text-subTitleText lg:px-6">
-                                                    {row.point.toLocaleString()}
-                                                </td>
-                                            </tr>
-                                        ))
+                                                    <td className="whitespace-nowrap px-3 py-3 text-right font-bold text-titleText lg:px-6 lg:py-4">
+                                                        {(row.vots ?? 0).toLocaleString()}
+                                                    </td>
+
+                                                    <td className="whitespace-nowrap px-3 py-3 text-right font-medium text-subTitleText lg:px-6 lg:py-4">
+                                                        {(row.point ?? 0).toLocaleString()}
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })
                                     ) : (
                                         <tr>
                                             <td

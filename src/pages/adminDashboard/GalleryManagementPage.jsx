@@ -8,6 +8,7 @@ import useArtwork from '../../hooks/useArtwork';
 import AdminArtworkCard from '../../components/admin/Adminartworkcard';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
 import Pagination from '../../components/shared/Pagination';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
 
 const GalleryManagementPage = () => {
     // Read query params from the current URL.
@@ -36,7 +37,7 @@ const GalleryManagementPage = () => {
     };
 
     // Show loading page while data is being fetched.
-    if (loading) return <LoadingPage />;
+    if (loading) return <ArtworkSkeleton/>
 
     // Show an error if fetching fails.
     if (error) {

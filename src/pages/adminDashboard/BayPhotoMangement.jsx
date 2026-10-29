@@ -8,6 +8,7 @@ import useArtwork from '../../hooks/useArtwork';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
 import AdminArtworkCard from '../../components/admin/Adminartworkcard';
 import Pagination from '../../components/shared/Pagination';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
 
 const BayPhotoMangement = () => {
     const [searchParams] = useSearchParams();
@@ -32,7 +33,7 @@ const BayPhotoMangement = () => {
         setDeletedIds((prev) => [...prev, id]);
     };
 
-    if (loading) return <LoadingPage />;
+    if (loading) return <ArtworkSkeleton/>
 
     if (error) {
         return <p className="text-red-500">{error}</p>;

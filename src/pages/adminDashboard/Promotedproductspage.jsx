@@ -5,6 +5,7 @@ import useFetch from '../../hooks/useFetch';
 import MyArtworkFilter from '../../components/ui/MyArtworkFilter';
 import PromotedProductCard from '../../components/admin/Promotedproductcard';
 import Pagination from '../../components/shared/Pagination';
+import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
 
 const PAGE_SIZE = 12; // cards per page
 
@@ -27,7 +28,7 @@ const PromotedProductsPage = () => {
     const { data, isLoading, error } = useFetch('/Promoted.json');
 
     // Show loading page while data is being fetched.
-    if (isLoading) return <LoadingPage />;
+    if (isLoading) return <ArtworkSkeleton/>
 
     // Show an error if fetching fails.
     if (error) {

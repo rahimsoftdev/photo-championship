@@ -115,7 +115,7 @@ const AdminSidebar = () => {
                 {/* Logo */}
                 <Link to="/" aria-label="Photo Championship home" className="absolute left-1/2 -translate-x-1/2">
                     <img
-                        src="/src/assets/images/logo.png"
+                        src="/logo.png"
                         alt="Photo Championship"
                         className="h-10 w-auto object-contain"
                     />
@@ -167,7 +167,7 @@ const AdminSidebar = () => {
                             aria-label="Photo Championship home"
                         >
                             <img
-                                src="/src/assets/images/logo.png"
+                                src="/logo.png"
                                 alt="Photo Championship"
                                 className="h-14 w-auto object-contain"
                             />
