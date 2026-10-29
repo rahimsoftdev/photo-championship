@@ -31,7 +31,7 @@ const BayPhotosPage = () => {
             {artworks.length === 0 ? (
                <NoPhotosFound/>
             ) : (
-                <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-4">
+                <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-4">
                     {artworks.map((artWorkData) => (
                         <ArtworkCard
                             key={artWorkData.id}

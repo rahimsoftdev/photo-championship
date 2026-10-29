@@ -219,7 +219,7 @@ const ReportPhotoModal = ({ photoTitle = "this single photo" }) => {
             >
               {/* Only this area scrolls when the content is taller than the modal.
                   overscroll-contain stops the page behind from scrolling. */}
-              <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5">
+              <div className="flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain px-4 py-4 sm:px-5">
                 <h3 className="text-xs font-semibold text-[#111827]">
                   Why are you reporting {photoTitle}?
                 </h3>
@@ -241,8 +241,8 @@ const ReportPhotoModal = ({ photoTitle = "this single photo" }) => {
                         onClick={() => handleSelectReason(reason.id)}
                         aria-pressed={isSelected}
                         className={`relative flex min-h-[65px] items-center gap-2.5 rounded-xl border p-2.5 text-left transition ${isSelected
-                            ? "border-primary bg-[#F5F5FF] ring-1 ring-primary"
-                            : "border-[#E5E7EB] bg-white hover:border-primary/50 hover:bg-gray-50"
+                          ? "border-primary bg-[#F5F5FF] ring-1 ring-primary"
+                          : "border-[#E5E7EB] bg-white hover:border-primary/50 hover:bg-gray-50"
                           }`}
                       >
                         {/* Reason icon with grey background */}
@@ -340,7 +340,7 @@ const ReportPhotoModal = ({ photoTitle = "this single photo" }) => {
           </>
         ) : (
           /* Success screen: scrolls on its own if the screen is very small */
-          <div className="relative overflow-y-auto overscroll-contain px-5 py-8 sm:px-7 sm:py-10">
+          <div className="relative overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-contain px-5 py-8 sm:px-7 sm:py-10">
             {/* Close button pinned to the top-right corner */}
             <button
               type="button"
