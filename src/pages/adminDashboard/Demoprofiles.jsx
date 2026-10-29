@@ -220,7 +220,8 @@ const ProfileDetailsModal = ({ profile, onClose, onToggleStatus }) => {
         aria-modal="true"
         aria-label="Profile details"
         onClick={(e) => e.stopPropagation()}
-        className="flex max-h-[92dvh] w-full flex-col overflow-y-auto overscroll-contain rounded-t-2xl bg-white pb-[env(safe-area-inset-bottom)] shadow-2xl sm:max-h-[90dvh] sm:max-w-md sm:rounded-2xl sm:pb-0"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex max-h-[92dvh] w-full flex-col overflow-y-auto overscroll-contain rounded-t-2xl bg-white pb-[env(safe-area-inset-bottom)] shadow-2xl [&::-webkit-scrollbar]:hidden sm:max-h-[90dvh] sm:max-w-md sm:rounded-2xl sm:pb-0"
       >
         {/* Mobile bottom-sheet handle */}
         <div className="mx-auto mt-2 h-1 w-10 flex-shrink-0 rounded-full bg-gray-200 sm:hidden" />
@@ -328,8 +329,8 @@ const ProfileDetailsModal = ({ profile, onClose, onToggleStatus }) => {
             type="button"
             onClick={() => onToggleStatus(profile.id, isActive ? "Inactive" : "Active")}
             className={`rounded-md px-4 py-2.5 text-xs font-medium transition sm:py-2 2xl:text-sm ${isActive
-                ? "bg-red-50 text-red-600 hover:bg-red-100"
-                : "bg-green-50 text-green-700 hover:bg-green-100"
+              ? "bg-red-50 text-red-600 hover:bg-red-100"
+              : "bg-green-50 text-green-700 hover:bg-green-100"
               }`}
           >
             {isActive ? "Deactivate Profile" : "Activate Profile"}
