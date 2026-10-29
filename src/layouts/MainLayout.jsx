@@ -10,7 +10,7 @@ import ScrollToTop from '../components/shared/ScrollToTop';
 const MainLayout = () => {
     return (
         <div>
-            {/* <ScrollToTop /> */}
+            <ScrollToTop />
             <AnnouncementBar />
             <Navbar />
             <main className=''>
