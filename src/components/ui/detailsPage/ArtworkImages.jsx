@@ -65,7 +65,7 @@ const ArtworkImages = ({ images = [], isDashboard = false }) => {
           alt={`Artwork image ${currentIndex + 1}`}
           className={`block w-full object-cover
     aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9]
-    max-h-[260px] sm:max-h-[360px] md:max-h-[420px] xl:max-h-[500px]
+    max-h-[260px] sm:max-h-[310px] m md:max-h-[360px] xl:max-h-[400px]
     transition-opacity duration-300 ease-in-out ${isVisible ? "opacity-100" : "opacity-0"
             }`}
         />
