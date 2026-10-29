@@ -1,4 +1,5 @@
 import { useLocation, useSearchParams } from "react-router";
+import { useEffect, useRef } from "react";
 import useArtwork from "../../hooks/useArtwork";
 import ArtworkCard from "../../components/ui/ArtworkCard";
 import Pagination from "../../components/shared/Pagination";
@@ -8,8 +9,24 @@ import ArtworkSkeleton from "../../components/ui/Skeletons/ArtworkSkeleton";
 
 const CompetitionPage = () => {
     // Read query params from the current URL.
+    const sectionRef = useRef(null);
     const [searchParams] = useSearchParams();
     const { pathname } = useLocation();
+
+    const previousParams = useRef(searchParams.toString());
+
+    useEffect(() => {
+        const currentParams = searchParams.toString();
+
+        if (previousParams.current !== currentParams) {
+            sectionRef.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+
+        previousParams.current = currentParams;
+    }, [searchParams]);
 
     const isFavorite = pathname === "/user-dashboard/favourite-photos";
 
@@ -24,39 +41,38 @@ const CompetitionPage = () => {
         totalPages,
     } = useArtwork(params, true, 9, '/artWork.json');
 
-    // Show loading page while data is being fetched.
-    if (loading) return <ArtworkSkeleton />;
 
-    // Show an error if fetching fails.
-    if (error) {
-        return <p className="text-red-500">{error}</p>;
-    }
+    // Show loading page while data is being fetched.
+
 
     return (
-        <section className={`w-full space-y-6 ${!isFavorite && 'lg:pt-7'}`}>
-
-            {isFavorite && (
-                <h1 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
-                    My Favorite Photos
-                </h1>
-            )}
-            {/* <h1>Buy Photos</h1> */}
-
-            {artworks.length === 0 ? (
-                <NoPhotosFound />
+        <section
+            ref={sectionRef}
+            className={`w-full space-y-6 ${!isFavorite && "lg:pt-2"}`}
+        >
+            {loading ? (
+                <ArtworkSkeleton />
+            ) : error ? (
+                <p className="text-red-500">{error}</p>
             ) : (
-                <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-4">
-                    {artworks.map((artWorkData) => (
-                        <ArtworkCard
-                            key={artWorkData.id}
-                            artWorkData={artWorkData}
-                            isFavorite={isFavorite}
-                        />
-                    ))}
-                </div>
-            )}
+                <>
+                    {artworks.length === 0 ? (
+                        <NoPhotosFound />
+                    ) : (
+                        <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-4">
+                            {artworks.map((artWorkData) => (
+                                <ArtworkCard
+                                    key={artWorkData.id}
+                                    artWorkData={artWorkData}
+                                    isFavorite={isFavorite}
+                                />
+                            ))}
+                        </div>
+                    )}
 
-            <Pagination totalPages={totalPages} />
+                    <Pagination totalPages={totalPages} />
+                </>
+            )}
         </section>
     );
 };
