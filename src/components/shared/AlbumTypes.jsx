@@ -11,7 +11,7 @@ import AlbumCard from "../ui/AlbumCard";
  * - isHome    : Home page er section design
  * - isArtwork : User dashboard er "Creative Upload Hub" design
  */
-const AlbumTypes = ({ isHome, isArtwork }) => {
+const AlbumTypes = ({ isHome, isArtwork, isAblum }) => {
   // Fetch album data using the custom useFetch hook
   const { data: albums, isLoading, error } = useFetch("/albumTypesData.json");
 
@@ -77,7 +77,7 @@ const AlbumTypes = ({ isHome, isArtwork }) => {
   /* ================= Home / Default ================= */
   return (
     <div
-      className={`w-full bg-[#F7F8FA] py-10 sm:py-12 md:py-14 lg:py-15 ${isHome ? "lg:py-section" : ""}`}
+      className={`w-full bg-[#F7F8FA] py-10 sm:py-12 md:py-14 lg:py-15 ${isHome | isAblum ? "xl:py-section" : ""}`}
     >
       <section className="mx-auto w-full max-w-main px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

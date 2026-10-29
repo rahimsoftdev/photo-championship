@@ -43,7 +43,7 @@ const Checkbox = ({ name, value, checked, onChange }) => (
 const AlbumSidebar = () => {
   // Fetch categories and their subcategories from the public JSON file.
   const { data, isLoading, error } = useFetch("/albumCategories.json");
-  
+
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -257,22 +257,37 @@ const AlbumSidebar = () => {
     </div>
   );
 
-  if(isLoading) {
-     return <AlbumSidebarSkeleton/>
+  if (isLoading) {
+    return <AlbumSidebarSkeleton />
   }
 
   return (
     <>
       {/* Mobile/tablet filter button. Hidden on desktop (md and above). */}
-      <div className="mb-1 md:hidden">
+      <div className="mb-3 md:hidden">
         <button
           type="button"
           onClick={() => setIsSidebarOpen(true)}
           aria-expanded={isSidebarOpen}
-          className="inline-flex items-center gap-2 rounded-lg bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+          className="group inline-flex w-full items-center justify-between rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition-all duration-200 hover:border-secondary/40 hover:shadow-md active:scale-[0.99]"
         >
-          <FiSliders size={18} />
-          Filters
+          <span className="flex items-center gap-3">
+            <span className="flex size-9 items-center justify-center rounded-lg bg-secondary/10 text-secondary transition-colors group-hover:bg-secondary group-hover:text-white">
+              <FiSliders size={19} />
+            </span>
+
+            <span className="text-left">
+              <span className="block">Filters</span>
+              <span className="mt-0.5 block text-xs font-normal text-gray-500">
+                Refine your photo collection
+              </span>
+            </span>
+          </span>
+
+          <FiChevronRight
+            size={20}
+            className="text-gray-400 transition-transform group-hover:translate-x-1"
+          />
         </button>
       </div>
 
@@ -283,7 +298,7 @@ const AlbumSidebar = () => {
 
       {/* Mobile/tablet drawer: overlay + slide-in sidebar */}
       {isSidebarOpen && (
-        <div className="fixed inset-0 z-110 md:hidden">
+        <div className="absolute inset-0 h-full w-full bg-gray-950/50 backdrop-blur-[3px] z-222">
           {/* Clicking outside the sidebar closes the drawer */}
           <button
             type="button"
