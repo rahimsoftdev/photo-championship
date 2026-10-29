@@ -7,6 +7,8 @@ import ArtworkGalleryGrid from "../../components/ui/detailsPage/ArtworkGalleryGr
 import ArtworkComments from "../../components/ui/detailsPage/ArtworkComments";
 import SupportSection from "../../components/ui/detailsPage/SupportSection";
 import LoadingPage from "../feedback/LoadingPage";
+import GlobalRankings from "../../components/shared/Globalrankings";
+import ArtworkVideo from "../../components/ui/detailsPage/ArtworkVideo";
 // import ArtworkImages from "../../components/shared/ArtworkImages";
 
 // user-dashboard ba admin dashboard route hole true
@@ -40,13 +42,15 @@ const ArtwokDetailsPage = () => {
       <ArtworkGalleryGrid images={artwork.images} zodiacs={artwork.zodiacs} />
 
       {/* TODO: Video component  */}
-      {/* <ArtworkVideo video={artwork.video} /> */}
+      <ArtworkVideo video={artwork.video} />
 
       <ArtworkInfoSection isDashboard={isDashboard} artwork={artwork} />
 
       {
         !isDashboard && <SupportSection/>
       }
+
+      <GlobalRankings/>
       
       <ArtworkComments isDashboard={isDashboard}  artwork={artwork} />
 

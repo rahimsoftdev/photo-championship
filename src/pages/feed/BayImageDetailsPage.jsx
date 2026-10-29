@@ -4,6 +4,7 @@ import useArtworkById from '../../hooks/useArtworkById';
 import ArtworkImages from '../../components/ui/detailsPage/ArtworkImages';
 import ArtworkGalleryGrid from '../../components/ui/detailsPage/ArtworkGalleryGrid';
 import BayPhotoGalleryGrid from '../../components/ui/detailsPage/BayPhotoGalleryGrid';
+import ArtworkVideo from '../../components/ui/detailsPage/ArtworkVideo';
 
 // user-dashboard ba admin dashboard route hole true
 const DASHBOARD_PATH = /^\/(user-dashboard|admin-dashboard|admin)(\/|$)/;
@@ -25,7 +26,7 @@ const BayImageDetailsPage = () => {
             <ArtworkGalleryGrid images={bayPhoto?.images} zodiacs={bayPhoto?.zodiacs} />
 
             {/* TODO: Video component  */}
-            {/* <ArtworkVideo video={artwork.video} /> */}
+            <ArtworkVideo  />
 
             <BayPhotoGalleryGrid images={bayPhoto?.images} zodiacs={bayPhoto?.zodiacs} bayPhoto={bayPhoto} />
 
