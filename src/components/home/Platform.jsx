@@ -57,16 +57,16 @@ const platformFeatures = [
 
 const Platform = () => {
   return (
-    <section className="bg-white md:pb-section   min-[350px]:px-4 sm:px-6 sm:pb-12 md:px-8  pb-10">
+    <section className="bg-white md:pb-section    sm:pb-12   pb-10">
       <div className="container mx-auto max-w-main px-5">
 
         {/* Section heading */}
-        <div className="mb-8 text-center md:text-start">
-          <p className="mb-2 text-base font-bold uppercase tracking-wide text-blueText">
+        <div className="mb-4 text-center md:text-start">
+          <p className=" mb-2 text-base font-bold uppercase tracking-wide text-blueText">
             The Platform
           </p>
 
-          <h2 className=" text-xl font-extrabold text-titleText md:text-3xl mt-5">
+          <h2 className=" text-xl font-extrabold text-titleText md:text-3xl ">
             Why My12Photos
           </h2>
         </div>

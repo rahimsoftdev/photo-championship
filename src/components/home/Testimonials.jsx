@@ -12,7 +12,7 @@ const Testimonials = () => {
     return <LoadingPage />
   }
   return (
-    <section className="bg-[#F7F8FA] px-4 py-10 font-sans min-[350px]:px-4 sm:px-6 sm:py-12 md:px-8 lg:py-section">
+    <section className="bg-[#F7F8FA]  py-10 font-sans md:px-4  sm:py-12  lg:py-section">
       <div className="container mx-auto px-4 max-w-main">
 
         {/* Section heading */}
