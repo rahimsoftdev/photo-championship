@@ -5,7 +5,7 @@ import SearchBar from "../ui/SearchBar";
 // Hero section introducing the zodiac photography competition.
 const Hero = () => {
   return (
-    <section className="relative isolate flex  w-full items-center overflow-hidden bg-[#100d2b] sm:min-h-[620px] ">
+    <section className="relative isolate flex  w-full items-center overflow-hidden bg-[#100d2b] md:min-h-[520px] ">
       {/* Optimized background image */}
       <img
         src={heroBg}

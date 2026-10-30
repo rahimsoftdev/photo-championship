@@ -22,6 +22,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const [language, setLanguage] = useState("English");
+    console.log(userinfo)
 
     const closeMenu = () => {
         setIsMenuOpen(false);
