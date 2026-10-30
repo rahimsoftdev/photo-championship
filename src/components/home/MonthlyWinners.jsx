@@ -1,6 +1,7 @@
 import { FaArrowRight } from "react-icons/fa";
 import useFetch from "../../hooks/useFetch";
 import LoadingPage from "../../pages/feedback/LoadingPage";
+import { Link } from "react-router";
 
 
 const MonthlyWinners = () => {
@@ -75,27 +76,26 @@ const MonthlyWinners = () => {
               </p>
 
               {/* Album Button */}
-              <button
-                type="button"
+              <Link
+              to={`/photographers/${winner.userId}`}
+               
                 className="mt-4 w-full rounded-full border border-white/20 px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:mt-5 sm:px-4"
-                onClick={() => {
-                  // Add your album navigation here.
-                }}
+                
               >
                 View Album
-              </button>
+              </Link>
             </article>
           ))}
         </div>
 
         {/* Previous Winners Link */}
-        <a
-          href="/previous-winners"
+        <Link
+          to="/winners"
           className="mt-5 inline-flex items-center justify-center gap-2 text-xs font-medium text-white transition-opacity hover:opacity-80 sm:mt-7 sm:text-sm"
         >
           View all previous winners
           <FaArrowRight className="text-[10px] sm:text-xs" aria-hidden="true" />
-        </a>
+        </Link>
       </div>
     </section>
   );

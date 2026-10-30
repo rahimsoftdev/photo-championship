@@ -7,7 +7,8 @@
     "votes": "3,210 votes",
     "prize": "$300",
     "avatar": "https://i.pravatar.cc/150?img=47",
-    "medal": "🥇"
+    "medal": "🥇",
+    "userId":"user_102"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "votes": "2,801 votes",
     "prize": "$150",
     "avatar": "https://i.pravatar.cc/150?img=12",
-    "medal": "🥈"
+    "medal": "🥈",
+    "userId":"user_102"
   },
   {
     "id": 3,
@@ -27,6 +29,7 @@
     "votes": "2,645 votes",
     "prize": "$50",
     "avatar": "https://i.pravatar.cc/150?img=44",
-    "medal": "🥉"
+    "medal": "🥉",
+    "userId":"user_102"
   }
 ]
