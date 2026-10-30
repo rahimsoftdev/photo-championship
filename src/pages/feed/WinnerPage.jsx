@@ -26,7 +26,7 @@ const WinnerPage = () => {
   });
 
   return (
-    <main className="mx-auto w-full max-w-main px-4 pt-6 sm:px-6 lg:px-8 sm:pt-12 lg:pt-15">
+    <main className="mx-auto w-full max-w-main px-4 pt-5 sm:px-6 lg:px-8 sm:pt-8 lg:pt-10">
       <div className="mb-5">
         <h1 className="text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
           Complete Winners Archive
@@ -51,7 +51,7 @@ const WinnerPage = () => {
       ) : artworks.length === 0 ? (
         <NoPhotosFound />
       ) : (
-        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-10 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-8 lg:grid-cols-3 xl:grid-cols-4">
           {artworks.map((artwork) => (
             <ArtworkCard
               key={artwork.id ?? artwork._id}
