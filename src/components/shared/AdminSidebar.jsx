@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { Link, NavLink, useLocation } from 'react-router';
 import {
     FiGrid,
     FiAward,
@@ -25,10 +25,16 @@ import {
     FiMenu,
     FiX,
     FiChevronRight,
+    FiChevronsLeft,
+    FiChevronsRight,
 } from 'react-icons/fi';
 import { getSavedUserInfo } from '../../utils/getUserInof';
 
 const BASE = '/admin-dashboard';
+
+const COLLAPSE_KEY = 'adminSidebarCollapsed';
+const WIDTH_EXPANDED = '270px';
+const WIDTH_COLLAPSED = '80px';
 
 const menuSections = [
     {
@@ -68,12 +74,45 @@ const menuSections = [
     },
 ];
 
+const scrollToTopSmooth = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+};
+
 const AdminSidebar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false); // mobile open/close
+
+    // Desktop collapse state - localStorage theke read kore, tai reload e ager moto thakbe
+    const [isCollapsed, setIsCollapsed] = useState(() => {
+        try {
+            return localStorage.getItem(COLLAPSE_KEY) === 'true';
+        } catch {
+            return false;
+        }
+    });
+
+    const { pathname } = useLocation();
     const userInfo = getSavedUserInfo();
+    const isFirstRender = useRef(true);
 
     const toggleSidebar = () => setIsOpen((prev) => !prev);
     const closeSidebar = () => setIsOpen(false);
+    const toggleCollapse = () => setIsCollapsed((prev) => !prev);
+
+    // Collapse state save kora + CSS variable set kora (main content er margin er jonno)
+    useLayoutEffect(() => {
+        try {
+            localStorage.setItem(COLLAPSE_KEY, String(isCollapsed));
+        } catch {
+            /* ignore */
+        }
+        document.documentElement.style.setProperty(
+            '--sidebar-width',
+            isCollapsed ? WIDTH_COLLAPSED : WIDTH_EXPANDED
+        );
+        return () => {
+            document.documentElement.style.removeProperty('--sidebar-width');
+        };
+    }, [isCollapsed]);
 
     // Mobile e sidebar open thakle background page scroll lock
     useEffect(() => {
@@ -82,6 +121,16 @@ const AdminSidebar = () => {
             document.body.style.overflow = '';
         };
     }, [isOpen]);
+
+    // Route change hole page smooth vabe upore scroll kore jabe
+    // (prothom render e skip kore, tai reload e animation hobe na)
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        scrollToTopSmooth();
+    }, [pathname]);
 
     // Esc chaple sidebar bondho hobe
     useEffect(() => {
@@ -92,6 +141,26 @@ const AdminSidebar = () => {
         window.addEventListener('keydown', onKeyDown);
         return () => window.removeEventListener('keydown', onKeyDown);
     }, [isOpen]);
+
+    // Link click korle: mobile sidebar bondho + page smooth upore scroll
+    // (ekoi page er link e click korleo upore jabe)
+    // requestAnimationFrame: mobile e scroll lock khule jawar por scroll hobe
+    const handleNavClick = () => {
+        setIsOpen(false);
+        requestAnimationFrame(scrollToTopSmooth);
+    };
+
+    // Collapsed hole (shudhu desktop e) text smooth vabe hide hobe
+    const textBase = 'lg:transition-all lg:duration-300 lg:ease-in-out lg:whitespace-nowrap lg:overflow-hidden';
+    const hideText = isCollapsed
+        ? 'lg:max-w-0 lg:opacity-0'
+        : 'lg:max-w-[200px] lg:opacity-100';
+    const smoothText = `${textBase} ${hideText}`;
+
+    // Section title (Workspace, Manage, System) er jonno - height o kombe
+    const smoothTitle = `lg:transition-all lg:duration-300 lg:ease-in-out lg:overflow-hidden ${
+        isCollapsed ? 'lg:max-h-0 lg:opacity-0 lg:!mb-0' : 'lg:max-h-6 lg:opacity-100'
+    }`;
 
     const handleLogout = () => {
         // Add your logout logic here
@@ -144,11 +213,17 @@ const AdminSidebar = () => {
                 - Scrollbar hidden, tobe mouse wheel / touch diye scroll kora jay.
                 - overscroll-contain: sidebar scroll korle bairer page scroll hobe na. */}
             <aside
-                className={`fixed top-0 left-0 z-50 w-[270px] max-w-[85vw] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col overflow-y-auto overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+                className={`fixed top-0 left-0 z-50 w-[270px] max-w-[85vw] ${
+                    isCollapsed ? 'lg:w-[80px]' : 'lg:w-[270px]'
+                } h-screen bg-white border-r border-gray-100 transition-[transform,width] duration-300 ease-in-out lg:translate-x-0 flex flex-col overflow-y-auto overflow-x-hidden overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
                     isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
                 } lg:shadow-none`}
             >
-                <div className="p-5 flex-1 flex flex-col">
+                <div
+                    className={`p-5 ${
+                        isCollapsed ? 'lg:p-3' : ''
+                    } flex-1 flex flex-col transition-[padding] duration-300 ease-in-out`}
+                >
                     {/* Mobile Close Button */}
                     <button
                         onClick={closeSidebar}
@@ -158,30 +233,50 @@ const AdminSidebar = () => {
                         <FiX size={20} />
                     </button>
 
-                    {/* Logo Section */}
-                    <div className="mb-6 pt-2">
-                        <Link
-                            to="/"
-                            onClick={closeSidebar}
-                            className="inline-block shrink-0"
-                            aria-label="Photo Championship home"
+                    {/* Top Row: Logo + Desktop Collapse/Expand Toggle (pasha pashi) */}
+                    <div
+                        className={`flex items-center justify-between mb-6 pt-2 ${
+                            isCollapsed ? 'lg:justify-center lg:gap-0' : 'gap-2'
+                        }`}
+                    >
+                        {/* Logo + tagline */}
+                        <div className={smoothText}>
+                            <Link
+                                to="/"
+                                onClick={handleNavClick}
+                                className="block shrink-0"
+                                aria-label="Photo Championship home"
+                            >
+                                <img
+                                    src="/logo.png"
+                                    alt="Photo Championship"
+                                    className="h-14 w-auto object-contain lg:h-12"
+                                />
+                            </Link>
+                            <p className="text-[7px] text-gray-500 uppercase tracking-wider mt-0.5">
+                                AS ABOVE SO BELOW - AS BELOW SO ABOVE
+                            </p>
+                        </div>
+
+                        {/* Desktop Collapse / Expand Toggle */}
+                        <button
+                            onClick={toggleCollapse}
+                            className="hidden lg:flex shrink-0 items-center justify-center w-9 h-9 rounded-lg bg-gray-50 text-[#494453] border border-gray-200 hover:bg-[#FDE8E9] hover:text-[#EE1C25] hover:border-[#EE1C25]/30 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EE1C25]/40"
+                            aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                            aria-expanded={!isCollapsed}
+                            title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
                         >
-                            <img
-                                src="/logo.png"
-                                alt="Photo Championship"
-                                className="h-14 w-auto object-contain"
-                            />
-                        </Link>
-                        <p className="text-[7px] text-gray-500 uppercase tracking-wider mt-0.5">
-                            AS ABOVE SO BELOW - AS BELOW SO ABOVE
-                        </p>
+                            {isCollapsed ? <FiChevronsRight size={18} /> : <FiChevronsLeft size={18} />}
+                        </button>
                     </div>
 
                     {/* Navigation Sections */}
                     <nav className="flex-1 space-y-5">
                         {menuSections.map((section) => (
                             <div key={section.title}>
-                                <div className="text-xs text-gray-400 font-medium mb-2 px-2">
+                                <div
+                                    className={`text-xs text-gray-400 font-medium mb-2 px-2 ${smoothTitle}`}
+                                >
                                     {section.title}
                                 </div>
 
@@ -193,9 +288,13 @@ const AdminSidebar = () => {
                                                 key={item.path}
                                                 to={item.path}
                                                 end={item.end}
-                                                onClick={closeSidebar}
+                                                onClick={handleNavClick}
+                                                title={isCollapsed ? item.name : undefined}
+                                                aria-label={item.name}
                                                 className={({ isActive }) =>
-                                                    `flex items-center gap-3 px-3 py-2.5 rounded-r-lg rounded-l-sm text-sm font-medium transition-all duration-150 border-l-4 ${
+                                                    `flex items-center gap-3 px-3 py-2.5 rounded-r-lg rounded-l-sm text-sm font-medium transition-all duration-300 border-l-4 ${
+                                                        isCollapsed ? 'lg:justify-center lg:gap-0 lg:px-0' : ''
+                                                    } ${
                                                         isActive
                                                             ? 'bg-[#FDE8E9] text-[#EE1C25] border-[#EE1C25] font-semibold'
                                                             : 'text-[#494453] border-transparent hover:bg-gray-50 hover:text-gray-900'
@@ -207,9 +306,16 @@ const AdminSidebar = () => {
                                                         <span className="shrink-0">
                                                             <Icon size={18} />
                                                         </span>
-                                                        <span className="truncate flex-1">{item.name}</span>
+                                                        <span className={`truncate flex-1 ${smoothText}`}>
+                                                            {item.name}
+                                                        </span>
                                                         {isActive && (
-                                                            <FiChevronRight size={16} className="shrink-0" />
+                                                            <FiChevronRight
+                                                                size={16}
+                                                                className={`shrink-0 ${
+                                                                    isCollapsed ? 'lg:hidden' : ''
+                                                                }`}
+                                                            />
                                                         )}
                                                     </>
                                                 )}
@@ -223,13 +329,18 @@ const AdminSidebar = () => {
 
                     {/* Admin Profile Card + Logout */}
                     <div className="mt-6 pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-3 p-2.5 bg-gray-50 rounded-xl">
+                        <div
+                            className={`flex items-center gap-3 p-2.5 bg-gray-50 rounded-xl transition-all duration-300 ${
+                                isCollapsed ? 'lg:justify-center lg:gap-0 lg:p-1.5' : ''
+                            }`}
+                            title={isCollapsed ? userInfo?.name : undefined}
+                        >
                             <img
                                 src={userInfo?.image}
                                 alt={userInfo?.name || 'Admin'}
-                                className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                                className="w-10 h-10 rounded-full object-cover border border-gray-200 shrink-0"
                             />
-                            <div className="overflow-hidden">
+                            <div className={`overflow-hidden ${smoothText}`}>
                                 <h4 className="text-sm font-semibold text-gray-800 truncate leading-tight">
                                     {userInfo?.name}
                                 </h4>
@@ -239,10 +350,14 @@ const AdminSidebar = () => {
 
                         <button
                             onClick={handleLogout}
-                            className="w-full mt-3 flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#D00000] hover:bg-red-50 transition-colors"
+                            title={isCollapsed ? 'Log Out' : undefined}
+                            aria-label="Log Out"
+                            className={`w-full mt-3 flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#D00000] hover:bg-red-50 transition-all duration-300 ${
+                                isCollapsed ? 'lg:justify-center lg:gap-0 lg:px-0' : ''
+                            }`}
                         >
-                            <FiLogOut size={18} />
-                            <span>Log Out</span>
+                            <FiLogOut size={18} className="shrink-0" />
+                            <span className={smoothText}>Log Out</span>
                         </button>
                     </div>
                 </div>

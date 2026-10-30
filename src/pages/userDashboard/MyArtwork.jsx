@@ -7,6 +7,7 @@ import MyArtworkFilter from "../../components/ui/MyArtworkFilter";
 import DashboardArtworkCard from "../../components/userDashbaord/DashboardArtworkCard";
 import { getSavedUserInfo } from "../../utils/getUserInof";
 import ArtworkSkeleton from "../../components/ui/Skeletons/ArtworkSkeleton";
+import NoPhotosFound from "../../components/ui/NoPhotosFound";
 
 const MyArtwork = () => {
     const [searchParams] = useSearchParams();
@@ -28,7 +29,6 @@ const MyArtwork = () => {
         '/artWork.json'
     );
 
-    if (loading) return <ArtworkSkeleton/>
     if (error) return <div className="py-20 text-center text-sm text-red-500">{error}</div>;
 
     return (
@@ -54,16 +54,18 @@ const MyArtwork = () => {
             </div>
 
             {/* Stats Cards Component */}
-            <ArtworkStats counts={counts} />
+            <ArtworkStats counts={counts || {}} />
 
             {/* Filter Component */}
             <MyArtworkFilter
-                totalShown={artworks.length}
-                totalFiltered={filteredArtworks.length}
+                totalShown={artworks?.length ?? 0}
+                totalFiltered={filteredArtworks?.length ?? 0}
             />
 
-            {/* Artwork Cards Grid Section */}
-            {artworks.length > 0 ? (
+            {/* Artwork Cards Grid Section (loading shudhu ekhanei dekhabe) */}
+            {loading ? (
+                <ArtworkSkeleton />
+            ) : artworks?.length > 0 ? (
                 <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-4">
                     {artworks.map((artWorkData) => (
                         <DashboardArtworkCard
@@ -77,18 +79,11 @@ const MyArtwork = () => {
                     ))}
                 </div>
             ) : (
-                <div className="rounded-xl border border-dashed border-[#CBD5E1] bg-[#F8FAFC] p-8 text-center">
-                    <p className="text-sm font-semibold text-[#334155]">
-                        Kono artwork pawa jayni!
-                    </p>
-                    <p className="mt-1 text-xs text-[#64748B]">
-                        Apnar filter ba criteria change kore abar chesta korun.
-                    </p>
-                </div>
+                <NoPhotosFound />
             )}
 
-            {/* Pagination Component */}
-            <Pagination totalPages={totalPages} />
+            {/* Pagination Component (loading er somoy hide) */}
+            {!loading && <Pagination totalPages={totalPages} />}
         </div>
     );
 };

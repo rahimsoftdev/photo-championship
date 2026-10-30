@@ -49,7 +49,6 @@ const MyStore = () => {
     setDeletedIds((prev) => new Set(prev).add(id));
   };
 
-  if (loading) return <ArtworkSkeleton/>
   if (error) return <div className="text-center py-12 sm:py-20 px-4 text-sm sm:text-base text-red-500 break-words">Error: {error}</div>;
 
   return (
@@ -82,7 +81,7 @@ const MyStore = () => {
         {/* FILTER CATEGORY TABS WITH bg-primary */}
         <div className="flex items-center gap-2 overflow-x-auto pb-3 sm:pb-4 mb-6 sm:mb-8 no-scrollbar border-b">
           {categories.map((cat) => {
-            const isActive = currentCategory.toLowerCase() === cat.toLowerCase();
+            const isActive = (currentCategory || 'All Items').toLowerCase() === cat.toLowerCase();
             return (
               <button
                 key={cat}
@@ -99,8 +98,10 @@ const MyStore = () => {
           })}
         </div>
 
-        {/* PRODUCTS GRID */}
-        {visibleProducts.length === 0 ? (
+        {/* PRODUCTS GRID (loading shudhu ekhanei dekhabe) */}
+        {loading ? (
+          <ArtworkSkeleton />
+        ) : visibleProducts.length === 0 ? (
           <div className="text-center py-12 sm:py-20 text-sm sm:text-base text-gray-400">No products found in this category.</div>
         ) : (
           <div className="grid w-full grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4">
@@ -115,10 +116,12 @@ const MyStore = () => {
           </div>
         )}
 
-        {/* PAGINATION COMPONENT */}
-        <div className="flex justify-center overflow-x-auto mt-6 sm:mt-8 pb-2">
-          <Pagination totalPages={totalPages} />
-        </div>
+        {/* PAGINATION COMPONENT (loading er somoy hide) */}
+        {!loading && (
+          <div className="flex justify-center overflow-x-auto mt-6 sm:mt-8 pb-2">
+            <Pagination totalPages={totalPages} />
+          </div>
+        )}
 
       </div>
     </div>

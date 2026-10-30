@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router';
 import { FiArrowLeft, FiCalendar, FiClock, FiHeart, FiMail, FiShare2 } from 'react-icons/fi';
 import { usePostOrNewsDetails } from '../../hooks/usePostOrNewsDetails';
 import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
+import { getSavedUserInfo } from '../../utils/getUserInof';
+import ArtworkDetailsSkeleton from '../../components/ui/Skeletons/ArtworkDetailsSkeleton';
 
 const BACK_PATH = '/user-dashboard/news-message';
 
@@ -10,8 +12,10 @@ const NewsAndMessageDetailsPage = () => {
     const { id } = useParams(); // route: /user-dashboard/news-message/:id
     const { details, loading, error, notFound } = usePostOrNewsDetails("/newsOrPost.json", id);
     const [copied, setCopied] = useState(false);
+    const userInfo = getSavedUserInfo()
 
-    if (loading) return <ArtworkSkeleton />;
+
+    if (loading) return <ArtworkDetailsSkeleton/>
 
     if (error) {
         return (
@@ -78,15 +82,15 @@ const NewsAndMessageDetailsPage = () => {
                 <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-3 mb-4 sm:mb-6">
                     <div className="flex items-start gap-3 min-w-0 flex-1 basis-[220px]">
                         <img
-                            src={usrinfo?.avatar || "https://i.pravatar.cc/150"}
-                            alt={usrinfo?.name || "User"}
+                            src={userInfo?.image || "https://i.pravatar.cc/150"}
+                            alt={userInfo?.name || "User"}
                             className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-full object-cover border border-gray-100"
                         />
                         <div className="min-w-0 flex-1">
                             <h1 className="text-base sm:text-lg font-semibold text-gray-900 leading-snug break-words">
-                                {usrinfo?.name}
+                                {userInfo?.name}
                             </h1>
-                            {usrinfo?.email && (
+                            {userInfo?.email && (
                                 <p className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-500 mt-0.5 min-w-0">
                                     <FiMail size={13} className="shrink-0" />
                                     <span className="truncate">{usrinfo.email}</span>

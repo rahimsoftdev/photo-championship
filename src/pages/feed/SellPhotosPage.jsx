@@ -8,14 +8,12 @@ import ArtworkCard from '../../components/ui/ArtworkCard';
 import ArtworkSkeleton from '../../components/ui/Skeletons/ArtworkSkeleton';
 import { FaPlus } from 'react-icons/fa6';
 import { getSavedUserInfo } from '../../utils/getUserInof';
-import useAllArtworks from '../../hooks/useAllArtworks';
 
 const SellPhotosPage = () => {
-
-        const [searchParams] = useSearchParams();
-        const params = Object.fromEntries(searchParams.entries());
-        const userInfo = getSavedUserInfo();
-        const userId = userInfo?.id;
+    const [searchParams] = useSearchParams();
+    const params = Object.fromEntries(searchParams.entries());
+    const userInfo = getSavedUserInfo();
+    const userId = userInfo?.id;
 
     // Modal state for upload format selection
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -28,21 +26,6 @@ const SellPhotosPage = () => {
         totalFiltered = 0,
     } = useArtwork(params, true, 9, "/bayPhoto.json", userId);
 
-    //     const {
-    //     artworks,
-    //     filteredArtworks,
-    //     counts,
-    //     totalPages,
-    //     loading,
-    //     error,
-    // } = useAllArtworks(
-    //     // userId sobar sheshe dewa hoyeche, jate URL er query param diye keu onno user er id override korte na pare
-    //     { ...params, userId },
-    //     12,
-    //     '/bayPhoto.json'
-    // );
-
-    if (loading) return <ArtworkSkeleton />;
     if (error) {
         return (
             <div className="text-center py-12 sm:py-20 px-4 text-red-500 text-xs sm:text-sm break-words">
@@ -77,25 +60,38 @@ const SellPhotosPage = () => {
 
             {/* Filter */}
             <div className="mb-6 sm:mb-8 w-full min-w-0">
-                <MyArtworkFilter totalShown={artworks.length} totalFiltered={totalFiltered || artworks.length} />
+                <MyArtworkFilter
+                    totalShown={artworks?.length ?? 0}
+                    totalFiltered={totalFiltered || artworks?.length || 0}
+                />
             </div>
 
-            {/* Artwork Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 mb-4 md:mb-8 ">
-                {artworks.map((item) => (
-                    <ArtworkCard
-                        key={item.id}
-                        artWorkData={item}
-                        dashboard="yes"
-                        currentUserId={userId}
-                    />
-                ))}
-            </div>
+            {/* Artwork Cards Grid (loading shudhu ekhanei dekhabe) */}
+            {loading ? (
+                <ArtworkSkeleton />
+            ) : artworks.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 mb-4 md:mb-8">
+                    {artworks.map((item) => (
+                        <ArtworkCard
+                            key={item.id}
+                            artWorkData={item}
+                            dashboard="yes"
+                            currentUserId={userId}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <div className="text-center py-12 text-sm text-gray-500">
+                    No photos found.
+                </div>
+            )}
 
-            {/* Pagination */}
-            <div className="flex justify-center overflow-x-auto ">
-                <Pagination totalPages={totalPages} />
-            </div>
+            {/* Pagination (loading er somoy hide) */}
+            {!loading && (
+                <div className="flex justify-center overflow-x-auto">
+                    <Pagination totalPages={totalPages} />
+                </div>
+            )}
 
             {/* Upload Format Selection Modal Component */}
             <UploadArtworkModal

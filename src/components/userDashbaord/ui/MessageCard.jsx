@@ -19,7 +19,7 @@ const MessageCard = ({ item, post,userInfo }) => {
     // Details page-e jawar id (item.id thakle seta, na hole userId)
     const itemId = userId;
     const goToDetails = () => {
-        if (itemId) navigate(`/user-dashboard/news-message/${itemId || 897}`);
+        if (itemId) navigate(`/user-dashboard/news-message/${item.id || 897}`);
     };
 
     const handleKeyDown = (e) => {

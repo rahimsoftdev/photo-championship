@@ -9,6 +9,7 @@ import SupportSection from "../../components/ui/detailsPage/SupportSection";
 import LoadingPage from "../feedback/LoadingPage";
 import GlobalRankings from "../../components/shared/Globalrankings";
 import ArtworkVideo from "../../components/ui/detailsPage/ArtworkVideo";
+import ArtworkDetailsSkeleton from "../../components/ui/Skeletons/ArtworkDetailsSkeleton";
 // import ArtworkImages from "../../components/shared/ArtworkImages";
 
 // user-dashboard ba admin dashboard route hole true
@@ -21,9 +22,7 @@ const ArtwokDetailsPage = () => {
 
   const { artwork, loading, error } = useArtworkById(id, '/artWork.json');
 
-  if (loading) {
-    return <LoadingPage/>
-  }
+  if (loading)return <ArtworkDetailsSkeleton/>
 
   if (error) {
     return <p>{error}</p>;

@@ -11,8 +11,8 @@ const NewsAndMessagePage = () => {
     const [searchParams] = useSearchParams();
     const currentPage = Number(searchParams.get("page")) || 1;
     const itemsPerPage = 6;
-    const userInfo = getSavedUserInfo()
-    const userId = userInfo.id
+    const userInfo = getSavedUserInfo();
+    const userId = userInfo?.id;
 
     const { paginatedData, totalPages, loading, error } = usePostOrNewsData(
         "/newsOrPost.json",
@@ -21,7 +21,6 @@ const NewsAndMessagePage = () => {
         userId
     );
 
-    if (loading) return <ArtworkSkeleton />;
     if (error) {
         return (
             <div className="text-center py-10 sm:py-12 px-4 text-sm sm:text-base text-red-500 break-words">
@@ -52,8 +51,10 @@ const NewsAndMessagePage = () => {
                 </Link>
             </div>
 
-            {/* Cards Grid */}
-            {paginatedData?.length ? (
+            {/* Cards Grid (loading shudhu ekhanei dekhabe) */}
+            {loading ? (
+                <ArtworkSkeleton />
+            ) : paginatedData?.length ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 mb-8 sm:mb-10">
                     {paginatedData.map((item, index) => (
                         <MessageCard key={item.id || item.userId || index} item={item} userInfo={userInfo} />
@@ -65,10 +66,12 @@ const NewsAndMessagePage = () => {
                 </div>
             )}
 
-            {/* Pagination */}
-            <div className="flex justify-center overflow-x-auto pb-2">
-                <Pagination totalPages={totalPages} />
-            </div>
+            {/* Pagination (loading er somoy hide) */}
+            {!loading && (
+                <div className="flex justify-center overflow-x-auto pb-2">
+                    <Pagination totalPages={totalPages} />
+                </div>
+            )}
         </div>
     );
 };

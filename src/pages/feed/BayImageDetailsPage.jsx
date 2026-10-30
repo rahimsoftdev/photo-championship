@@ -5,6 +5,7 @@ import ArtworkImages from '../../components/ui/detailsPage/ArtworkImages';
 import ArtworkGalleryGrid from '../../components/ui/detailsPage/ArtworkGalleryGrid';
 import BayPhotoGalleryGrid from '../../components/ui/detailsPage/BayPhotoGalleryGrid';
 import ArtworkVideo from '../../components/ui/detailsPage/ArtworkVideo';
+import ArtworkDetailsSkeleton from '../../components/ui/Skeletons/ArtworkDetailsSkeleton';
 
 // user-dashboard ba admin dashboard route hole true
 const DASHBOARD_PATH = /^\/(user-dashboard|admin-dashboard|admin)(\/|$)/;
@@ -17,6 +18,7 @@ const BayImageDetailsPage = () => {
 
     const { artwork: bayPhoto, loading, error } = useArtworkById(id, '/bayPhoto.json');
     console.log(bayPhoto)
+    if(loading) return <ArtworkDetailsSkeleton/>
     return (
         // Dashboard-e full width, public page-e ager moto max-w-main + center
         <div className={isDashboard ? 'w-full' : 'max-w-main mx-auto px-5'}>
