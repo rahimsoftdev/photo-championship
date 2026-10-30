@@ -253,7 +253,7 @@ export default function AdvertisePage() {
       </section>
 
       {/* ================= FORM CARD ================= */}
-      <main className="mx-auto mt-4 w-full max-w-main px-3  sm:px-4">
+      <main className="mx-auto mt-4 w-full max-w-main px-4  sm:px-8">
         <form
           onSubmit={handlePay}
           noValidate

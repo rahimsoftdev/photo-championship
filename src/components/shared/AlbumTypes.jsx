@@ -77,7 +77,7 @@ const AlbumTypes = ({ isHome, isArtwork, isAblum }) => {
   /* ================= Home / Default ================= */
   return (
     <div
-      className={`w-full bg-[#F7F8FA] py-10 sm:py-12 md:py-14 lg:py-15 ${isHome | isAblum ? "xl:py-section" : ""}`}
+      className={`w-full bg-[#F7F8FA] py-10 sm:py-12 md:py-14 lg:py-15 ${isHome | isAblum ? "pb-8 md:pb-10 lg:pb-section pt-5 md:pt-8 lg:pt-10" : ""}`}
     >
       <section className="mx-auto w-full max-w-main px-4 sm:px-6 lg:px-8">
         {/* Section Header */}

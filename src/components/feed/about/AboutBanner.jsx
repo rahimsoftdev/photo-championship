@@ -6,7 +6,7 @@ import aboutImg from "../../../assets/images/about.jpg";
  */
 const AboutBanner = () => {
     return (
-        <section className="relative w-full min-h-[400px] lg:h-[440px] flex items-center overflow-hidden">
+        <section className="relative w-full min-h-[300px] md:min-h-[400px] lg:h-[440px] flex items-center overflow-hidden">
 
             {/* Background Image with Full Width */}
             <div
@@ -18,7 +18,7 @@ const AboutBanner = () => {
             </div>
 
             {/* Content Container (Max width aligned with max-w-main / max-w-7xl) */}
-            <div className="relative z-10 w-full max-w-main mx-auto px-4 sm:px-6 lg:px-8 md:py-section">
+            <div className="relative z-10 w-full max-w-main mx-auto px-4 sm:px-6 lg:px-8 lg:py-section">
                 <div className="max-w-2xl">
 
                     {/* Top Badge */}
