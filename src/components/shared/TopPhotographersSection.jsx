@@ -50,6 +50,7 @@ export default function TopPhotographersSection() {
     const { pathname } = useLocation();
     // /admin-dashboard/winners (ba /admin-dashboard/** ) hole admin layout
     const isAdmin = pathname.startsWith('/admin-dashboard');
+    const leaderBoard = pathname.startsWith('/leaderboard');
 
     const [selectedType, setSelectedType] = useState('six');
 
@@ -66,7 +67,7 @@ export default function TopPhotographersSection() {
             className={`w-full overflow-x-hidden bg-[#f8fafc] font-sans ${
                 isAdmin
                     ? 'm-0 p-0'
-                    : 'px-3 py-8 min-[400px]:px-4 sm:px-6 sm:py-10 md:px-8 md:py-12 lg:px-10 lg:py-section xl:px-12 2xl:px-16'
+                    : `px-3 py-8 min-[400px]:px-4 ${leaderBoard ? 'pb-10 sm:pb-12 lg:pb-section pt-5 sm:-8  lg:pt-10' : ' sm:py-10 md:py-12 lg:py-section'} sm:px-6  md:px-8  lg:px-10  xl:px-12 2xl:px-16`
             }`}
         >
             <div
