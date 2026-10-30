@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router';
 import {
     FiGrid,
     FiEdit3,
@@ -19,15 +19,48 @@ import {
     FiSettings,
     FiLogOut,
     FiMenu,
-    FiX
+    FiX,
+    FiChevronsLeft,
+    FiChevronsRight
 } from 'react-icons/fi';
 import { getSavedUserInfo } from '../../utils/getUserInof';
 
-const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
+const COLLAPSE_KEY = 'sidebarCollapsed';
+const WIDTH_EXPANDED = '270px';
+const WIDTH_COLLAPSED = '80px';
 
+const Sidebar = () => {
+    const [isOpen, setIsOpen] = useState(false); // mobile open/close
+
+    // Desktop collapse state - localStorage theke read kore, tai reload e ager moto thakbe
+    const [isCollapsed, setIsCollapsed] = useState(() => {
+        try {
+            return localStorage.getItem(COLLAPSE_KEY) === 'true';
+        } catch {
+            return false;
+        }
+    });
+
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
     const userInfo = getSavedUserInfo();
+    const isFirstRender = useRef(true);
+
+    // Collapse state save kora + CSS variable set kora (main content er margin er jonno)
+    useLayoutEffect(() => {
+        try {
+            localStorage.setItem(COLLAPSE_KEY, String(isCollapsed));
+        } catch {
+            /* ignore */
+        }
+        document.documentElement.style.setProperty(
+            '--sidebar-width',
+            isCollapsed ? WIDTH_COLLAPSED : WIDTH_EXPANDED
+        );
+        return () => {
+            document.documentElement.style.removeProperty('--sidebar-width');
+        };
+    }, [isCollapsed]);
 
     // Mobile e sidebar open thakle background page scroll lock
     useEffect(() => {
@@ -36,6 +69,16 @@ const Sidebar = () => {
             document.body.style.overflow = '';
         };
     }, [isOpen]);
+
+    // Route change hole page smooth vabe upore scroll kore jabe
+    // (prothom render e skip kore, tai reload e animation hobe na)
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }, [pathname]);
 
     // Esc chaple sidebar bondho hobe
     useEffect(() => {
@@ -48,6 +91,17 @@ const Sidebar = () => {
     }, [isOpen]);
 
     const toggleSidebar = () => setIsOpen((prev) => !prev);
+    const toggleCollapse = () => setIsCollapsed((prev) => !prev);
+
+    // Link click korle: mobile sidebar bondho + page smooth upore scroll
+    // (ekoi page er link e click korleo upore jabe, tai onClick e o rakha hoyeche)
+    const handleNavClick = () => {
+        setIsOpen(false);
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    };
+
+    // Collapsed hole (shudhu desktop e) text hide korar class
+    const hideWhenCollapsed = isCollapsed ? 'lg:hidden' : '';
 
     const navItems = [
         { name: 'Dashboard', path: '/user-dashboard', icon: <FiGrid size={18} /> },
@@ -99,7 +153,7 @@ const Sidebar = () => {
 
                 {/* User avatar -> Profile */}
                 <Link
-                    to={`/user-dashboard/photographers/${userInfo.id}`}
+                    to={`/user-dashboard/photographers/${userInfo?.id}`}
                     aria-label="Go to profile"
                     className="shrink-0"
                 >
@@ -119,14 +173,13 @@ const Sidebar = () => {
                 aria-hidden="true"
             />
 
-            {/* ===== Sidebar Container =====
-                - Scrollbar hidden, tobe mouse wheel / touch diye scroll kora jay.
-                - overscroll-contain: sidebar scroll korle bairer page scroll hobe na. */}
+            {/* ===== Sidebar Container ===== */}
             <aside
-                className={`fixed top-0 left-0 z-50 w-[270px] max-w-[85vw] h-screen bg-white border-r border-gray-100 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col justify-between overflow-y-auto overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+                className={`fixed top-0 left-0 z-50 w-[270px] max-w-[85vw] ${isCollapsed ? 'lg:w-[80px]' : 'lg:w-[270px]'
+                    } h-screen bg-white border-r border-gray-100 transition-[transform,width] duration-300 ease-in-out lg:translate-x-0 flex flex-col justify-between overflow-y-auto overscroll-contain [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
                     } lg:shadow-none`}
             >
-                <div className="p-5 flex-1 flex flex-col">
+                <div className={`p-5 ${isCollapsed ? 'lg:p-3' : ''} flex-1 flex flex-col`}>
                     {/* Mobile Close Button */}
                     <button
                         onClick={() => setIsOpen(false)}
@@ -136,29 +189,44 @@ const Sidebar = () => {
                         <FiX size={20} />
                     </button>
 
-                    {/* Logo Section */}
-                    <div className="flex items-center gap-3 mb-6 pt-2">
-                        <div>
+                    {/* Top Row: Logo + Desktop Collapse/Expand Toggle (pasha pashi) */}
+                    <div
+                        className={`flex items-center justify-between gap-2 mb-6 pt-2 ${isCollapsed ? 'lg:justify-center' : ''
+                            }`}
+                    >
+                        {/* Logo + tagline */}
+                        <div className={hideWhenCollapsed}>
                             <Link
                                 to="/"
-                                onClick={() => setIsOpen(false)}
-                                className="shrink-0"
+                                onClick={handleNavClick}
+                                className="block shrink-0"
                                 aria-label="Photo Championship home"
                             >
                                 <img
                                     src="/logo.png"
                                     alt="Photo Championship"
-                                    className="h-24 w-auto object-contain sm:h-14"
+                                    className="h-24 w-auto object-contain sm:h-14 lg:h-12"
                                 />
                             </Link>
                             <p className="text-[7px] text-gray-500 uppercase tracking-wider mt-0.5">
                                 AS ABOVE SO BELOW - AS BELOW SO ABOVE
                             </p>
                         </div>
+
+                        {/* Desktop Collapse / Expand Toggle */}
+                        <button
+                            onClick={toggleCollapse}
+                            className="hidden lg:flex shrink-0 items-center justify-center w-9 h-9 rounded-lg bg-gray-50 text-[#494453] border border-gray-200 hover:bg-[#FDE8E9] hover:text-[#EE1C25] hover:border-[#EE1C25]/30 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EE1C25]/40"
+                            aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                            aria-expanded={!isCollapsed}
+                            title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                        >
+                            {isCollapsed ? <FiChevronsRight size={18} /> : <FiChevronsLeft size={18} />}
+                        </button>
                     </div>
 
                     {/* Section Heading */}
-                    <div className="text-xs text-gray-400 font-medium mb-3 px-2">
+                    <div className={`text-xs text-gray-400 font-medium mb-3 px-2 ${hideWhenCollapsed}`}>
                         Main menu
                     </div>
 
@@ -169,29 +237,36 @@ const Sidebar = () => {
                                 key={item.path}
                                 to={item.path}
                                 end={item.path === '/user-dashboard'}
-                                onClick={() => setIsOpen(false)}
+                                onClick={handleNavClick}
+                                title={isCollapsed ? item.name : undefined}
+                                aria-label={item.name}
                                 className={({ isActive }) =>
-                                    `flex items-center gap-3 px-3 py-2.5 rounded-r-lg rounded-l-sm text-sm font-medium transition-all duration-150 border-l-4 ${isActive
+                                    `flex items-center gap-3 px-3 py-2.5 rounded-r-lg rounded-l-sm text-sm font-medium transition-all duration-150 border-l-4 ${isCollapsed ? 'lg:justify-center lg:gap-0 lg:px-0' : ''
+                                    } ${isActive
                                         ? 'bg-[#FDE8E9] text-[#EE1C25] border-[#EE1C25] font-semibold'
                                         : 'text-[#494453] border-transparent hover:bg-gray-50 hover:text-gray-900'
                                     }`
                                 }
                             >
                                 <span className="shrink-0">{item.icon}</span>
-                                <span className="truncate">{item.name}</span>
+                                <span className={`truncate ${hideWhenCollapsed}`}>{item.name}</span>
                             </NavLink>
                         ))}
                     </nav>
 
                     {/* User Profile Info Card */}
                     <div className="mt-6 pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-3 p-2.5 bg-gray-50 rounded-xl">
+                        <div
+                            className={`flex items-center gap-3 p-2.5 bg-gray-50 rounded-xl ${isCollapsed ? 'lg:justify-center lg:gap-0 lg:p-1.5' : ''
+                                }`}
+                            title={isCollapsed ? userInfo?.name : undefined}
+                        >
                             <img
                                 src={userInfo?.image}
                                 alt={userInfo?.name || 'User'}
-                                className="w-10 h-10 rounded-full object-cover border border-gray-200"
+                                className="w-10 h-10 rounded-full object-cover border border-gray-200 shrink-0"
                             />
-                            <div className="overflow-hidden">
+                            <div className={`overflow-hidden ${hideWhenCollapsed}`}>
                                 <h4 className="text-sm font-semibold text-gray-800 truncate leading-tight">
                                     {userInfo?.name}
                                 </h4>
@@ -202,10 +277,13 @@ const Sidebar = () => {
                         {/* Logout Button */}
                         <button
                             onClick={handleLogout}
-                            className="w-full mt-3 flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#D00000] hover:bg-red-50 transition-colors"
+                            title={isCollapsed ? 'Log Out' : undefined}
+                            aria-label="Log Out"
+                            className={`w-full mt-3 flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#D00000] hover:bg-red-50 transition-colors ${isCollapsed ? 'lg:justify-center lg:gap-0 lg:px-0' : ''
+                                }`}
                         >
-                            <FiLogOut size={18} />
-                            <span>Log Out</span>
+                            <FiLogOut size={18} className="shrink-0" />
+                            <span className={hideWhenCollapsed}>Log Out</span>
                         </button>
                     </div>
                 </div>

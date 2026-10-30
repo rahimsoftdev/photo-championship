@@ -16,9 +16,10 @@ export default function UserDashboard() {
       <Sidebar />
 
       {/* Main Content Area
-          pt-24: mobile e fixed top bar (h-16) er niche content shuru hobe
-          lg:pt-8: desktop e top bar nai */}
-      <main className="flex-1 min-w-0 lg:ml-[270px] pt-24 lg:pt-8 pb-8 transition-all duration-300 max-sm:px-4 px-6">
+      pt-24: mobile e fixed top bar (h-16) er niche content shuru hobe
+      lg:pt-8: desktop e top bar nai
+      lg:ml-[var(--sidebar-width,270px)]: sidebar collapse/expand hole content o sathe sathe adjust hobe */}
+      <main className="flex-1 min-w-0 lg:ml-[var(--sidebar-width,270px)] pt-24 lg:pt-8 pb-8 transition-[margin] duration-300 max-sm:px-4 px-6">
         <Outlet />
       </main>
     </div>
